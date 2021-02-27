@@ -24,4 +24,8 @@
     <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Foundation\Foundation.csproj" />
+  </ItemGroup>
+
 </Project>
