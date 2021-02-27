@@ -9,5 +9,33 @@ namespace FinalProject.Areas.Admin.Controllers
         {
             return View();
         }
+
+        public IActionResult Header()
+        {
+            return View();
+        }
+
+        public IActionResult Menu()
+        {
+            return View();
+        }
+        public IActionResult Footer()
+        {
+            return View();
+        }
+        public IActionResult Post()
+        {
+            return View();
+        }
+        
+        public IActionResult Notice()
+        {
+            return View();
+        }
+
+        public IActionResult Advertise()
+        {
+            return View();
+        }
     }
 }
