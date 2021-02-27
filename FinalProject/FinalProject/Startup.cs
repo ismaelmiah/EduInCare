@@ -1,6 +1,8 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using FinalProject.Data;
+using Foundation;
+using Foundation.Contexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -38,6 +40,8 @@ namespace FinalProject
         public void ConfigureContainer(ContainerBuilder builder)
         {
             var (connectionString, migrationAssemblyName) = ConnectionAndMigration();
+
+            builder.RegisterModule(new FoundationModule(connectionString, migrationAssemblyName));
         }
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -45,6 +49,9 @@ namespace FinalProject
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<WebsiteContext>(options =>
+                options.UseSqlServer(ConnectionAndMigration().connectionString, m => m.MigrationsAssembly(ConnectionAndMigration().migrationAssemblyName)));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();

@@ -1,12 +1,12 @@
 ﻿using System;
 using DataAccessLayer;
 
-namespace Foundation.Entity
+namespace Foundation.Entities
 {
-    public class Advertise : IEntity<Guid>
+    public class Notice : IEntity<Guid>
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
-        public string ActionUrl { get; set; }
+        public string Description { get; set; }
     }
 }

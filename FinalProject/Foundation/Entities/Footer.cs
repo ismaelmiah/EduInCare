@@ -1,7 +1,7 @@
 ﻿using System;
 using DataAccessLayer;
 
-namespace Foundation.Entity
+namespace Foundation.Entities
 {
     public class Footer : IEntity<Guid>
     {
