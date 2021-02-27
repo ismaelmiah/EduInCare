@@ -1,37 +1,56 @@
-﻿using FinalProject.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+using FinalProject.Models;
+using Microsoft.AspNetCore.Mvc;
+using FinalProject.Areas.Admin.Models;
 
 namespace FinalProject.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var model = new WebsiteModel
+            {
+                Header = new HeaderModel(),
+                Footer = new FooterModel(),
+                Advertise = new AdvertiseModel(),
+                Notice = new NoticeModel()
+                {
+                    NoticeList = new List<NoticeViewModel>
+                    {
+                        new NoticeViewModel()
+                        {
+                            Title = "Admission",
+                            Description = "Admission Going On"
+                        },
+                        new NoticeViewModel()
+                        {
+                            Title = "Result Published",
+                            Description = "Result Published On"
+                        }
+                    }
+                },
+                Post = new PostModel
+                {
+                    PostList = new List<PostViewModel>
+                    {
+                        new PostViewModel
+                        {
+                            Title = "Admission",
+                            CreateDate = DateTime.Today,
+                            Description = "Admission Going On"
+                        },
+                        new PostViewModel
+                        {
+                            Title = "Admission",
+                            CreateDate = DateTime.Today,
+                            Description = "Admission Going On"
+                        },
+                    }
+                }
+            };
+            return View(model);
         }
     }
 }
