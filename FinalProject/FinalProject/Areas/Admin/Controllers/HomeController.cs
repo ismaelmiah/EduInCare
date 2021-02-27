@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FinalProject.Areas.Admin.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProject.Areas.Admin.Controllers
 {
@@ -12,6 +13,12 @@ namespace FinalProject.Areas.Admin.Controllers
 
         public IActionResult Header()
         {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Header(HeaderModel model)
+        {
+            model.SaveHeader(model);
             return View();
         }
 
