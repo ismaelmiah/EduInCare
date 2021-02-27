@@ -3,7 +3,7 @@ using Foundation.Repositories;
 
 namespace Foundation.UnitOfWorks
 {
-    public interface IWebsiteUnitOfWorks : IUnitOfWork
+    public interface IWebsiteUnitOfWork : IUnitOfWork
     {
         IHeaderRepository Header { get; set; }
         IFooterRepository Footer { get; set; }

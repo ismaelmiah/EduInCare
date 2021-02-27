@@ -1,5 +1,9 @@
-﻿using Autofac;
+﻿using System.Linq;
+using System.Reflection;
+using Autofac;
 using Foundation.Contexts;
+using Foundation.UnitOfWorks;
+using Module = Autofac.Module;
 
 namespace Foundation
 {
@@ -20,6 +24,17 @@ namespace Foundation
                 .WithParameter("connectionString", _connectionString)
                 .WithParameter("migrationAssemblyName", _migrationAssemblyName)
                 .InstancePerLifetimeScope();
+
+            builder.RegisterTypes().Where(x => x.Namespace != null && x.Namespace.Contains("Services"))
+                .As(x => x.GetInterfaces().FirstOrDefault(i => i.Name == "I" + x.Name))
+                .InstancePerLifetimeScope();
+            
+
+            builder.RegisterTypes().Where(x => x.Namespace != null && x.Namespace.Contains("Repositories"))
+                .As(x => x.GetInterfaces().FirstOrDefault(i => i.Name == "I" + x.Name))
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<WebsiteUnitOfWork>().As<IWebsiteUnitOfWork>().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

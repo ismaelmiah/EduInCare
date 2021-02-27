@@ -4,7 +4,7 @@ using Foundation.Repositories;
 
 namespace Foundation.UnitOfWorks
 {
-    public class WebsiteUnitOfWork : UnitOfWork, IWebsiteUnitOfWorks
+    public class WebsiteUnitOfWork : UnitOfWork, IWebsiteUnitOfWork
     {
         public WebsiteUnitOfWork(WebsiteContext dbContext,
             IHeaderRepository header,
