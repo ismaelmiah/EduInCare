@@ -17,7 +17,7 @@ namespace FinalProject.Areas.Admin.Models
             _service = Startup.AutofacContainer.Resolve<IAdvertiseService>();
         }
 
-        public string Title { get; set; }
-        public string ActionUrl { get; set; }
+        public string Title { get; set; } = "This is Advertise Section";
+        public string ActionUrl { get; set; } = "/";
     }
 }

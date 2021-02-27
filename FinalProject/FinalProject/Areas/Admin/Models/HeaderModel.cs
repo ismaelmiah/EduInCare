@@ -17,7 +17,8 @@ namespace FinalProject.Areas.Admin.Models
             _service = Startup.AutofacContainer.Resolve<IHeaderService>();
         }
 
-        public string Heading { get; set; }
+        public string Heading { get; set; } = "This is Heading";
+        public string SubHeading { get; set; }
         public IFormFile CoverPhoto { get; set; }
     }
 }

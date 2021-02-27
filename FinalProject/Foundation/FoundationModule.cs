@@ -25,14 +25,14 @@ namespace Foundation
                 .WithParameter("migrationAssemblyName", _migrationAssemblyName)
                 .InstancePerLifetimeScope();
 
-            builder.RegisterTypes().Where(x => x.Namespace != null && x.Namespace.Contains("Services"))
-                .As(x => x.GetInterfaces().FirstOrDefault(i => i.Name == "I" + x.Name))
-                .InstancePerLifetimeScope();
+            var foundationAssembly = Assembly.GetExecutingAssembly();
+
+            builder.RegisterAssemblyTypes(foundationAssembly).Where(x => x.Namespace != null && x.Namespace.Contains("Services")).As(x => x.GetInterfaces()
+                    .FirstOrDefault(i => i.Name == "I" + x.Name)).InstancePerLifetimeScope();
             
 
-            builder.RegisterTypes().Where(x => x.Namespace != null && x.Namespace.Contains("Repositories"))
-                .As(x => x.GetInterfaces().FirstOrDefault(i => i.Name == "I" + x.Name))
-                .InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(foundationAssembly).Where(x => x.Namespace != null && x.Namespace.Contains("Repositories")).As(x => x.GetInterfaces()
+                    .FirstOrDefault(i => i.Name == "I" + x.Name)).InstancePerLifetimeScope();
 
             builder.RegisterType<WebsiteUnitOfWork>().As<IWebsiteUnitOfWork>().InstancePerLifetimeScope();
 

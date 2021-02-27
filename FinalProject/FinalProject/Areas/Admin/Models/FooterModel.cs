@@ -17,6 +17,6 @@ namespace FinalProject.Areas.Admin.Models
             _service = Startup.AutofacContainer.Resolve<IFooterService>();
         }
 
-        public string Copyright { get; set; }
+        public string Copyright { get; set; } = "All Rights reserved by &copy; Ismail Final Year Project";
     }
 }

@@ -1,4 +1,6 @@
-﻿using Autofac;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Autofac;
 using Foundation.Services;
 
 namespace FinalProject.Areas.Admin.Models
@@ -16,8 +18,12 @@ namespace FinalProject.Areas.Admin.Models
         {
             _service = Startup.AutofacContainer.Resolve<INoticeService>();
         }
+        public IList<NoticeViewModel> NoticeList { get; set; }
+    }
 
-        public string Title { get; set; }
-        public string Description { get; set; }
+    public class NoticeViewModel
+    {
+        public string Title { get; set; } = "This is Notice Title";
+        public string Description { get; set; } = "This is Notice Description";
     }
 }
