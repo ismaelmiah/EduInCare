@@ -1,4 +1,6 @@
-﻿using Foundation.Entities;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Foundation.Entities;
 using Foundation.UnitOfWorks;
 
 namespace Foundation.Services
@@ -15,7 +17,13 @@ namespace Foundation.Services
 
         public void AddHeaderImage(Header header)
         {
-            throw new System.NotImplementedException();
+            _websiteUnit.Header.Add(header);
+            _websiteUnit.Save();
+        }
+
+        public IList<Header> GetHeader()
+        {
+            return _websiteUnit.Header.Get(null,null, "Image", false);
         }
 
         public void RemoveHeaderImage()

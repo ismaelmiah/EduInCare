@@ -4,7 +4,14 @@
 }
  
 <div class="jumbotron text-center m-0 p-0">
-        <img style="width: 100%" src="http://www.narsingditsc.gov.bd/cloud/themes/tsc/inc/img/logo/logo.png" alt="" >
+    @if (Model.Header.ShowBannerImage)
+    {
+        <img style="width: 100%" src="@Model.Header.ImagePath" alt="">
+    }
+    else
+    {
+        <img style="width: 100%" src="/Banner.png" alt="">
+    }
 </div>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
