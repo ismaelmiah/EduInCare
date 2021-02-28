@@ -34,10 +34,13 @@
     </div>
 </nav>
 
-
-<div class="jumbotron text-center">
-    <p>@Model.Advertise.Title</p>
-</div>
+@if (Model.Advertise.IsActive)
+{
+    
+    <div class="jumbotron text-center">
+        <p>@Model.Advertise.Title</p>
+    </div>
+}
 
 <div class="container" style="margin-top:30px">
     <div class="row">

@@ -50,5 +50,11 @@ namespace FinalProject.Areas.Admin.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Advertise(AdvertiseModel model)
+        {
+            model.SaveAdvertise();
+            return View();
+        }
     }
 }

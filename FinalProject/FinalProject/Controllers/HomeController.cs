@@ -14,7 +14,7 @@ namespace FinalProject.Controllers
             {
                 Header = new HeaderModel().CurrentHeader(),
                 Footer = new FooterModel().CurrentFooter(),
-                Advertise = new AdvertiseModel(),
+                Advertise = new AdvertiseModel().CurrentAdvertise(),
                 Notice = new NoticeModel()
                 {
                     NoticeList = new List<NoticeViewModel>
