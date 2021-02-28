@@ -40,6 +40,12 @@ namespace FinalProject.Areas.Admin.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Post(PostViewModel model)
+        {
+            model.SavePost();
+            return View();
+        }
         
         public IActionResult Notice()
         {

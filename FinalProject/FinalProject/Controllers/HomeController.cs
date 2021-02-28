@@ -31,24 +31,7 @@ namespace FinalProject.Controllers
                         }
                     }
                 },
-                Post = new PostModel
-                {
-                    PostList = new List<PostViewModel>
-                    {
-                        new PostViewModel
-                        {
-                            Title = "Admission",
-                            CreateDate = DateTime.Today,
-                            Description = "Admission Going On"
-                        },
-                        new PostViewModel
-                        {
-                            Title = "Admission",
-                            CreateDate = DateTime.Today,
-                            Description = "Admission Going On"
-                        },
-                    }
-                }
+                Post = new PostModel()
             };
             return View(model);
         }

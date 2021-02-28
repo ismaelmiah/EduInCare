@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Home Page";
 }
- 
+
 <div class="jumbotron text-center m-0 p-0">
     @if (Model.Header.ShowBannerImage)
     {
@@ -36,7 +36,7 @@
 
 @if (Model.Advertise.IsActive)
 {
-    
+
     <div class="jumbotron text-center">
         <p>@Model.Advertise.Title</p>
     </div>
@@ -57,12 +57,18 @@
             <hr class="d-sm-none">
         </div>
         <div class="col-sm-8">
-            @foreach (var post in Model.Post.PostList)
+            @if (Model.Post.PostList != null)
             {
-                <h2>@post.Title</h2>
-                <h5>@post.CreateDate.ToString("MM/dd/yyyy hh:mm tt")</h5>
-                <p>@post.Description</p>
-                <br>
+                @foreach (var post in Model.Post.PostList)
+                {
+                    if (post.IsActive)
+                    {
+                        <h2>@post.Title</h2>
+                        <h5>@post.CreateDate.ToString("MM/dd/yyyy hh:mm tt")</h5>
+                        <p>@post.Description</p>
+                        <br>
+                    }
+                }
             }
         </div>
     </div>
