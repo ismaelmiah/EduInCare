@@ -18,7 +18,7 @@ namespace FinalProject.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Header(HeaderModel model)
         {
-            model.SaveHeader(model);
+            model.SaveHeader();
             return View();
         }
 
@@ -28,6 +28,12 @@ namespace FinalProject.Areas.Admin.Controllers
         }
         public IActionResult Footer()
         {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Footer(FooterModel model)
+        {
+            model.SaveFooter();
             return View();
         }
         public IActionResult Post()

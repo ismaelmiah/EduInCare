@@ -25,9 +25,9 @@ namespace FinalProject.Areas.Admin.Models
         public IFormFile BannerImage { get; set; }
         public string ImagePath { get; set; }
 
-        public void SaveHeader(HeaderModel model)
+        public void SaveHeader()
         {
-            var header = model.ConvertToEntity(model);
+            var header = ConvertToEntity();
             _service.AddHeaderImage(header);
         }
 
@@ -42,12 +42,12 @@ namespace FinalProject.Areas.Admin.Models
             }
             return model;
         }
-        private Header ConvertToEntity(HeaderModel model)
+        private Header ConvertToEntity()
         {
-            var (fileName, filePath) = StoreFile(model.BannerImage);
+            var (fileName, filePath) = StoreFile(BannerImage);
             return new Header
             {
-                ShowBannerImage = model.ShowBannerImage,
+                ShowBannerImage = ShowBannerImage,
                 Image = new Image
                 {
                     Url = filePath,

@@ -13,7 +13,7 @@ namespace FinalProject.Controllers
             var model = new WebsiteModel
             {
                 Header = new HeaderModel().CurrentHeader(),
-                Footer = new FooterModel(),
+                Footer = new FooterModel().CurrentFooter(),
                 Advertise = new AdvertiseModel(),
                 Notice = new NoticeModel()
                 {
