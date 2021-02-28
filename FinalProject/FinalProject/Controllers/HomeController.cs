@@ -12,25 +12,10 @@ namespace FinalProject.Controllers
         {
             var model = new WebsiteModel
             {
-                Header = new HeaderModel().CurrentHeader(),
-                Footer = new FooterModel().CurrentFooter(),
-                Advertise = new AdvertiseModel().CurrentAdvertise(),
-                Notice = new NoticeModel()
-                {
-                    NoticeList = new List<NoticeViewModel>
-                    {
-                        new NoticeViewModel()
-                        {
-                            Title = "Admission",
-                            Description = "Admission Going On"
-                        },
-                        new NoticeViewModel()
-                        {
-                            Title = "Result Published",
-                            Description = "Result Published On"
-                        }
-                    }
-                },
+                Header = new HeaderModel(),
+                Footer = new FooterModel(),
+                Advertise = new AdvertiseModel(),
+                Notice = new NoticeModel(),
                 Post = new PostModel()
             };
             return View(model);

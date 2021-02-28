@@ -17,6 +17,7 @@ namespace FinalProject.Areas.Admin.Models
         public FooterModel()
         {
             _service = Startup.AutofacContainer.Resolve<IFooterService>();
+            CurrentFooter();
         }
 
         public string Copyright { get; set; }

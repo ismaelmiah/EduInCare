@@ -32,7 +32,7 @@ namespace FinalProject.Areas.Admin.Models
 
         private void GetAllPosts()
         {
-            var posts = _service.Posts();
+            var posts = _service.GetAllPosts();
             PostList = new List<PostViewModel>();
             foreach (var post in posts)
             {

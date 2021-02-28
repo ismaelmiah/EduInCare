@@ -19,6 +19,7 @@ namespace FinalProject.Areas.Admin.Models
         public HeaderModel()
         {
             _service = Startup.AutofacContainer.Resolve<IHeaderService>();
+            CurrentHeader();
         }
 
         public bool ShowBannerImage { get; set; }

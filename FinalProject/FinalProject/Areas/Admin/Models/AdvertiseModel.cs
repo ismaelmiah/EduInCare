@@ -16,6 +16,7 @@ namespace FinalProject.Areas.Admin.Models
         public AdvertiseModel()
         {
             _service = Startup.AutofacContainer.Resolve<IAdvertiseService>();
+            CurrentAdvertise();
         }
 
         public string Title { get; set; } = "This is Advertise Section";

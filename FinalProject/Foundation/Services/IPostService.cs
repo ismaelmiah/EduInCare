@@ -7,7 +7,7 @@ namespace Foundation.Services
     public interface IPostService
     {
         void AddPost(Post post);
-        IList<Post> Posts();
+        IList<Post> GetAllPosts();
         void RemovePost();
     }
 }

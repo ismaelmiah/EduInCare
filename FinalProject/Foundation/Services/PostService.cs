@@ -19,7 +19,7 @@ namespace Foundation.Services
             _websiteUnit.Save();
         }
 
-        public IList<Post> Posts()
+        public IList<Post> GetAllPosts()
         {
             return _websiteUnit.Post.GetAll();
         }

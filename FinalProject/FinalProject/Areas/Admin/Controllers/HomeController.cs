@@ -51,6 +51,13 @@ namespace FinalProject.Areas.Admin.Controllers
         {
             return View();
         }
+        
+        [HttpPost]
+        public IActionResult Notice(NoticeViewModel model)
+        {
+            model.SaveNotice();
+            return View();
+        }
 
         public IActionResult Advertise()
         {
