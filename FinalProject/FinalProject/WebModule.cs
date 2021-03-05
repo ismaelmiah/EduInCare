@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 using Autofac;
+using Module = Autofac.Module;
 
 namespace FinalProject
 {
@@ -19,7 +17,9 @@ namespace FinalProject
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterTypes().Where(x => x.Namespace != null && x.Namespace.Contains("Admin.Models")).AsSelf();
+            var webExecutingAssembly = Assembly.GetExecutingAssembly();
+
+            builder.RegisterAssemblyTypes(webExecutingAssembly).Where(x => x.Namespace != null && x.Namespace.Contains("Admin.Models")).AsSelf();
 
             base.Load(builder);
         }

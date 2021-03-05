@@ -1,10 +1,14 @@
-﻿using Autofac;
+﻿using System;
+using System.Collections;
+using Autofac;
+using FinalProject.Models;
+using Foundation.Entities;
 using Foundation.Services;
 using Microsoft.AspNetCore.Http;
 
 namespace FinalProject.Areas.Admin.Models
 {
-    public class HeaderModel
+    public class HeaderModel : BaseModel
     {
         private readonly IHeaderService _service;
         public HeaderModel(IHeaderService headerService)
@@ -15,10 +19,40 @@ namespace FinalProject.Areas.Admin.Models
         public HeaderModel()
         {
             _service = Startup.AutofacContainer.Resolve<IHeaderService>();
+            CurrentHeader();
         }
 
-        public string Heading { get; set; } = "This is Heading";
-        public string SubHeading { get; set; }
-        public IFormFile CoverPhoto { get; set; }
+        public bool ShowBannerImage { get; set; }
+        public IFormFile BannerImage { get; set; }
+        public string ImagePath { get; set; }
+
+        public void SaveHeader()
+        {
+            var header = ConvertToEntity();
+            _service.AddHeaderImage(header);
+        }
+
+        public void CurrentHeader()
+        {
+            var headers = _service.GetHeader();
+            foreach (var header in headers)
+            {
+                ImagePath = FormatImageUrl(header.Image?.AlternativeText);
+                ShowBannerImage = header.ShowBannerImage;
+            }
+        }
+        private Header ConvertToEntity()
+        {
+            var (fileName, filePath) = StoreFile(BannerImage);
+            return new Header
+            {
+                ShowBannerImage = ShowBannerImage,
+                Image = new Image
+                {
+                    Url = filePath,
+                    AlternativeText = $"{fileName}"
+                },
+            };
+        }
     }
 }

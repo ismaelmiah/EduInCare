@@ -1,4 +1,6 @@
-﻿using Foundation.UnitOfWorks;
+﻿using System.Collections.Generic;
+using Foundation.Entities;
+using Foundation.UnitOfWorks;
 
 namespace Foundation.Services
 {
@@ -9,6 +11,22 @@ namespace Foundation.Services
         public PostService(IWebsiteUnitOfWork website)
         {
             _websiteUnit = website;
+        }
+
+        public void AddPost(Post post)
+        {
+            _websiteUnit.Post.Add(post);
+            _websiteUnit.Save();
+        }
+
+        public IList<Post> GetAllPosts()
+        {
+            return _websiteUnit.Post.GetAll();
+        }
+
+        public void RemovePost()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

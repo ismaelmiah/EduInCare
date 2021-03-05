@@ -170,25 +170,65 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-                             with font-awesome or any other icon font library -->
-
-                        <li class="nav-item has-treeview">
+                        <li class="nav-header">
+                            Website Management
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-area="Admin" asp-action="Header" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Header</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-area="Admin" asp-action="Menu" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Menu</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-area="Admin" asp-action="Advertise" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Advertise</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-area="Admin" asp-action="Post" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Post</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-area="Admin" asp-action="Notice" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Notice</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-area="Admin" asp-action="Footer" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Footer</p>
+                            </a>
+                        </li>
+                        <li class="nav-header">
+                            Portal Management
+                        </li>
+                        <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-edit"></i>
+                                <i class="nav-icon fas fa-chalkboard-teacher"></i>
                                 <p>
-                                    Student Enroll Forms
-                                    <i class="fas fa-angle-left right"></i>
+                                    Teacher Portal
+                                    <span class="right badge badge-danger">New</span>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a asp-controller="Home" asp-area="" asp-action="Index" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add Student</p>
-                                    </a>
-                                </li>
-                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-user-graduate"></i>
+                                <p>
+                                    Student Portal
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
                         </li>
                     </ul>
                 </nav>

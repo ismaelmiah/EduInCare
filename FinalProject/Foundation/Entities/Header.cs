@@ -7,6 +7,6 @@ namespace Foundation.Entities
     {
         public Guid Id { get; set; }
         public virtual Image Image { get; set; }
-        public string Heading { get; set; }
+        public bool ShowBannerImage { get; set; }
     }
 }

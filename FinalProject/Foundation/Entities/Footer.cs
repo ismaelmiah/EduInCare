@@ -7,5 +7,6 @@ namespace Foundation.Entities
     {
         public Guid Id { get; set; }
         public string Copyright { get; set; }
+        public bool ShowCopyright { get; set; }
     }
 }
