@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Autofac;
 using Foundation.Entities;
 using Foundation.Services;
@@ -19,7 +18,6 @@ namespace FinalProject.Areas.Admin.Models
         public PostModel()
         {
             _service = Startup.AutofacContainer.Resolve<IPostService>();
-
             GetAllPosts();
         }
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using FinalProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using FinalProject.Areas.Admin.Models;

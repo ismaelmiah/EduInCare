@@ -29,17 +29,15 @@ namespace FinalProject.Areas.Admin.Models
             _service.CreateAdvertise(advertise);
         }
 
-        public AdvertiseModel CurrentAdvertise()
+        public void CurrentAdvertise()
         {
             var advertises = _service.GetAdvertises();
-            var model = new AdvertiseModel();
             foreach (var advertise in advertises)
             {
-                model.ActionUrl = advertise.ActionUrl;
-                model.Title = advertise.Title;
-                model.IsActive = advertise.IsActive;
+                ActionUrl = advertise.ActionUrl;
+                Title = advertise.Title;
+                IsActive = advertise.IsActive;
             }
-            return model;
         }
         private Advertise ConvertToEntity()
         {

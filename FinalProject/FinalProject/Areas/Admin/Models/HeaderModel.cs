@@ -32,16 +32,14 @@ namespace FinalProject.Areas.Admin.Models
             _service.AddHeaderImage(header);
         }
 
-        public HeaderModel CurrentHeader()
+        public void CurrentHeader()
         {
-            var model = new HeaderModel();
             var headers = _service.GetHeader();
             foreach (var header in headers)
             {
-                model.ImagePath = FormatImageUrl(header.Image?.AlternativeText);
-                model.ShowBannerImage = header.ShowBannerImage;
+                ImagePath = FormatImageUrl(header.Image?.AlternativeText);
+                ShowBannerImage = header.ShowBannerImage;
             }
-            return model;
         }
         private Header ConvertToEntity()
         {

@@ -29,17 +29,14 @@ namespace FinalProject.Areas.Admin.Models
             _service.AddFooter(model);
         }
 
-        public FooterModel CurrentFooter()
+        public void CurrentFooter()
         {
             var footers = _service.GetFooter();
-            var footerModel = new FooterModel();
             foreach (var footer in footers)
             {
-                footerModel.Copyright = footer.Copyright;
-                footerModel.ShowCopyrightText = footer.ShowCopyright;
+                Copyright = footer.Copyright;
+                ShowCopyrightText = footer.ShowCopyright;
             }
-
-            return footerModel;
         }
         private Footer ConvertToEntity()
         {
