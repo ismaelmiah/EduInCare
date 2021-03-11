@@ -10,17 +10,5 @@ namespace FinalProject.Areas.Admin.Controllers
         {
             return View();
         }
-        public IActionResult Upsert()
-        {
-            return View();
-        }
-        public IActionResult Delete(Guid id)
-        {
-            return RedirectToAction(nameof(Index));
-        }
-        public IActionResult StudentReport(Guid id)
-        {
-            return View();
-        }
     }
 }
