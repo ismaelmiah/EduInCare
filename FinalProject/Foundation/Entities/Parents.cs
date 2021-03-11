@@ -1,7 +1,11 @@
-﻿namespace Foundation.Entities
+﻿using System;
+using DataAccessLayer;
+
+namespace Foundation.Entities
 {
-    public class Parents
+    public class StudentParents : IEntity<Guid>
     {
+        public Guid Id { get; set; }
         public string FatherName { get; set; }
         public string FatherMobileNo { get; set; }
         public string FatherOccupation { get; set; }

@@ -12,5 +12,9 @@ namespace Foundation.Contexts
         DbSet<Post> Posts { get; set; }
         DbSet<Advertise> Advertises { get; set; }
         DbSet<Image> Images { get; set; }
+        DbSet<Student> Students { get; set; }
+        DbSet<Address> Addresses { get; set; }
+        DbSet<StudentParents> Parents { get; set; }
+        DbSet<Course> Courses { get; set; }
     }
 }

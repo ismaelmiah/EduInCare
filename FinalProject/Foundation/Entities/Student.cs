@@ -18,7 +18,7 @@ namespace Foundation.Entities
         public Address PermanentAddress { get; set; }
         public string Nationality { get; set; }
         public DateTime YearOfEnroll { get; set; }
-        public Parents ParentsInfo { get; set; }
+        public StudentParents ParentsInfo { get; set; }
         public Course EnrollCourse { get; set; }
     }
 }
