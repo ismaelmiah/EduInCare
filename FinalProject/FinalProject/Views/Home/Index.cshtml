@@ -3,40 +3,13 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="jumbotron text-center m-0 p-0">
-    @if (Model.Header.ShowBannerImage)
-    {
-        <img style="width: 100%" src="@Model.Header.ImagePath" alt="">
-    }
-    else
-    {
-        <img style="width: 100%" src="/Banner.png" alt="">
-    }
-</div>
-
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+@section HeaderModel
+{
+    <partial name="_HeaderView" model="Model.Header" />
+}
 
 @if (Model.Advertise.IsActive)
 {
-
     <div class="jumbotron text-center">
         <p>@Model.Advertise.Title</p>
     </div>

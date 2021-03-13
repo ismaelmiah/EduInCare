@@ -1,7 +1,96 @@
-﻿@{
-    ViewData["Title"] = "Upsert";
-    Layout = "~/Areas/Student/Views/Shared/_StudentLayout.cshtml";
-}
+﻿@model StudentFormModel
 
-<h1>Upsert</h1>
+@{
+    ViewData["Title"] = "Student Application";
+    Layout = "_StudentLayout";
+}
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="card card-info">
+            <div class="card-header">
+                <h3 class="card-title text-center">@ViewData["Title"]</h3>
+            </div>
+            <form class="form-horizontal" asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MiddleName" class="control-label"></label>
+                        <input asp-for="MiddleName" class="form-control" />
+                        <span asp-validation-for="MiddleName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DateOfBirth" class="control-label"></label>
+                        <input asp-for="DateOfBirth" class="form-control" />
+                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BirthCertificateNo" class="control-label"></label>
+                        <input asp-for="BirthCertificateNo" class="form-control" />
+                        <span asp-validation-for="BirthCertificateNo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NationalIdentificationNo" class="control-label"></label>
+                        <input asp-for="NationalIdentificationNo" class="form-control" />
+                        <span asp-validation-for="NationalIdentificationNo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Gender" class="control-label"></label>
+                        <input asp-for="Gender" class="form-control" />
+                        <span asp-validation-for="Gender" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MobileNo" class="control-label"></label>
+                        <input asp-for="MobileNo" class="form-control" />
+                        <span asp-validation-for="MobileNo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Nationality" class="control-label"></label>
+                        <input asp-for="Nationality" class="form-control" />
+                        <span asp-validation-for="Nationality" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <div>
+                            <label class="text-bold">Present Address</label>
+                        </div>
+                        <partial name="_AddressFormVIew" model="Model.PresentAddress"/>
+                    </div>
+                    <div>
+                        <div>
+                            <label class="text-bold">Permanent Address</label>
+                        </div>
+                        <partial name="_AddressFormVIew" model="Model.PresentAddress"/>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="YearOfEnroll" class="control-label"></label>
+                        <input asp-for="YearOfEnroll" class="form-control" />
+                        <span asp-validation-for="YearOfEnroll" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="form-group row mb-0">
+                        <div class="col-6 text-left">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                        <div class="col-6 text-right">
+                            <a asp-action="Index">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>
 

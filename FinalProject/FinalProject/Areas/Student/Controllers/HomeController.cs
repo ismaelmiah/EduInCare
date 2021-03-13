@@ -1,4 +1,5 @@
 ﻿using System;
+using FinalProject.Areas.Student.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProject.Areas.Student.Controllers
@@ -12,7 +13,8 @@ namespace FinalProject.Areas.Student.Controllers
         }
         public IActionResult Upsert()
         {
-            return View();
+            var model = new StudentFormModel();
+            return View(model);
         }
         public IActionResult Delete(Guid id)
         {
