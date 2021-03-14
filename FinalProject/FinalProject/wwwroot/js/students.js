@@ -36,7 +36,7 @@
         var modal = $("#modal-default");
         modal.find('.modal-body p').text('Are you sure you want to delete this record?');
         $("#deleteId").val(id);
-        $("#deleteForm").attr("action", "/admin/student/delete");
+        $("#deleteForm").attr("action", "/student/home/delete");
         modal.modal('show');
     });
 

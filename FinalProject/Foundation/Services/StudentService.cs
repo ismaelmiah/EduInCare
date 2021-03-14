@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Foundation.Library.Entities;
 using Foundation.Library.UnitOfWorks;
@@ -60,6 +61,12 @@ namespace Foundation.Library.Services
                 }).ToList();
 
             return (result.total, result.totalDisplay, data);
+        }
+
+        public void Delete(Guid id)
+        {
+            _management.Student.Remove(id);
+            _management.Save();
         }
 
         public Student ConvertToEntityStudent()

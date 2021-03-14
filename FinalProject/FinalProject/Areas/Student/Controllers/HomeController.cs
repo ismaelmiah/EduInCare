@@ -24,6 +24,8 @@ namespace FinalProject.Web.Areas.Student.Controllers
         }
         public IActionResult Delete(Guid id)
         {
+            var model = new StudentFormModel();
+            model.DeleteStudent(id);
             return RedirectToAction(nameof(Index));
         }
         public IActionResult StudentReport(Guid id)

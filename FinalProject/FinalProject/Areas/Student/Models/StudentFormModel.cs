@@ -63,5 +63,9 @@ namespace FinalProject.Web.Areas.Student.Models
             };
         }
 
+        public void DeleteStudent(Guid id)
+        {
+            _studentService.Delete(id);
+        }
     }
 }
