@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Foundation.Library.Entities;
 using Foundation.Library.Repositories;
 
@@ -17,9 +18,45 @@ namespace Foundation.Library.Services
             _studentRepository.Add(student);
         }
 
-        public IList<Student> GetStudents()
+        public (int total, int totalDisplay, IList<Student> records) GetStudentList(int pageIndex, int pageSize, string searchText,
+            string orderBy)
         {
-            return _studentRepository.GetAll();
+            (IList<Student> data, int total, int totalDisplay) result = (null, 0, 0);
+
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                result = _studentRepository.GetDynamic(null,
+                    orderBy, "Images", pageIndex, pageSize, true);
+
+            }
+            else
+            {
+                result = _studentRepository.GetDynamic(x => x.FirstName == searchText,
+                    orderBy, "Images", pageIndex, pageSize, true);
+            }
+
+            var data = (from x in result.data
+                select new Student
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    MiddleName = x.MiddleName,
+                    LastName = x.LastName,
+                    Gender = x.Gender,
+                    MobileNo = x.MobileNo,
+                    DateOfBirth = x.DateOfBirth,
+                    BirthCertificateNo = x.BirthCertificateNo,
+                    NationalIdentificationNo = x.NationalIdentificationNo,
+                    PresentAddress = x.PresentAddress,
+                    PermanentAddress = x.PermanentAddress,
+                    PhotoImage = x.PhotoImage,
+                    Nationality = x.Nationality,
+                    YearOfEnroll = x.YearOfEnroll,
+                    EnrollCourse = x.EnrollCourse,
+                    ParentsInfo = x.ParentsInfo
+                }).ToList();
+
+            return (result.total, result.totalDisplay, data);
         }
     }
 }
