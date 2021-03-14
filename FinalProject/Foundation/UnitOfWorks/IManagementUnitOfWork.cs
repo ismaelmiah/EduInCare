@@ -5,7 +5,8 @@ namespace Foundation.Library.UnitOfWorks
 {
     public interface IManagementUnitOfWork : IUnitOfWork
     {
-        public IStudentRepository Student { get; set; }
+        public IStudentRepository StudentRepository { get; set; }
         public IParentsRepository ParentsRepository { get; set; }
+        public ICourseRepository CourseRepository { get; set; }
     }
 }

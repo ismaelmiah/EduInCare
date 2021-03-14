@@ -7,14 +7,17 @@ namespace Foundation.Library.UnitOfWorks
     public class ManagementUnitOfWork : UnitOfWork, IManagementUnitOfWork
     {
         public ManagementUnitOfWork(WebsiteContext dbContext,
+            ICourseRepository course,
             IStudentRepository student,
             IParentsRepository parents) : base(dbContext)
         {
-            Student = student;
+            CourseRepository = course;
+            StudentRepository = student;
             ParentsRepository = parents;
         }
 
-        public IStudentRepository Student { get; set; }
+        public IStudentRepository StudentRepository { get; set; }
         public IParentsRepository ParentsRepository { get; set; }
+        public ICourseRepository CourseRepository { get; set; }
     }
 }

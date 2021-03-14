@@ -1,0 +1,18 @@
+﻿@model StudentFormModel
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="form-group">
+    <label asp-for="PermanentAddress.Street" class="control-label"></label>
+    <input asp-for="PermanentAddress.Street" class="form-control" />
+    <span asp-validation-for="PermanentAddress.Street" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="PermanentAddress.City" class="control-label"></label>
+    <input asp-for="PermanentAddress.City" class="form-control" />
+    <span asp-validation-for="PermanentAddress.City" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="PermanentAddress.ZipCode" class="control-label"></label>
+    <input asp-for="PermanentAddress.ZipCode" class="form-control" />
+    <span asp-validation-for="PermanentAddress.ZipCode" class="text-danger"></span>
+</div>

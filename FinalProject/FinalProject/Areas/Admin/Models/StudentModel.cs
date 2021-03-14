@@ -8,7 +8,6 @@ namespace FinalProject.Web.Areas.Admin.Models
 {
     public class StudentModel : BaseModel
     {
-
         private readonly IStudentService _studentService;
 
         public StudentModel(IStudentService studentService) { _studentService = studentService; }

@@ -13,25 +13,20 @@ namespace FinalProject.Web.Areas.Student.Controllers
         }
         public IActionResult Upsert()
         {
-            var model = new StudentFormModel
-            {
-                ParentsInfo = new ParentsModel(),
-                PresentAddress = new AddressModel(),
-                PermanentAddress = new AddressModel()
-            };
+            var model = new StudentFormModel();
             return View(model);
         }
         [HttpPost]
         public IActionResult Upsert(StudentFormModel model)
         {
             model.SaveStudent();
-            return RedirectToAction(nameof(Index));
+            return RedirectToRoute(new { Area="", controller = "Home", action = "Index"});
         }
         public IActionResult Delete(Guid id)
         {
             var model = new StudentFormModel();
             model.DeleteStudent(id);
-            return RedirectToAction(nameof(Index));
+            return RedirectToRoute(new{Area = "Admin", controller = "Student", action = "Index"});
         }
         public IActionResult StudentReport(Guid id)
         {

@@ -16,9 +16,9 @@ namespace Foundation.Library.Services
             _management = management;
         }
 
-        public void CreateStudent(Student student)
+        public void AddStudent(Student student)
         {
-            _management.Student.Add(student);
+            _management.StudentRepository.Add(student);
             _management.Save();
         }
 
@@ -29,14 +29,14 @@ namespace Foundation.Library.Services
 
             if (string.IsNullOrWhiteSpace(searchText))
             {
-                result = _management.Student.GetDynamic(null,
-                    orderBy, "", pageIndex, pageSize, true);
+                result = _management.StudentRepository.GetDynamic(null,
+                    orderBy, "PhotoImage", pageIndex, pageSize, true);
 
             }
             else
             {
-                result = _management.Student.GetDynamic(x => x.FirstName == searchText,
-                    orderBy, "", pageIndex, pageSize, true);
+                result = _management.StudentRepository.GetDynamic(x => x.FirstName == searchText,
+                    orderBy, "PhotoImage", pageIndex, pageSize, true);
             }
 
             var data = (from x in result.data
@@ -65,13 +65,8 @@ namespace Foundation.Library.Services
 
         public void Delete(Guid id)
         {
-            _management.Student.Remove(id);
+            _management.StudentRepository.Remove(id);
             _management.Save();
-        }
-
-        public Student ConvertToEntityStudent()
-        {
-            return new Student();
         }
     }
 }

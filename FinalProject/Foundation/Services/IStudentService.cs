@@ -6,7 +6,7 @@ namespace Foundation.Library.Services
 {
     public interface IStudentService
     {
-        void CreateStudent(Student student);
+        void AddStudent(Student student);
         (int total, int totalDisplay, IList<Student> records) GetStudentList(int pageIndex,
             int pageSize, string searchText, string orderBy);
 

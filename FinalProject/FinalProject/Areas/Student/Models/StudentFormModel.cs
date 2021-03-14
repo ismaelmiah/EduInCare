@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Autofac;
+using FinalProject.Models;
 using Foundation.Library.Services;
 using Foundation.Library.Entities;
 using Microsoft.AspNetCore.Http;
@@ -9,16 +11,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FinalProject.Web.Areas.Student.Models
 {
-    public class StudentFormModel
+    public class StudentFormModel : BaseModel
     {
 
         private readonly IStudentService _studentService;
+        private readonly ICourseService _courseService;
 
-        public StudentFormModel(IStudentService studentService) { _studentService = studentService; }
+        public StudentFormModel(IStudentService studentService, ICourseService courseService)
+        {
+            _studentService = studentService;
+            _courseService = courseService;
+        }
 
         public StudentFormModel()
         {
             _studentService = Startup.AutofacContainer.Resolve<IStudentService>();
+            _courseService = Startup.AutofacContainer.Resolve<ICourseService>();
+            EnrollCourse = CourseList();
         }
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
@@ -46,23 +55,27 @@ namespace FinalProject.Web.Areas.Student.Models
 
         public IFormFile Photo { get; set; }
 
-        public IList<SelectListItem> EnrollCourse { get; set; } = new List<SelectListItem>
-        {
-            new SelectListItem()
-            {
-                Text = "Select Course",
-                Value = "1"
-            }
-        };
+        public IList<SelectListItem> EnrollCourse { get; set; }
         public Guid CourseId { get; set; }
 
         public void SaveStudent()
         {
-            _studentService.CreateStudent(ConvertToEntityStudent(this));
+            _studentService.AddStudent(ConvertToEntityStudent(this));
         }
 
-        public static Foundation.Library.Entities.Student ConvertToEntityStudent(StudentFormModel model)
+        public List<SelectListItem> CourseList()
         {
+            var data = _courseService.GetCourses();
+            return data.Select(x => new SelectListItem
+            {
+                Text = x.Title,
+                Value = x.Id.ToString()
+            }).ToList();
+        }
+        private Foundation.Library.Entities.Student ConvertToEntityStudent(StudentFormModel model)
+        {
+            var imageInfo = StoreFile(model.Photo);
+
             return new Foundation.Library.Entities.Student
             {
                 FirstName = model.FirstName,
@@ -85,10 +98,29 @@ namespace FinalProject.Web.Areas.Student.Models
                     MotherMobileNo = model.ParentsInfo.MotherMobileNo,
                     GuardianName = model.ParentsInfo.GuardianName,
                     GuardianMobileNo = model.ParentsInfo.GuardianMobileNo,
-                }
+                },
+                EnrollCourse = GetSelectedCourse(model.CourseId),
+                PhotoImage = new Image
+                {
+                    Url = imageInfo.filePath,
+                    AlternativeText = $"{model.FirstName} Image"
+                },
+                PermanentAddress = GetActualAddress(model.PermanentAddress),
+                PresentAddress = GetActualAddress(model.PresentAddress)
             };
         }
 
+        public Course GetSelectedCourse(Guid id)
+        {
+            return _courseService.GetCourse(id);
+        }
+
+        public Address GetActualAddress(AddressModel model) => new Address
+        {
+            City = model.City,
+            Street = model.Street,
+            ZipCode = model.ZipCode
+        };
         public void DeleteStudent(Guid id)
         {
             _studentService.Delete(id);
