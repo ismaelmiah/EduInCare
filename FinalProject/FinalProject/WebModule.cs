@@ -2,7 +2,7 @@
 using Autofac;
 using Module = Autofac.Module;
 
-namespace FinalProject
+namespace FinalProject.Web
 {
     public class WebModule : Module
     {

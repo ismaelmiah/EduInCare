@@ -1,7 +1,7 @@
 ﻿using DataAccessLayer;
-using Foundation.Repositories;
+using Foundation.Library.Repositories;
 
-namespace Foundation.UnitOfWorks
+namespace Foundation.Library.UnitOfWorks
 {
     public interface IWebsiteUnitOfWork : IUnitOfWork
     {

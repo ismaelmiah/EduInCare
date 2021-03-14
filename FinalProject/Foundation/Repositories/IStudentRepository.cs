@@ -5,8 +5,7 @@ using Foundation.Library.Entities;
 
 namespace Foundation.Library.Repositories
 {
-    public interface INoticeRepository : IRepository<Notice, Guid, WebsiteContext>
+    public interface IStudentRepository : IRepository<Student, Guid, WebsiteContext>
     {
-
     }
 }

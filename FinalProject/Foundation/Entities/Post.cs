@@ -1,7 +1,7 @@
 ﻿using System;
 using DataAccessLayer;
 
-namespace Foundation.Entities
+namespace Foundation.Library.Entities
 {
     public class Post : IEntity<Guid>
     {

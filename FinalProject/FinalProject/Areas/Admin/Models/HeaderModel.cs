@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections;
-using Autofac;
+﻿using Autofac;
 using FinalProject.Models;
-using Foundation.Entities;
-using Foundation.Services;
+using Foundation.Library.Entities;
+using Foundation.Library.Services;
 using Microsoft.AspNetCore.Http;
 
-namespace FinalProject.Areas.Admin.Models
+namespace FinalProject.Web.Areas.Admin.Models
 {
     public class HeaderModel : BaseModel
     {

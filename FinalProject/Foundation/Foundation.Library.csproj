@@ -15,11 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.Library.csproj" />
   </ItemGroup>
 
 </Project>

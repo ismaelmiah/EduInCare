@@ -2,7 +2,8 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using FinalProject.Data;
 using Foundation;
-using Foundation.Contexts;
+using Foundation.Library;
+using Foundation.Library.Contexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -11,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace FinalProject
+namespace FinalProject.Web
 {
     public class Startup
     {

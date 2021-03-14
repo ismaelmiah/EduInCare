@@ -1,7 +1,7 @@
-﻿using Foundation.Entities;
+﻿using Foundation.Library.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Foundation.Contexts
+namespace Foundation.Library.Contexts
 {
     public class WebsiteContext : DbContext, IWebsiteContext
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Foundation.Entities;
+using Foundation.Library.Entities;
 
-namespace Foundation.Services
+namespace Foundation.Library.Services
 {
     public interface IFooterService
     {

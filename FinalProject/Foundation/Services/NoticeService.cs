@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Foundation.Entities;
-using Foundation.UnitOfWorks;
+using Foundation.Library.Entities;
+using Foundation.Library.UnitOfWorks;
 
-namespace Foundation.Services
+namespace Foundation.Library.Services
 {
     public class NoticeService : INoticeService
     {
