@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Autofac;
 using Foundation.Library.Services;
 using Foundation.Library.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FinalProject.Web.Areas.Student.Models
@@ -42,6 +43,8 @@ namespace FinalProject.Web.Areas.Student.Models
         public DateTime YearOfEnroll { get; set; }
         [Display(Name = "Parents Information")]
         public ParentsModel ParentsInfo { get; set; }
+
+        public IFormFile Photo { get; set; }
 
         public IList<SelectListItem> EnrollCourse { get; set; } = new List<SelectListItem>
         {

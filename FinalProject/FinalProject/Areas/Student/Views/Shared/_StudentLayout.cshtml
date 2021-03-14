@@ -8,12 +8,13 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <div class="container-fluid m-0 p-0">
-        <div class="bg-secondary p-3 m-0">
-            <h3>Admission Form</h3>
-        </div>
-        <div>@RenderBody()</div>
-        <div class="fixed-bottom">Footer</div>
+<div class="container-fluid m-0 p-0">
+    <div class="bg-secondary p-3 m-0">
+        <h3>Admission Form</h3>
     </div>
+    <div>@RenderBody()</div>
+    <div class="fixed-bottom">Footer</div>
+</div>
+@await RenderSectionAsync("Scripts", false);
 </body>
 </html>
