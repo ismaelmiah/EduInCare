@@ -2,7 +2,7 @@
     $('#students').DataTable({
         "processing": true,
         "serverSide": true,
-        "ajax": "/Admin/Students/GetStudents",
+        "ajax": "/Admin/Student/GetStudents",
         "columnDefs": [
             {
                 "orderable": false,

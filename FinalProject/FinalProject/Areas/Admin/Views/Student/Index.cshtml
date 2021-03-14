@@ -1,36 +1,42 @@
 ﻿@{
     ViewData["Title"] = "Index";
 }
-<div >
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Students</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Students</li>
-                    </ol>
-                </div>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Students</h1>
             </div>
-        </div><!-- /.container-fluid -->
-    </section>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Students</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
 
-    <!-- Main content -->
-    <section class="content">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Current Students</h3>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-4 text-left">
+                            <h2 class="card-title">Current Students</h2>
+                        </div>
+                        <div class="col-md-8 text-right">
+                            <a href="#" class="btn btn-outline-primary">Add Student</a>
+                        </div>
                     </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <table id="students" class="table table-bordered table-striped">
-                            <thead>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="students" class="table table-bordered table-striped">
+                        <thead>
                             <tr>
                                 <th>First Name</th>
                                 <th>Middle Name</th>
@@ -41,20 +47,19 @@
                                 <th>Year Of Enroll</th>
                                 <th>Action</th>
                             </tr>
-                            </thead>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
+                        </thead>
+                    </table>
                 </div>
-                <!-- /.card -->
+                <!-- /.card-body -->
             </div>
-            <!-- /.col -->
+            <!-- /.card -->
         </div>
-        <!-- /.row -->
-    </section>
-    <!-- /.content -->
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
 
-</div>
 @section scripts
 {
     <script src="/AdminPanel/plugins/datatables/jquery.dataTables.js"></script>

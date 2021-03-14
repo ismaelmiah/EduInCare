@@ -26,13 +26,13 @@ namespace Foundation.Library.Services
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 result = _studentRepository.GetDynamic(null,
-                    orderBy, "Images", pageIndex, pageSize, true);
+                    orderBy, "", pageIndex, pageSize, true);
 
             }
             else
             {
                 result = _studentRepository.GetDynamic(x => x.FirstName == searchText,
-                    orderBy, "Images", pageIndex, pageSize, true);
+                    orderBy, "", pageIndex, pageSize, true);
             }
 
             var data = (from x in result.data
