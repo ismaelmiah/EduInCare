@@ -1,7 +1,7 @@
-﻿using FinalProject.Areas.Admin.Models;
+﻿using FinalProject.Web.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FinalProject.Areas.Admin.Controllers
+namespace FinalProject.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class HomeController : Controller

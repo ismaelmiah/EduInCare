@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using System.Reflection;
 using Autofac;
-using Foundation.Contexts;
-using Foundation.UnitOfWorks;
+using Foundation.Library.Contexts;
+using Foundation.Library.UnitOfWorks;
 using Module = Autofac.Module;
 
-namespace Foundation
+namespace Foundation.Library
 {
     public class FoundationModule : Module
     {

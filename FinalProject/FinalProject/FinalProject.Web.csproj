@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Foundation\Foundation.csproj" />
+    <ProjectReference Include="..\Foundation\Foundation.Library.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,6 +2,7 @@ using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Autofac.Extensions.DependencyInjection;
+using FinalProject.Web;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Events;

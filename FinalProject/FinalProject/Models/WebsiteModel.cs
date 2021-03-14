@@ -1,6 +1,6 @@
-﻿using FinalProject.Areas.Admin.Models;
+﻿using FinalProject.Web.Areas.Admin.Models;
 
-namespace FinalProject.Models
+namespace FinalProject.Web.Models
 {
     public class WebsiteModel
     {

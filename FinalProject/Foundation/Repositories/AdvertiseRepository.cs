@@ -1,9 +1,10 @@
 ﻿using System;
 using DataAccessLayer;
-using Foundation.Contexts;
-using Foundation.Entities;
+using Foundation.Library.Entities;
+using Foundation.Library.Contexts;
+using Foundation.Library.Repositories;
 
-namespace Foundation.Repositories
+namespace Foundation.Library.Repositories
 {
     public class AdvertiseRepository : Repository<Advertise, Guid, WebsiteContext>, IAdvertiseRepository
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using DataAccessLayer;
-using Foundation.Contexts;
-using Foundation.Entities;
+using Foundation.Library.Entities;
+using Foundation.Library.Contexts;
 
-namespace Foundation.Repositories
+namespace Foundation.Library.Repositories
 {
     public class FooterRepository : Repository<Footer, Guid, WebsiteContext>, IFooterRepository
     {

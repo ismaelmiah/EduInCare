@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Foundation.Entities;
-using Foundation.UnitOfWorks;
+﻿using System.Collections.Generic;
+using Foundation.Library.Entities;
+using Foundation.Library.UnitOfWorks;
 
-namespace Foundation.Services
+namespace Foundation.Library.Services
 {
     public class HeaderService : IHeaderService
     {

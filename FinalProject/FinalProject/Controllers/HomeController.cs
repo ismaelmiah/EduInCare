@@ -1,9 +1,9 @@
-﻿using System;
-using FinalProject.Models;
+﻿using FinalProject.Models;
+using FinalProject.Web.Areas.Admin.Models;
+using FinalProject.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using FinalProject.Areas.Admin.Models;
 
-namespace FinalProject.Controllers
+namespace FinalProject.Web.Controllers
 {
     public class HomeController : Controller
     {

@@ -1,9 +1,8 @@
-﻿using System.Linq;
-using Autofac;
-using Foundation.Entities;
-using Foundation.Services;
+﻿using Autofac;
+using Foundation.Library.Entities;
+using Foundation.Library.Services;
 
-namespace FinalProject.Areas.Admin.Models
+namespace FinalProject.Web.Areas.Admin.Models
 {
     public class FooterModel
     {

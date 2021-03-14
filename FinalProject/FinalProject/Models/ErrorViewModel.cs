@@ -1,6 +1,6 @@
 using System;
 
-namespace FinalProject.Models
+namespace FinalProject.Web.Models
 {
     public class ErrorViewModel
     {

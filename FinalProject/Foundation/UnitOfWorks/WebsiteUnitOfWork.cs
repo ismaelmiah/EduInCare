@@ -1,8 +1,8 @@
 ﻿using DataAccessLayer;
-using Foundation.Contexts;
-using Foundation.Repositories;
+using Foundation.Library.Contexts;
+using Foundation.Library.Repositories;
 
-namespace Foundation.UnitOfWorks
+namespace Foundation.Library.UnitOfWorks
 {
     public class WebsiteUnitOfWork : UnitOfWork, IWebsiteUnitOfWork
     {

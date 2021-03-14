@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Autofac;
-using Foundation.Entities;
-using Foundation.Services;
+using Foundation.Library.Entities;
+using Foundation.Library.Services;
 
-namespace FinalProject.Areas.Admin.Models
+namespace FinalProject.Web.Areas.Admin.Models
 {
     public class NoticeModel
     {
