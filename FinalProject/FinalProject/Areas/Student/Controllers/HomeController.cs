@@ -16,6 +16,12 @@ namespace FinalProject.Web.Areas.Student.Controllers
             var model = new StudentFormModel();
             return View(model);
         }
+        [HttpPost]
+        public IActionResult Upsert(StudentFormModel model)
+        {
+            model.SaveStudent();
+            return RedirectToAction(nameof(Index));
+        }
         public IActionResult Delete(Guid id)
         {
             return RedirectToAction(nameof(Index));

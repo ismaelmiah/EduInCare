@@ -8,5 +8,6 @@ namespace Foundation.Library.Services
         void CreateStudent(Student student);
         (int total, int totalDisplay, IList<Student> records) GetStudentList(int pageIndex,
             int pageSize, string searchText, string orderBy);
+        
     }
 }

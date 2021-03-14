@@ -20,6 +20,7 @@ namespace FinalProject.Web
             var webExecutingAssembly = Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(webExecutingAssembly).Where(x => x.Namespace != null && x.Namespace.Contains("Admin.Models")).AsSelf();
+            builder.RegisterAssemblyTypes(webExecutingAssembly).Where(x => x.Namespace != null && x.Namespace.Contains("Student.Models")).AsSelf();
 
             base.Load(builder);
         }

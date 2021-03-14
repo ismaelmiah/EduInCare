@@ -1,37 +1,40 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Foundation.Library.Entities;
-using Foundation.Library.Repositories;
+using Foundation.Library.UnitOfWorks;
 
 namespace Foundation.Library.Services
 {
     public class StudentService : IStudentService
     {
-        private readonly IStudentRepository _studentRepository;
 
-        public StudentService(IStudentRepository studentRepository)
+        private readonly IManagementUnitOfWork _management;
+
+        public StudentService(IManagementUnitOfWork management)
         {
-            _studentRepository = studentRepository;
+            _management = management;
         }
+
         public void CreateStudent(Student student)
         {
-            _studentRepository.Add(student);
+            _management.Student.Add(student);
+            _management.Save();
         }
 
         public (int total, int totalDisplay, IList<Student> records) GetStudentList(int pageIndex, int pageSize, string searchText,
             string orderBy)
         {
-            (IList<Student> data, int total, int totalDisplay) result = (null, 0, 0);
+            (IList<Student> data, int total, int totalDisplay) result;
 
             if (string.IsNullOrWhiteSpace(searchText))
             {
-                result = _studentRepository.GetDynamic(null,
+                result = _management.Student.GetDynamic(null,
                     orderBy, "", pageIndex, pageSize, true);
 
             }
             else
             {
-                result = _studentRepository.GetDynamic(x => x.FirstName == searchText,
+                result = _management.Student.GetDynamic(x => x.FirstName == searchText,
                     orderBy, "", pageIndex, pageSize, true);
             }
 
@@ -57,6 +60,11 @@ namespace Foundation.Library.Services
                 }).ToList();
 
             return (result.total, result.totalDisplay, data);
+        }
+
+        public Student ConvertToEntityStudent()
+        {
+            return new Student();
         }
     }
 }
