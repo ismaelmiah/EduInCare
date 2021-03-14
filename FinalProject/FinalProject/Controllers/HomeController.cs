@@ -1,5 +1,4 @@
-﻿using FinalProject.Models;
-using FinalProject.Web.Areas.Admin.Models;
+﻿using FinalProject.Web.Areas.Admin.Models;
 using FinalProject.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 

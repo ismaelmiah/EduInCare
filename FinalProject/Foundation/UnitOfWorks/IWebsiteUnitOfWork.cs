@@ -10,5 +10,6 @@ namespace Foundation.Library.UnitOfWorks
         IPostRepository Post { get; set; }
         INoticeRepository Notice { get; set; }
         IAdvertiseRepository Advertise { get; set; }
+        IStudentRepository Student { get; set; }
     }
 }

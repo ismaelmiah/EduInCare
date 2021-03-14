@@ -7,8 +7,8 @@ namespace Foundation.Library.Repositories
 {
     public class StudentRepository : Repository<Student, Guid, WebsiteContext>, IStudentRepository
     {
-    public StudentRepository(WebsiteContext context) : base(context)
-    {
-    }
+        public StudentRepository(WebsiteContext context) : base(context)
+        {
+        }
     }
 }

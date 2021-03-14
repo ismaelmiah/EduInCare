@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace FinalProject.Migrations
+namespace FinalProject.Web.Migrations
 {
     public partial class WebsiteEntitiesInitialized : Migration
     {
