@@ -30,6 +30,7 @@ namespace FinalProject.Web.Areas.Admin.Models
                     "LastName",
                     "Photo",
                     "Gender",
+                    "Class",
                     "DateOfBirth",
                     "YearOfEnroll"
                 }));
@@ -41,14 +42,15 @@ namespace FinalProject.Web.Areas.Admin.Models
                 data = (from record in records
                         select new[]
                         {
-                            record.Id.ToString(),
                             record.FirstName,
                             record.MiddleName,
                             record.LastName,
                             FormatImageUrl(record.PhotoImage?.Url),
                             record.Gender,
+                            record.EnrollCourse?.Title,
                             record.DateOfBirth.ToShortDateString(),
-                            record.YearOfEnroll.ToShortDateString()
+                            record.YearOfEnroll.ToShortDateString(),
+                            record.Id.ToString(),
                         }
                     ).ToArray()
 

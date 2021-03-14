@@ -2,18 +2,19 @@
     $('#students').DataTable({
         "processing": true,
         "serverSide": true,
+        "searching": true,       
         "ajax": "/Admin/Student/GetStudents",
         "columnDefs": [
             {
                 "orderable": false,
-                "targets": 1,
+                "targets": 3,
                 "render": function (data, type, row) {
                     return `<img src=${data} width='50px' />`;
                 }
             },
             {
                 "orderable": false,
-                "targets": 4,
+                "targets": 8,
                 "render": function (data, type, row) {
                     return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/admin/products/edit/${data}'" value='${data}'>
                                         <i class="fas fa-pencil-alt">
@@ -33,9 +34,9 @@
     $('#students').on('click', '.show-bs-modal', function (event) {
         var id = $(this).data("id");
         var modal = $("#modal-default");
-        modal.find('.modal-body p').text('Are you sure you want to delete this record?')
+        modal.find('.modal-body p').text('Are you sure you want to delete this record?');
         $("#deleteId").val(id);
-        $("#deleteForm").attr("action", "/admin/products/delete")
+        $("#deleteForm").attr("action", "/admin/student/delete");
         modal.modal('show');
     });
 
