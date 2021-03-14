@@ -170,6 +170,91 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-area="Admin" asp-action="Index" class="nav-link active">
+                                <i class="fas fa-home nav-icon"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
+                                <i class="fas fa-chalkboard-teacher nav-icon"></i>
+                                <p>Teachers</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
+                                <i class="fas fa-user-graduate nav-icon"></i>
+                                <p>Students</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
+                                <i class="fas fa-user-shield nav-icon"></i>
+                                <p>Parents</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
+                                <i class="fas fa-th nav-icon"></i>
+                                <p>Classes</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
+                                <i class="fas fa-book nav-icon"></i>
+                                <p>Subjects</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
+                                <i class="fas fa-vector-square nav-icon"></i>
+                                <p>Class Routine</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
+                                <i class="far fa-check-square nav-icon"></i>
+                                <p>Attendance</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
+                                <i class="fas fa-clipboard nav-icon"></i>
+                                <p>Reports</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
+                                <i class="fas fa-diagnoses nav-icon"></i>
+                                <p>Exam</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
+                                <i class="fas fa-briefcase nav-icon"></i>
+                                <p>Account</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
+                                <i class="fas fa-book-reader nav-icon"></i>
+                                <p>Library</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
+                                <i class="fas fa-bus-alt nav-icon"></i>
+                                <p>Transport</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
+                                <i class="fas fa-cogs nav-icon"></i>
+                                <p>Configuration</p>
+                            </a>
+                        </li>
                         <li class="nav-header">
                             Website Management
                         </li>
@@ -221,61 +306,6 @@
                             </ul>
                         </li>
                         <li class="nav-header">
-                            Management Tools
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fas fa-edit"></i>
-                                <p>
-                                    Student Management
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Students List</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-controller="Home" asp-area="Student" asp-action="Upsert" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add Student</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fas fa-edit"></i>
-                                <p>
-                                    Course Management
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a asp-action="" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Courses List</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-action="" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add Course</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-action="" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Enroll Student</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-header">
                             Portal Management
                         </li>
                         <li class="nav-item">
@@ -305,7 +335,9 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            @RenderBody()
+            <div class="mt-3">
+                @RenderBody()
+            </div>
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
