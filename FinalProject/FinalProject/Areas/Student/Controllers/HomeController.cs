@@ -13,7 +13,12 @@ namespace FinalProject.Web.Areas.Student.Controllers
         }
         public IActionResult Upsert()
         {
-            var model = new StudentFormModel();
+            var model = new StudentFormModel
+            {
+                ParentsInfo = new ParentsModel(),
+                PresentAddress = new AddressModel(),
+                PermanentAddress = new AddressModel()
+            };
             return View(model);
         }
         [HttpPost]

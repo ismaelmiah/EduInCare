@@ -17,7 +17,7 @@ namespace FinalProject.Web.Areas.Admin.Models
         {
             _studentService = Startup.AutofacContainer.Resolve<IStudentService>();
         }
-        internal object GetProducts(DataTablesAjaxRequestModel tableModel)
+        internal object GetStudents(DataTablesAjaxRequestModel tableModel)
         {
             var (total, totalDisplay, records) = _studentService.GetStudentList(
                 tableModel.PageIndex,

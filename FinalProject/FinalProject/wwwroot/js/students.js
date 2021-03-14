@@ -2,7 +2,6 @@
     $('#students').DataTable({
         "processing": true,
         "serverSide": true,
-        "searching": true,       
         "ajax": "/Admin/Student/GetStudents",
         "columnDefs": [
             {
@@ -30,6 +29,8 @@
             }
         ]
     });
+
+    $('#students_filter').addClass("text-right");
 
     $('#students').on('click', '.show-bs-modal', function (event) {
         var id = $(this).data("id");

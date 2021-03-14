@@ -35,6 +35,11 @@
                         <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                     </div>
                     <div class="form-group">
+                        <label asp-for="Gender" class="control-label"></label>
+                        <input asp-for="Gender" class="form-control" />
+                        <span asp-validation-for="Gender" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
                         <label asp-for="BirthCertificateNo" class="control-label"></label>
                         <input asp-for="BirthCertificateNo" class="form-control" />
                         <span asp-validation-for="BirthCertificateNo" class="text-danger"></span>
@@ -43,11 +48,6 @@
                         <label asp-for="NationalIdentificationNo" class="control-label"></label>
                         <input asp-for="NationalIdentificationNo" class="form-control" />
                         <span asp-validation-for="NationalIdentificationNo" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Gender" class="control-label"></label>
-                        <input asp-for="Gender" class="form-control" />
-                        <span asp-validation-for="Gender" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="MobileNo" class="control-label"></label>
@@ -61,15 +61,26 @@
                     </div>
                     <div>
                         <div>
+                            <label class="text-bold">Parents Info</label>
+                        </div>
+                        <partial name="_ParentsFromView" model="Model" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Course</label>
+                        <select asp-for="CourseId" asp-items="Model.EnrollCourse" class="form-control"></select>
+                        <span asp-validation-for="CourseId" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <div>
                             <label class="text-bold">Present Address</label>
                         </div>
-                        <partial name="_AddressFormVIew" model="Model.PresentAddress"/>
+                        <partial name="_AddressFormVIew" model="Model.PresentAddress" />
                     </div>
                     <div>
                         <div>
                             <label class="text-bold">Permanent Address</label>
                         </div>
-                        <partial name="_AddressFormVIew" model="Model.PresentAddress"/>
+                        <partial name="_AddressFormVIew" model="Model.PresentAddress" />
                     </div>
                     <div class="form-group">
                         <label asp-for="YearOfEnroll" class="control-label"></label>
@@ -83,7 +94,7 @@
                             <input type="submit" value="Create" class="btn btn-primary" />
                         </div>
                         <div class="col-6 text-right">
-                            <a asp-action="Index">Back to List</a>
+                            <a asp-area="" asp-controller="Home" asp-action="Index">Back to List</a>
                         </div>
                     </div>
                 </div>

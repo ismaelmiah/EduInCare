@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Autofac;
 using Foundation.Library.Services;
 using Foundation.Library.Entities;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FinalProject.Web.Areas.Student.Models
 {
@@ -39,8 +40,18 @@ namespace FinalProject.Web.Areas.Student.Models
         public string Nationality { get; set; }
         [Display(Name = "Year Of Enroll")]
         public DateTime YearOfEnroll { get; set; }
+        [Display(Name = "Parents Information")]
         public ParentsModel ParentsInfo { get; set; }
-        public IList<CourseEnrollModel> EnrollCourse { get; set; }
+
+        public IList<SelectListItem> EnrollCourse { get; set; } = new List<SelectListItem>
+        {
+            new SelectListItem()
+            {
+                Text = "Select Course",
+                Value = "1"
+            }
+        };
+        public Guid CourseId { get; set; }
 
         public void SaveStudent()
         {
@@ -60,6 +71,18 @@ namespace FinalProject.Web.Areas.Student.Models
                 Nationality = model.Nationality,
                 BirthCertificateNo = model.BirthCertificateNo,
                 NationalIdentificationNo = model.NationalIdentificationNo,
+                ParentsInfo = new StudentParents()
+                {
+                    FatherName = model.ParentsInfo.FatherName,
+                    FatherOccupation = model.ParentsInfo.FatherOccupation,
+                    FatherAnnualIncome = model.ParentsInfo.FatherAnnualIncome,
+                    FatherMobileNo = model.ParentsInfo.FatherMobileNo,
+                    MotherName = model.ParentsInfo.MotherName,
+                    MotherOccupation = model.ParentsInfo.FatherOccupation,
+                    MotherMobileNo = model.ParentsInfo.MotherMobileNo,
+                    GuardianName = model.ParentsInfo.GuardianName,
+                    GuardianMobileNo = model.ParentsInfo.GuardianMobileNo,
+                }
             };
         }
 
