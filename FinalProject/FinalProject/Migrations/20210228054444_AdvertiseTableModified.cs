@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace FinalProject.Migrations
+namespace FinalProject.Web.Migrations
 {
     public partial class AdvertiseTableModified : Migration
     {

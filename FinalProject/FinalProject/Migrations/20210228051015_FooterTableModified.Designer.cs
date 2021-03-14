@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace FinalProject.Migrations
+namespace FinalProject.Web.Migrations
 {
     [DbContext(typeof(WebsiteContext))]
     [Migration("20210228051015_FooterTableModified")]

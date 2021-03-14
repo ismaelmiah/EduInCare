@@ -1,4 +1,4 @@
-﻿namespace FinalProject.Areas.Student.Models
+﻿namespace FinalProject.Web.Areas.Student.Models
 {
     public class ParentsModel
     {

@@ -1,8 +1,8 @@
 ﻿using System;
-using FinalProject.Areas.Student.Models;
+using FinalProject.Web.Areas.Student.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FinalProject.Areas.Student.Controllers
+namespace FinalProject.Web.Areas.Student.Controllers
 {
     [Area("Student")]
     public class HomeController : Controller
@@ -15,6 +15,12 @@ namespace FinalProject.Areas.Student.Controllers
         {
             var model = new StudentFormModel();
             return View(model);
+        }
+        [HttpPost]
+        public IActionResult Upsert(StudentFormModel model)
+        {
+            model.SaveStudent();
+            return RedirectToAction(nameof(Index));
         }
         public IActionResult Delete(Guid id)
         {

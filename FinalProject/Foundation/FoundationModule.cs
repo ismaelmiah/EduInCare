@@ -34,7 +34,8 @@ namespace Foundation.Library
             builder.RegisterAssemblyTypes(foundationAssembly).Where(x => x.Namespace != null && x.Namespace.Contains("Repositories")).As(x => x.GetInterfaces()
                     .FirstOrDefault(i => i.Name == "I" + x.Name)).InstancePerLifetimeScope();
 
-            builder.RegisterType<WebsiteUnitOfWork>().As<IWebsiteUnitOfWork>().InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(foundationAssembly).Where(x => x.Namespace != null && x.Namespace.Contains("UnitOfWorks")).As(x => x.GetInterfaces()
+                    .FirstOrDefault(i => i.Name == "I" + x.Name)).InstancePerLifetimeScope();
 
             base.Load(builder);
         }

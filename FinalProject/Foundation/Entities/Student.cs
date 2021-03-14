@@ -14,6 +14,7 @@ namespace Foundation.Library.Entities
         public string NationalIdentificationNo { get; set; }
         public string Gender { get; set; }
         public string MobileNo { get; set; }
+        public Image PhotoImage { get; set; }
         public Address PresentAddress { get; set; }
         public Address PermanentAddress { get; set; }
         public string Nationality { get; set; }

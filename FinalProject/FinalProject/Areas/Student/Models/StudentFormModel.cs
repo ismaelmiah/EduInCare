@@ -1,12 +1,23 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Autofac;
+using Foundation.Library.Services;
+using Foundation.Library.Entities;
 
-namespace FinalProject.Areas.Student.Models
+namespace FinalProject.Web.Areas.Student.Models
 {
     public class StudentFormModel
     {
+
+        private readonly IStudentService _studentService;
+
+        public StudentFormModel(IStudentService studentService) { _studentService = studentService; }
+
+        public StudentFormModel()
+        {
+            _studentService = Startup.AutofacContainer.Resolve<IStudentService>();
+        }
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Display(Name = "Middle Name")]
@@ -30,5 +41,27 @@ namespace FinalProject.Areas.Student.Models
         public DateTime YearOfEnroll { get; set; }
         public ParentsModel ParentsInfo { get; set; }
         public IList<CourseEnrollModel> EnrollCourse { get; set; }
+
+        public void SaveStudent()
+        {
+            _studentService.CreateStudent(ConvertToEntityStudent(this));
+        }
+
+        public static Foundation.Library.Entities.Student ConvertToEntityStudent(StudentFormModel model)
+        {
+            return new Foundation.Library.Entities.Student
+            {
+                FirstName = model.FirstName,
+                MiddleName = model.MiddleName,
+                LastName = model.LastName,
+                Gender = model.Gender,
+                DateOfBirth = model.DateOfBirth,
+                YearOfEnroll = model.YearOfEnroll,
+                Nationality = model.Nationality,
+                BirthCertificateNo = model.BirthCertificateNo,
+                NationalIdentificationNo = model.NationalIdentificationNo,
+            };
+        }
+
     }
 }

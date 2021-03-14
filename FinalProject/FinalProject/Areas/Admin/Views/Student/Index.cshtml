@@ -1,1 +1,70 @@
-﻿<h1>Students List</h1>
+﻿@{
+    ViewData["Title"] = "Index";
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Students</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Students</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-4 text-left">
+                            <h2 class="card-title">Current Students</h2>
+                        </div>
+                        <div class="col-md-8 text-right">
+                            <a asp-action="Upsert" asp-controller="Home" asp-area="Student" class="btn btn-outline-primary">Add Student</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+
+                    <table id="students" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Middle Name</th>
+                            <th>Last Name</th>
+                            <th>Photo</th>
+                            <th>Gender</th>
+                            <th>Class</th>
+                            <th>Date Of Birth</th>
+                            <th>Year Of Enroll</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+
+@section scripts
+{
+    <script src="/AdminPanel/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="/AdminPanel/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+    <script src="~/js/students.js"></script>
+}
