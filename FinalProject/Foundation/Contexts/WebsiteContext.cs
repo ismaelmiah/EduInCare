@@ -37,5 +37,9 @@ namespace Foundation.Contexts
         public DbSet<Post> Posts { get; set; }
         public DbSet<Advertise> Advertises { get; set; }
         public DbSet<Image> Images { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<StudentParents> Parents { get; set; }
+        public DbSet<Course> Courses { get; set; }
     }
 }
