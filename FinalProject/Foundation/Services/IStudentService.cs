@@ -11,5 +11,7 @@ namespace Foundation.Library.Services
             int pageSize, string searchText, string orderBy);
 
         void Delete(Guid id);
+        Student GetStudent(Guid id);
+        void Update(Student student);
     }
 }

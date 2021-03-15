@@ -29,6 +29,7 @@ namespace FinalProject.Web.Areas.Student.Models
             _courseService = Startup.AutofacContainer.Resolve<ICourseService>();
             EnrollCourse = CourseList();
         }
+        public Guid Id { get; set; }
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Display(Name = "Middle Name")]
@@ -52,9 +53,8 @@ namespace FinalProject.Web.Areas.Student.Models
         public DateTime YearOfEnroll { get; set; }
         [Display(Name = "Parents Information")]
         public ParentsModel ParentsInfo { get; set; }
-
+        public string ImagePath { get; set; }
         public IFormFile Photo { get; set; }
-
         public IList<SelectListItem> EnrollCourse { get; set; }
         public Guid CourseId { get; set; }
 
@@ -114,8 +114,43 @@ namespace FinalProject.Web.Areas.Student.Models
         {
             return _courseService.GetCourse(id);
         }
-
+        public ParentsModel GetStudentParents(StudentParents model)
+        {
+            return new ParentsModel
+            {
+                FatherName = model.FatherName,
+                FatherOccupation = model.FatherOccupation,
+                FatherAnnualIncome = model.FatherAnnualIncome,
+                FatherMobileNo = model.FatherMobileNo,
+                MotherName = model.MotherName,
+                MotherOccupation = model.FatherOccupation,
+                MotherMobileNo = model.MotherMobileNo,
+                GuardianName = model.GuardianName,
+                GuardianMobileNo = model.GuardianMobileNo,
+            };
+        }
+        public StudentParents GetStudentParents(ParentsModel model)
+        {
+            return new StudentParents
+            {
+                FatherName = model.FatherName,
+                FatherOccupation = model.FatherOccupation,
+                FatherAnnualIncome = model.FatherAnnualIncome,
+                FatherMobileNo = model.FatherMobileNo,
+                MotherName = model.MotherName,
+                MotherOccupation = model.FatherOccupation,
+                MotherMobileNo = model.MotherMobileNo,
+                GuardianName = model.GuardianName,
+                GuardianMobileNo = model.GuardianMobileNo,
+            };
+        }
         public Address GetActualAddress(AddressModel model) => new Address
+        {
+            City = model.City,
+            Street = model.Street,
+            ZipCode = model.ZipCode
+        };
+        public AddressModel GetActualAddress(Address model) => new AddressModel
         {
             City = model.City,
             Street = model.Street,
@@ -124,6 +159,56 @@ namespace FinalProject.Web.Areas.Student.Models
         public void DeleteStudent(Guid id)
         {
             _studentService.Delete(id);
+        }
+        public StudentFormModel GetStudentModel(Guid id)
+        {
+            var student = _studentService.GetStudent(id);
+            return new StudentFormModel
+            {
+                Id = student.Id,
+                FirstName = student.FirstName,
+                MiddleName = student.MiddleName,
+                LastName = student.LastName,
+                Gender = student.Gender,
+                DateOfBirth = student.DateOfBirth,
+                YearOfEnroll = student.YearOfEnroll,
+                Nationality = student.Nationality,
+                MobileNo = student.MobileNo,
+                BirthCertificateNo = student.BirthCertificateNo,
+                NationalIdentificationNo = student.NationalIdentificationNo,
+                ParentsInfo = GetStudentParents(student.ParentsInfo),
+                EnrollCourse = CourseList(),
+                ImagePath = FormatImageUrl(student.PhotoImage?.Url),
+                PermanentAddress = GetActualAddress(student.PermanentAddress),
+                PresentAddress = GetActualAddress(student.PresentAddress)
+            };
+        }
+
+        public void UpdateStudent()
+        {
+            var model = _studentService.GetStudent(Id);
+            model.FirstName = FirstName;
+            model.MiddleName = MiddleName;
+            model.LastName = LastName;
+            model.Gender = Gender;
+            model.MobileNo = MobileNo;
+            model.PresentAddress = GetActualAddress(PresentAddress);
+            model.PermanentAddress = GetActualAddress(PermanentAddress);
+            model.Nationality = Nationality;
+            model.YearOfEnroll = YearOfEnroll;
+            model.ParentsInfo = GetStudentParents(ParentsInfo);
+            model.EnrollCourse = GetSelectedCourse(CourseId);
+            if (Photo != null)
+            {
+                var imageInfo = StoreFile(Photo);
+
+                model.PhotoImage = new Image
+                {
+                    Url = imageInfo.filePath,
+                    AlternativeText = $"{model.FirstName} Image"
+                };
+            }
+            _studentService.Update(model);
         }
     }
 }

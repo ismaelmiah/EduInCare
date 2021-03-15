@@ -11,15 +11,35 @@ namespace FinalProject.Web.Areas.Student.Controllers
         {
             return View();
         }
-        public IActionResult Upsert()
+        public IActionResult Upsert(Guid? id)
         {
             var model = new StudentFormModel();
+
+            if (id == null)
+                return View(model);
+
+            model = model.GetStudentModel(id.GetValueOrDefault());
+            if (model == null)
+                return NotFound();
             return View(model);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Upsert(StudentFormModel model)
         {
-            model.SaveStudent();
+            if (ModelState.IsValid)
+            {
+                if (model.Id == new Guid())
+                {
+                    //Create
+                    model.SaveStudent();
+                }
+                else
+                {
+                    //Update
+                    model.UpdateStudent();
+                }
+            }
             return RedirectToRoute(new { Area="", controller = "Home", action = "Index"});
         }
         public IActionResult Delete(Guid id)

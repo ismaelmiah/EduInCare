@@ -15,16 +15,14 @@
                 "orderable": false,
                 "targets": 8,
                 "render": function (data, type, row) {
-                    return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/admin/products/edit/${data}'" value='${data}'>
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Edit
-                                    </button>
-                                    <button type="submit" class="btn btn-danger btn-sm show-bs-modal" href="#" data-id='${data}' value='${data}'>
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
-                                    </button>`;
+                    return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/student/Home/Upsert/${data}'" value='${data}'>
+                                <i class="fas fa-pencil-alt"></i>
+                                Edit
+                            </button>
+                            <button type="submit" class="btn btn-danger btn-sm show-bs-modal" href="#" data-id='${data}' value='${data}'>
+                                <i class="fas fa-trash"></i>
+                                Delete
+                            </button>`;
                 }
             }
         ]

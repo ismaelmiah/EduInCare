@@ -4,6 +4,11 @@
     ViewData["Title"] = "Student Application";
     ViewData["subtitle"] = "Addmission Form";
     Layout = "_StudentLayout";
+    if (Model.Id != new Guid())
+    {
+        //edit
+        ViewData["Title"] = "Update Student Application";
+    }
 }
 <div class="row">
     <div class="col-md-1"></div>
@@ -13,6 +18,10 @@
                 <h3 class="card-title text-center">@ViewData["Title"]</h3>
             </div>
             <form class="form-horizontal" asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
+                @if (Model.Id != new Guid())
+                {
+                    <input type="hidden" asp-for="Id" />
+                }
                 <div class="card-body row">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="col-md-8">
@@ -21,7 +30,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label asp-for="FirstName" class="control-label"></label>
-                                    <input asp-for="FirstName" class="form-control"/>
+                                    <input asp-for="FirstName" class="form-control" />
                                     <span asp-validation-for="FirstName" class="text-danger"></span>
                                 </div>
                             </div>
@@ -42,7 +51,7 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="DateOfBirth" class="control-label"></label>
-                            <input asp-for="DateOfBirth" class="form-control"/>
+                            <input asp-for="DateOfBirth" class="form-control" />
                             <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -56,22 +65,22 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="BirthCertificateNo" class="control-label"></label>
-                            <input asp-for="BirthCertificateNo" class="form-control"/>
+                            <input asp-for="BirthCertificateNo" class="form-control" />
                             <span asp-validation-for="BirthCertificateNo" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="NationalIdentificationNo" class="control-label"></label>
-                            <input asp-for="NationalIdentificationNo" class="form-control"/>
+                            <input asp-for="NationalIdentificationNo" class="form-control" />
                             <span asp-validation-for="NationalIdentificationNo" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="MobileNo" class="control-label"></label>
-                            <input asp-for="MobileNo" class="form-control"/>
+                            <input asp-for="MobileNo" class="form-control" />
                             <span asp-validation-for="MobileNo" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Nationality" class="control-label"></label>
-                            <input asp-for="Nationality" class="form-control"/>
+                            <input asp-for="Nationality" class="form-control" />
                             <span asp-validation-for="Nationality" class="text-danger"></span>
                         </div>
 
@@ -82,15 +91,25 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="YearOfEnroll" class="control-label"></label>
-                            <input asp-for="YearOfEnroll" class="form-control"/>
+                            <input asp-for="YearOfEnroll" class="form-control" />
                             <span asp-validation-for="YearOfEnroll" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Photo" class="control-label"></label>
-                            <input asp-for="Photo" onchange="readURL(this);" class="form-control"/>
+                            <input asp-for="Photo" onchange="readURL(this);" class="form-control" />
                             <span asp-validation-for="Photo" class="text-danger"></span>
                         </div>
-                        <div id="previewstudentphoto"></div>
+                        <div id="previewstudentphoto">
+
+                            @if (Model.ImagePath != null)
+                            {
+                                <img id="blah" style="width: 150px; height: 200px;" src="@Model.ImagePath" alt="Student Photo">
+                            }
+                            else
+                            {
+                                <img id="blah" style="width: 150px; height: 200px;" src="#" alt="Student Photo">
+                            }
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <div>
@@ -112,7 +131,14 @@
                 <div class="card-footer">
                     <div class="form-group row mb-0">
                         <div class="col-6 text-left">
-                            <input type="submit" value="Create" class="btn btn-primary" />
+                            @if (Model.Id == new Guid())
+                            {
+                                <input type="submit" value="Create" class="btn btn-primary" />
+                            }
+                            else
+                            {
+                                <input type="submit" value="Update" class="btn btn-warning" />
+                            }
                         </div>
                         <div class="col-6 text-right">
                             <a asp-area="" asp-controller="Home" asp-action="Index">Back to List</a>
@@ -129,18 +155,23 @@
 @section Scripts
 {
     <script>
-        
-        var image = document.createElement('img'); 
-        image.id = "blah";
-        var selectDiv = document.getElementById('previewstudentphoto');
-
-        selectDiv.appendChild(image);
-
+        var imageTag = document.getElementById('blah');
+        imageTag.style.border = "2px solid";
+        imageTag.style.paddingTop = "100px";
+        imageTag.style.paddingBottom = "100px";
+        imageTag.style.paddingLeft = "75px";
+        imageTag.style.paddingRight = "75px";
+        if (imageTag.src !== "#") {
+            imageTag.style.removeProperty('padding');
+            imageTag.style.removeProperty('border');
+        }
+        console.log(imageTag);
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
-                console.log(reader);
                 reader.onload = function (e) {
+                    document.getElementById('blah').style.removeProperty('padding');
+                    document.getElementById('blah').style.removeProperty('border');
                     document.getElementById('blah').src = e.target.result;
                     document.getElementById('blah').width = 150;
                     document.getElementById('blah').height = 200;

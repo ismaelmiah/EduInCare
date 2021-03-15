@@ -68,5 +68,17 @@ namespace Foundation.Library.Services
             _management.StudentRepository.Remove(id);
             _management.Save();
         }
+
+        public Student GetStudent(Guid id)
+        {
+            return _management.StudentRepository.Get(x => x.Id == id, null,
+                "PhotoImage,PresentAddress,PermanentAddress,EnrollCourse,ParentsInfo", true).FirstOrDefault();
+        }
+
+        public void Update(Student student)
+        {
+            _management.StudentRepository.Edit(student);
+            _management.Save();
+        }
     }
 }
