@@ -31,7 +31,7 @@ namespace FinalProject.Web.Areas.Admin.Controllers
         public IActionResult Upsert(CourseModel model)
         {
             model.SaveCourse();
-            return View(model);
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Delete(Guid id)

@@ -23,7 +23,7 @@
         ]
     });
 
-    $('#students_filter').addClass("text-right");
+    $('#courses_filter').addClass("text-right");
 
     $('#courses').on('click', '.show-bs-modal', function (event) {
         var id = $(this).data("id");
