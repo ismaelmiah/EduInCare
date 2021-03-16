@@ -30,13 +30,13 @@ namespace Foundation.Library.Services
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 result = _management.StudentRepository.GetDynamic(null,
-                    orderBy, "PhotoImage", pageIndex, pageSize, true);
+                    orderBy, "Image", pageIndex, pageSize, true);
 
             }
             else
             {
                 result = _management.StudentRepository.GetDynamic(x => x.FirstName == searchText,
-                    orderBy, "PhotoImage", pageIndex, pageSize, true);
+                    orderBy, "Image", pageIndex, pageSize, true);
             }
 
             var data = (from x in result.data
@@ -51,12 +51,10 @@ namespace Foundation.Library.Services
                     DateOfBirth = x.DateOfBirth,
                     BirthCertificateNo = x.BirthCertificateNo,
                     NationalIdentificationNo = x.NationalIdentificationNo,
-                    Address = x.Address,
                     Image = x.Image,
                     Nationality = x.Nationality,
                     YearOfEnroll = x.YearOfEnroll,
                     Course = x.Course,
-                    Parents = x.Parents
                 }).ToList();
 
             return (result.total, result.totalDisplay, data);
@@ -71,7 +69,7 @@ namespace Foundation.Library.Services
         public Student GetStudent(Guid id)
         {
             return _management.StudentRepository.Get(x => x.Id == id, null,
-                "PhotoImage,PresentAddress,PermanentAddress,EnrollCourse,ParentsInfo", false).FirstOrDefault();
+                "Image,Addresses,Course,Parents", false).FirstOrDefault();
         }
 
         public void Update(Student student)
