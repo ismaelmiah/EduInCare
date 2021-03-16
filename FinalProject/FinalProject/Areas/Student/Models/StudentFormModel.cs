@@ -87,7 +87,7 @@ namespace FinalProject.Web.Areas.Student.Models
                 Nationality = model.Nationality,
                 BirthCertificateNo = model.BirthCertificateNo,
                 NationalIdentificationNo = model.NationalIdentificationNo,
-                ParentsInfo = new StudentParents()
+                Parents = new Parents()
                 {
                     FatherName = model.ParentsInfo.FatherName,
                     FatherOccupation = model.ParentsInfo.FatherOccupation,
@@ -99,14 +99,13 @@ namespace FinalProject.Web.Areas.Student.Models
                     GuardianName = model.ParentsInfo.GuardianName,
                     GuardianMobileNo = model.ParentsInfo.GuardianMobileNo,
                 },
-                EnrollCourse = GetSelectedCourse(model.CourseId),
-                PhotoImage = new Image
+                Course = GetSelectedCourse(model.CourseId),
+                Image = new Image
                 {
                     Url = imageInfo.filePath,
                     AlternativeText = $"{model.FirstName} Image"
                 },
-                PermanentAddress = GetActualAddress(model.PermanentAddress),
-                PresentAddress = GetActualAddress(model.PresentAddress)
+                Address = GetActualAddress(model.PermanentAddress),
             };
         }
 
@@ -114,7 +113,7 @@ namespace FinalProject.Web.Areas.Student.Models
         {
             return _courseService.GetCourse(id);
         }
-        public ParentsModel GetStudentParents(StudentParents model)
+        public ParentsModel GetStudentParents(Parents model)
         {
             return new ParentsModel
             {
@@ -129,9 +128,9 @@ namespace FinalProject.Web.Areas.Student.Models
                 GuardianMobileNo = model.GuardianMobileNo,
             };
         }
-        public StudentParents GetStudentParents(ParentsModel model)
+        public Parents GetStudentParents(ParentsModel model)
         {
-            return new StudentParents
+            return new Parents
             {
                 FatherName = model.FatherName,
                 FatherOccupation = model.FatherOccupation,
@@ -146,15 +145,13 @@ namespace FinalProject.Web.Areas.Student.Models
         }
         public Address GetActualAddress(AddressModel model) => new Address
         {
-            City = model.City,
-            Street = model.Street,
-            ZipCode = model.ZipCode
+            PresentAddress = model.City,
+            PermanentAddress = model.Street,
         };
         public AddressModel GetActualAddress(Address model) => new AddressModel
         {
-            City = model.City,
-            Street = model.Street,
-            ZipCode = model.ZipCode
+            City = model.PresentAddress,
+            Street = model.PermanentAddress,
         };
         public void DeleteStudent(Guid id)
         {
@@ -176,11 +173,10 @@ namespace FinalProject.Web.Areas.Student.Models
                 MobileNo = student.MobileNo,
                 BirthCertificateNo = student.BirthCertificateNo,
                 NationalIdentificationNo = student.NationalIdentificationNo,
-                ParentsInfo = GetStudentParents(student.ParentsInfo),
+                ParentsInfo = GetStudentParents(student.Parents),
                 EnrollCourse = CourseList(),
-                ImagePath = FormatImageUrl(student.PhotoImage?.Url),
-                PermanentAddress = GetActualAddress(student.PermanentAddress),
-                PresentAddress = GetActualAddress(student.PresentAddress)
+                ImagePath = FormatImageUrl(student.Image?.Url),
+                PermanentAddress = GetActualAddress(student.Address),
             };
         }
 
@@ -192,17 +188,16 @@ namespace FinalProject.Web.Areas.Student.Models
             model.LastName = LastName;
             model.Gender = Gender;
             model.MobileNo = MobileNo;
-            model.PresentAddress = GetActualAddress(PresentAddress);
-            model.PermanentAddress = GetActualAddress(PermanentAddress);
+            model.Address = GetActualAddress(PresentAddress);
             model.Nationality = Nationality;
             model.YearOfEnroll = YearOfEnroll;
-            model.ParentsInfo = GetStudentParents(ParentsInfo);
-            model.EnrollCourse = GetSelectedCourse(CourseId);
+            model.Parents = GetStudentParents(ParentsInfo);
+            model.Course = GetSelectedCourse(CourseId);
             if (Photo != null)
             {
                 var imageInfo = StoreFile(Photo);
 
-                model.PhotoImage = new Image
+                model.Image = new Image
                 {
                     Url = imageInfo.filePath,
                     AlternativeText = $"{model.FirstName} Image"

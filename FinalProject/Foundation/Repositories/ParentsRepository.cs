@@ -5,7 +5,7 @@ using Foundation.Library.Entities;
 
 namespace Foundation.Library.Repositories
 {
-    public class ParentsRepository : Repository<StudentParents, Guid, WebsiteContext>, IParentsRepository
+    public class ParentsRepository : Repository<Parents, Guid, WebsiteContext>, IParentsRepository
     {
         public ParentsRepository(WebsiteContext context) : base(context)
         {

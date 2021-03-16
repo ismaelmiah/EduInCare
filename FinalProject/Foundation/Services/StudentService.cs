@@ -51,13 +51,12 @@ namespace Foundation.Library.Services
                     DateOfBirth = x.DateOfBirth,
                     BirthCertificateNo = x.BirthCertificateNo,
                     NationalIdentificationNo = x.NationalIdentificationNo,
-                    PresentAddress = x.PresentAddress,
-                    PermanentAddress = x.PermanentAddress,
-                    PhotoImage = x.PhotoImage,
+                    Address = x.Address,
+                    Image = x.Image,
                     Nationality = x.Nationality,
                     YearOfEnroll = x.YearOfEnroll,
-                    EnrollCourse = x.EnrollCourse,
-                    ParentsInfo = x.ParentsInfo
+                    Course = x.Course,
+                    Parents = x.Parents
                 }).ToList();
 
             return (result.total, result.totalDisplay, data);
@@ -72,7 +71,7 @@ namespace Foundation.Library.Services
         public Student GetStudent(Guid id)
         {
             return _management.StudentRepository.Get(x => x.Id == id, null,
-                "PhotoImage,PresentAddress,PermanentAddress,EnrollCourse,ParentsInfo", true).FirstOrDefault();
+                "PhotoImage,PresentAddress,PermanentAddress,EnrollCourse,ParentsInfo", false).FirstOrDefault();
         }
 
         public void Update(Student student)

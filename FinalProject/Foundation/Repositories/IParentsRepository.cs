@@ -5,7 +5,7 @@ using Foundation.Library.Entities;
 
 namespace Foundation.Library.Repositories
 {
-    public interface IParentsRepository : IRepository<StudentParents, Guid, WebsiteContext>
+    public interface IParentsRepository : IRepository<Parents, Guid, WebsiteContext>
     {
     }
 }

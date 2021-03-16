@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DataAccessLayer;
 
 namespace Foundation.Library.Entities
@@ -7,5 +8,6 @@ namespace Foundation.Library.Entities
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
+        public ICollection<Student> Students { get; set; }
     }
 }

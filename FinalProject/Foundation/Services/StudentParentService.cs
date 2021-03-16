@@ -15,10 +15,10 @@ namespace Foundation.Library.Services
             _management = management;
         }
 
-        public (int total, int totalDisplay, IList<StudentParents> records) GetStudentsParentsList(int pageIndex,
+        public (int total, int totalDisplay, IList<Parents> records) GetStudentsParentsList(int pageIndex,
             int pageSize, string searchText, string orderBy)
         {
-            (IList<StudentParents> data, int total, int totalDisplay) result;
+            (IList<Parents> data, int total, int totalDisplay) result;
 
             if (string.IsNullOrWhiteSpace(searchText))
             {
@@ -33,7 +33,7 @@ namespace Foundation.Library.Services
             }
 
             var data = (from x in result.data
-                select new StudentParents()
+                select new Parents()
                 {
                     Id = x.Id,
                     FatherName = x.FatherName,
