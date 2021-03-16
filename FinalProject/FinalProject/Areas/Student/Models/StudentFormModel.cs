@@ -16,15 +16,19 @@ namespace FinalProject.Web.Areas.Student.Models
 
         private readonly IStudentService _studentService;
         private readonly ICourseService _courseService;
+        private readonly IStudentParentService _parentService;
 
-        public StudentFormModel(IStudentService studentService, ICourseService courseService)
+        public StudentFormModel(IStudentService studentService, ICourseService courseService,
+            IStudentParentService parentService)
         {
             _studentService = studentService;
             _courseService = courseService;
+            _parentService = parentService;
         }
 
         public StudentFormModel()
         {
+            _parentService = Startup.AutofacContainer.Resolve<IStudentParentService>();
             _studentService = Startup.AutofacContainer.Resolve<IStudentService>();
             _courseService = Startup.AutofacContainer.Resolve<ICourseService>();
             EnrollCourse = CourseList();
@@ -128,6 +132,24 @@ namespace FinalProject.Web.Areas.Student.Models
                 GuardianMobileNo = model.GuardianMobileNo,
             };
         }
+        public void GetParentsChanges(ParentsModel model, Parents exParents)
+        {
+            exParents.FatherName = model.FatherName;
+            exParents.FatherOccupation = model.FatherOccupation;
+            exParents.FatherAnnualIncome = model.FatherAnnualIncome;
+            exParents.FatherMobileNo = model.FatherMobileNo;
+            exParents.MotherName = model.MotherName;
+            exParents.MotherOccupation = model.FatherOccupation;
+            exParents.MotherMobileNo = model.MotherMobileNo;
+            exParents.GuardianName = model.GuardianName;
+            exParents.GuardianMobileNo = model.GuardianMobileNo;
+        }
+
+        public void GetAddressChanges(AddressModel model, Address exAddress)
+        {
+            exAddress.PresentAddress = model.Street + " " + model.City + " " + model.ZipCode;
+            exAddress.PermanentAddress = model.Street + " " + model.City + " " + model.ZipCode;
+        }
         public Parents GetStudentParents(ParentsModel model)
         {
             return new Parents
@@ -182,28 +204,36 @@ namespace FinalProject.Web.Areas.Student.Models
 
         public void UpdateStudent()
         {
-            var model = _studentService.GetStudent(Id);
-            model.FirstName = FirstName;
-            model.MiddleName = MiddleName;
-            model.LastName = LastName;
-            model.Gender = Gender;
-            model.MobileNo = MobileNo;
-            model.Address = GetActualAddress(PresentAddress);
-            model.Nationality = Nationality;
-            model.YearOfEnroll = YearOfEnroll;
-            model.Parents = GetStudentParents(ParentsInfo);
-            model.Course = GetSelectedCourse(CourseId);
+            var exStudent = _studentService.GetStudent(Id);
+            
+            exStudent.FirstName = FirstName;
+            exStudent.MiddleName = MiddleName;
+            exStudent.LastName = LastName;
+            exStudent.Gender = Gender;
+            exStudent.MobileNo = MobileNo;
+            exStudent.Address = GetActualAddress(PresentAddress);
+            exStudent.Nationality = Nationality;
+            exStudent.YearOfEnroll = YearOfEnroll;
+            exStudent.Course = GetSelectedCourse(CourseId);
             if (Photo != null)
             {
                 var imageInfo = StoreFile(Photo);
 
-                model.Image = new Image
+                exStudent.Image = new Image
                 {
                     Url = imageInfo.filePath,
-                    AlternativeText = $"{model.FirstName} Image"
+                    AlternativeText = $"{exStudent.FirstName} Image"
                 };
             }
-            _studentService.Update(model);
+
+            var exParents = _parentService.GetParents(exStudent.ParentsId);
+            GetParentsChanges(ParentsInfo, exParents);
+
+            //var exAddress = _
+            //TODO: Implement Address Service & Course Service for Update Data
+
+            _parentService.Update(exParents);
+            _studentService.Update(exStudent);
         }
     }
 }

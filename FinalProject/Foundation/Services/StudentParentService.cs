@@ -55,5 +55,18 @@ namespace Foundation.Library.Services
         {
             throw new NotImplementedException();
         }
+
+        public Parents GetParents(Guid id)
+        {
+            var data = _management.ParentsRepository.Get(x => x.Id == id, null,
+                "", false).FirstOrDefault();
+            return data;
+        }
+
+        public void Update(Parents parents)
+        {
+            _management.ParentsRepository.Edit(parents);
+            _management.Save();
+        }
     }
 }

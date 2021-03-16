@@ -10,5 +10,7 @@ namespace Foundation.Library.Services
             int pageSize, string searchText, string orderBy);
 
         void Delete(Guid id);
+        Parents GetParents(Guid id);
+        void Update(Parents parents);
     }
 }

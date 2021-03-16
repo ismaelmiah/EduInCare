@@ -69,7 +69,7 @@ namespace Foundation.Library.Services
         public Student GetStudent(Guid id)
         {
             return _management.StudentRepository.Get(x => x.Id == id, null,
-                "Image,Addresses,Course,Parents", false).FirstOrDefault();
+                "Image,Address,Course,Parents", false).FirstOrDefault();
         }
 
         public void Update(Student student)
