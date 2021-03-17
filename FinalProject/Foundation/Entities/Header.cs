@@ -7,7 +7,7 @@ namespace Foundation.Library.Entities
     {
         public Guid Id { get; set; }
         public Guid ImageId { get; set; }
-        public Image Image { get; set; }
+        public HeaderImage Image { get; set; }
         public bool ShowBannerImage { get; set; }
     }
 }

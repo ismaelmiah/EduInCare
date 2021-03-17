@@ -14,13 +14,10 @@ namespace Foundation.Library.Entities
         public string NationalIdentificationNo { get; set; }
         public string Gender { get; set; }
         public string MobileNo { get; set; }
-        public Guid ImageId { get; set; }
         public Image Image { get; set; }
-        public Guid AddressId { get; set; }
         public Address Address { get; set; }
         public string Nationality { get; set; }
         public DateTime YearOfEnroll { get; set; }
-        public Guid ParentsId { get; set; }
         public Parents Parents { get; set; }
         public Guid CourseId { get; set; }
         public Course Course { get; set; }

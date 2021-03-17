@@ -76,41 +76,46 @@ namespace FinalProject.Web.Areas.Student.Models
                 Value = x.Id.ToString()
             }).ToList();
         }
+
         private Foundation.Library.Entities.Student ConvertToEntityStudent(StudentFormModel model)
         {
-            var imageInfo = StoreFile(model.Photo);
 
-            return new Foundation.Library.Entities.Student
+            var student = new Foundation.Library.Entities.Student();
+            if (Photo != null)
             {
-                FirstName = model.FirstName,
-                MiddleName = model.MiddleName,
-                LastName = model.LastName,
-                Gender = model.Gender,
-                DateOfBirth = model.DateOfBirth,
-                YearOfEnroll = model.YearOfEnroll,
-                Nationality = model.Nationality,
-                BirthCertificateNo = model.BirthCertificateNo,
-                NationalIdentificationNo = model.NationalIdentificationNo,
-                Parents = new Parents()
-                {
-                    FatherName = model.ParentsInfo.FatherName,
-                    FatherOccupation = model.ParentsInfo.FatherOccupation,
-                    FatherAnnualIncome = model.ParentsInfo.FatherAnnualIncome,
-                    FatherMobileNo = model.ParentsInfo.FatherMobileNo,
-                    MotherName = model.ParentsInfo.MotherName,
-                    MotherOccupation = model.ParentsInfo.FatherOccupation,
-                    MotherMobileNo = model.ParentsInfo.MotherMobileNo,
-                    GuardianName = model.ParentsInfo.GuardianName,
-                    GuardianMobileNo = model.ParentsInfo.GuardianMobileNo,
-                },
-                Course = GetSelectedCourse(model.CourseId),
-                Image = new Image
+                var imageInfo = StoreFile(model.Photo);
+                student.Image = new Image
                 {
                     Url = imageInfo.filePath,
                     AlternativeText = $"{model.FirstName} Image"
-                },
-                Address = GetActualAddress(model.PermanentAddress),
+                };
+            }
+
+            student.FirstName = model.FirstName;
+            student.MiddleName = model.MiddleName;
+            student.LastName = model.LastName;
+            student.Gender = model.Gender;
+            student.DateOfBirth = model.DateOfBirth;
+            student.YearOfEnroll = model.YearOfEnroll;
+            student.Nationality = model.Nationality;
+            student.BirthCertificateNo = model.BirthCertificateNo;
+            student.NationalIdentificationNo = model.NationalIdentificationNo;
+            student.Parents = new Parents()
+            {
+                FatherName = model.ParentsInfo.FatherName,
+                FatherOccupation = model.ParentsInfo.FatherOccupation,
+                FatherAnnualIncome = model.ParentsInfo.FatherAnnualIncome,
+                FatherMobileNo = model.ParentsInfo.FatherMobileNo,
+                MotherName = model.ParentsInfo.MotherName,
+                MotherOccupation = model.ParentsInfo.FatherOccupation,
+                MotherMobileNo = model.ParentsInfo.MotherMobileNo,
+                GuardianName = model.ParentsInfo.GuardianName,
+                GuardianMobileNo = model.ParentsInfo.GuardianMobileNo,
             };
+            student.Course = GetSelectedCourse(model.CourseId);
+            student.Address = GetActualAddress(model.PermanentAddress);
+
+            return student;
         }
 
         public Course GetSelectedCourse(Guid id)
@@ -214,6 +219,7 @@ namespace FinalProject.Web.Areas.Student.Models
             exStudent.Address = GetActualAddress(PresentAddress);
             exStudent.Nationality = Nationality;
             exStudent.YearOfEnroll = YearOfEnroll;
+            exStudent.Parents = GetStudentParents(ParentsInfo);
             exStudent.Course = GetSelectedCourse(CourseId);
             if (Photo != null)
             {
@@ -226,13 +232,8 @@ namespace FinalProject.Web.Areas.Student.Models
                 };
             }
 
-            var exParents = _parentService.GetParents(exStudent.ParentsId);
-            GetParentsChanges(ParentsInfo, exParents);
-
-            //var exAddress = _
             //TODO: Implement Address Service & Course Service for Update Data
-
-            _parentService.Update(exParents);
+            
             _studentService.Update(exStudent);
         }
     }

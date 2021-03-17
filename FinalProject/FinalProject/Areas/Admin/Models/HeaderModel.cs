@@ -45,7 +45,7 @@ namespace FinalProject.Web.Areas.Admin.Models
             return new Header
             {
                 ShowBannerImage = ShowBannerImage,
-                Image = new Image
+                Image = new HeaderImage
                 {
                     Url = filePath,
                     AlternativeText = $"{fileName}"

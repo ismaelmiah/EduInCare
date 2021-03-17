@@ -39,29 +39,24 @@ namespace Foundation.Library.Contexts
             builder.Entity<Parents>()
                 .HasOne(x => x.Student)
                 .WithOne(x => x.Parents)
-                .HasForeignKey<Student>(x => x.ParentsId)
-                .HasPrincipalKey<Parents>(x=>x.Id)
+                .HasForeignKey<Parents>(x => x.StudentId)
+                .HasPrincipalKey<Student>(x=>x.Id)
                 .IsRequired();
 
             builder.Entity<Address>()
                 .HasOne(x => x.Student)
                 .WithOne(x => x.Address)
-                .HasForeignKey<Student>(x => x.AddressId)
-                .HasPrincipalKey<Address>(x=>x.Id);
+                .HasForeignKey<Address>(x => x.StudentId);
 
             builder.Entity<Image>()
                 .HasOne(x => x.Student)
                 .WithOne(x => x.Image)
-                .HasForeignKey<Student>(x => x.ImageId)
-                .HasPrincipalKey<Image>(x=>x.Id)
-                .IsRequired();
+                .HasForeignKey<Image>(x => x.StudentId);
 
-            builder.Entity<Image>()
-                .HasOne(x => x.Header)
-                .WithOne(x => x.Image)
-                .HasForeignKey<Header>(x => x.ImageId)
-                .HasPrincipalKey<Image>(x=>x.Id)
-                .IsRequired();
+            builder.Entity<Header>()
+                .HasOne(x => x.Image)
+                .WithOne(x => x.Header)
+                .HasForeignKey<HeaderImage>(x => x.HeaderId);
 
 
             base.OnModelCreating(builder);

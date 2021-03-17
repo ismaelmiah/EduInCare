@@ -4,14 +4,16 @@ using Foundation.Library.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FinalProject.Web.Migrations
 {
     [DbContext(typeof(WebsiteContext))]
-    partial class WebsiteContextModelSnapshot : ModelSnapshot
+    [Migration("20210317032603_ModifiedRelations-1")]
+    partial class ModifiedRelations1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,7 +112,7 @@ namespace FinalProject.Web.Migrations
                     b.ToTable("Headers");
                 });
 
-            modelBuilder.Entity("Foundation.Library.Entities.HeaderImage", b =>
+            modelBuilder.Entity("Foundation.Library.Entities.Image", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -122,26 +124,6 @@ namespace FinalProject.Web.Migrations
                     b.Property<Guid>("HeaderId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HeaderId")
-                        .IsUnique();
-
-                    b.ToTable("HeaderImage");
-                });
-
-            modelBuilder.Entity("Foundation.Library.Entities.Image", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("AlternativeText")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("StudentId")
                         .HasColumnType("uniqueidentifier");
 
@@ -149,6 +131,9 @@ namespace FinalProject.Web.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("HeaderId")
+                        .IsUnique();
 
                     b.HasIndex("StudentId")
                         .IsUnique();
@@ -295,17 +280,14 @@ namespace FinalProject.Web.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Foundation.Library.Entities.HeaderImage", b =>
+            modelBuilder.Entity("Foundation.Library.Entities.Image", b =>
                 {
                     b.HasOne("Foundation.Library.Entities.Header", "Header")
                         .WithOne("Image")
-                        .HasForeignKey("Foundation.Library.Entities.HeaderImage", "HeaderId")
+                        .HasForeignKey("Foundation.Library.Entities.Image", "HeaderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("Foundation.Library.Entities.Image", b =>
-                {
                     b.HasOne("Foundation.Library.Entities.Student", "Student")
                         .WithOne("Image")
                         .HasForeignKey("Foundation.Library.Entities.Image", "StudentId")
