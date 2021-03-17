@@ -15,8 +15,12 @@
                 "orderable": false,
                 "targets": 8,
                 "render": function (data, type, row) {
-                    return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/student/Home/Upsert/${data}'" value='${data}'>
-                                <i class="fas fa-pencil-alt"></i>
+                    return `<a class="btn btn-info btn-sm" href='/student/Home/Profile/${data}'">
+                                <i class="fas fa-info-circle"></i>
+                                Details
+                            </a>
+                            <button type="submit" class="btn btn-warning btn-sm" onclick="window.location.href='/student/Home/Upsert/${data}'" value='${data}'>
+                                <i class="fas fa-edit"></i>
                                 Edit
                             </button>
                             <button type="submit" class="btn btn-danger btn-sm show-bs-modal" href="#" data-id='${data}' value='${data}'>

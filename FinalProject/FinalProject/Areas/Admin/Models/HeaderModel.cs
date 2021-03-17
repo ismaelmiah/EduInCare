@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using FinalProject.Models;
+using FinalProject.Web.Models;
 using Foundation.Library.Entities;
 using Foundation.Library.Services;
 using Microsoft.AspNetCore.Http;

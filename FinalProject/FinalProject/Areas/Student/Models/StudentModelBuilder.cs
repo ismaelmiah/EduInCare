@@ -1,87 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Autofac;
-using FinalProject.Models;
-using Foundation.Library.Services;
+using FinalProject.Web.Models;
 using Foundation.Library.Entities;
-using Microsoft.AspNetCore.Http;
+using Foundation.Library.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FinalProject.Web.Areas.Student.Models
 {
-    public class StudentFormModel : BaseModel
+    public class StudentModelBuilder : BaseModel
     {
-
         private readonly IStudentService _studentService;
         private readonly ICourseService _courseService;
         private readonly IStudentParentService _parentService;
 
-        public StudentFormModel(IStudentService studentService, ICourseService courseService,
+        public StudentModelBuilder(IStudentService studentService, ICourseService courseService,
             IStudentParentService parentService)
         {
             _studentService = studentService;
             _courseService = courseService;
             _parentService = parentService;
         }
-
-        public StudentFormModel()
+        public StudentModelBuilder()
         {
             _parentService = Startup.AutofacContainer.Resolve<IStudentParentService>();
             _studentService = Startup.AutofacContainer.Resolve<IStudentService>();
             _courseService = Startup.AutofacContainer.Resolve<ICourseService>();
-            EnrollCourse = CourseList();
         }
-        public Guid Id { get; set; }
-        [Display(Name = "First Name")]
-        public string FirstName { get; set; }
-        [Display(Name = "Middle Name")]
-        public string MiddleName { get; set; }
-        [Display(Name = "Last Name")]
-        public string LastName { get; set; }
-        [Display(Name = "Date Of Birth")]
-        public DateTime DateOfBirth { get; set; }
-        [Display(Name = "Birth Certificate Number")]
-        public string BirthCertificateNo { get; set; }
-        [Display(Name = "National Identification Number")]
-        public string NationalIdentificationNo { get; set; }
-        public string Gender { get; set; }
-        public string MobileNo { get; set; }
-        [Display(Name = "Present Address")]
-        public AddressModel PresentAddress { get; set; }
-        [Display(Name = "Permanent Address")]
-        public AddressModel PermanentAddress { get; set; }
-        public string Nationality { get; set; }
-        [Display(Name = "Year Of Enroll")]
-        public DateTime YearOfEnroll { get; set; }
-        [Display(Name = "Parents Information")]
-        public ParentsModel ParentsInfo { get; set; }
-        public string ImagePath { get; set; }
-        public IFormFile Photo { get; set; }
-        public IList<SelectListItem> EnrollCourse { get; set; }
-        public Guid CourseId { get; set; }
-
-        public void SaveStudent()
+        private Foundation.Library.Entities.Student ConvertToEntityStudent(StudentFormViewModel model)
         {
-            _studentService.AddStudent(ConvertToEntityStudent(this));
-        }
-
-        public List<SelectListItem> CourseList()
-        {
-            var data = _courseService.GetCourses();
-            return data.Select(x => new SelectListItem
-            {
-                Text = x.Title,
-                Value = x.Id.ToString()
-            }).ToList();
-        }
-
-        private Foundation.Library.Entities.Student ConvertToEntityStudent(StudentFormModel model)
-        {
-
             var student = new Foundation.Library.Entities.Student();
-            if (Photo != null)
+            if (model.Photo != null)
             {
                 var imageInfo = StoreFile(model.Photo);
                 student.Image = new Image
@@ -113,9 +63,19 @@ namespace FinalProject.Web.Areas.Student.Models
                 GuardianMobileNo = model.ParentsInfo.GuardianMobileNo,
             };
             student.Course = GetSelectedCourse(model.CourseId);
-            student.Address = GetActualAddress(model.PermanentAddress);
+            student.Address = GetActualAddress(model);
 
             return student;
+        }
+
+        public List<SelectListItem> CourseList()
+        {
+            var data = _courseService.GetCourses();
+            return data.Select(x => new SelectListItem
+            {
+                Text = x.Title,
+                Value = x.Id.ToString()
+            }).ToList();
         }
 
         public Course GetSelectedCourse(Guid id)
@@ -137,25 +97,8 @@ namespace FinalProject.Web.Areas.Student.Models
                 GuardianMobileNo = model.GuardianMobileNo,
             };
         }
-        public void GetParentsChanges(ParentsModel model, Parents exParents)
-        {
-            exParents.FatherName = model.FatherName;
-            exParents.FatherOccupation = model.FatherOccupation;
-            exParents.FatherAnnualIncome = model.FatherAnnualIncome;
-            exParents.FatherMobileNo = model.FatherMobileNo;
-            exParents.MotherName = model.MotherName;
-            exParents.MotherOccupation = model.FatherOccupation;
-            exParents.MotherMobileNo = model.MotherMobileNo;
-            exParents.GuardianName = model.GuardianName;
-            exParents.GuardianMobileNo = model.GuardianMobileNo;
-        }
 
-        public void GetAddressChanges(AddressModel model, Address exAddress)
-        {
-            exAddress.PresentAddress = model.Street + " " + model.City + " " + model.ZipCode;
-            exAddress.PermanentAddress = model.Street + " " + model.City + " " + model.ZipCode;
-        }
-        public Parents GetStudentParents(ParentsModel model)
+        public Parents GetParentsChanges(ParentsModel model)
         {
             return new Parents
             {
@@ -170,26 +113,37 @@ namespace FinalProject.Web.Areas.Student.Models
                 GuardianMobileNo = model.GuardianMobileNo,
             };
         }
-        public Address GetActualAddress(AddressModel model) => new Address
+        public Address GetActualAddress(StudentFormViewModel model) => new Address
         {
-            PresentAddress = model.City,
-            PermanentAddress = model.Street,
+            PresentAddress = model.PresentAddress.Street 
+                             + "," + model.PresentAddress.City 
+                             + "," + model.PresentAddress.ZipCode,
+
+            PermanentAddress = model.PermanentAddress.Street 
+                               + "," + model.PermanentAddress.City 
+                               + "," + model.PermanentAddress.ZipCode,
         };
-        public AddressModel GetActualAddress(Address model) => new AddressModel
+
+        public AddressModel BuildAddressModel(string address)
         {
-            City = model.PresentAddress,
-            Street = model.PermanentAddress,
-        };
+            var fullAddress = address.Split(",");
+            var addressModel = new AddressModel
+            {
+                City = fullAddress[1],
+                Street = fullAddress[0],
+                ZipCode = fullAddress[2]
+            };
+            return addressModel;
+        }
         public void DeleteStudent(Guid id)
         {
             _studentService.Delete(id);
         }
-        public StudentFormModel GetStudentModel(Guid id)
+        public StudentFormViewModel BuildStudentModel(Guid id)
         {
             var student = _studentService.GetStudent(id);
-            return new StudentFormModel
+            return new StudentFormViewModel
             {
-                Id = student.Id,
                 FirstName = student.FirstName,
                 MiddleName = student.MiddleName,
                 LastName = student.LastName,
@@ -203,27 +157,28 @@ namespace FinalProject.Web.Areas.Student.Models
                 ParentsInfo = GetStudentParents(student.Parents),
                 EnrollCourse = CourseList(),
                 ImagePath = FormatImageUrl(student.Image?.Url),
-                PermanentAddress = GetActualAddress(student.Address),
+                PresentAddress = BuildAddressModel(student.Address.PresentAddress),
+                PermanentAddress = BuildAddressModel(student.Address.PermanentAddress),
             };
         }
 
-        public void UpdateStudent()
+        public void UpdateStudent(Guid id, StudentFormViewModel model)
         {
-            var exStudent = _studentService.GetStudent(Id);
-            
-            exStudent.FirstName = FirstName;
-            exStudent.MiddleName = MiddleName;
-            exStudent.LastName = LastName;
-            exStudent.Gender = Gender;
-            exStudent.MobileNo = MobileNo;
-            exStudent.Address = GetActualAddress(PresentAddress);
-            exStudent.Nationality = Nationality;
-            exStudent.YearOfEnroll = YearOfEnroll;
-            exStudent.Parents = GetStudentParents(ParentsInfo);
-            exStudent.Course = GetSelectedCourse(CourseId);
-            if (Photo != null)
+            var exStudent = _studentService.GetStudent(id);
+
+            exStudent.FirstName = model.FirstName;
+            exStudent.MiddleName = model.MiddleName;
+            exStudent.LastName = model.LastName;
+            exStudent.Gender = model.Gender;
+            exStudent.MobileNo = model.MobileNo;
+            exStudent.Address = GetActualAddress(model);
+            exStudent.Nationality = model.Nationality;
+            exStudent.YearOfEnroll = model.YearOfEnroll;
+            exStudent.Parents = GetParentsChanges(model.ParentsInfo);
+            exStudent.Course = GetSelectedCourse(model.CourseId);
+            if (model.Photo != null)
             {
-                var imageInfo = StoreFile(Photo);
+                var imageInfo = StoreFile(model.Photo);
 
                 exStudent.Image = new Image
                 {
@@ -232,6 +187,12 @@ namespace FinalProject.Web.Areas.Student.Models
                 };
             }
             _studentService.Update(exStudent);
+        }
+
+        public void SaveStudent(StudentFormViewModel model)
+        {
+            var student = ConvertToEntityStudent(model);
+            _studentService.AddStudent(student);
         }
     }
 }
