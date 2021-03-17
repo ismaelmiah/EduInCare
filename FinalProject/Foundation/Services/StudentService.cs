@@ -30,13 +30,13 @@ namespace Foundation.Library.Services
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 result = _management.StudentRepository.GetDynamic(null,
-                    orderBy, "Image", pageIndex, pageSize, true);
+                    orderBy, "Image,Address,Parents,Course", pageIndex, pageSize, true);
 
             }
             else
             {
                 result = _management.StudentRepository.GetDynamic(x => x.FirstName == searchText,
-                    orderBy, "Image", pageIndex, pageSize, true);
+                    orderBy, "Image,Address,Parents,Course", pageIndex, pageSize, true);
             }
 
             var data = (from x in result.data
@@ -51,9 +51,11 @@ namespace Foundation.Library.Services
                     DateOfBirth = x.DateOfBirth,
                     BirthCertificateNo = x.BirthCertificateNo,
                     NationalIdentificationNo = x.NationalIdentificationNo,
-                    Image = x.Image,
                     Nationality = x.Nationality,
                     YearOfEnroll = x.YearOfEnroll,
+                    Image = x.Image,
+                    Address = x.Address,
+                    Parents = x.Parents,
                     Course = x.Course,
                 }).ToList();
 

@@ -231,9 +231,6 @@ namespace FinalProject.Web.Areas.Student.Models
                     AlternativeText = $"{exStudent.FirstName} Image"
                 };
             }
-
-            //TODO: Implement Address Service & Course Service for Update Data
-            
             _studentService.Update(exStudent);
         }
     }
