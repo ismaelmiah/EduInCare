@@ -48,7 +48,10 @@ namespace FinalProject.Models
 
         public string FormatImageUrl(string imageName)
         {
-            return $"/{ImagePath}/{imageName}";
+            var indexOfFileName = imageName.LastIndexOf('\\');
+            if (indexOfFileName < 0) return "";
+            var fileName = imageName.Substring(indexOfFileName);
+            return $"/{ImagePath}/{fileName}";
         }
     }
 }

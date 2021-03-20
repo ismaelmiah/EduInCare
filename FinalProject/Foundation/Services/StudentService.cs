@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Foundation.Library.Entities;
 using Foundation.Library.UnitOfWorks;
@@ -15,9 +16,9 @@ namespace Foundation.Library.Services
             _management = management;
         }
 
-        public void CreateStudent(Student student)
+        public void AddStudent(Student student)
         {
-            _management.Student.Add(student);
+            _management.StudentRepository.Add(student);
             _management.Save();
         }
 
@@ -28,14 +29,14 @@ namespace Foundation.Library.Services
 
             if (string.IsNullOrWhiteSpace(searchText))
             {
-                result = _management.Student.GetDynamic(null,
-                    orderBy, "", pageIndex, pageSize, true);
+                result = _management.StudentRepository.GetDynamic(null,
+                    orderBy, "Image", pageIndex, pageSize, true);
 
             }
             else
             {
-                result = _management.Student.GetDynamic(x => x.FirstName == searchText,
-                    orderBy, "", pageIndex, pageSize, true);
+                result = _management.StudentRepository.GetDynamic(x => x.FirstName == searchText,
+                    orderBy, "Image", pageIndex, pageSize, true);
             }
 
             var data = (from x in result.data
@@ -50,21 +51,31 @@ namespace Foundation.Library.Services
                     DateOfBirth = x.DateOfBirth,
                     BirthCertificateNo = x.BirthCertificateNo,
                     NationalIdentificationNo = x.NationalIdentificationNo,
-                    PresentAddress = x.PresentAddress,
-                    PermanentAddress = x.PermanentAddress,
-                    PhotoImage = x.PhotoImage,
+                    Image = x.Image,
                     Nationality = x.Nationality,
                     YearOfEnroll = x.YearOfEnroll,
-                    EnrollCourse = x.EnrollCourse,
-                    ParentsInfo = x.ParentsInfo
+                    Course = x.Course,
                 }).ToList();
 
             return (result.total, result.totalDisplay, data);
         }
 
-        public Student ConvertToEntityStudent()
+        public void Delete(Guid id)
         {
-            return new Student();
+            _management.StudentRepository.Remove(id);
+            _management.Save();
+        }
+
+        public Student GetStudent(Guid id)
+        {
+            return _management.StudentRepository.Get(x => x.Id == id, null,
+                "Image,Address,Course,Parents", false).FirstOrDefault();
+        }
+
+        public void Update(Student student)
+        {
+            _management.StudentRepository.Edit(student);
+            _management.Save();
         }
     }
 }

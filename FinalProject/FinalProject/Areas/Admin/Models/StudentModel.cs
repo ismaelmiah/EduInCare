@@ -8,7 +8,6 @@ namespace FinalProject.Web.Areas.Admin.Models
 {
     public class StudentModel : BaseModel
     {
-
         private readonly IStudentService _studentService;
 
         public StudentModel(IStudentService studentService) { _studentService = studentService; }
@@ -17,7 +16,7 @@ namespace FinalProject.Web.Areas.Admin.Models
         {
             _studentService = Startup.AutofacContainer.Resolve<IStudentService>();
         }
-        internal object GetProducts(DataTablesAjaxRequestModel tableModel)
+        internal object GetStudents(DataTablesAjaxRequestModel tableModel)
         {
             var (total, totalDisplay, records) = _studentService.GetStudentList(
                 tableModel.PageIndex,
@@ -45,9 +44,9 @@ namespace FinalProject.Web.Areas.Admin.Models
                             record.FirstName,
                             record.MiddleName,
                             record.LastName,
-                            FormatImageUrl(record.PhotoImage?.Url),
+                            FormatImageUrl(record.Image?.Url),
                             record.Gender,
-                            record.EnrollCourse?.Title,
+                            record.Course?.Title,
                             record.DateOfBirth.ToShortDateString(),
                             record.YearOfEnroll.ToShortDateString(),
                             record.Id.ToString(),

@@ -2,6 +2,7 @@
 using System.Reflection;
 using Autofac;
 using Foundation.Library.Contexts;
+using Foundation.Library.Repositories;
 using Foundation.Library.UnitOfWorks;
 using Module = Autofac.Module;
 

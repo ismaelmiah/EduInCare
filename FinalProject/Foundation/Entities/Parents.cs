@@ -3,7 +3,7 @@ using DataAccessLayer;
 
 namespace Foundation.Library.Entities
 {
-    public class StudentParents : IEntity<Guid>
+    public class Parents : IEntity<Guid>
     {
         public Guid Id { get; set; }
         public string FatherName { get; set; }
@@ -15,5 +15,6 @@ namespace Foundation.Library.Entities
         public string MotherOccupation { get; set; }
         public string GuardianName { get; set; }
         public string GuardianMobileNo { get; set; }
+        public Student Student { get; set; }
     }
 }

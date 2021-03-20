@@ -8,5 +8,7 @@ namespace Foundation.Library.Entities
         public Guid Id { get; set; }
         public string Url { get; set; }
         public string AlternativeText { get; set; }
+        public Student Student { get; set; }
+        public Header Header { get; set; }
     }
 }
