@@ -22,21 +22,20 @@ namespace Foundation.Library.Services
             _management.Save();
         }
 
-        public (int total, int totalDisplay, IList<Student> records) GetStudentList(int pageIndex, int pageSize, string searchText,
-            string orderBy)
+        public (int total, int totalDisplay, IList<Student> records) GetStudentList(int pageIndex, int pageSize, string searchText, string orderBy)
         {
             (IList<Student> data, int total, int totalDisplay) result;
 
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 result = _management.StudentRepository.GetDynamic(null,
-                    orderBy, "Image,Address,Parents,Course", pageIndex, pageSize, true);
+                    orderBy, "Image,Address,Parents,Course", pageIndex, pageSize, false);
 
             }
             else
             {
                 result = _management.StudentRepository.GetDynamic(x => x.FirstName == searchText,
-                    orderBy, "Image,Address,Parents,Course", pageIndex, pageSize, true);
+                    orderBy, "Image,Address,Parents,Course", pageIndex, pageSize, false);
             }
 
             var data = (from x in result.data

@@ -66,5 +66,10 @@ namespace Foundation.Library.Services
             _management.DepartmentRepository.Edit(department);
             _management.Save();
         }
+
+        public IList<Department> GetDepartments()
+        {
+            return _management.DepartmentRepository.GetAll();
+        }
     }
 }

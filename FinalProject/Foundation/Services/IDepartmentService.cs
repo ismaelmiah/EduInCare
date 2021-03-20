@@ -12,5 +12,6 @@ namespace Foundation.Library.Services
         (int total, int totalDisplay, IList<Department> records) GetDepartmentList(int pageIndex,
             int pageSize, string searchText, string orderBy);
         void UpdateDepartment(Department department);
+        IList<Department> GetDepartments();
     }
 }

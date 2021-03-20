@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20210320175647_Student&amp;Address&amp;Employee.cs" />
+    <Compile Remove="Migrations\20210320175647_Student&amp;Address&amp;Employee.Designer.cs" />
+    <Compile Remove="Migrations\20210320180107_Student&amp;Address&amp;Employee.cs" />
+    <Compile Remove="Migrations\20210320180107_Student&amp;Address&amp;Employee.Designer.cs" />
+    <Compile Remove="Migrations\20210320181058_Student&amp;Address&amp;Employee.cs" />
+    <Compile Remove="Migrations\20210320181058_Student&amp;Address&amp;Employee.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.12" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.12" />

@@ -171,7 +171,7 @@ namespace FinalProject.Web.Areas.Student.Models
             exStudent.LastName = model.LastName;
             exStudent.Gender = model.Gender;
             exStudent.MobileNo = model.MobileNo;
-            exStudent.Address = GetActualAddress(model);
+            exStudent.Address = GetAddressChanges(model);
             exStudent.Nationality = model.Nationality;
             exStudent.YearOfEnroll = model.YearOfEnroll;
             exStudent.Parents = GetParentsChanges(model.ParentsInfo);
@@ -187,6 +187,20 @@ namespace FinalProject.Web.Areas.Student.Models
                 };
             }
             _studentService.Update(exStudent);
+        }
+
+        private Address GetAddressChanges(StudentFormViewModel model)
+        {
+            return new Address
+            {
+                PresentAddress = model.PresentAddress.Street
+                                 + "," + model.PresentAddress.City
+                                 + "," + model.PresentAddress.ZipCode,
+
+                PermanentAddress = model.PermanentAddress.Street
+                                   + "," + model.PermanentAddress.City
+                                   + "," + model.PermanentAddress.ZipCode
+            };
         }
 
         public void SaveStudent(StudentFormViewModel model)
