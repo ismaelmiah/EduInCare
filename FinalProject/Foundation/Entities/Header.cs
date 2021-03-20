@@ -6,7 +6,6 @@ namespace Foundation.Library.Entities
     public class Header : IEntity<Guid>
     {
         public Guid Id { get; set; }
-        public Guid ImageId { get; set; }
         public HeaderImage Image { get; set; }
         public bool ShowBannerImage { get; set; }
     }

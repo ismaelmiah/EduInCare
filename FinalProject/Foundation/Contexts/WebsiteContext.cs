@@ -51,12 +51,14 @@ namespace Foundation.Library.Contexts
             builder.Entity<Image>()
                 .HasOne(x => x.Student)
                 .WithOne(x => x.Image)
-                .HasForeignKey<Image>(x => x.StudentId);
+                .HasForeignKey<Image>(x => x.StudentId)
+                .IsRequired();
 
             builder.Entity<Header>()
                 .HasOne(x => x.Image)
                 .WithOne(x => x.Header)
-                .HasForeignKey<HeaderImage>(x => x.HeaderId);
+                .HasForeignKey<HeaderImage>(x => x.HeaderId)
+                .IsRequired();
 
 
             base.OnModelCreating(builder);
