@@ -16,5 +16,9 @@ namespace Foundation.Library.Contexts
         DbSet<Address> Address { get; set; }
         DbSet<Parents> Parents { get; set; }
         DbSet<Course> Courses { get; set; }
+        DbSet<Department> Departments { get; set; }
+        DbSet<Employee> Employees { get; set; }
+        DbSet<HeaderImage> HeaderImage { get; set; }
+        DbSet<EmployeeImage> EmployeeImage { get; set; }
     }
 }

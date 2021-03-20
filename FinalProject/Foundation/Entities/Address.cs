@@ -8,7 +8,9 @@ namespace Foundation.Library.Entities
         public Guid Id { get; set; }
         public string PresentAddress { get; set; }
         public string PermanentAddress { get; set; }
-        public Guid StudentId { get; set; }
+        public Guid? StudentId { get; set; }
         public Student Student { get; set; }
+        public Guid? EmployeeId { get; set; }
+        public Employee Employee { get; set; }
     }
 }

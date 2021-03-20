@@ -9,5 +9,7 @@ namespace Foundation.Library.Entities
         public Guid Id { get; set; }
         public string Title { get; set; }
         public ICollection<Student> Students { get; set; }
+        public Guid? DepartmentId { get; set; }
+        public Department Department { get; set; }
     }
 }

@@ -4,14 +4,16 @@ using Foundation.Library.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FinalProject.Web.Migrations
 {
     [DbContext(typeof(WebsiteContext))]
-    partial class WebsiteContextModelSnapshot : ModelSnapshot
+    [Migration("20210320114414_Department&EmployeeTableInitialized&ImageTableModified")]
+    partial class DepartmentEmployeeTableInitializedImageTableModified
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,8 +78,7 @@ namespace FinalProject.Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("DepartmentId")
-                        .IsRequired()
+                    b.Property<Guid>("DepartmentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
@@ -145,29 +146,6 @@ namespace FinalProject.Web.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("Foundation.Library.Entities.EmployeeImage", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("AlternativeText")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("EmployeeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId")
-                        .IsUnique();
-
-                    b.ToTable("EmployeeImage");
-                });
-
             modelBuilder.Entity("Foundation.Library.Entities.Footer", b =>
                 {
                     b.Property<Guid>("Id")
@@ -199,29 +177,6 @@ namespace FinalProject.Web.Migrations
                     b.ToTable("Headers");
                 });
 
-            modelBuilder.Entity("Foundation.Library.Entities.HeaderImage", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("AlternativeText")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("HeaderId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HeaderId")
-                        .IsUnique();
-
-                    b.ToTable("HeaderImage");
-                });
-
             modelBuilder.Entity("Foundation.Library.Entities.Image", b =>
                 {
                     b.Property<Guid>("Id")
@@ -231,7 +186,10 @@ namespace FinalProject.Web.Migrations
                     b.Property<string>("AlternativeText")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("StudentId")
+                    b.Property<Guid?>("HeaderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("StudentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Url")
@@ -239,8 +197,13 @@ namespace FinalProject.Web.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("HeaderId")
+                        .IsUnique()
+                        .HasFilter("[HeaderId] IS NOT NULL");
+
                     b.HasIndex("StudentId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[StudentId] IS NOT NULL");
 
                     b.ToTable("Images");
                 });
@@ -404,31 +367,15 @@ namespace FinalProject.Web.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Foundation.Library.Entities.EmployeeImage", b =>
-                {
-                    b.HasOne("Foundation.Library.Entities.Employee", "Employee")
-                        .WithOne("Image")
-                        .HasForeignKey("Foundation.Library.Entities.EmployeeImage", "EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Foundation.Library.Entities.HeaderImage", b =>
+            modelBuilder.Entity("Foundation.Library.Entities.Image", b =>
                 {
                     b.HasOne("Foundation.Library.Entities.Header", "Header")
                         .WithOne("Image")
-                        .HasForeignKey("Foundation.Library.Entities.HeaderImage", "HeaderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                        .HasForeignKey("Foundation.Library.Entities.Image", "HeaderId");
 
-            modelBuilder.Entity("Foundation.Library.Entities.Image", b =>
-                {
                     b.HasOne("Foundation.Library.Entities.Student", "Student")
                         .WithOne("Image")
-                        .HasForeignKey("Foundation.Library.Entities.Image", "StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Foundation.Library.Entities.Image", "StudentId");
                 });
 
             modelBuilder.Entity("Foundation.Library.Entities.Parents", b =>

@@ -51,14 +51,29 @@ namespace Foundation.Library.Contexts
             builder.Entity<Image>()
                 .HasOne(x => x.Student)
                 .WithOne(x => x.Image)
-                .HasForeignKey<Image>(x => x.StudentId)
-                .IsRequired();
+                .HasForeignKey<Image>(x => x.StudentId);
 
             builder.Entity<Header>()
                 .HasOne(x => x.Image)
                 .WithOne(x => x.Header)
-                .HasForeignKey<HeaderImage>(x => x.HeaderId)
+                .HasForeignKey<HeaderImage>(x => x.HeaderId);
+
+            builder.Entity<Course>()
+                .HasOne(x => x.Department)
+                .WithMany(x => x.Courses)
+                .HasForeignKey(x => x.DepartmentId)
                 .IsRequired();
+
+            builder.Entity<Department>()
+                .HasOne(x => x.Employee)
+                .WithOne(x => x.Department)
+                .HasForeignKey<Department>(x => x.EmployeeId)
+                .IsRequired();
+
+            builder.Entity<Employee>()
+                .HasOne(x => x.Image)
+                .WithOne(x => x.Employee)
+                .HasForeignKey<EmployeeImage>(x => x.EmployeeId);
 
 
             base.OnModelCreating(builder);
@@ -74,5 +89,9 @@ namespace Foundation.Library.Contexts
         public DbSet<Address> Address { get; set; }
         public DbSet<Parents> Parents { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<HeaderImage> HeaderImage { get; set; }
+        public DbSet<EmployeeImage> EmployeeImage { get; set; }
     }
 }
