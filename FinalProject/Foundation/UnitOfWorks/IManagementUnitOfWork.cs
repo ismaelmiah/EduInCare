@@ -8,5 +8,6 @@ namespace Foundation.Library.UnitOfWorks
         public IStudentRepository StudentRepository { get; set; }
         public IParentsRepository ParentsRepository { get; set; }
         public ICourseRepository CourseRepository { get; set; }
+        public IDepartmentRepository DepartmentRepository { get; set; }
     }
 }

@@ -9,15 +9,18 @@ namespace Foundation.Library.UnitOfWorks
         public ManagementUnitOfWork(WebsiteContext dbContext,
             ICourseRepository course,
             IStudentRepository student,
-            IParentsRepository parents) : base(dbContext)
+            IParentsRepository parents,
+            IDepartmentRepository department) : base(dbContext)
         {
             CourseRepository = course;
             StudentRepository = student;
             ParentsRepository = parents;
+            DepartmentRepository = department;
         }
 
         public IStudentRepository StudentRepository { get; set; }
         public IParentsRepository ParentsRepository { get; set; }
         public ICourseRepository CourseRepository { get; set; }
+        public IDepartmentRepository DepartmentRepository { get; set; }
     }
 }

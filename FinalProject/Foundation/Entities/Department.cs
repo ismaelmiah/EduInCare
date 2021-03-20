@@ -9,7 +9,6 @@ namespace Foundation.Library.Entities
         public Guid Id { get; set; }
         public string Name { get; set; }
         public ICollection<Course> Courses { get; set; }
-        public Guid EmployeeId { get; set; }
-        public Employee Employee { get; set; }
+        public ICollection<Employee> Employees { get; set; }
     }
 }

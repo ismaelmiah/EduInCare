@@ -64,11 +64,13 @@ namespace Foundation.Library.Contexts
                 .HasForeignKey(x => x.DepartmentId)
                 .IsRequired();
 
-            builder.Entity<Department>()
-                .HasOne(x => x.Employee)
-                .WithOne(x => x.Department)
-                .HasForeignKey<Department>(x => x.EmployeeId)
-                .IsRequired();
+            builder.Entity<Employee>()
+                .HasOne(x => x.Department)
+                .WithMany(x => x.Employees)
+                .HasForeignKey(x => x.DepartmentId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Employee>()
                 .HasOne(x => x.Image)
