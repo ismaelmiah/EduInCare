@@ -1,10 +1,9 @@
 ﻿using System.IO;
 using Autofac;
-using FinalProject.Web;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
-namespace FinalProject.Models
+namespace FinalProject.Web.Models
 {
     public class BaseModel
     {

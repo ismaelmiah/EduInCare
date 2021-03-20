@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using FinalProject.Models;
+using FinalProject.Web.Models;
 using Foundation.Library.Entities;
 using Foundation.Library.Services;
 using Microsoft.AspNetCore.Http;
@@ -45,7 +45,7 @@ namespace FinalProject.Web.Areas.Admin.Models
             return new Header
             {
                 ShowBannerImage = ShowBannerImage,
-                Image = new Image
+                Image = new HeaderImage
                 {
                     Url = filePath,
                     AlternativeText = $"{fileName}"

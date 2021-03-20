@@ -13,39 +13,41 @@ namespace FinalProject.Web.Areas.Student.Controllers
         }
         public IActionResult Upsert(Guid? id)
         {
-            var model = new StudentFormModel();
+            var model = new StudentFormViewModel();
 
             if (id == null)
                 return View(model);
 
-            model = model.GetStudentModel(id.GetValueOrDefault());
+            model = model._modelBuilder.BuildStudentModel(id.GetValueOrDefault());
             if (model == null)
                 return NotFound();
             return View(model);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(StudentFormModel model)
+        public IActionResult Upsert(StudentFormViewModel model)
         {
             if (ModelState.IsValid)
             {
                 if (model.Id == new Guid())
                 {
                     //Create
-                    model.SaveStudent();
+                    model._modelBuilder.SaveStudent(model);
                 }
                 else
                 {
                     //Update
-                    model.UpdateStudent();
+                    model._modelBuilder.UpdateStudent(model.Id, model);
                 }
             }
             return RedirectToRoute(new { Area="", controller = "Home", action = "Index"});
         }
+
         public IActionResult Delete(Guid id)
         {
-            var model = new StudentFormModel();
-            model.DeleteStudent(id);
+            var model = new StudentFormViewModel();
+            model._modelBuilder.DeleteStudent(id);
             return RedirectToRoute(new{Area = "Admin", controller = "Student", action = "Index"});
         }
         public IActionResult StudentReport(Guid id)
@@ -55,7 +57,12 @@ namespace FinalProject.Web.Areas.Student.Controllers
 
         public IActionResult Profile(Guid id)
         {
-            return View();
+            var model = new StudentFormViewModel();
+
+            model = model._modelBuilder.BuildStudentModel(id);
+            if (model == null)
+                return NotFound();
+            return View(model);
         }
     }
 }

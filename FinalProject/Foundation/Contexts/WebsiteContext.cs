@@ -39,28 +39,25 @@ namespace Foundation.Library.Contexts
             builder.Entity<Parents>()
                 .HasOne(x => x.Student)
                 .WithOne(x => x.Parents)
-                .HasForeignKey<Student>(x => x.ParentsId)
-                .HasPrincipalKey<Parents>(x=>x.Id)
+                .HasForeignKey<Parents>(x => x.StudentId)
+                .HasPrincipalKey<Student>(x=>x.Id)
                 .IsRequired();
 
             builder.Entity<Address>()
                 .HasOne(x => x.Student)
                 .WithOne(x => x.Address)
-                .HasForeignKey<Student>(x => x.AddressId)
-                .HasPrincipalKey<Address>(x=>x.Id);
+                .HasForeignKey<Address>(x => x.StudentId);
 
             builder.Entity<Image>()
                 .HasOne(x => x.Student)
                 .WithOne(x => x.Image)
-                .HasForeignKey<Student>(x => x.ImageId)
-                .HasPrincipalKey<Image>(x=>x.Id)
+                .HasForeignKey<Image>(x => x.StudentId)
                 .IsRequired();
 
-            builder.Entity<Image>()
-                .HasOne(x => x.Header)
-                .WithOne(x => x.Image)
-                .HasForeignKey<Header>(x => x.ImageId)
-                .HasPrincipalKey<Image>(x=>x.Id)
+            builder.Entity<Header>()
+                .HasOne(x => x.Image)
+                .WithOne(x => x.Header)
+                .HasForeignKey<HeaderImage>(x => x.HeaderId)
                 .IsRequired();
 
 
@@ -74,7 +71,7 @@ namespace Foundation.Library.Contexts
         public DbSet<Advertise> Advertises { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Student> Students { get; set; }
-        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Address> Address { get; set; }
         public DbSet<Parents> Parents { get; set; }
         public DbSet<Course> Courses { get; set; }
     }

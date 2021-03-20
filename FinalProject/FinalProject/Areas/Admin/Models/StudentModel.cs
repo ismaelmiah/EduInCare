@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Autofac;
-using FinalProject.Models;
 using FinalProject.Web.Models;
 using Foundation.Library.Services;
 

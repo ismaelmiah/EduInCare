@@ -31,9 +31,15 @@ namespace FinalProject.Web.Migrations
                     b.Property<string>("PresentAddress")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Addresses");
+                    b.HasIndex("StudentId")
+                        .IsUnique();
+
+                    b.ToTable("Address");
                 });
 
             modelBuilder.Entity("Foundation.Library.Entities.Advertise", b =>
@@ -93,18 +99,35 @@ namespace FinalProject.Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ImageId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<bool>("ShowBannerImage")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImageId")
+                    b.ToTable("Headers");
+                });
+
+            modelBuilder.Entity("Foundation.Library.Entities.HeaderImage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AlternativeText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("HeaderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HeaderId")
                         .IsUnique();
 
-                    b.ToTable("Headers");
+                    b.ToTable("HeaderImage");
                 });
 
             modelBuilder.Entity("Foundation.Library.Entities.Image", b =>
@@ -116,10 +139,16 @@ namespace FinalProject.Web.Migrations
                     b.Property<string>("AlternativeText")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("StudentId")
+                        .IsUnique();
 
                     b.ToTable("Images");
                 });
@@ -177,7 +206,13 @@ namespace FinalProject.Web.Migrations
                     b.Property<string>("MotherOccupation")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("StudentId")
+                        .IsUnique();
 
                     b.ToTable("Parents");
                 });
@@ -208,9 +243,6 @@ namespace FinalProject.Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AddressId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("BirthCertificateNo")
                         .HasColumnType("nvarchar(max)");
 
@@ -225,9 +257,6 @@ namespace FinalProject.Web.Migrations
 
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("ImageId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
@@ -244,60 +273,57 @@ namespace FinalProject.Web.Migrations
                     b.Property<string>("Nationality")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ParentsId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("YearOfEnroll")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId")
-                        .IsUnique();
-
                     b.HasIndex("CourseId");
-
-                    b.HasIndex("ImageId")
-                        .IsUnique();
-
-                    b.HasIndex("ParentsId")
-                        .IsUnique();
 
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("Foundation.Library.Entities.Header", b =>
+            modelBuilder.Entity("Foundation.Library.Entities.Address", b =>
                 {
-                    b.HasOne("Foundation.Library.Entities.Image", "Image")
-                        .WithOne("Header")
-                        .HasForeignKey("Foundation.Library.Entities.Header", "ImageId")
+                    b.HasOne("Foundation.Library.Entities.Student", "Student")
+                        .WithOne("Address")
+                        .HasForeignKey("Foundation.Library.Entities.Address", "StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Foundation.Library.Entities.HeaderImage", b =>
+                {
+                    b.HasOne("Foundation.Library.Entities.Header", "Header")
+                        .WithOne("Image")
+                        .HasForeignKey("Foundation.Library.Entities.HeaderImage", "HeaderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Foundation.Library.Entities.Image", b =>
+                {
+                    b.HasOne("Foundation.Library.Entities.Student", "Student")
+                        .WithOne("Image")
+                        .HasForeignKey("Foundation.Library.Entities.Image", "StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Foundation.Library.Entities.Parents", b =>
+                {
+                    b.HasOne("Foundation.Library.Entities.Student", "Student")
+                        .WithOne("Parents")
+                        .HasForeignKey("Foundation.Library.Entities.Parents", "StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("Foundation.Library.Entities.Student", b =>
                 {
-                    b.HasOne("Foundation.Library.Entities.Address", "Address")
-                        .WithOne("Student")
-                        .HasForeignKey("Foundation.Library.Entities.Student", "AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Foundation.Library.Entities.Course", "Course")
                         .WithMany("Students")
                         .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Foundation.Library.Entities.Image", "Image")
-                        .WithOne("Student")
-                        .HasForeignKey("Foundation.Library.Entities.Student", "ImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Foundation.Library.Entities.Parents", "Parents")
-                        .WithOne("Student")
-                        .HasForeignKey("Foundation.Library.Entities.Student", "ParentsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
