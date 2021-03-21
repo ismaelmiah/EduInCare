@@ -18,5 +18,6 @@ namespace Foundation.Library.Entities
         public Guid DepartmentId { get; set; }
         public Department Department { get; set; }
         public EmployeeImage Image { get; set; }
+        public string EmployeeType { get; set; }
     }
 }

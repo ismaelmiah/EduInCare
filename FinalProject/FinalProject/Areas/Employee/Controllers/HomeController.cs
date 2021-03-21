@@ -47,7 +47,7 @@ namespace FinalProject.Web.Areas.Employee.Controllers
         public IActionResult Delete(Guid id)
         {
             var model = new StudentFormViewModel();
-            model._modelBuilder.DeleteStudent(id);
+            model.ModelBuilder.DeleteStudent(id);
             return RedirectToRoute(new { Area = "Admin", controller = "Student", action = "Index" });
         }
         public IActionResult StudentReport(Guid id)
@@ -59,7 +59,7 @@ namespace FinalProject.Web.Areas.Employee.Controllers
         {
             var model = new StudentFormViewModel();
 
-            model = model._modelBuilder.BuildStudentModel(id);
+            model = model.ModelBuilder.BuildStudentModel(id);
             if (model == null)
                 return NotFound();
             return View(model);

@@ -17,6 +17,8 @@
     <Compile Remove="Migrations\20210321041541_EmployeeAddressSeparated.Designer.cs" />
     <Compile Remove="Migrations\20210321042254_EmployeeAddressSeparated.cs" />
     <Compile Remove="Migrations\20210321042254_EmployeeAddressSeparated.Designer.cs" />
+    <Compile Remove="Migrations\20210321070526_EmployeeTypeAdded.cs" />
+    <Compile Remove="Migrations\20210321070526_EmployeeTypeAdded.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

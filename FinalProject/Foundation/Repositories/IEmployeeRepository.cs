@@ -1,14 +1,12 @@
-﻿using DataAccessLayer;
+﻿using System;
+using DataAccessLayer;
+using Foundation.Library.Contexts;
+using Foundation.Library.Entities;
 
 namespace Foundation.Library.Repositories
 {
-    public interface IEmployeeRepository
+    public interface IEmployeeRepository : IRepository<Employee, Guid, WebsiteContext>
     {
         
-    }
-
-    public class EmployeeRepository : IEmployeeRepository
-    {
-
     }
 }

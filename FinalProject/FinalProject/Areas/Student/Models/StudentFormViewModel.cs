@@ -8,11 +8,11 @@ namespace FinalProject.Web.Areas.Student.Models
 {
     public class StudentFormViewModel
     {
-        internal StudentModelBuilder _modelBuilder;
+        internal StudentModelBuilder ModelBuilder;
         public StudentFormViewModel()
         {
-            _modelBuilder = new StudentModelBuilder();
-            EnrollCourse = _modelBuilder.CourseList();
+            ModelBuilder = new StudentModelBuilder();
+            EnrollCourse = ModelBuilder.CourseList();
         }
         [Display(Name = "First Name")]
         public string FirstName { get; set; }

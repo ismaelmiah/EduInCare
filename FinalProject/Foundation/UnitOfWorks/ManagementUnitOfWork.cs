@@ -10,17 +10,20 @@ namespace Foundation.Library.UnitOfWorks
             ICourseRepository course,
             IStudentRepository student,
             IParentsRepository parents,
-            IDepartmentRepository department) : base(dbContext)
+            IDepartmentRepository department,
+            IEmployeeRepository employee) : base(dbContext)
         {
             CourseRepository = course;
             StudentRepository = student;
             ParentsRepository = parents;
             DepartmentRepository = department;
+            EmployeeRepository = employee;
         }
 
         public IStudentRepository StudentRepository { get; set; }
         public IParentsRepository ParentsRepository { get; set; }
         public ICourseRepository CourseRepository { get; set; }
         public IDepartmentRepository DepartmentRepository { get; set; }
+        public IEmployeeRepository EmployeeRepository { get; set; }
     }
 }
