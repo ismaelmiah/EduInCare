@@ -46,8 +46,7 @@ namespace Foundation.Library.Contexts
             builder.Entity<Address>()
                 .HasOne(x => x.Student)
                 .WithOne(x => x.Address)
-                .HasForeignKey<Address>(x => x.StudentId)
-                .IsRequired(false);
+                .HasForeignKey<Address>(x => x.StudentId);
 
             builder.Entity<Image>()
                 .HasOne(x => x.Student)
@@ -78,12 +77,10 @@ namespace Foundation.Library.Contexts
                 .WithOne(x => x.Employee)
                 .HasForeignKey<EmployeeImage>(x => x.EmployeeId);
 
-            builder.Entity<Address>()
-                .HasOne(x => x.Employee)
-                .WithOne(x => x.Address)
-                .HasForeignKey<Address>(x => x.EmployeeId)
-                .IsRequired(false);
-
+            builder.Entity<Employee>()
+                .HasOne(x => x.Address)
+                .WithOne(x => x.Employee)
+                .HasForeignKey<EmployeeAddress>(x => x.EmployeeId);
 
             base.OnModelCreating(builder);
         }
@@ -102,5 +99,6 @@ namespace Foundation.Library.Contexts
         public DbSet<Employee> Employees { get; set; }
         public DbSet<HeaderImage> HeaderImage { get; set; }
         public DbSet<EmployeeImage> EmployeeImage { get; set; }
+        public DbSet<EmployeeAddress> EmployeeAddress { get; set; }
     }
 }

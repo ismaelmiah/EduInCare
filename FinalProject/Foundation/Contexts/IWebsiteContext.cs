@@ -5,7 +5,6 @@ namespace Foundation.Library.Contexts
 {
     public interface IWebsiteContext
     {
-
         DbSet<Header> Headers { get; set; }
         DbSet<Footer> Footers { get; set; }
         DbSet<Notice> Notices { get; set; }
@@ -20,5 +19,6 @@ namespace Foundation.Library.Contexts
         DbSet<Employee> Employees { get; set; }
         DbSet<HeaderImage> HeaderImage { get; set; }
         DbSet<EmployeeImage> EmployeeImage { get; set; }
+        DbSet<EmployeeAddress> EmployeeAddress { get; set; }
     }
 }

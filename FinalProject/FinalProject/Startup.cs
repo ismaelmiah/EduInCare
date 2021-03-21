@@ -55,8 +55,13 @@ namespace FinalProject.Web
             services.AddDbContext<WebsiteContext>(options =>
                 options.UseSqlServer(ConnectionAndMigration().connectionString, m => m.MigrationsAssembly(ConnectionAndMigration().migrationAssemblyName)));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

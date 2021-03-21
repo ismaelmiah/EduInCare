@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Autofac;
@@ -43,6 +44,8 @@ namespace FinalProject.Web.Areas.Admin.Models
                 tableModel.GetSortText(new[]
                 {
                     "Title",
+                    "Students",
+                    "Department"
                 }));
 
             return new
@@ -50,9 +53,11 @@ namespace FinalProject.Web.Areas.Admin.Models
                 recordsTotal = total,
                 recordsFiltered = totalDisplay,
                 data = (from record in records
-                        select new[]
+                        select new object[]
                         {
                             record.Title,
+                            record.Students.Count(),
+                            record.Department.Name,
                             record.Id.ToString(),
                         }
                     ).ToArray()

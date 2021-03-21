@@ -13,6 +13,10 @@
     <Compile Remove="Migrations\20210320180107_Student&amp;Address&amp;Employee.Designer.cs" />
     <Compile Remove="Migrations\20210320181058_Student&amp;Address&amp;Employee.cs" />
     <Compile Remove="Migrations\20210320181058_Student&amp;Address&amp;Employee.Designer.cs" />
+    <Compile Remove="Migrations\20210321041541_EmployeeAddressSeparated.cs" />
+    <Compile Remove="Migrations\20210321041541_EmployeeAddressSeparated.Designer.cs" />
+    <Compile Remove="Migrations\20210321042254_EmployeeAddressSeparated.cs" />
+    <Compile Remove="Migrations\20210321042254_EmployeeAddressSeparated.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +24,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.12" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.12" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.12" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.12" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.12" />

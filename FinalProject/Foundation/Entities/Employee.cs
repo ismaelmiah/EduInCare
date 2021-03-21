@@ -14,7 +14,7 @@ namespace Foundation.Library.Entities
         public string MobileNo { get; set; }
         public DateTime JoinOfDate { get; set; }
         public string Nationality { get; set; }
-        public Address Address { get; set; }
+        public EmployeeAddress Address { get; set; }
         public Guid DepartmentId { get; set; }
         public Department Department { get; set; }
         public EmployeeImage Image { get; set; }
