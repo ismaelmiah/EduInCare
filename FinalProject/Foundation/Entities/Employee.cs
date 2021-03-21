@@ -1,23 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
 using DataAccessLayer;
+using Foundation.Library.Enums;
 
 namespace Foundation.Library.Entities
 {
     public class Employee : IEntity<Guid>
     {
         public Guid Id { get; set; }
-        public string FirstName { get; set; }
-        public string MiddleName { get; set; }
-        public string LastName { get; set; }
-        public string NationalIdentificationNo { get; set; }
-        public string Gender { get; set; }
+        public string Name { get; set; }
+        public string FatherName { get; set; }
+        public string MotherName { get; set; }
+        public Gender Gender { get; set; }
+        public string Nid { get; set; }
         public string MobileNo { get; set; }
+        public string MaritalStatus { get; set; }
+        public Religion Religion { get; set; }
         public DateTime JoinOfDate { get; set; }
         public string Nationality { get; set; }
         public EmployeeAddress Address { get; set; }
-        public Guid DepartmentId { get; set; }
-        public Department Department { get; set; }
         public EmployeeImage Image { get; set; }
-        public string EmployeeType { get; set; }
+        public string UserName { get; set; }
+        public ICollection<EmployeeEducation> EmployeeEducation { get; set; }
+        public ICollection<EmploymentHistory> EmploymentHistory { get; set; }
+        public ICollection<JobInfo> JobInfo { get; set; }
     }
 }
