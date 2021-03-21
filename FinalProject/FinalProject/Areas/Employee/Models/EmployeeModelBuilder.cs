@@ -27,7 +27,7 @@ namespace FinalProject.Web.Areas.Employee.Models
         }
         public EmployeeFormViewModel BuildEmployeeModel(Guid id)
         {
-            var employee = _employeeService.GetEmployee(id);
+            var employee = _employeeService.GetEmployeeWithoutTrack(id);
             return new EmployeeFormViewModel
             {
                 FirstName = employee.FirstName,
@@ -42,7 +42,7 @@ namespace FinalProject.Web.Areas.Employee.Models
                 PresentAddress = BuildAddressModel(employee.Address.PresentAddress),
                 PermanentAddress = BuildAddressModel(employee.Address.PermanentAddress),
                 DepartmentId = employee.DepartmentId,
-                EmployeeType = employee.EmployeeType.ToString()
+                EmployeeType = employee.EmployeeType
             };
         }
 
@@ -69,7 +69,6 @@ namespace FinalProject.Web.Areas.Employee.Models
 
         public void SaveEmployee(EmployeeFormViewModel model)
         {
-
             var employee = ConvertToEntity(model);
             _employeeService.AddEmployee(employee);
         }
@@ -96,6 +95,7 @@ namespace FinalProject.Web.Areas.Employee.Models
             employee.NationalIdentificationNo = model.NationalIdentificationNo;
             employee.Department = GetSelectedDepartment(model.DepartmentId);
             employee.Address = GetActualAddress(model);
+            employee.EmployeeType = model.EmployeeType;
 
             return employee;
         }
@@ -110,12 +110,71 @@ namespace FinalProject.Web.Areas.Employee.Models
                                + "," + model.PermanentAddress.City
                                + "," + model.PermanentAddress.ZipCode,
         };
-        private Department GetSelectedDepartment(Guid departmentId) =>
-            _departmentService.GetDepartment(departmentId);
+        private Department GetSelectedDepartment(Guid departmentId) => _departmentService.GetDepartment(departmentId);
 
         public void UpdateEmployee(Guid modelId, EmployeeFormViewModel model)
         {
-            throw new NotImplementedException();
+            var exEmployee = _employeeService.GetEmployee(modelId);
+
+            exEmployee.FirstName = model.FirstName;
+            exEmployee.MiddleName = model.MiddleName;
+            exEmployee.LastName = model.LastName;
+            exEmployee.Gender = model.Gender;
+            exEmployee.MobileNo = model.MobileNo;
+            exEmployee.Address = GetAddressChanges(model);
+            exEmployee.Nationality = model.Nationality;
+            if (model.Photo != null)
+            {
+                var imageInfo = StoreFile(model.Photo);
+
+                exEmployee.Image = new EmployeeImage
+                {
+                    Url = imageInfo.filePath,
+                    AlternativeText = $"{exEmployee.FirstName} Image"
+                };
+            }
+            _employeeService.UpdateEmployee(exEmployee);
+        }
+
+        private EmployeeAddress GetAddressChanges(EmployeeFormViewModel model)
+        {
+            return new EmployeeAddress
+            {
+                PresentAddress = model.PresentAddress.Street
+                + "," + model.PresentAddress.City
+                + "," + model.PresentAddress.ZipCode,
+
+                PermanentAddress = model.PermanentAddress.Street
+                                   + "," + model.PermanentAddress.City
+                                   + "," + model.PermanentAddress.ZipCode
+            };
+        }
+
+        public IList<SelectListItem> GetTypeList()
+        {
+            return new List<SelectListItem>
+            {
+                new SelectListItem
+                {
+                    Text = "Admin",
+                    Value = "admin"
+                },
+                new SelectListItem
+                {
+                    Text = "Teacher",
+                    Value = "teacher"
+                },
+                new SelectListItem
+                {
+                    Text = "Employee",
+                    Value = "employee"
+                },
+            };
+        }
+
+        public void DeleteEmployee(Guid id)
+        {
+            _employeeService.DeleteEmployee(id);
         }
     }
 }

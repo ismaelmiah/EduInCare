@@ -11,14 +11,15 @@ namespace FinalProject.Web.Areas.Employee.Controllers
     [Area("Employee")]
     public class HomeController : Controller
     {
-        public IActionResult Upsert(Guid? id)
+        public IActionResult Upsert(Guid? id, bool? isAdmin)
         {
             var model = new EmployeeFormViewModel();
-
+            if (isAdmin != null) model.IsAdmin = isAdmin.Value;
             if (id == null)
                 return View(model);
 
             model = model.ModelBuilder.BuildEmployeeModel(id.GetValueOrDefault());
+            if (isAdmin != null) model.IsAdmin = isAdmin.Value;
             if (model == null)
                 return NotFound();
             return View(model);
@@ -41,16 +42,17 @@ namespace FinalProject.Web.Areas.Employee.Controllers
                     model.ModelBuilder.UpdateEmployee(model.Id, model);
                 }
             }
-            return RedirectToRoute(new { Area = "Employee", controller = "Employee", action = "Index" });
+            return model.IsAdmin ? RedirectToRoute(new { Area = "Admin", controller = "Employee", action = "Index" })
+                : RedirectToRoute(new { Area = "", controller = "Home", action = "Index" });
         }
 
         public IActionResult Delete(Guid id)
         {
-            var model = new StudentFormViewModel();
-            model.ModelBuilder.DeleteStudent(id);
-            return RedirectToRoute(new { Area = "Admin", controller = "Student", action = "Index" });
+            var model = new EmployeeFormViewModel();
+            model.ModelBuilder.DeleteEmployee(id);
+            return RedirectToRoute(new { Area = "Admin", controller = "Employee", action = "Index" });
         }
-        public IActionResult StudentReport(Guid id)
+        public IActionResult EmployeeReport(Guid id)
         {
             return View();
         }

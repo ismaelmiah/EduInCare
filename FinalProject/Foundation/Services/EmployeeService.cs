@@ -13,9 +13,16 @@ namespace Foundation.Library.Services
         {
             _management = management;
         }
+
+        public Employee GetEmployeeWithoutTrack(Guid id)
+        {
+            return _management.EmployeeRepository.Get(x => x.Id == id, null, "Image,Address,Department", false)
+                .FirstOrDefault();
+        }
+
         public Employee GetEmployee(Guid id)
         {
-            return _management.EmployeeRepository.Get(x=>x.Id==id,null, "Image,Address,Department", true)
+            return _management.EmployeeRepository.Get(x => x.Id == id, null, "Image,Address,Department", false)
                 .FirstOrDefault();
         }
 
@@ -53,22 +60,22 @@ namespace Foundation.Library.Services
             }
 
             var data = (from x in result.data
-                select new Employee
-                {
-                    Id = x.Id,
-                    FirstName = x.FirstName,
-                    MiddleName = x.MiddleName,
-                    LastName = x.LastName,
-                    Gender = x.Gender,
-                    MobileNo = x.MobileNo,
-                    NationalIdentificationNo = x.NationalIdentificationNo,
-                    Nationality = x.Nationality,
-                    Image = x.Image,
-                    Address = x.Address,
-                    JoinOfDate = x.JoinOfDate,
-                    Department = x.Department,
-                    EmployeeType = x.EmployeeType
-                }).ToList();
+                        select new Employee
+                        {
+                            Id = x.Id,
+                            FirstName = x.FirstName,
+                            MiddleName = x.MiddleName,
+                            LastName = x.LastName,
+                            Gender = x.Gender,
+                            MobileNo = x.MobileNo,
+                            NationalIdentificationNo = x.NationalIdentificationNo,
+                            Nationality = x.Nationality,
+                            Image = x.Image,
+                            Address = x.Address,
+                            JoinOfDate = x.JoinOfDate,
+                            Department = x.Department,
+                            EmployeeType = x.EmployeeType
+                        }).ToList();
 
             return (result.total, result.totalDisplay, data);
         }

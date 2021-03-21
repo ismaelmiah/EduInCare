@@ -6,6 +6,7 @@ namespace Foundation.Library.Services
 {
     public interface IEmployeeService
     {
+        Employee GetEmployeeWithoutTrack(Guid id);
         Employee GetEmployee(Guid id);
         void DeleteEmployee(Guid id);
         void UpdateEmployee(Employee employee);

@@ -19,7 +19,7 @@
                                 <i class="fas fa-info-circle"></i>
                                 Details
                             </a>
-                            <button type="submit" class="btn btn-warning btn-sm" onclick="window.location.href='/Employee/Home/Upsert/${data}'" value='${data}'>
+                            <button type="submit" class="btn btn-warning btn-sm" onclick="window.location.href='/Employee/Home/Upsert/${data}?isAdmin=true'" value='${data}'>
                                 <i class="fas fa-edit"></i>
                                 Edit
                             </button>

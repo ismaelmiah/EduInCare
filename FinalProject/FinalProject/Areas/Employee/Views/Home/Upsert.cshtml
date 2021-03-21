@@ -1,15 +1,16 @@
 ﻿@model EmployeeFormViewModel
-
 @{
-    ViewData["Title"] = "Employee Application";
-    ViewData["subtitle"] = "Teacher Form";
-    ViewData["Info"] = "Employee Info";
+    ViewData["Title"] = Model.IsTeacherApplication ? "Teacher Application" : "Employee Application";
+    ViewData["subtitle"] = Model.IsTeacherApplication ? "Teacher Form" : "Employee Form";
+    ViewData["Info"] = Model.IsTeacherApplication ? "Employee Info" : "Teacher Info";
+    var isAdmin = Model.IsAdmin;
     Layout = "~/Areas/Student/Views/Shared/_StudentLayout.cshtml";
     if (Model.Id != new Guid())
     {
         //edit
         ViewData["Title"] = "Update Employee Application";
     }
+
 }
 <div class="row">
     <div class="col-md-1"></div>
@@ -18,7 +19,8 @@
             <div class="card-header">
                 <h3 class="card-title text-center">@ViewData["Title"]</h3>
             </div>
-            <form class="form-horizontal" asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
+            <form class="form-horizontal" asp-antiforgery="true" method="post" enctype="multipart/form-data" 
+                  asp-controller="Home" asp-area="Employee" asp-action="Upsert">
                 @if (Model.Id != new Guid())
                 {
                     <input type="hidden" asp-for="Id" />
@@ -26,7 +28,6 @@
                 <div class="card-body row">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="col-md-8">
-                        <label class="control-label">@ViewData["Info"]</label>
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -50,6 +51,14 @@
                                 </div>
                             </div>
                         </div>
+                        @if (isAdmin)
+                        {
+                            <div class="form-group">
+                                <label class="control-label">Employee Type</label>
+                                <select asp-for="EmployeeType" asp-items="Model.EmployeeTypeList" class="form-control"></select>
+                                <span asp-validation-for="EmployeeType" class="text-danger"></span>
+                            </div>
+                        }
                         <div class="form-group">
                             <label asp-for="JoinOfDate" class="control-label"></label>
                             <input asp-for="JoinOfDate" class="form-control" />
@@ -75,17 +84,6 @@
                             <span asp-validation-for="MobileNo" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Nationality" class="control-label"></label>
-                            <input asp-for="Nationality" class="form-control" />
-                            <span asp-validation-for="Nationality" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label">Department</label>
-                            <select asp-for="DepartmentId" asp-items="Model.DepartmentList" class="form-control"></select>
-                            <span asp-validation-for="DepartmentId" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
                             <label asp-for="Photo" class="control-label"></label>
                             <input asp-for="Photo" onchange="readURL(this);" class="form-control" />
                             <span asp-validation-for="Photo" class="text-danger"></span>
@@ -103,13 +101,23 @@
                         </div>
                     </div>
                     <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="Nationality" class="control-label"></label>
+                            <input asp-for="Nationality" class="form-control" />
+                            <span asp-validation-for="Nationality" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Department</label>
+                            <select asp-for="DepartmentId" asp-items="Model.DepartmentList" class="form-control"></select>
+                            <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                        </div>
                         <div>
                             <label>Present Address</label>
                             <partial name="_PresentAddressFormVIew" model="Model" />
                         </div>
                         <div>
                             <label>Permanent Address</label>
-                            <partial name="_PresentAddressFormVIew" model="Model" />
+                            <partial name="_PermanentAddressFormView" model="Model" />
                         </div>
                     </div>
                 </div>
