@@ -12,8 +12,9 @@ namespace Foundation.Library.Services
         void UpdateEmployee(Employee employee);
         void AddEmployee(Employee employee);
 
-        (int total, int totalDisplay, IList<Employee> records) GetEmployeeList(int pageIndex,
-            int pageSize, string searchText, string orderBy);
+        (int total, int totalDisplay, IList<Employee> records) GetEmployeeList(int pageIndex, int pageSize, string searchText, string orderBy);
+
+        IList<Employee> GetAllEmployees();
 
     }
 }

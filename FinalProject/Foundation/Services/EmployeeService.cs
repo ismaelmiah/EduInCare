@@ -51,12 +51,12 @@ namespace Foundation.Library.Services
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 result = _management.EmployeeRepository.GetDynamic(null,
-                    orderBy, "Image,Address,Department", pageIndex, pageSize, false);
+                    orderBy, "", pageIndex, pageSize, false);
             }
             else
             {
                 result = _management.EmployeeRepository.GetDynamic(x => x.Name == searchText,
-                    orderBy, "Image,Address,Department", pageIndex, pageSize, false);
+                    orderBy, "", pageIndex, pageSize, false);
             }
 
             var data = (from x in result.data
@@ -67,11 +67,18 @@ namespace Foundation.Library.Services
                             Gender = x.Gender,
                             MobileNo = x.MobileNo,
                             Nid = x.Nid,
+                            ImageUrl = x.ImageUrl,
+                            UserName = x.UserName,
                             Nationality = x.Nationality,
                             JoinOfDate = x.JoinOfDate,
                         }).ToList();
 
             return (result.total, result.totalDisplay, data);
+        }
+
+        public IList<Employee> GetAllEmployees()
+        {
+            return _management.EmployeeRepository.GetAll();
         }
     }
 }
