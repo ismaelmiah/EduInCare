@@ -54,8 +54,6 @@ namespace Foundation.Library.Services
                 {
                     Id = x.Id,
                     Name = x.Name,
-                    Employees = x.Employees,
-                    Courses = x.Courses,
                 }).ToList();
 
             return (result.total, result.totalDisplay, data);

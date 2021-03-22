@@ -43,12 +43,6 @@ namespace Foundation.Library.Contexts
                 .HasPrincipalKey<Student>(x=>x.Id)
                 .IsRequired();
 
-            builder.Entity<Course>()
-                .HasOne(x => x.Department)
-                .WithMany(x => x.Courses)
-                .HasForeignKey(x => x.DepartmentId)
-                .IsRequired();
-
             builder.Entity<JobInfo>()
                 .HasOne(x => x.Employee)
                 .WithMany(x => x.JobInfo)

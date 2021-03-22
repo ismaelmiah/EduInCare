@@ -35,7 +35,6 @@ namespace FinalProject.Web.Areas.Employee.Models
                 JoinOfDate = employee.JoinOfDate,
                 Nationality = employee.Nationality,
                 MobileNo = employee.MobileNo,
-                NationalIdentificationNo = employee.Nid,
                 UserName = employee.UserName,
             };
         }
@@ -76,24 +75,22 @@ namespace FinalProject.Web.Areas.Employee.Models
             }
 
             employee.Name = model.Name;
+            employee.FatherName = model.FatherName;
+            employee.MotherName = model.MotherName;
             employee.Gender = model.Gender;
             employee.JoinOfDate = model.JoinOfDate;
+            employee.MaritalStatus = model.MaritalStatus;
+            employee.Religion = model.Religion;
             employee.Nationality = model.Nationality;
-            employee.Nid = model.NationalIdentificationNo;
+            employee.Nid = model.Nid;
+            employee.PresentAddress = model.PresentAddress;
+            employee.PermanentAddress = model.PermanentAddress;
+            employee.MobileNo = model.MobileNo;
+            employee.UserName = model.UserName;
 
             return employee;
         }
 
-        private EmployeeAddress GetActualAddress(EmployeeFormViewModel model) => new EmployeeAddress
-        {
-            PresentAddress = model.PresentAddress.Street
-                             + "," + model.PresentAddress.City
-                             + "," + model.PresentAddress.ZipCode,
-
-            PermanentAddress = model.PermanentAddress.Street
-                               + "," + model.PermanentAddress.City
-                               + "," + model.PermanentAddress.ZipCode,
-        };
         private Department GetSelectedDepartment(Guid departmentId) => _departmentService.GetDepartment(departmentId);
 
         public void UpdateEmployee(Guid modelId, EmployeeFormViewModel model)
@@ -112,19 +109,6 @@ namespace FinalProject.Web.Areas.Employee.Models
             _employeeService.UpdateEmployee(exEmployee);
         }
 
-        private EmployeeAddress GetAddressChanges(EmployeeFormViewModel model)
-        {
-            return new EmployeeAddress
-            {
-                PresentAddress = model.PresentAddress.Street
-                + "," + model.PresentAddress.City
-                + "," + model.PresentAddress.ZipCode,
-
-                PermanentAddress = model.PermanentAddress.Street
-                                   + "," + model.PermanentAddress.City
-                                   + "," + model.PermanentAddress.ZipCode
-            };
-        }
 
         public IList<SelectListItem> GetTypeList()
         {

@@ -17,6 +17,7 @@ namespace Foundation.Library.Entities
         public string MaritalStatus { get; set; }
         public Religion Religion { get; set; }
         public DateTime JoinOfDate { get; set; }
+        public DateTime BirthDate { get; set; }
         public string Nationality { get; set; }
         public string PresentAddress { get; set; }
         public string PermanentAddress { get; set; }

@@ -40,8 +40,6 @@ namespace FinalProject.Web.Areas.Admin.Models
                         select new object[]
                         {
                             record.Name,
-                            record.Courses.Count(),
-                            record.Employees.Count(),
                             record.Id.ToString(),
                         }
                     ).ToArray()
