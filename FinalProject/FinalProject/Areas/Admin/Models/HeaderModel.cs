@@ -35,7 +35,6 @@ namespace FinalProject.Web.Areas.Admin.Models
             var headers = _service.GetHeader();
             foreach (var header in headers)
             {
-                if(header.Image!=null) ImagePath = FormatImageUrl(header.Image?.Url);
                 ShowBannerImage = header.ShowBannerImage;
             }
         }
@@ -45,11 +44,6 @@ namespace FinalProject.Web.Areas.Admin.Models
             return new Header
             {
                 ShowBannerImage = ShowBannerImage,
-                Image = new HeaderImage
-                {
-                    Url = filePath,
-                    AlternativeText = $"{fileName}"
-                },
             };
         }
     }

@@ -11,6 +11,10 @@ namespace FinalProject.Web.Areas.Admin.Controllers
         {
             return View();
         }
+        public IActionResult Teachers()
+        {
+            return View();
+        }
         public IActionResult GetEmployees()
         {
             var tableModel = new DataTablesAjaxRequestModel(Request);

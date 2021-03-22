@@ -30,19 +30,13 @@ namespace FinalProject.Web.Areas.Employee.Models
             var employee = _employeeService.GetEmployeeWithoutTrack(id);
             return new EmployeeFormViewModel
             {
-                FirstName = employee.FirstName,
-                MiddleName = employee.MiddleName,
-                LastName = employee.LastName,
+                Name = employee.Name,
                 Gender = employee.Gender,
                 JoinOfDate = employee.JoinOfDate,
                 Nationality = employee.Nationality,
                 MobileNo = employee.MobileNo,
-                NationalIdentificationNo = employee.NationalIdentificationNo,
-                ImagePath = FormatImageUrl(employee.Image?.Url),
-                PresentAddress = BuildAddressModel(employee.Address.PresentAddress),
-                PermanentAddress = BuildAddressModel(employee.Address.PermanentAddress),
-                DepartmentId = employee.DepartmentId,
-                EmployeeType = employee.EmployeeType
+                NationalIdentificationNo = employee.Nid,
+                UserName = employee.UserName,
             };
         }
 
@@ -79,23 +73,13 @@ namespace FinalProject.Web.Areas.Employee.Models
             if (model.Photo != null)
             {
                 var imageInfo = StoreFile(model.Photo);
-                employee.Image = new EmployeeImage
-                {
-                    Url = imageInfo.filePath,
-                    AlternativeText = $"{model.FirstName} Image"
-                };
             }
 
-            employee.FirstName = model.FirstName;
-            employee.MiddleName = model.MiddleName;
-            employee.LastName = model.LastName;
+            employee.Name = model.Name;
             employee.Gender = model.Gender;
             employee.JoinOfDate = model.JoinOfDate;
             employee.Nationality = model.Nationality;
-            employee.NationalIdentificationNo = model.NationalIdentificationNo;
-            employee.Department = GetSelectedDepartment(model.DepartmentId);
-            employee.Address = GetActualAddress(model);
-            employee.EmployeeType = model.EmployeeType;
+            employee.Nid = model.NationalIdentificationNo;
 
             return employee;
         }
@@ -116,22 +100,14 @@ namespace FinalProject.Web.Areas.Employee.Models
         {
             var exEmployee = _employeeService.GetEmployee(modelId);
 
-            exEmployee.FirstName = model.FirstName;
-            exEmployee.MiddleName = model.MiddleName;
-            exEmployee.LastName = model.LastName;
+            exEmployee.Name = model.Name;
             exEmployee.Gender = model.Gender;
             exEmployee.MobileNo = model.MobileNo;
-            exEmployee.Address = GetAddressChanges(model);
             exEmployee.Nationality = model.Nationality;
             if (model.Photo != null)
             {
                 var imageInfo = StoreFile(model.Photo);
-
-                exEmployee.Image = new EmployeeImage
-                {
-                    Url = imageInfo.filePath,
-                    AlternativeText = $"{exEmployee.FirstName} Image"
-                };
+                
             }
             _employeeService.UpdateEmployee(exEmployee);
         }

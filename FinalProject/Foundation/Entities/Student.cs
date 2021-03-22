@@ -14,8 +14,10 @@ namespace Foundation.Library.Entities
         public string NationalIdentificationNo { get; set; }
         public string Gender { get; set; }
         public string MobileNo { get; set; }
-        public virtual Image Image { get; set; }
-        public virtual Address Address { get; set; }
+        public string ImageUrl { get; set; }
+        public string ImageAlternativeText { get; set; }
+        public string PresentAddress { get; set; }
+        public string PermanentAddress { get; set; }
         public string Nationality { get; set; }
         public DateTime YearOfEnroll { get; set; }
         public virtual Parents Parents { get; set; }

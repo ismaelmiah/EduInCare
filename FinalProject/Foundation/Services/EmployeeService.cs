@@ -55,7 +55,7 @@ namespace Foundation.Library.Services
             }
             else
             {
-                result = _management.EmployeeRepository.GetDynamic(x => x.FirstName == searchText,
+                result = _management.EmployeeRepository.GetDynamic(x => x.Name == searchText,
                     orderBy, "Image,Address,Department", pageIndex, pageSize, false);
             }
 
@@ -63,18 +63,12 @@ namespace Foundation.Library.Services
                         select new Employee
                         {
                             Id = x.Id,
-                            FirstName = x.FirstName,
-                            MiddleName = x.MiddleName,
-                            LastName = x.LastName,
+                            Name = x.Name,
                             Gender = x.Gender,
                             MobileNo = x.MobileNo,
-                            NationalIdentificationNo = x.NationalIdentificationNo,
+                            Nid = x.Nid,
                             Nationality = x.Nationality,
-                            Image = x.Image,
-                            Address = x.Address,
                             JoinOfDate = x.JoinOfDate,
-                            Department = x.Department,
-                            EmployeeType = x.EmployeeType
                         }).ToList();
 
             return (result.total, result.totalDisplay, data);

@@ -7,9 +7,9 @@ namespace Foundation.Library.Entities
     public class EmployeeEducation : IEntity<Guid>
     {
         public Guid Id { get; set; }
-        public int EducationLevelId { get; set; }
+        public Guid EducationLevelId { get; set; }
         public EducationLevel EducationLevel { get; set; }
-        public int ExamTitleId { get; set; }
+        public Guid ExamTitleId { get; set; }
         public ExamTitle ExamTitle { get; set; }
         public string Major { get; set; }
         public string InstituteName { get; set; }
@@ -20,7 +20,7 @@ namespace Foundation.Library.Entities
         public string PassingYear { get; set; }
         public int Duration { get; set; }
         public string Achievement { get; set; }
-        public int EmployeeId { get; set; }
+        public Guid EmployeeId { get; set; }
         public Employee Employee { get; set; }
     }
 }

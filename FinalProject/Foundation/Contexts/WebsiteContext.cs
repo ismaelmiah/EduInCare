@@ -43,44 +43,64 @@ namespace Foundation.Library.Contexts
                 .HasPrincipalKey<Student>(x=>x.Id)
                 .IsRequired();
 
-            builder.Entity<Address>()
-                .HasOne(x => x.Student)
-                .WithOne(x => x.Address)
-                .HasForeignKey<Address>(x => x.StudentId);
-
-            builder.Entity<Image>()
-                .HasOne(x => x.Student)
-                .WithOne(x => x.Image)
-                .HasForeignKey<Image>(x => x.StudentId);
-
-            builder.Entity<Header>()
-                .HasOne(x => x.Image)
-                .WithOne(x => x.Header)
-                .HasForeignKey<HeaderImage>(x => x.HeaderId);
-
             builder.Entity<Course>()
                 .HasOne(x => x.Department)
                 .WithMany(x => x.Courses)
                 .HasForeignKey(x => x.DepartmentId)
                 .IsRequired();
 
-            builder.Entity<Employee>()
-                .HasOne(x => x.Department)
-                .WithMany(x => x.Employees)
-                .HasForeignKey(x => x.DepartmentId)
+            builder.Entity<JobInfo>()
+                .HasOne(x => x.Employee)
+                .WithMany(x => x.JobInfo)
+                .HasForeignKey(x => x.EmployeeId)
                 .HasPrincipalKey(x => x.Id)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<Employee>()
-                .HasOne(x => x.Image)
-                .WithOne(x => x.Employee)
-                .HasForeignKey<EmployeeImage>(x => x.EmployeeId);
+            builder.Entity<EmploymentHistory>()
+                .HasOne(x => x.Employee)
+                .WithMany(x => x.EmploymentHistory)
+                .HasForeignKey(x => x.EmployeeId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<Employee>()
-                .HasOne(x => x.Address)
-                .WithOne(x => x.Employee)
-                .HasForeignKey<EmployeeAddress>(x => x.EmployeeId);
+            builder.Entity<EmployeeEducation>()
+                .HasOne(x => x.Employee)
+                .WithMany(x => x.EmployeeEducation)
+                .HasForeignKey(x => x.EmployeeId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<EmployeeEducation>()
+                .HasOne(x => x.EducationLevel)
+                .WithOne(x => x.EmployeeEducation)
+                .HasForeignKey<EmployeeEducation>(x => x.EducationLevelId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<EmployeeEducation>()
+                .HasOne(x => x.ExamTitle)
+                .WithOne(x => x.EmployeeEducation)
+                .HasForeignKey<EmployeeEducation>(x => x.ExamTitleId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<ExamTitle>()
+                .HasOne(x => x.EducationLevel)
+                .WithOne(x => x.ExamTitle)
+                .HasForeignKey<ExamTitle>(x => x.EducationLevelId);
+
+            builder.Entity<Designation>()
+                .HasOne(x => x.JobInfo)
+                .WithOne(x => x.Designation)
+                .HasForeignKey<JobInfo>(x => x.DesignationId);
+            
+            builder.Entity<JobInfo>()
+                .HasOne(x => x.Appointment)
+                .WithOne(x => x.JobInfo)
+                .HasForeignKey<AppointmentImage>(x => x.JobInfoId);
 
             base.OnModelCreating(builder);
         }
@@ -90,15 +110,17 @@ namespace Foundation.Library.Contexts
         public DbSet<Notice> Notices { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Advertise> Advertises { get; set; }
-        public DbSet<Image> Images { get; set; }
         public DbSet<Student> Students { get; set; }
-        public DbSet<Address> Address { get; set; }
         public DbSet<Parents> Parents { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<HeaderImage> HeaderImage { get; set; }
-        public DbSet<EmployeeImage> EmployeeImage { get; set; }
-        public DbSet<EmployeeAddress> EmployeeAddress { get; set; }
+        public DbSet<EmployeeEducation> EmployeeEducations { get; set; }
+        public DbSet<EmploymentHistory> EmploymentHistories { get; set; }
+        public DbSet<JobInfo> JobInfos { get; set; }
+        public DbSet<EducationLevel> EducationLevels { get; set; }
+        public DbSet<ExamTitle> ExamTitles { get; set; }
+        public DbSet<Designation> Designations { get; set; }
+        public DbSet<AppointmentImage> AppointmentImages { get; set; }
     }
 }

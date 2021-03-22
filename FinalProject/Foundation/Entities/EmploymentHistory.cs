@@ -11,7 +11,7 @@ namespace Foundation.Library.Entities
         public string Designation { get; set; }
         public DateTime From { get; set; }
         public DateTime To { get; set; }
-        public int EmployeeId { get; set; }
+        public Guid EmployeeId { get; set; }
         public Employee Employee { get; set; }
     }
 }

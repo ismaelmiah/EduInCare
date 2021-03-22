@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FinalProject.Web.Areas.Employee.Models;
 using FinalProject.Web.Areas.Student.Models;
 
@@ -11,15 +8,13 @@ namespace FinalProject.Web.Areas.Employee.Controllers
     [Area("Employee")]
     public class HomeController : Controller
     {
-        public IActionResult Upsert(Guid? id, bool? isAdmin)
+        public IActionResult Upsert(Guid? id)
         {
             var model = new EmployeeFormViewModel();
-            if (isAdmin != null) model.IsAdmin = isAdmin.Value;
             if (id == null)
                 return View(model);
 
             model = model.ModelBuilder.BuildEmployeeModel(id.GetValueOrDefault());
-            if (isAdmin != null) model.IsAdmin = isAdmin.Value;
             if (model == null)
                 return NotFound();
             return View(model);
@@ -42,8 +37,8 @@ namespace FinalProject.Web.Areas.Employee.Controllers
                     model.ModelBuilder.UpdateEmployee(model.Id, model);
                 }
             }
-            return model.IsAdmin ? RedirectToRoute(new { Area = "Admin", controller = "Employee", action = "Index" })
-                : RedirectToRoute(new { Area = "", controller = "Home", action = "Index" });
+
+            return RedirectToRoute(new {Area = "Admin", controller = "Employee", action = "Index"});
         }
 
         public IActionResult Delete(Guid id)

@@ -18,9 +18,12 @@ namespace Foundation.Library.Entities
         public Religion Religion { get; set; }
         public DateTime JoinOfDate { get; set; }
         public string Nationality { get; set; }
-        public EmployeeAddress Address { get; set; }
-        public EmployeeImage Image { get; set; }
+        public string PresentAddress { get; set; }
+        public string PermanentAddress { get; set; }
+        public string ImageUrl { get; set; }
+        public string ImageAlternativeText { get; set; }
         public string UserName { get; set; }
+        public string Email { get; set; }
         public ICollection<EmployeeEducation> EmployeeEducation { get; set; }
         public ICollection<EmploymentHistory> EmploymentHistory { get; set; }
         public ICollection<JobInfo> JobInfo { get; set; }

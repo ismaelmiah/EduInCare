@@ -52,8 +52,6 @@ namespace Foundation.Library.Services
                     NationalIdentificationNo = x.NationalIdentificationNo,
                     Nationality = x.Nationality,
                     YearOfEnroll = x.YearOfEnroll,
-                    Image = x.Image,
-                    Address = x.Address,
                     Parents = x.Parents,
                     Course = x.Course,
                 }).ToList();

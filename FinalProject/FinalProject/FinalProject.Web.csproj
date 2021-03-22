@@ -19,6 +19,16 @@
     <Compile Remove="Migrations\20210321042254_EmployeeAddressSeparated.Designer.cs" />
     <Compile Remove="Migrations\20210321070526_EmployeeTypeAdded.cs" />
     <Compile Remove="Migrations\20210321070526_EmployeeTypeAdded.Designer.cs" />
+    <Compile Remove="Migrations\20210321172955_EmployeeTableRe-arrange.cs" />
+    <Compile Remove="Migrations\20210321172955_EmployeeTableRe-arrange.Designer.cs" />
+    <Compile Remove="Migrations\20210322135839_EmployeeTableReGenerate.cs" />
+    <Compile Remove="Migrations\20210322135839_EmployeeTableReGenerate.Designer.cs" />
+    <Compile Remove="Migrations\20210322140400_EmployeeTableReGenerate.cs" />
+    <Compile Remove="Migrations\20210322140400_EmployeeTableReGenerate.Designer.cs" />
+    <Compile Remove="Migrations\20210322140744_EmployeeTableReGenerate.cs" />
+    <Compile Remove="Migrations\20210322140744_EmployeeTableReGenerate.Designer.cs" />
+    <Compile Remove="Migrations\20210322141130_EmployeeTableReGenerate.cs" />
+    <Compile Remove="Migrations\20210322141130_EmployeeTableReGenerate.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
