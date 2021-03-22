@@ -1,12 +1,12 @@
 ﻿$(function () {
-    $('#employeeseducation').DataTable({
+    $('#employeeseducationlevel').DataTable({
         "processing": true,
         "serverSide": true,
-        "ajax": "/Employee/EmployeeEducation/GetEmployeeEducations",
+        "ajax": "/Employee/EducationLevel/GetEducationLevels",
         "columnDefs": [
             {
                 "orderable": false,
-                "targets": 8,
+                "targets": 1,
                 "render": function (data, type, row) {
                     return `<a class="btn btn-info btn-sm" href='/student/Home/Profile/${data}'">
                                 <i class="fas fa-info-circle"></i>
@@ -25,9 +25,9 @@
         ]
     });
 
-    $('#employeeseducation_filter').addClass("text-right");
+    $('#employeeseducationlevel_filter').addClass("text-right");
 
-    $('#employeeseducation').on('click', '.show-bs-modal', function (event) {
+    $('#employeeseducationlevel').on('click', '.show-bs-modal', function (event) {
         var id = $(this).data("id");
         var modal = $("#modal-default");
         modal.find('.modal-body p').text('Are you sure you want to delete this record?');

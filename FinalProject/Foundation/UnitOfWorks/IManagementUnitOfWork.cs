@@ -11,5 +11,6 @@ namespace Foundation.Library.UnitOfWorks
         public IDepartmentRepository DepartmentRepository { get; set; }
         public IEmployeeRepository EmployeeRepository { get; set; }
         public IEmployeeEducationRepository EmployeeEducationRepository { get; set; }
+        public IEducationLevelRepository EducationLevelRepository { get; set; }
     }
 }

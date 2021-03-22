@@ -11,15 +11,18 @@ namespace FinalProject.Web.Areas.Admin.Models
     {
         private readonly IEmployeeService _employeeService;
         private readonly IEmployeeEducationService _employeeEducationService;
+        private readonly IEducationLevelService _educationLevelService;
 
-        public EmployeeModel(IEmployeeService employeeService, IEmployeeEducationService employeeEducationService)
+        public EmployeeModel(IEmployeeService employeeService, IEmployeeEducationService employeeEducationService, IEducationLevelService educationLevelService)
         {
             _employeeService = employeeService;
             _employeeEducationService = employeeEducationService;
+            _educationLevelService = educationLevelService;
         }
 
         public EmployeeModel()
         {
+            _educationLevelService = Startup.AutofacContainer.Resolve<IEducationLevelService>(); ;
             _employeeService = Startup.AutofacContainer.Resolve<IEmployeeService>();
             _employeeEducationService = Startup.AutofacContainer.Resolve<IEmployeeEducationService>();
         }
@@ -127,6 +130,32 @@ namespace FinalProject.Web.Areas.Admin.Models
                             record.PassingYear,
                             record.Duration.ToString(),
                             record.Employee.Name,
+                            record.Id.ToString(),
+                        }
+                    ).ToArray()
+
+            };
+        }
+
+        public object GetEducationLevels(DataTablesAjaxRequestModel tableModel)
+        {
+            var (total, totalDisplay, records) = _educationLevelService.GetEducationLevelList(
+                tableModel.PageIndex,
+                tableModel.PageSize,
+                tableModel.SearchText,
+                tableModel.GetSortText(new[]
+                {
+                    "EducationLevelName",
+                }));
+
+            return new
+            {
+                recordsTotal = total,
+                recordsFiltered = totalDisplay,
+                data = (from record in records
+                        select new[]
+                        {
+                            record.EducationLevelName,
                             record.Id.ToString(),
                         }
                     ).ToArray()
