@@ -12,16 +12,23 @@ namespace FinalProject.Web.Areas.Admin.Models
         private readonly IEmployeeService _employeeService;
         private readonly IEmployeeEducationService _employeeEducationService;
         private readonly IEducationLevelService _educationLevelService;
+        private readonly IExamTitleService _examTitleService;
 
-        public EmployeeModel(IEmployeeService employeeService, IEmployeeEducationService employeeEducationService, IEducationLevelService educationLevelService)
+        public EmployeeModel(
+            IEmployeeService employeeService,
+            IEmployeeEducationService employeeEducationService,
+            IEducationLevelService educationLevelService,
+            IExamTitleService examTitleService)
         {
             _employeeService = employeeService;
             _employeeEducationService = employeeEducationService;
             _educationLevelService = educationLevelService;
+            _examTitleService = examTitleService;
         }
 
         public EmployeeModel()
         {
+            _examTitleService = Startup.AutofacContainer.Resolve<IExamTitleService>(); ;
             _educationLevelService = Startup.AutofacContainer.Resolve<IEducationLevelService>(); ;
             _employeeService = Startup.AutofacContainer.Resolve<IEmployeeService>();
             _employeeEducationService = Startup.AutofacContainer.Resolve<IEmployeeEducationService>();
@@ -156,6 +163,33 @@ namespace FinalProject.Web.Areas.Admin.Models
                         select new[]
                         {
                             record.EducationLevelName,
+                            record.Id.ToString(),
+                        }
+                    ).ToArray()
+
+            };
+        }
+
+        public object GetExamTitles(DataTablesAjaxRequestModel tableModel)
+        {
+
+            var (total, totalDisplay, records) = _examTitleService.GetExamTitleList(
+                tableModel.PageIndex,
+                tableModel.PageSize,
+                tableModel.SearchText,
+                tableModel.GetSortText(new[]
+                {
+                    "TitleName",
+                }));
+
+            return new
+            {
+                recordsTotal = total,
+                recordsFiltered = totalDisplay,
+                data = (from record in records
+                        select new[]
+                        {
+                            record.TitleName,
                             record.Id.ToString(),
                         }
                     ).ToArray()

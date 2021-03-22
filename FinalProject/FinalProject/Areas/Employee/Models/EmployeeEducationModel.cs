@@ -13,30 +13,34 @@ namespace FinalProject.Web.Areas.Employee.Models
     public class EmployeeEducationModel
     {
         private readonly IEmployeeService _employee;
+        private readonly IEducationLevelService _educationLevelService;
+        private readonly IExamTitleService _examTitleService;
         internal EmployeeEducationModelBuilder ModelBuilder;
-        public EmployeeEducationModel(IEmployeeService employee)
+        public EmployeeEducationModel(IEmployeeService employee, IEducationLevelService educationLevelService, IExamTitleService examTitleService)
         {
             _employee = employee;
+            _educationLevelService = educationLevelService;
+            _examTitleService = examTitleService;
         }
 
         public EmployeeEducationModel()
         {
             _employee = Startup.AutofacContainer.Resolve<IEmployeeService>();
-            ModelBuilder = new EmployeeEducationModelBuilder();
-            EducationLevelList = new List<SelectListItem>
-            {
-                new SelectListItem{Text = "HSC", Value = "HSC"},
-                new SelectListItem{Text = "SSC", Value = "SSC"},
-                new SelectListItem{Text = "Degree", Value = "Degree"},
-                new SelectListItem{Text = "BSC", Value = "BSC"},
-                new SelectListItem{Text = "MSC", Value = "MSC"},
-            };
+            _educationLevelService = Startup.AutofacContainer.Resolve<IEducationLevelService>();
+            _examTitleService = Startup.AutofacContainer.Resolve<IExamTitleService>();
 
-            ExamTitleList = new List<SelectListItem>
+            ModelBuilder = new EmployeeEducationModelBuilder();
+            EducationLevelList = _educationLevelService.GetEducationLevels().Select(x => new SelectListItem
             {
-                new SelectListItem{Text = "MidTerm", Value = "MidTerm"},
-                new SelectListItem{Text = "Final", Value = "Final"},
-            };
+                Value = x.Id.ToString(),
+                Text = x.EducationLevelName
+            }).ToList();
+
+            ExamTitleList = _examTitleService.ExamTitles().Select(x => new SelectListItem
+            {
+                Text = x.TitleName,
+                Value = x.Id.ToString(),
+            }).ToList();
 
             EmployeeList = _employee.GetAllEmployees().Select(x => new SelectListItem
             {

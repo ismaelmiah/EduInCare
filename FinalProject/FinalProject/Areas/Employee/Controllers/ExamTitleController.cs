@@ -10,7 +10,7 @@ using FinalProject.Web.Models;
 namespace FinalProject.Web.Areas.Employee.Controllers
 {
     [Area("Employee")]
-    public class EmployeeEducationController : Controller
+    public class ExamTitleController : Controller
     {
         public IActionResult Index()
         {
@@ -18,11 +18,11 @@ namespace FinalProject.Web.Areas.Employee.Controllers
         }
         public IActionResult Upsert(Guid? id)
         {
-            var model = new EmployeeEducationModel();
+            var model = new ExamModel();
             if (id == null)
                 return View(model);
 
-            model = model.ModelBuilder.BuildEmployeeEducationModel(id.GetValueOrDefault());
+            model = model.ModelBuilder.BuildExamModel(id.GetValueOrDefault());
             if (model == null)
                 return NotFound();
             return View(model);
@@ -30,31 +30,29 @@ namespace FinalProject.Web.Areas.Employee.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(EmployeeEducationModel model)
+        public IActionResult Upsert(ExamModel model)
         {
             if (ModelState.IsValid)
             {
                 if (model.Id == new Guid())
                 {
                     //Create
-                    model.ModelBuilder.SaveEmployeeEducation(model);
+                    model.ModelBuilder.SaveExamModel(model);
                 }
                 else
                 {
                     //Update
-                    model.ModelBuilder.UpdateEmployeeEducation(model.Id, model);
+                    model.ModelBuilder.UpdateExamModel(model.Id, model);
                 }
             }
 
             return RedirectToRoute(new { Area = "Admin", controller = "Employee", action = "Index" });
         }
-
-
-        public IActionResult GetEmployeeEducations()
+        public IActionResult GetExamTitles()
         {
             var tableModel = new DataTablesAjaxRequestModel(Request);
             var model = new EmployeeModel();
-            var data = model.GetEmployeeEducations(tableModel);
+            var data = model.GetExamTitles(tableModel);
             return Json(data);
         }
     }
