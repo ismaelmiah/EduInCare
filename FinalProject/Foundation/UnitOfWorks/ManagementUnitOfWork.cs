@@ -14,7 +14,8 @@ namespace Foundation.Library.UnitOfWorks
             IEmployeeRepository employee,
             IEmployeeEducationRepository education,
             IEducationLevelRepository educationLevel,
-            IExamTitleRepository examTitle) : base(dbContext)
+            IExamTitleRepository examTitle,
+            IEmploymentHistoryRepository employmentHistory) : base(dbContext)
         {
             CourseRepository = course;
             StudentRepository = student;
@@ -24,6 +25,7 @@ namespace Foundation.Library.UnitOfWorks
             EmployeeEducationRepository = education;
             EducationLevelRepository = educationLevel;
             ExamTitleRepository = examTitle;
+            EmploymentHistoryRepository = employmentHistory;
         }
 
         public IStudentRepository StudentRepository { get; set; }
@@ -34,5 +36,6 @@ namespace Foundation.Library.UnitOfWorks
         public IEmployeeEducationRepository EmployeeEducationRepository { get; set; }
         public IEducationLevelRepository EducationLevelRepository { get; set; }
         public IExamTitleRepository ExamTitleRepository { get; set; }
+        public IEmploymentHistoryRepository EmploymentHistoryRepository { get; set; }
     }
 }

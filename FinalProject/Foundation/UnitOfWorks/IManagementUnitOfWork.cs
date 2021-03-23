@@ -13,5 +13,6 @@ namespace Foundation.Library.UnitOfWorks
         public IEmployeeEducationRepository EmployeeEducationRepository { get; set; }
         public IEducationLevelRepository EducationLevelRepository { get; set; }
         public IExamTitleRepository ExamTitleRepository { get; set; }
+        public IEmploymentHistoryRepository EmploymentHistoryRepository { get; set; }
     }
 }

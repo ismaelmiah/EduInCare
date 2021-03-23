@@ -13,17 +13,20 @@ namespace FinalProject.Web.Areas.Admin.Models
         private readonly IEmployeeEducationService _employeeEducationService;
         private readonly IEducationLevelService _educationLevelService;
         private readonly IExamTitleService _examTitleService;
+        private readonly IEmploymentHistoryService _employmentHistory;
 
         public EmployeeModel(
             IEmployeeService employeeService,
             IEmployeeEducationService employeeEducationService,
             IEducationLevelService educationLevelService,
-            IExamTitleService examTitleService)
+            IExamTitleService examTitleService,
+            IEmploymentHistoryService employmentHistory)
         {
             _employeeService = employeeService;
             _employeeEducationService = employeeEducationService;
             _educationLevelService = educationLevelService;
             _examTitleService = examTitleService;
+            _employmentHistory = employmentHistory;
         }
 
         public EmployeeModel()
@@ -32,6 +35,7 @@ namespace FinalProject.Web.Areas.Admin.Models
             _educationLevelService = Startup.AutofacContainer.Resolve<IEducationLevelService>(); ;
             _employeeService = Startup.AutofacContainer.Resolve<IEmployeeService>();
             _employeeEducationService = Startup.AutofacContainer.Resolve<IEmployeeEducationService>();
+            _employmentHistory = Startup.AutofacContainer.Resolve<IEmploymentHistoryService>();
         }
         public object GetEmployees(DataTablesAjaxRequestModel tableModel)
         {
@@ -190,6 +194,42 @@ namespace FinalProject.Web.Areas.Admin.Models
                         select new[]
                         {
                             record.TitleName,
+                            record.Id.ToString(),
+                        }
+                    ).ToArray()
+
+            };
+        }
+
+        public object GetEmploymentHistories(DataTablesAjaxRequestModel tableModel)
+        {
+            var (total, totalDisplay, records) = _employmentHistory.GetEmploymentHistoryList(
+                tableModel.PageIndex,
+                tableModel.PageSize,
+                tableModel.SearchText,
+                tableModel.GetSortText(new[]
+                {
+                    "Employee",
+                    "Designation",
+                    "CompanyName",
+                    "CompanyLocation",
+                    "From",
+                    "To",
+                }));
+
+            return new
+            {
+                recordsTotal = total,
+                recordsFiltered = totalDisplay,
+                data = (from record in records
+                        select new[]
+                        {
+                            record.Employee.Name,
+                            record.Designation,
+                            record.CompanyName,
+                            record.CompanyLocation,
+                            record.From.ToShortDateString(),
+                            record.To.ToShortDateString(),
                             record.Id.ToString(),
                         }
                     ).ToArray()
