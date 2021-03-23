@@ -14,25 +14,33 @@ namespace FinalProject.Web.Areas.Admin.Models
         private readonly IEducationLevelService _educationLevelService;
         private readonly IExamTitleService _examTitleService;
         private readonly IEmploymentHistoryService _employmentHistory;
+        private readonly IJobInfoService _jobInfoService;
+        private readonly IDesignationService _designationService;
 
         public EmployeeModel(
             IEmployeeService employeeService,
             IEmployeeEducationService employeeEducationService,
             IEducationLevelService educationLevelService,
             IExamTitleService examTitleService,
-            IEmploymentHistoryService employmentHistory)
+            IEmploymentHistoryService employmentHistory,
+            IJobInfoService jobInfo,
+            IDesignationService designationService)
         {
             _employeeService = employeeService;
             _employeeEducationService = employeeEducationService;
             _educationLevelService = educationLevelService;
             _examTitleService = examTitleService;
             _employmentHistory = employmentHistory;
+            _jobInfoService = jobInfo;
+            _designationService = designationService;
         }
 
         public EmployeeModel()
         {
-            _examTitleService = Startup.AutofacContainer.Resolve<IExamTitleService>(); ;
-            _educationLevelService = Startup.AutofacContainer.Resolve<IEducationLevelService>(); ;
+            _designationService = Startup.AutofacContainer.Resolve<IDesignationService>(); ;
+            _jobInfoService = Startup.AutofacContainer.Resolve<IJobInfoService>();
+            _examTitleService = Startup.AutofacContainer.Resolve<IExamTitleService>();
+            _educationLevelService = Startup.AutofacContainer.Resolve<IEducationLevelService>();
             _employeeService = Startup.AutofacContainer.Resolve<IEmployeeService>();
             _employeeEducationService = Startup.AutofacContainer.Resolve<IEmployeeEducationService>();
             _employmentHistory = Startup.AutofacContainer.Resolve<IEmploymentHistoryService>();
@@ -230,6 +238,66 @@ namespace FinalProject.Web.Areas.Admin.Models
                             record.CompanyLocation,
                             record.From.ToShortDateString(),
                             record.To.ToShortDateString(),
+                            record.Id.ToString(),
+                        }
+                    ).ToArray()
+
+            };
+        }
+
+        public object GetJobInfos(DataTablesAjaxRequestModel tableModel)
+        {
+            var (total, totalDisplay, records) = _jobInfoService.GetEmployeeList(
+                tableModel.PageIndex,
+                tableModel.PageSize,
+                tableModel.SearchText,
+                tableModel.GetSortText(new[]
+                {
+                    "Employee",
+                    "Designation",
+                    "JoiningDate",
+                    "Salary",
+                    "TotalLeave",
+                }));
+
+            return new
+            {
+                recordsTotal = total,
+                recordsFiltered = totalDisplay,
+                data = (from record in records
+                        select new[]
+                        {
+                            record.Employee.Name,
+                            record.Designation.Name,
+                            record.JoiningDate.ToShortDateString(),
+                            record.Salary.ToString(CultureInfo.InvariantCulture),
+                            record.TotalLeave.ToString(),
+                            record.Id.ToString(),
+                        }
+                    ).ToArray()
+
+            };
+        }
+
+        public object GetDesignations(DataTablesAjaxRequestModel tableModel)
+        {
+            var (total, totalDisplay, records) = _designationService.GetDesignationList(
+                tableModel.PageIndex,
+                tableModel.PageSize,
+                tableModel.SearchText,
+                tableModel.GetSortText(new[]
+                {
+                    "Name",
+                }));
+
+            return new
+            {
+                recordsTotal = total,
+                recordsFiltered = totalDisplay,
+                data = (from record in records
+                        select new[]
+                        {
+                            record.Name,
                             record.Id.ToString(),
                         }
                     ).ToArray()

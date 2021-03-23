@@ -49,12 +49,12 @@ namespace Foundation.Library.Services
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 result = _management.EmploymentHistoryRepository.GetDynamic(null,
-                    orderBy, "", pageIndex, pageSize, false);
+                    orderBy, "Designation,Employee", pageIndex, pageSize, false);
             }
             else
             {
                 result = _management.EmploymentHistoryRepository.GetDynamic(x => x.Designation == searchText,
-                    orderBy, "", pageIndex, pageSize, false);
+                    orderBy, "Designation,Employee", pageIndex, pageSize, false);
             }
 
             var data = (from x in result.data
