@@ -2,15 +2,24 @@
 using System.Collections.Generic;
 using DataAccessLayer;
 using Foundation.Library.Enums;
-using Membership.Library.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace Foundation.Library.Entities
 {
+
+    /// <summary>
+    /// Teacher Is A Employee
+    /// Teacher Has Many EmployeeEducation
+    /// Teacher Has Many EmploymentHistory
+    /// Teacher Has Many JobInfo
+    /// Each Teacher Is A User
+    /// Each Teacher Has One Section To-Advise
+    /// </summary>
     public class Employee : IEntity<Guid>
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
-        public ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
         public string Name { get; set; }
         public string FatherName { get; set; }
         public string MotherName { get; set; }
@@ -28,8 +37,9 @@ namespace Foundation.Library.Entities
         public string ImageAlternativeText { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
-        public ICollection<EmployeeEducation> EmployeeEducation { get; set; }
-        public ICollection<EmploymentHistory> EmploymentHistory { get; set; }
-        public ICollection<JobInfo> JobInfo { get; set; }
+        public virtual ICollection<EmployeeEducation> EmployeeEducation { get; set; }
+        public virtual ICollection<EmploymentHistory> EmploymentHistory { get; set; }
+        public virtual ICollection<JobInfo> JobInfo { get; set; }
+        public virtual Section Section { get; set; }
     }
 }

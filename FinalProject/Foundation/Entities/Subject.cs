@@ -3,6 +3,9 @@ using DataAccessLayer;
 
 namespace Foundation.Library.Entities
 {
+    /// <summary>
+    /// Each Subject Has One Course
+    /// </summary>
     public class Subject : IEntity<Guid>
     {
         public Guid Id { get; set; }

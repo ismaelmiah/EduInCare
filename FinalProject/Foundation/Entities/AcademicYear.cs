@@ -3,6 +3,9 @@ using DataAccessLayer;
 
 namespace Foundation.Library.Entities
 {
+    /// <summary>
+    /// Each AcademicYear Has One Registration (If Status TRUE)
+    /// </summary>
     public class AcademicYear : IEntity<Guid>
     {
         public Guid Id { get; set; }
@@ -11,5 +14,6 @@ namespace Foundation.Library.Entities
         public DateTime EndDate { get; set; }
         public bool IsOpenForAdmission { get; set; }
         public bool Status { get; set; }
+        public virtual Registration Registration { get; set; }
     }
 }

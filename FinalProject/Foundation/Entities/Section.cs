@@ -3,6 +3,10 @@ using DataAccessLayer;
 
 namespace Foundation.Library.Entities
 {
+    /// <summary>
+    /// Each Section Has One Course
+    /// Each Section Has One adviser
+    /// </summary>
     public class Section : IEntity<Guid>
     {
         public Guid Id { get; set; }
@@ -14,5 +18,6 @@ namespace Foundation.Library.Entities
         public virtual Employee Employee { get; set; }
         public bool Status { get; set; }
         public string Description { get; set; }
+        public virtual Registration Registration { get; set; }
     }
 }
