@@ -53,7 +53,6 @@ namespace Foundation.Library.Services
                     Nationality = x.Nationality,
                     YearOfEnroll = x.YearOfEnroll,
                     Parents = x.Parents,
-                    Course = x.Course,
                 }).ToList();
 
             return (result.total, result.totalDisplay, data);
