@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using DataAccessLayer;
 
 namespace Foundation.Library.Entities
 {
-    public class Department : IEntity<Guid>
+    public class Shift: IEntity<Guid>
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<Course> Courses { get; set; }
+        public virtual Registration Registration { get; set; }
     }
 }
