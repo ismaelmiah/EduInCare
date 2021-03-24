@@ -53,6 +53,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Foundation\Foundation.Library.csproj" />
+    <ProjectReference Include="..\Membership.Library\Membership.Library.csproj" />
   </ItemGroup>
 
 </Project>

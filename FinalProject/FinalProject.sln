@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foundation.Library", "Found
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer.Library", "DataAccessLayer\DataAccessLayer.Library.csproj", "{318DE56A-780F-47A8-8C37-9C32F15A1ACF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Membership.Library", "Membership.Library\Membership.Library.csproj", "{984E5D67-EE28-47F0-AC95-E87A0C4C8A50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{318DE56A-780F-47A8-8C37-9C32F15A1ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{318DE56A-780F-47A8-8C37-9C32F15A1ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{318DE56A-780F-47A8-8C37-9C32F15A1ACF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{984E5D67-EE28-47F0-AC95-E87A0C4C8A50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{984E5D67-EE28-47F0-AC95-E87A0C4C8A50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{984E5D67-EE28-47F0-AC95-E87A0C4C8A50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{984E5D67-EE28-47F0-AC95-E87A0C4C8A50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
