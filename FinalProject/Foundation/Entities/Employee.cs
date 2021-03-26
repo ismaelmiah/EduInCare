@@ -18,7 +18,6 @@ namespace Foundation.Library.Entities
     public class Employee : IEntity<Guid>
     {
         public Guid Id { get; set; }
-        public Guid UserId { get; set; }
         public string Name { get; set; }
         public string FatherName { get; set; }
         public string MotherName { get; set; }

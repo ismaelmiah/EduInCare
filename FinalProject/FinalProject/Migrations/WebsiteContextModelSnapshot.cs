@@ -19,32 +19,6 @@ namespace FinalProject.Web.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Foundation.Library.Entities.AcademicYear", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsOpenForAdmission")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AcademicYears");
-                });
-
             modelBuilder.Entity("Foundation.Library.Entities.Advertise", b =>
                 {
                     b.Property<Guid>("Id")
@@ -94,42 +68,15 @@ namespace FinalProject.Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("DepartmentId")
+                    b.Property<Guid?>("DepartmentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Duration")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("GroupId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("HaveCompulsorySubject")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("MaxCompulsorySubject")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("SubjectId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmentId");
-
-                    b.HasIndex("GroupId")
-                        .IsUnique();
-
-                    b.HasIndex("SubjectId")
-                        .IsUnique();
 
                     b.ToTable("Courses");
                 });
@@ -229,9 +176,6 @@ namespace FinalProject.Web.Migrations
 
                     b.Property<int>("Religion")
                         .HasColumnType("int");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
@@ -362,20 +306,6 @@ namespace FinalProject.Web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Footers");
-                });
-
-            modelBuilder.Entity("Foundation.Library.Entities.Group", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Groups");
                 });
 
             modelBuilder.Entity("Foundation.Library.Entities.Header", b =>
@@ -513,116 +443,6 @@ namespace FinalProject.Web.Migrations
                     b.ToTable("Posts");
                 });
 
-            modelBuilder.Entity("Foundation.Library.Entities.Registration", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AcademicYearId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("BoardRegistrationNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CardNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("CourseId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("IsPromoted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("OldRegistrationId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RegistrationNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RollNo")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("SectionId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ShiftId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("StudentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AcademicYearId")
-                        .IsUnique();
-
-                    b.HasIndex("CourseId")
-                        .IsUnique();
-
-                    b.HasIndex("SectionId")
-                        .IsUnique();
-
-                    b.HasIndex("ShiftId")
-                        .IsUnique();
-
-                    b.HasIndex("StudentId")
-                        .IsUnique();
-
-                    b.ToTable("Registrations");
-                });
-
-            modelBuilder.Entity("Foundation.Library.Entities.Section", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Capacity")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("CourseId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("TeacherId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("TeacherId")
-                        .IsUnique();
-
-                    b.ToTable("Sections");
-                });
-
-            modelBuilder.Entity("Foundation.Library.Entities.Shift", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Shifts");
-                });
-
             modelBuilder.Entity("Foundation.Library.Entities.Student", b =>
                 {
                     b.Property<Guid>("Id")
@@ -631,6 +451,9 @@ namespace FinalProject.Web.Migrations
 
                     b.Property<string>("BirthCertificateNo")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
@@ -668,38 +491,14 @@ namespace FinalProject.Web.Migrations
                     b.Property<string>("PresentAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("YearOfEnroll")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CourseId");
+
                     b.ToTable("Students");
-                });
-
-            modelBuilder.Entity("Foundation.Library.Entities.Subject", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("CourseId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("ExcludeInResult")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Subjects");
                 });
 
             modelBuilder.Entity("Foundation.Library.Entities.AppointmentImage", b =>
@@ -714,22 +513,8 @@ namespace FinalProject.Web.Migrations
             modelBuilder.Entity("Foundation.Library.Entities.Course", b =>
                 {
                     b.HasOne("Foundation.Library.Entities.Department", "Department")
-                        .WithMany("Courses")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Foundation.Library.Entities.Group", "Group")
-                        .WithOne("Course")
-                        .HasForeignKey("Foundation.Library.Entities.Course", "GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Foundation.Library.Entities.Subject", "Subject")
-                        .WithOne("Course")
-                        .HasForeignKey("Foundation.Library.Entities.Course", "SubjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("DepartmentId");
                 });
 
             modelBuilder.Entity("Foundation.Library.Entities.EmployeeEducation", b =>
@@ -795,50 +580,11 @@ namespace FinalProject.Web.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Foundation.Library.Entities.Registration", b =>
-                {
-                    b.HasOne("Foundation.Library.Entities.AcademicYear", "AcademicYear")
-                        .WithOne("Registration")
-                        .HasForeignKey("Foundation.Library.Entities.Registration", "AcademicYearId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Foundation.Library.Entities.Course", "Course")
-                        .WithOne("Registration")
-                        .HasForeignKey("Foundation.Library.Entities.Registration", "CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Foundation.Library.Entities.Section", "Section")
-                        .WithOne("Registration")
-                        .HasForeignKey("Foundation.Library.Entities.Registration", "SectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Foundation.Library.Entities.Shift", "Shift")
-                        .WithOne("Registration")
-                        .HasForeignKey("Foundation.Library.Entities.Registration", "ShiftId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Foundation.Library.Entities.Student", "Student")
-                        .WithOne("Registration")
-                        .HasForeignKey("Foundation.Library.Entities.Registration", "StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Foundation.Library.Entities.Section", b =>
+            modelBuilder.Entity("Foundation.Library.Entities.Student", b =>
                 {
                     b.HasOne("Foundation.Library.Entities.Course", "Course")
-                        .WithMany("Sections")
+                        .WithMany("Students")
                         .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Foundation.Library.Entities.Employee", "Employee")
-                        .WithOne("Section")
-                        .HasForeignKey("Foundation.Library.Entities.Section", "TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
