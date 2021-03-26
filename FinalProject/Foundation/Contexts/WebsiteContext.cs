@@ -1,13 +1,19 @@
-﻿using Foundation.Library.Entities;
+﻿using System;
+using Foundation.Library.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Foundation.Library.Contexts
 {
-    public class WebsiteContext : DbContext, IWebsiteContext
+    public class WebsiteContext : IdentityDbContext<ApplicationUser, Role, Guid,
+        UserClaim, UserRole, UserLogin, RoleClaim, UserToken>, IWebsiteContext
     {
         private readonly string _connectionString;
         private readonly string _migrationAssemblyName;
-
+        public WebsiteContext(DbContextOptions<WebsiteContext> options)
+            : base(options)
+        {
+        }
         public WebsiteContext(string connectionString, string migrationAssemblyName)
         {
             _connectionString = connectionString;

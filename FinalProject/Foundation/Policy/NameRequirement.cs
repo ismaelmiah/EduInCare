@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 
-namespace Membership.Library.Policy
+namespace Foundation.Library.Policy
 {
     public class NameRequirement : IAuthorizationRequirement
     {

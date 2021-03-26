@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Identity;
 
-namespace Membership.Library.Entities
+namespace Foundation.Library.Entities
 {
     public class UserLogin
         : IdentityUserLogin<Guid>
