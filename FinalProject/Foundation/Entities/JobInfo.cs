@@ -3,6 +3,10 @@ using DataAccessLayer;
 
 namespace Foundation.Library.Entities
 {
+    /// <summary>
+    /// Each Job Info Has One Designation
+    /// Each Job Info belongs To One Employee
+    /// </summary>
     public class JobInfo : IEntity<Guid>
     {
         public Guid Id { get; set; }

@@ -6,6 +6,7 @@ namespace Foundation.Library.Entities
     public class Student : IEntity<Guid>
     {
         public Guid Id { get; set; }
+        public Guid UserId { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
@@ -21,7 +22,6 @@ namespace Foundation.Library.Entities
         public string Nationality { get; set; }
         public DateTime YearOfEnroll { get; set; }
         public virtual Parents Parents { get; set; }
-        public Guid CourseId { get; set; }
-        public virtual Course Course { get; set; }
+        public virtual Registration Registration { get; set; }
     }
 }

@@ -34,7 +34,7 @@ namespace Foundation.Library.Services
             }
             else
             {
-                result = _management.CourseRepository.GetDynamic(x => x.Title == searchText,
+                result = _management.CourseRepository.GetDynamic(x => x.Name == searchText,
                     orderBy, "Students,Department", pageIndex, pageSize, true);
             }
 
@@ -42,8 +42,7 @@ namespace Foundation.Library.Services
                 select new Course
                 {
                     Id = x.Id,
-                    Title = x.Title,
-                    Students = x.Students,
+                    Name = x.Name,
                     Department = x.Department,
                     DepartmentId = x.DepartmentId
 

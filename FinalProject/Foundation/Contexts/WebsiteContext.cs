@@ -1,13 +1,19 @@
-﻿using Foundation.Library.Entities;
+﻿using System;
+using Foundation.Library.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Foundation.Library.Contexts
 {
-    public class WebsiteContext : DbContext, IWebsiteContext
+    public class WebsiteContext : IdentityDbContext<ApplicationUser, Role, Guid,
+        UserClaim, UserRole, UserLogin, RoleClaim, UserToken>, IWebsiteContext
     {
         private readonly string _connectionString;
         private readonly string _migrationAssemblyName;
-
+        public WebsiteContext(DbContextOptions<WebsiteContext> options)
+            : base(options)
+        {
+        }
         public WebsiteContext(string connectionString, string migrationAssemblyName)
         {
             _connectionString = connectionString;
@@ -29,12 +35,11 @@ namespace Foundation.Library.Contexts
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Student>()
-                .HasOne(x => x.Course)
-                .WithMany(x => x.Students)
-                .HasForeignKey(x => x.CourseId)
-                .HasPrincipalKey(x => x.Id)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasOne(x => x.Registration)
+                .WithOne(x => x.Student)
+                .HasForeignKey<Registration>(x => x.StudentId)
+                .HasPrincipalKey<Student>(x => x.Id)
+                .IsRequired();
 
             builder.Entity<Parents>()
                 .HasOne(x => x.Student)
@@ -96,6 +101,67 @@ namespace Foundation.Library.Contexts
                 .WithOne(x => x.JobInfo)
                 .HasForeignKey<AppointmentImage>(x => x.JobInfoId);
 
+            builder.Entity<JobInfo>()
+                .HasOne(x => x.Appointment)
+                .WithOne(x => x.JobInfo)
+                .HasForeignKey<AppointmentImage>(x => x.JobInfoId);
+
+            builder.Entity<Subject>()
+                .HasOne(x => x.Course)
+                .WithOne(x => x.Subject)
+                .HasForeignKey<Course>(x => x.SubjectId);
+
+            builder.Entity<Group>()
+                .HasOne(x => x.Course)
+                .WithOne(x => x.Group)
+                .HasForeignKey<Course>(x => x.GroupId);
+
+            builder.Entity<Section>()
+                .HasOne(x => x.Course)
+                .WithMany(x => x.Sections)
+                .HasForeignKey(x => x.CourseId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Section>()
+                .HasOne(x => x.Employee)
+                .WithOne(x => x.Section)
+                .HasForeignKey<Section>(x => x.TeacherId);
+
+            builder.Entity<Registration>()
+                .HasOne(x => x.Section)
+                .WithOne(x => x.Registration)
+                .HasForeignKey<Registration>(x => x.SectionId);
+
+            builder.Entity<Course>()
+                .HasOne(x => x.Department)
+                .WithMany(x => x.Courses)
+                .HasForeignKey(x => x.DepartmentId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Registration>()
+                .HasOne(x => x.Course)
+                .WithOne(x => x.Registration)
+                .HasForeignKey<Registration>(x => x.CourseId);
+
+            builder.Entity<Registration>()
+                .HasOne(x => x.AcademicYear)
+                .WithOne(x => x.Registration)
+                .HasForeignKey<Registration>(x => x.AcademicYearId);
+
+            builder.Entity<Registration>()
+                .HasOne(x => x.Shift)
+                .WithOne(x => x.Registration)
+                .HasForeignKey<Registration>(x => x.ShiftId);
+
+            builder.Entity<Registration>()
+                .HasOne(x => x.Student)
+                .WithOne(x => x.Registration)
+                .HasForeignKey<Registration>(x => x.StudentId);
+
             base.OnModelCreating(builder);
         }
 
@@ -116,5 +182,11 @@ namespace Foundation.Library.Contexts
         public DbSet<ExamTitle> ExamTitles { get; set; }
         public DbSet<Designation> Designations { get; set; }
         public DbSet<AppointmentImage> AppointmentImages { get; set; }
+        public DbSet<Section> Sections { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<Shift> Shifts { get; set; }
+        public DbSet<Registration> Registrations { get; set; }
+        public DbSet<AcademicYear> AcademicYears { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
     }
 }

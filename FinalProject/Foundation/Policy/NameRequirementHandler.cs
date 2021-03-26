@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
 
-namespace Membership.Library.Policy
+namespace Foundation.Library.Policy
 {
     public class NameRequirementHandler :
           AuthorizationHandler<NameRequirement>

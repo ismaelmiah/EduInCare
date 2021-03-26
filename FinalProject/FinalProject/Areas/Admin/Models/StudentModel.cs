@@ -44,7 +44,6 @@ namespace FinalProject.Web.Areas.Admin.Models
                             record.MiddleName,
                             record.LastName,
                             record.Gender,
-                            record.Course?.Title,
                             record.DateOfBirth.ToShortDateString(),
                             record.YearOfEnroll.ToShortDateString(),
                             record.Id.ToString(),

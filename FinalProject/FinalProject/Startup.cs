@@ -3,11 +3,9 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Foundation.Library;
 using Foundation.Library.Contexts;
-using Membership.Library;
-using Membership.Library.Contexts;
-using Membership.Library.Entities;
-using Membership.Library.Policy;
-using Membership.Library.Services;
+using Foundation.Library.Entities;
+using Foundation.Library.Policy;
+using Foundation.Library.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -51,16 +49,11 @@ namespace FinalProject.Web
 
             builder.RegisterModule(new FoundationModule(connectionString, migrationAssemblyName));
             builder.RegisterModule(new WebModule(connectionString, migrationAssemblyName));
-            builder.RegisterModule(new MembershipModule(connectionString, migrationAssemblyName));
         }
         // This method gets called by the runtime. Use this method to add services to the container.
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(ConnectionAndMigration().connectionString, 
-                    m => m.MigrationsAssembly(ConnectionAndMigration().migrationAssemblyName)));
-
             services.AddDbContext<WebsiteContext>(options =>
                 options.UseSqlServer(ConnectionAndMigration().connectionString, 
                     m => m.MigrationsAssembly(ConnectionAndMigration().migrationAssemblyName)));
@@ -71,7 +64,7 @@ namespace FinalProject.Web
 
             services
                 .AddIdentity<ApplicationUser, Role>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<WebsiteContext>()
                 .AddUserManager<UserManager>()
                 .AddRoleManager<RoleManager>()
                 .AddSignInManager<SignInManager>()

@@ -57,7 +57,6 @@ namespace FinalProject.Web.Areas.Student.Models
                 GuardianName = model.ParentsInfo.GuardianName,
                 GuardianMobileNo = model.ParentsInfo.GuardianMobileNo,
             };
-            student.Course = GetSelectedCourse(model.CourseId);
 
             return student;
         }
@@ -67,7 +66,7 @@ namespace FinalProject.Web.Areas.Student.Models
             var data = _courseService.GetCourses();
             return data.Select(x => new SelectListItem
             {
-                Text = x.Title,
+                Text = x.Name,
                 Value = x.Id.ToString()
             }).ToList();
         }
@@ -156,7 +155,6 @@ namespace FinalProject.Web.Areas.Student.Models
             exStudent.Nationality = model.Nationality;
             exStudent.YearOfEnroll = model.YearOfEnroll;
             exStudent.Parents = GetParentsChanges(model.ParentsInfo);
-            exStudent.Course = GetSelectedCourse(model.CourseId);
             if (model.Photo != null)
             {
                 var imageInfo = StoreFile(model.Photo);

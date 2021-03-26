@@ -55,8 +55,7 @@ namespace FinalProject.Web.Areas.Admin.Models
                 data = (from record in records
                         select new object[]
                         {
-                            record.Title,
-                            record.Students.Count(),
+                            record.Name,
                             record.Department.Name,
                             record.Id.ToString(),
                         }
@@ -66,7 +65,7 @@ namespace FinalProject.Web.Areas.Admin.Models
 
         public void SaveCourse()
         {
-            _courseService.AddCourse(new Course { Title = Title, DepartmentId = DepartmentId});
+            _courseService.AddCourse(new Course { Name = Title, DepartmentId = DepartmentId});
         }
 
         public void DeleteCourse(Guid id)

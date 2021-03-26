@@ -7,7 +7,7 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using FinalProject.Web.Areas.Admin.Models;
 using FinalProject.Web.Areas.Employee.Models;
-using Membership.Library.Entities;
+using Foundation.Library.Entities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
