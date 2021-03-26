@@ -1,11 +1,11 @@
-﻿using Membership.Library.Entities;
+﻿using Foundation.Library.Entities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Membership.Library.Services
+namespace Foundation.Library.Services
 {
     public class SignInManager
         : SignInManager<ApplicationUser>
