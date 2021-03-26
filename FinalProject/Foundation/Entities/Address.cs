@@ -6,9 +6,7 @@ namespace Foundation.Library.Entities
     public class Address : IEntity<Guid>
     {
         public Guid Id { get; set; }
-        public string PresentAddress { get; set; }
-        public string PermanentAddress { get; set; }
         public Guid StudentId { get; set; }
-        public Student Student { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

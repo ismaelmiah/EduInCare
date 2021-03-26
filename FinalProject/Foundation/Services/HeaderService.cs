@@ -22,7 +22,7 @@ namespace Foundation.Library.Services
 
         public IList<Header> GetHeader()
         {
-            return _websiteUnit.Header.Get(null,null, "Image", false);
+            return _websiteUnit.Header.Get(null,null, "", false);
         }
 
         public void RemoveHeaderImage()

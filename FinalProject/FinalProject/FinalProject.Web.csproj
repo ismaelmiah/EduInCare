@@ -7,10 +7,36 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20210320175647_Student&amp;Address&amp;Employee.cs" />
+    <Compile Remove="Migrations\20210320175647_Student&amp;Address&amp;Employee.Designer.cs" />
+    <Compile Remove="Migrations\20210320180107_Student&amp;Address&amp;Employee.cs" />
+    <Compile Remove="Migrations\20210320180107_Student&amp;Address&amp;Employee.Designer.cs" />
+    <Compile Remove="Migrations\20210320181058_Student&amp;Address&amp;Employee.cs" />
+    <Compile Remove="Migrations\20210320181058_Student&amp;Address&amp;Employee.Designer.cs" />
+    <Compile Remove="Migrations\20210321041541_EmployeeAddressSeparated.cs" />
+    <Compile Remove="Migrations\20210321041541_EmployeeAddressSeparated.Designer.cs" />
+    <Compile Remove="Migrations\20210321042254_EmployeeAddressSeparated.cs" />
+    <Compile Remove="Migrations\20210321042254_EmployeeAddressSeparated.Designer.cs" />
+    <Compile Remove="Migrations\20210321070526_EmployeeTypeAdded.cs" />
+    <Compile Remove="Migrations\20210321070526_EmployeeTypeAdded.Designer.cs" />
+    <Compile Remove="Migrations\20210321172955_EmployeeTableRe-arrange.cs" />
+    <Compile Remove="Migrations\20210321172955_EmployeeTableRe-arrange.Designer.cs" />
+    <Compile Remove="Migrations\20210322135839_EmployeeTableReGenerate.cs" />
+    <Compile Remove="Migrations\20210322135839_EmployeeTableReGenerate.Designer.cs" />
+    <Compile Remove="Migrations\20210322140400_EmployeeTableReGenerate.cs" />
+    <Compile Remove="Migrations\20210322140400_EmployeeTableReGenerate.Designer.cs" />
+    <Compile Remove="Migrations\20210322140744_EmployeeTableReGenerate.cs" />
+    <Compile Remove="Migrations\20210322140744_EmployeeTableReGenerate.Designer.cs" />
+    <Compile Remove="Migrations\20210322141130_EmployeeTableReGenerate.cs" />
+    <Compile Remove="Migrations\20210322141130_EmployeeTableReGenerate.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.12" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.12" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.12" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.12" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.12" />
@@ -21,11 +47,13 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Migrations\" />
+    <Folder Include="Areas\Employee\Data\" />
+    <Folder Include="Logs\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Foundation\Foundation.Library.csproj" />
+    <ProjectReference Include="..\Membership.Library\Membership.Library.csproj" />
   </ItemGroup>
 
 </Project>

@@ -43,7 +43,6 @@ namespace FinalProject.Web.Areas.Admin.Models
                             record.FirstName,
                             record.MiddleName,
                             record.LastName,
-                            FormatImageUrl(record.Image?.Url),
                             record.Gender,
                             record.Course?.Title,
                             record.DateOfBirth.ToShortDateString(),

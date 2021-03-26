@@ -16,6 +16,6 @@ namespace Foundation.Library.Entities
         public string GuardianName { get; set; }
         public string GuardianMobileNo { get; set; }
         public Guid StudentId { get; set; }
-        public Student Student { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

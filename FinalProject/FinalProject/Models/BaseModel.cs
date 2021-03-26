@@ -47,6 +47,7 @@ namespace FinalProject.Web.Models
 
         public string FormatImageUrl(string imageName)
         {
+            if (string.IsNullOrWhiteSpace(imageName)) return "";
             var indexOfFileName = imageName.LastIndexOf('\\');
             if (indexOfFileName < 0) return "";
             var fileName = imageName.Substring(indexOfFileName);

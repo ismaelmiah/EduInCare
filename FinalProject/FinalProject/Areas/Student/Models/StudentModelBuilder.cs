@@ -34,11 +34,6 @@ namespace FinalProject.Web.Areas.Student.Models
             if (model.Photo != null)
             {
                 var imageInfo = StoreFile(model.Photo);
-                student.Image = new Image
-                {
-                    Url = imageInfo.filePath,
-                    AlternativeText = $"{model.FirstName} Image"
-                };
             }
 
             student.FirstName = model.FirstName;
@@ -63,7 +58,6 @@ namespace FinalProject.Web.Areas.Student.Models
                 GuardianMobileNo = model.ParentsInfo.GuardianMobileNo,
             };
             student.Course = GetSelectedCourse(model.CourseId);
-            student.Address = GetActualAddress(model);
 
             return student;
         }
@@ -113,16 +107,6 @@ namespace FinalProject.Web.Areas.Student.Models
                 GuardianMobileNo = model.GuardianMobileNo,
             };
         }
-        public Address GetActualAddress(StudentFormViewModel model) => new Address
-        {
-            PresentAddress = model.PresentAddress.Street 
-                             + "," + model.PresentAddress.City 
-                             + "," + model.PresentAddress.ZipCode,
-
-            PermanentAddress = model.PermanentAddress.Street 
-                               + "," + model.PermanentAddress.City 
-                               + "," + model.PermanentAddress.ZipCode,
-        };
 
         public AddressModel BuildAddressModel(string address)
         {
@@ -156,9 +140,7 @@ namespace FinalProject.Web.Areas.Student.Models
                 NationalIdentificationNo = student.NationalIdentificationNo,
                 ParentsInfo = GetStudentParents(student.Parents),
                 EnrollCourse = CourseList(),
-                ImagePath = FormatImageUrl(student.Image?.Url),
-                PresentAddress = BuildAddressModel(student.Address.PresentAddress),
-                PermanentAddress = BuildAddressModel(student.Address.PermanentAddress),
+                ImagePath = "",
             };
         }
 
@@ -171,7 +153,6 @@ namespace FinalProject.Web.Areas.Student.Models
             exStudent.LastName = model.LastName;
             exStudent.Gender = model.Gender;
             exStudent.MobileNo = model.MobileNo;
-            exStudent.Address = GetActualAddress(model);
             exStudent.Nationality = model.Nationality;
             exStudent.YearOfEnroll = model.YearOfEnroll;
             exStudent.Parents = GetParentsChanges(model.ParentsInfo);
@@ -179,16 +160,10 @@ namespace FinalProject.Web.Areas.Student.Models
             if (model.Photo != null)
             {
                 var imageInfo = StoreFile(model.Photo);
-
-                exStudent.Image = new Image
-                {
-                    Url = imageInfo.filePath,
-                    AlternativeText = $"{exStudent.FirstName} Image"
-                };
             }
             _studentService.Update(exStudent);
         }
-
+        
         public void SaveStudent(StudentFormViewModel model)
         {
             var student = ConvertToEntityStudent(model);

@@ -18,7 +18,7 @@ namespace FinalProject.Web.Areas.Student.Controllers
             if (id == null)
                 return View(model);
 
-            model = model._modelBuilder.BuildStudentModel(id.GetValueOrDefault());
+            model = model.ModelBuilder.BuildStudentModel(id.GetValueOrDefault());
             if (model == null)
                 return NotFound();
             return View(model);
@@ -33,12 +33,12 @@ namespace FinalProject.Web.Areas.Student.Controllers
                 if (model.Id == new Guid())
                 {
                     //Create
-                    model._modelBuilder.SaveStudent(model);
+                    model.ModelBuilder.SaveStudent(model);
                 }
                 else
                 {
                     //Update
-                    model._modelBuilder.UpdateStudent(model.Id, model);
+                    model.ModelBuilder.UpdateStudent(model.Id, model);
                 }
             }
             return RedirectToRoute(new { Area="", controller = "Home", action = "Index"});
@@ -47,7 +47,7 @@ namespace FinalProject.Web.Areas.Student.Controllers
         public IActionResult Delete(Guid id)
         {
             var model = new StudentFormViewModel();
-            model._modelBuilder.DeleteStudent(id);
+            model.ModelBuilder.DeleteStudent(id);
             return RedirectToRoute(new{Area = "Admin", controller = "Student", action = "Index"});
         }
         public IActionResult StudentReport(Guid id)
@@ -59,7 +59,7 @@ namespace FinalProject.Web.Areas.Student.Controllers
         {
             var model = new StudentFormViewModel();
 
-            model = model._modelBuilder.BuildStudentModel(id);
+            model = model.ModelBuilder.BuildStudentModel(id);
             if (model == null)
                 return NotFound();
             return View(model);
