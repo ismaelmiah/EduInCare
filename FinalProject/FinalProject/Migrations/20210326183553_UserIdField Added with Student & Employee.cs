@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FinalProject.Web.Migrations
 {
-    public partial class AddedUserIdToStudentEmployee : Migration
+    public partial class UserIdFieldAddedwithStudentEmployee : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

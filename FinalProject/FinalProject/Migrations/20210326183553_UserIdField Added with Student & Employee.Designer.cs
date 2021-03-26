@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalProject.Web.Migrations
 {
     [DbContext(typeof(WebsiteContext))]
-    [Migration("20210326175610_AddedUserIdToStudent&Employee")]
-    partial class AddedUserIdToStudentEmployee
+    [Migration("20210326183553_UserIdField Added with Student & Employee")]
+    partial class UserIdFieldAddedwithStudentEmployee
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
