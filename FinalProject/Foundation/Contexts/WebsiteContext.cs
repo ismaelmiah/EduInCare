@@ -100,6 +100,62 @@ namespace Foundation.Library.Contexts
                 .WithOne(x => x.JobInfo)
                 .HasForeignKey<AppointmentImage>(x => x.JobInfoId);
 
+            builder.Entity<Subject>()
+                .HasOne(x => x.Course)
+                .WithOne(x => x.Subject)
+                .HasForeignKey<Course>(x => x.SubjectId);
+
+            builder.Entity<Group>()
+                .HasOne(x => x.Course)
+                .WithOne(x => x.Group)
+                .HasForeignKey<Course>(x => x.GroupId);
+
+            builder.Entity<Section>()
+                .HasOne(x => x.Course)
+                .WithMany(x => x.Sections)
+                .HasForeignKey(x => x.CourseId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Section>()
+                .HasOne(x => x.Employee)
+                .WithOne(x => x.Section)
+                .HasForeignKey<Section>(x => x.TeacherId);
+
+            builder.Entity<Registration>()
+                .HasOne(x => x.Section)
+                .WithOne(x => x.Registration)
+                .HasForeignKey<Registration>(x => x.SectionId);
+
+            builder.Entity<Course>()
+                .HasOne(x => x.Department)
+                .WithMany(x => x.Courses)
+                .HasForeignKey(x => x.DepartmentId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Registration>()
+                .HasOne(x => x.Course)
+                .WithOne(x => x.Registration)
+                .HasForeignKey<Registration>(x => x.CourseId);
+
+            builder.Entity<Registration>()
+                .HasOne(x => x.AcademicYear)
+                .WithOne(x => x.Registration)
+                .HasForeignKey<Registration>(x => x.AcademicYearId);
+
+            builder.Entity<Registration>()
+                .HasOne(x => x.Shift)
+                .WithOne(x => x.Registration)
+                .HasForeignKey<Registration>(x => x.ShiftId);
+
+            builder.Entity<Registration>()
+                .HasOne(x => x.Student)
+                .WithOne(x => x.Registration)
+                .HasForeignKey<Registration>(x => x.StudentId);
+
             base.OnModelCreating(builder);
         }
 
