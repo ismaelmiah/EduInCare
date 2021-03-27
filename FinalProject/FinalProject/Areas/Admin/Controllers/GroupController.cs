@@ -54,7 +54,7 @@ namespace FinalProject.Web.Areas.Admin.Controllers
         {
             var tableModel = new DataTablesAjaxRequestModel(Request);
             var model = new GroupModel();
-            var data = model.GetGroups(tableModel);
+            var data = model.ModelBuilder.GetGroups(tableModel);
             return Json(data);
         }
     }
