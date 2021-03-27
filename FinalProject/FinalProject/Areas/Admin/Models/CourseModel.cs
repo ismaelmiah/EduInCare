@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Autofac;
 using FinalProject.Web.Models;
-using Foundation.Library.Entities;
 using Foundation.Library.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -65,7 +63,7 @@ namespace FinalProject.Web.Areas.Admin.Models
 
         public void SaveCourse()
         {
-            _courseService.AddCourse(new Course { Name = Title, DepartmentId = DepartmentId});
+            _courseService.AddCourse(new Foundation.Library.Entities.Course { Name = Title, DepartmentId = DepartmentId});
         }
 
         public void DeleteCourse(Guid id)

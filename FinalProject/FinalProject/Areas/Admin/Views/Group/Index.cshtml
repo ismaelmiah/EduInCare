@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Groups</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home" asp-area="Admin">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Groups</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-4 text-left">
+                            <h2 class="card-title">Current Groups</h2>
+                        </div>
+                        <div class="col-md-8 text-right">
+                            <a asp-action="Upsert" asp-controller="Group" asp-area="Admin" class="btn btn-outline-primary">Add Group</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <partial name="_DeletePopupPartial" />
+                    <table id="groups" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+
+@section scripts
+{
+    <script src="/AdminPanel/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="/AdminPanel/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+    <script src="~/js/groups.js"></script>
+}

@@ -71,10 +71,6 @@ namespace FinalProject.Web.Areas.Student.Models
             }).ToList();
         }
 
-        public Course GetSelectedCourse(Guid id)
-        {
-            return _courseService.GetCourse(id);
-        }
         public ParentsModel GetStudentParents(Parents model)
         {
             return new ParentsModel
