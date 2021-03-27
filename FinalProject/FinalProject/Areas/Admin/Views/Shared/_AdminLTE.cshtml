@@ -162,51 +162,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a asp-controller="Employee" asp-area="Admin" asp-action="Index" class="nav-link">
-                                <i class="fas fa-user-cog nav-icon"></i>
-                                <p>Employees</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-controller="EmployeeEducation" asp-area="Employee" asp-action="Index" class="nav-link">
-                                <i class="fas fa-user-cog nav-icon"></i>
-                                <p>EmployeeEducation</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-controller="EducationLevel" asp-area="Employee" asp-action="Index" class="nav-link">
-                                <i class="fas fa-user-cog nav-icon"></i>
-                                <p>EducationLevel</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-controller="ExamTitle" asp-area="Employee" asp-action="Index" class="nav-link">
-                                <i class="fas fa-user-cog nav-icon"></i>
-                                <p>Exam Title</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-controller="EmploymentHistory" asp-area="Employee" asp-action="Index" class="nav-link">
-                                <i class="fas fa-user-cog nav-icon"></i>
-                                <p>Employment History</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-controller="JobInfo" asp-area="Employee" asp-action="Index" class="nav-link">
-                                <i class="fas fa-user-cog nav-icon"></i>
-                                <p>Job Infos</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-controller="Designation" asp-area="Employee" asp-action="Index" class="nav-link">
-                                <i class="fas fa-user-cog nav-icon"></i>
-                                <p>Designations</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-controller="Department" asp-area="Admin" asp-action="Index" class="nav-link">
-                                <i class="fas fa-building nav-icon"></i>
-                                <p>Department</p>
+                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
+                                <i class="fas fa-user-graduate nav-icon"></i>
+                                <p>Students</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -215,11 +173,364 @@
                                 <p>Teachers</p>
                             </a>
                         </li>
+                        <li>
+                            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-check-square nav-icon"></i>
+                                        <p>
+                                            Attendance
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="fas fa-user-graduate nav-icon"></i>
+                                                <p>Student Attendance</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="fas fa-user-tag nav-icon"></i>
+                                                <p>Employee Attendance</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-school nav-icon"></i>
+                                        <p>
+                                            Academic
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                        <li class="nav-item">
+                                            <a asp-controller="Course" asp-area="Admin" asp-action="Index" class="nav-link">
+                                                <i class="fas fa-th nav-icon"></i>
+                                                <p>Classes</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="fas fa-cubes nav-icon"></i>
+                                                <p>Sections</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
+                                                <i class="fas fa-book nav-icon"></i>
+                                                <p>Subjects</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
+                                                <i class="fas fa-vector-square nav-icon"></i>
+                                                <p>Class Routine</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li class="nav-item">
-                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
-                                <i class="fas fa-user-graduate nav-icon"></i>
-                                <p>Students</p>
+                            <a asp-controller="Home" asp-area="Admin" asp-action="Notice" class="nav-link">
+                                <i class="fas fa-bullhorn nav-icon"></i>
+                                <p>Notice Board</p>
                             </a>
+                        </li>
+                        <li>
+                            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-sign-in-alt nav-icon"></i>
+                                        <p>
+                                            Admission
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="fas fa-th nav-icon"></i>
+                                                <p>Applicants</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="fas fa-boxes nav-icon"></i>
+                                                <p>Online Registration</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="far fa-address-card nav-icon"></i>
+                                                <p>Admit Cart</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-hourglass-half nav-icon"></i>
+                                        <p>
+                                            Exam
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="fas fa-th nav-icon"></i>
+                                                <p>Rule</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="fas fa-boxes nav-icon"></i>
+                                                <p>Exam</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="far fa-address-card nav-icon"></i>
+                                                <p>Grade</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-clipboard-list nav-icon"></i>
+                                        <p>
+                                            Marks & Result
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="fas fa-clipboard-check nav-icon"></i>
+                                                <p>Marks</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="fas fa-tasks nav-icon"></i>
+                                                <p>Result</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-sort-amount-up nav-icon"></i>
+                                        <p>
+                                            Promotion
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="fas fa-sort-amount-up nav-icon"></i>
+                                                <p>Promote Student</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="fas fa-undo nav-icon"></i>
+                                                <p>Re-Admission</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="fas fa-sliders-h nav-icon"></i>
+                                                <p>Course Setting</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="far fa-calendar-alt nav-icon"></i>
+                                                <p>Update-Academic Year</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-users nav-icon"></i>
+                                        <p>
+                                            HR Manager
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a asp-controller="Employee" asp-area="Admin" asp-action="Index" class="nav-link">
+                                                <i class="fas fa-user-tag nav-icon"></i>
+                                                <p>Employees</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="EmployeeEducation" asp-area="Employee" asp-action="Index" class="nav-link">
+                                                <i class="fas fa-user-tag nav-icon"></i>
+                                                <p>EmployeeEducation</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="EducationLevel" asp-area="Employee" asp-action="Index" class="nav-link">
+                                                <i class="fas fa-user-tag nav-icon"></i>
+                                                <p>EducationLevel</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="ExamTitle" asp-area="Employee" asp-action="Index" class="nav-link">
+                                                <i class="fas fa-user-tag nav-icon"></i>
+                                                <p>Exam Title</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="EmploymentHistory" asp-area="Employee" asp-action="Index" class="nav-link">
+                                                <i class="fas fa-user-cog nav-icon"></i>
+                                                <p>Employment History</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="JobInfo" asp-area="Employee" asp-action="Index" class="nav-link">
+                                                <i class="fas fa-user-cog nav-icon"></i>
+                                                <p>Job Infos</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="Designation" asp-area="Employee" asp-action="Index" class="nav-link">
+                                                <i class="fas fa-user-cog nav-icon"></i>
+                                                <p>Designations</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="Department" asp-area="Admin" asp-action="Index" class="nav-link">
+                                                <i class="fas fa-building nav-icon"></i>
+                                                <p>Department</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="fas fa-bed nav-icon"></i>
+                                                <p>Leave</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="fas fa-cogs nav-icon"></i>
+                                                <p>Policy</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-money-bill-alt nav-icon"></i>
+                                        <p>
+                                            Account
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a asp-controller="Employee" asp-area="Admin" asp-action="Index" class="nav-link">
+                                                <i class="far fa-money-bill-alt nav-icon"></i>
+                                                <p>Heads</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="fas fa-file-invoice-dollar nav-icon"></i>
+                                                <p>Budget</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="fas fa-receipt nav-icon"></i>
+                                                <p>Student Fees</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="fas fa-plus nav-icon"></i>
+                                                <p>Income</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="fas fa-minus nav-icon"></i>
+                                                <p>Expense</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-dollar-sign nav-icon"></i>
+                                        <p>
+                                            Payrolls
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a asp-controller="Employee" asp-area="Admin" asp-action="Index" class="nav-link">
+                                                <i class="fas fa-file-invoice-dollar nav-icon"></i>
+                                                <p>Salary Template</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="far fa-file-alt nav-icon"></i>
+                                                <p>Employee Salary</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-action="" class="nav-link">
+                                                <i class="fab fa-amazon-pay nav-icon"></i>
+                                                <p>Payment</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a asp-controller="Parents" asp-area="Admin" asp-action="Index" class="nav-link">
@@ -227,53 +538,71 @@
                                 <p>Parents</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a asp-controller="Course" asp-area="Admin" asp-action="Index" class="nav-link">
-                                <i class="fas fa-th nav-icon"></i>
-                                <p>Classes</p>
-                            </a>
+                        <li>
+                            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-file-pdf nav-icon"></i>
+                                        <p>
+                                            Reports
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
+                                                <i class="fas fa-registered nav-icon"></i>
+                                                <p>Student Report</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
+                                                <i class="fas fa-registered nav-icon"></i>
+                                                <p>Employee Report</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
-                                <i class="fas fa-book nav-icon"></i>
-                                <p>Subjects</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
-                                <i class="fas fa-vector-square nav-icon"></i>
-                                <p>Class Routine</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
-                                <i class="far fa-check-square nav-icon"></i>
-                                <p>Attendance</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
-                                <i class="fas fa-clipboard nav-icon"></i>
-                                <p>Reports</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
-                                <i class="fas fa-diagnoses nav-icon"></i>
-                                <p>Exam</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
-                                <i class="fas fa-briefcase nav-icon"></i>
-                                <p>Account</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
-                                <i class="fas fa-book-reader nav-icon"></i>
-                                <p>Library</p>
-                            </a>
+                        <li>
+                            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-book-reader nav-icon"></i>
+                                        <p>
+                                            Library
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
+                                                <i class="fas fa-users nav-icon"></i>
+                                                <p>Members</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
+                                                <i class="fas fa-book nav-icon"></i>
+                                                <p>Books</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
+                                                <i class="fas fa-book-open nav-icon"></i>
+                                                <p>Issue Book</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
+                                                <i class="fas fa-dollar-sign nav-icon"></i>
+                                                <p>Fine Collection</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a asp-controller="Student" asp-area="Admin" asp-action="Index" class="nav-link">
@@ -281,20 +610,14 @@
                                 <p>Transport</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a asp-controller="Employee" asp-area="Admin" asp-action="Index" class="nav-link">
-                                <i class="fas fa-cog nav-icon"></i>
-                                <p>Configuration</p>
-                            </a>
-                        </li>
                         <li class="nav-header">
                             Website Management
                         </li>
                         <li class="nav-item has-treeview">
                             <a href="" class="nav-link">
-                                <i class="nav-icon fas fa-edit"></i>
+                                <i class="nav-icon fas fa-globe-europe"></i>
                                 <p>
-                                    Website Controller
+                                    Website
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -321,12 +644,6 @@
                                     <a asp-controller="Home" asp-area="Admin" asp-action="Post" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Post</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-controller="Home" asp-area="Admin" asp-action="Notice" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Notice</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
