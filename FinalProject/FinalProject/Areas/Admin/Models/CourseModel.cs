@@ -1,74 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Autofac;
-using FinalProject.Web.Models;
-using Foundation.Library.Services;
+using FinalProject.Web.Areas.Admin.Models.ModelBuilder;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FinalProject.Web.Areas.Admin.Models
 {
     public class CourseModel
     {
-        private readonly ICourseService _courseService;
-        private readonly IDepartmentService _department;
-
-        public CourseModel(ICourseService courseService, IDepartmentService department)
-        {
-            _courseService = courseService;
-            _department = department;
-        }
-
+        internal CourseModelBuilder ModelBuilder;
         public CourseModel()
         {
-            _courseService = Startup.AutofacContainer.Resolve<ICourseService>();
-            _department = Startup.AutofacContainer.Resolve<IDepartmentService>();
-
-            DepartmentList = _department.GetDepartments().Select(x => new SelectListItem
-            {
-                Text = x.Name,
-                Value = x.Id.ToString()
-            }).ToList();
+            ModelBuilder = new CourseModelBuilder();
+            DepartmentList = ModelBuilder.GetDepartmentList();
+            GroupList = ModelBuilder.GetGroupList();
         }
+
+        public Guid Id { get; set; }
         public string Title { get; set; }
+        public int Duration { get; set; }
+        public bool HaveCompulsorySubject { get; set; }
+        public int MaxCompulsorySubject { get; set; }
+        public bool Status { get; set; }
+        public string Description { get; set; }
         public Guid DepartmentId { get; set; }
         public List<SelectListItem> DepartmentList { get; set; }
-        internal object GetClasses(DataTablesAjaxRequestModel tableModel)
-        {
-            var (total, totalDisplay, records) = _courseService.GetCourseList(
-                tableModel.PageIndex,
-                tableModel.PageSize,
-                tableModel.SearchText,
-                tableModel.GetSortText(new[]
-                {
-                    "Title",
-                    "Students",
-                    "Department"
-                }));
-
-            return new
-            {
-                recordsTotal = total,
-                recordsFiltered = totalDisplay,
-                data = (from record in records
-                        select new object[]
-                        {
-                            record.Name,
-                            record.Department.Name,
-                            record.Id.ToString(),
-                        }
-                    ).ToArray()
-            };
-        }
-
-        public void SaveCourse()
-        {
-            _courseService.AddCourse(new Foundation.Library.Entities.Course { Name = Title, DepartmentId = DepartmentId});
-        }
-
-        public void DeleteCourse(Guid id)
-        {
-            _courseService.Delete(id);
-        }
+        public Guid GroupId { get; set; }
+        public List<SelectListItem> GroupList { get; set; }
     }
 }

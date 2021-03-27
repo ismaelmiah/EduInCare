@@ -100,11 +100,6 @@ namespace Foundation.Library.Contexts
                 .WithOne(x => x.JobInfo)
                 .HasForeignKey<AppointmentImage>(x => x.JobInfoId);
 
-            builder.Entity<Subject>()
-                .HasOne(x => x.Course)
-                .WithOne(x => x.Subject)
-                .HasForeignKey<Course>(x => x.SubjectId);
-
             builder.Entity<Group>()
                 .HasOne(x => x.Course)
                 .WithOne(x => x.Group)
@@ -113,6 +108,14 @@ namespace Foundation.Library.Contexts
             builder.Entity<Section>()
                 .HasOne(x => x.Course)
                 .WithMany(x => x.Sections)
+                .HasForeignKey(x => x.CourseId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Subject>()
+                .HasOne(x => x.Course)
+                .WithMany(x => x.Subjects)
                 .HasForeignKey(x => x.CourseId)
                 .HasPrincipalKey(x => x.Id)
                 .IsRequired()

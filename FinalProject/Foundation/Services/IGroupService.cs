@@ -9,6 +9,7 @@ namespace Foundation.Library.Services
         void AddGroup(Group group);
         (int total, int totalDisplay, IList<Group> records) GetGroupList(int pageIndex, int pageSize, string searchText, string orderBy);
         void Delete(Guid id);
+        IList<Group> GetGroups();
         Group GetGroup(Guid id);
         void Update(Group group);
     }

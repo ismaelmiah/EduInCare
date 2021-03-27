@@ -53,6 +53,11 @@ namespace Foundation.Library.Services
             _management.Save();
         }
 
+        public IList<Group> GetGroups()
+        {
+            return _management.GroupRepository.GetAll();
+        }
+
         public Group GetGroup(Guid id)
         {
             return _management.GroupRepository.GetById(id);

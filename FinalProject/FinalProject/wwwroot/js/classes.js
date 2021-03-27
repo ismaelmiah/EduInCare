@@ -6,7 +6,7 @@
         "columnDefs": [
             {
                 "orderable": false,
-                "targets": 3,
+                "targets": 8,
                 "render": function (data, type, row) {
                     return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/admin/course/edit/${data}'" value='${data}'>
                                         <i class="fas fa-pencil-alt">

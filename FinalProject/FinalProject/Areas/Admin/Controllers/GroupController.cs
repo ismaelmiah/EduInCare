@@ -41,14 +41,14 @@ namespace FinalProject.Web.Areas.Admin.Controllers
                     model.ModelBuilder.UpdateGroup(model.Id, model);
                 }
             }
-            return RedirectToRoute(new { Area = "", controller = "Home", action = "Index" });
+            return RedirectToRoute(new { Area = "Admin", controller = "Group", action = "Index" });
         }
 
         public IActionResult Delete(Guid id)
         {
             var model = new GroupModel();
             model.ModelBuilder.DeleteGroup(id);
-            return RedirectToRoute(new { Area = "Admin", controller = "Student", action = "Index" });
+            return RedirectToRoute(new { Area = "Admin", controller = "Group", action = "Index" });
         }
         public IActionResult GetGroups()
         {
