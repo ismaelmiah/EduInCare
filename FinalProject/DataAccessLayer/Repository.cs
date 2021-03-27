@@ -5,7 +5,7 @@ using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccessLayer
+namespace DataAccessLayer.Library
 {
     public abstract class Repository<TEntity, TKey, TContext>
         : IRepository<TEntity, TKey, TContext>

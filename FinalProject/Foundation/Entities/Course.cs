@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DataAccessLayer;
+using DataAccessLayer.Library;
 
 namespace Foundation.Library.Entities
 {

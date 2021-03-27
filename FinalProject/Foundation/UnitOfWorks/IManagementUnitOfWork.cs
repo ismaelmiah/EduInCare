@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer;
+using DataAccessLayer.Library;
 using Foundation.Library.Repositories;
 
 namespace Foundation.Library.UnitOfWorks
