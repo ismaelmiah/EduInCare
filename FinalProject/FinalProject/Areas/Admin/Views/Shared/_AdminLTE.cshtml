@@ -1,4 +1,5 @@
-﻿Employee<!DOCTYPE html>
+﻿Employee
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -155,7 +156,7 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
-                            <a asp-controller="Home" asp-area="Admin" asp-action="Index" class="nav-link active">
+                            <a asp-controller="Home" asp-area="Admin" asp-action="Index" class="nav-link">
                                 <i class="fas fa-home nav-icon"></i>
                                 <p>Dashboard</p>
                             </a>
@@ -392,6 +393,22 @@
     <script src="/AdminPanel/plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>$.widget.bridge('uibutton', $.ui.button)</script>
+    <script>
+        $(document).ready(function () {
+            /** add active class and stay opened when selected */
+            var url = window.location;
+
+            // for sidebar menu entirely but not cover treeview
+            $('ul.nav-sidebar a').filter(function () {
+                return this.href == url;
+            }).addClass('active');
+
+            // for treeview
+            $('ul.nav-treeview a').filter(function () {
+                return this.href == url;
+            }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open').prev('a').addClass('active');
+        })
+    </script>
     <!-- Bootstrap 4 -->
     <script src="/AdminPanel/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- ChartJS -->

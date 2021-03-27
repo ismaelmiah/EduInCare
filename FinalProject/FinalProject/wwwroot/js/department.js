@@ -6,7 +6,7 @@
         "columnDefs": [
             {
                 "orderable": false,
-                "targets": 3,
+                "targets": 2,
                 "render": function (data, type, row) {
                     return `<a class="btn btn-info btn-sm" href='/Admin/Department/Profile/${data}'">
                                 <i class="fas fa-info-circle"></i>

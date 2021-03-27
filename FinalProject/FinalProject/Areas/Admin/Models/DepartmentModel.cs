@@ -29,7 +29,6 @@ namespace FinalProject.Web.Areas.Admin.Models
                 {
                     "Name",
                     "Courses",
-                    "Employee"
                 }));
 
             return new
@@ -40,6 +39,7 @@ namespace FinalProject.Web.Areas.Admin.Models
                         select new object[]
                         {
                             record.Name,
+                            record.Courses.Count(),
                             record.Id.ToString(),
                         }
                     ).ToArray()
