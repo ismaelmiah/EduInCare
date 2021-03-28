@@ -17,7 +17,8 @@ namespace Foundation.Library.UnitOfWorks
             IExamTitleRepository examTitle,
             IEmploymentHistoryRepository employmentHistory,
             IJobInfoRepository jobInfoRepository,
-            IDesignationRepository designation) : base(dbContext)
+            IDesignationRepository designation,
+            IGroupRepository group) : base(dbContext)
         {
             CourseRepository = course;
             StudentRepository = student;
@@ -30,6 +31,7 @@ namespace Foundation.Library.UnitOfWorks
             EmploymentHistoryRepository = employmentHistory;
             JobInfoRepository = jobInfoRepository;
             DesignationRepository = designation;
+            GroupRepository = group;
         }
 
         public IStudentRepository StudentRepository { get; set; }
@@ -43,5 +45,6 @@ namespace Foundation.Library.UnitOfWorks
         public IEmploymentHistoryRepository EmploymentHistoryRepository { get; set; }
         public IJobInfoRepository JobInfoRepository { get; set; }
         public IDesignationRepository DesignationRepository { get; set; }
+        public IGroupRepository GroupRepository { get; set; }
     }
 }

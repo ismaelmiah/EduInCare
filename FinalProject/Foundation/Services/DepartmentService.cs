@@ -40,13 +40,13 @@ namespace Foundation.Library.Services
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 result = _management.DepartmentRepository.GetDynamic(null,
-                    orderBy, "Employees,Courses", pageIndex, pageSize, false);
+                    orderBy, "Courses", pageIndex, pageSize, false);
 
             }
             else
             {
                 result = _management.DepartmentRepository.GetDynamic(x => x.Name == searchText,
-                    orderBy, "Employees,Courses", pageIndex, pageSize, false);
+                    orderBy, "Courses", pageIndex, pageSize, false);
             }
 
             var data = (from x in result.data
@@ -54,6 +54,7 @@ namespace Foundation.Library.Services
                 {
                     Id = x.Id,
                     Name = x.Name,
+                    Courses = x.Courses,
                 }).ToList();
 
             return (result.total, result.totalDisplay, data);

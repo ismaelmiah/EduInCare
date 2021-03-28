@@ -6,9 +6,15 @@
         "columnDefs": [
             {
                 "orderable": false,
-                "targets": 3,
+                "targets": 7,
                 "render": function (data, type, row) {
-                    return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/admin/course/edit/${data}'" value='${data}'>
+                    return `
+                                    <button class="btn btn-info btn-sm" onclick="window.location.href='/admin/course/profile/${data}'" value='${data}'>
+                                                                            <i class="fas fa-info">
+                                                                            </i>
+                                                                            Details
+                                                                        </button>
+                                    <button type="submit" class="btn btn-warning btn-sm" onclick="window.location.href='/admin/course/upsert/${data}'" value='${data}'>
                                         <i class="fas fa-pencil-alt">
                                         </i>
                                         Edit

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DataAccessLayer
+﻿namespace DataAccessLayer.Library
 {
     public interface IEntity<T>
     {

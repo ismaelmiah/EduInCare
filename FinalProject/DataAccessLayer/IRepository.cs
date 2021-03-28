@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccessLayer
+namespace DataAccessLayer.Library
 {
     public interface IRepository<TEntity, in TKey, TContext>
         where TEntity : class, IEntity<TKey>

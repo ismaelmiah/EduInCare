@@ -103,9 +103,6 @@ namespace FinalProject.Web.Migrations
                     b.Property<int>("Duration")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("GroupId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<bool>("HaveCompulsorySubject")
                         .HasColumnType("bit");
 
@@ -118,18 +115,9 @@ namespace FinalProject.Web.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("SubjectId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmentId");
-
-                    b.HasIndex("GroupId")
-                        .IsUnique();
-
-                    b.HasIndex("SubjectId")
-                        .IsUnique();
 
                     b.ToTable("Courses");
                 });
@@ -699,6 +687,8 @@ namespace FinalProject.Web.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CourseId");
+
                     b.ToTable("Subjects");
                 });
 
@@ -717,18 +707,6 @@ namespace FinalProject.Web.Migrations
                         .WithMany("Courses")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Foundation.Library.Entities.Group", "Group")
-                        .WithOne("Course")
-                        .HasForeignKey("Foundation.Library.Entities.Course", "GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Foundation.Library.Entities.Subject", "Subject")
-                        .WithOne("Course")
-                        .HasForeignKey("Foundation.Library.Entities.Course", "SubjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -840,6 +818,15 @@ namespace FinalProject.Web.Migrations
                         .WithOne("Section")
                         .HasForeignKey("Foundation.Library.Entities.Section", "TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Foundation.Library.Entities.Subject", b =>
+                {
+                    b.HasOne("Foundation.Library.Entities.Course", "Course")
+                        .WithMany("Subjects")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

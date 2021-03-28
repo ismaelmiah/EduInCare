@@ -29,13 +29,13 @@ namespace Foundation.Library.Services
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 result = _management.CourseRepository.GetDynamic(null,
-                    orderBy, "Students,Department", pageIndex, pageSize, true);
+                    orderBy, "Sections,Subjects,Department", pageIndex, pageSize, false);
 
             }
             else
             {
                 result = _management.CourseRepository.GetDynamic(x => x.Name == searchText,
-                    orderBy, "Students,Department", pageIndex, pageSize, true);
+                    orderBy, "Sections,Subjects,Department", pageIndex, pageSize, false);
             }
 
             var data = (from x in result.data
@@ -43,9 +43,14 @@ namespace Foundation.Library.Services
                 {
                     Id = x.Id,
                     Name = x.Name,
+                    Description = x.Description,
+                    Duration = x.Duration,
+                    Status = x.Status,
+                    Subjects = x.Subjects,
+                    Sections = x.Sections,
+                    HaveCompulsorySubject = x.HaveCompulsorySubject,
+                    MaxCompulsorySubject = x.MaxCompulsorySubject,
                     Department = x.Department,
-                    DepartmentId = x.DepartmentId
-
                 }).ToList();
 
             return (result.total, result.totalDisplay, data);
@@ -65,6 +70,11 @@ namespace Foundation.Library.Services
         public IList<Course> GetCourses()
         {
             return _management.CourseRepository.Get(null,null, "Department,Students", false);
+        }
+
+        public void Update(Course course)
+        {
+            _management.CourseRepository.Edit(course);
         }
     }
 }

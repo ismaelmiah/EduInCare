@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer;
+using DataAccessLayer.Library;
 using Foundation.Library.Repositories;
 
 namespace Foundation.Library.UnitOfWorks
@@ -16,5 +17,6 @@ namespace Foundation.Library.UnitOfWorks
         public IEmploymentHistoryRepository EmploymentHistoryRepository { get; set; }
         public IJobInfoRepository JobInfoRepository { get; set; }
         public IDesignationRepository DesignationRepository { get; set; }
+        public IGroupRepository GroupRepository { get; set; }
     }
 }
