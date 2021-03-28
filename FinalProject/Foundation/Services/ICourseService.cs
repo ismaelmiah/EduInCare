@@ -10,8 +10,9 @@ namespace Foundation.Library.Services
         (int total, int totalDisplay, IList<Course> records) GetCourseList(int pageIndex,
             int pageSize, string searchText, string orderBy);
 
-        void Delete(Guid id);
         Course GetCourse(Guid id);
+        void Delete(Guid id);
         IList<Course> GetCourses();
+        void Update(Course course);
     }
 }

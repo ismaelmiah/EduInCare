@@ -71,5 +71,10 @@ namespace Foundation.Library.Services
         {
             return _management.CourseRepository.Get(null,null, "Department,Students", false);
         }
+
+        public void Update(Course course)
+        {
+            _management.CourseRepository.Edit(course);
+        }
     }
 }

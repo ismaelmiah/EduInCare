@@ -104,9 +104,17 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             };
         }
 
-        public void UpdateCourse(Guid modelId, CourseModel model)
+        public void UpdateCourse(Guid id, CourseModel model)
         {
-            throw new NotImplementedException();
+            var exCourse = _courseService.GetCourse(id);
+            exCourse.Name = model.Title;
+            exCourse.DepartmentId = model.DepartmentId;
+            exCourse.Description = model.Description;
+            exCourse.Status = model.Status;
+            exCourse.Duration = model.Duration;
+            exCourse.MaxCompulsorySubject = model.MaxCompulsorySubject;
+            exCourse.HaveCompulsorySubject = model.HaveCompulsorySubject;
+            _courseService.Update(exCourse);
         }
 
         internal SelectList PopulateDepartmentsDropDownList(object selectedDepartment = null)
