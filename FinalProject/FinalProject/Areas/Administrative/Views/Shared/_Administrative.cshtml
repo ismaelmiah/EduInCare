@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLTE.cshtml";
+}
+@section Styles
+{
+    
+}
+<div id="wrapper">
+    <div>
+        <ul>
+            <li>one</li>
+            <li>one</li>
+            <li>one</li>
+            <li>one</li>
+        </ul>
+    </div>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <div class="m-2">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+@RenderSection("Scripts", false)

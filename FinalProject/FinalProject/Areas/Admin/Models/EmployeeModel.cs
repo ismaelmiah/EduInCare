@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Linq;
 using Autofac;
 using FinalProject.Web.Models;
@@ -91,12 +92,12 @@ namespace FinalProject.Web.Areas.Admin.Models
                 tableModel.SearchText,
                 tableModel.GetSortText(new[]
                 {
-                    "FirstName",
-                    "MiddleName",
-                    "LastName",
+                    "Name",
+                    "UserName",
+                    "Section",
                     "Photo",
                     "Gender",
-                    "Department",
+                    "PresentAddress",
                     "JoiningDate",
                 }));
 
@@ -108,6 +109,11 @@ namespace FinalProject.Web.Areas.Admin.Models
                         select new[]
                         {
                             record.Name,
+                            record.UserName,
+                            record.Section?.Name,
+                            record.ImageUrl,
+                            ((Gender)(record.Gender)).ToString(),
+                            record.PresentAddress,
                             record.JoinOfDate.ToShortDateString(),
                             record.Id.ToString(),
                         }

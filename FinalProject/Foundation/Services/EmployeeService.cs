@@ -51,12 +51,12 @@ namespace Foundation.Library.Services
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 result = _management.EmployeeRepository.GetDynamic(null,
-                    orderBy, "", pageIndex, pageSize, false);
+                    orderBy, "Section", pageIndex, pageSize, false);
             }
             else
             {
                 result = _management.EmployeeRepository.GetDynamic(x => x.Name == searchText,
-                    orderBy, "", pageIndex, pageSize, false);
+                    orderBy, "Section", pageIndex, pageSize, false);
             }
 
             var data = (from x in result.data
