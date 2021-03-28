@@ -1,5 +1,100 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model SectionModel
+
 @{
+    ViewData["Title"] = "Upsert";
+    ViewData["subtitle"] = "Add Section";
 }
+
+<div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-6">
+        <div class="card card-info">
+            <div class="card-header">
+                <h3 class="card-title text-center">@ViewData["subtitle"]</h3>
+            </div>
+        </div>
+        <form class="form-horizontal" asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
+            <div class="card-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-5">
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <label asp-for="Name"></label>
+                            </div>
+                            <div class="col-8">
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <label asp-for="Capacity"></label>
+                            </div>
+                            <div class="col-8">
+                                <input asp-for="Capacity" class="form-control" />
+                                <span asp-validation-for="Capacity" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-7">
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <label asp-for="CourseId" class="control-label"></label>
+                            </div>
+                            <div class="col-8">
+                                <select asp-for="CourseId" asp-items="Model.CourseList" class="form-control"></select>
+                                <span asp-validation-for="CourseId" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <label asp-for="TeacherId" class="control-label"></label>
+                            </div>
+                            <div class="col-8">
+                                <select asp-for="TeacherId" asp-items="Model.TeacherList" class="form-control"></select>
+                                <span asp-validation-for="TeacherId" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-5">
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <label asp-for="Status"></label>
+                            </div>
+                            <div class="col-8">
+                                <input asp-for="Status" class="form-control" />
+                                <span asp-validation-for="Status" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-7">
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <label asp-for="Description"></label>
+                            </div>
+                            <div class="col-8">
+                                <textarea rows="3" asp-for="Description" class="form-control"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="form-group row mb-0">
+                    <div class="col-6 text-left">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                    <div class="col-6 text-right">
+                        <a asp-area="Admin" asp-controller="Section" asp-action="Index">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-2"></div>
+</div>

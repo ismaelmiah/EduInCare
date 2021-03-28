@@ -1,18 +1,31 @@
 ﻿using System;
 using System.Linq;
+using Autofac;
 using FinalProject.Web.Models;
 using Foundation.Library.Entities;
 using Foundation.Library.Services;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
 {
     public class SectionModelBuilder
     {
         private readonly ISectionService _sectionService;
+        private protected ICourseService CourseService { get; }
+        private protected IEmployeeService EmployeeService { get; }
 
-        public SectionModelBuilder(ISectionService sectionService)
+        public SectionModelBuilder(ISectionService sectionService, ICourseService courseService, IEmployeeService employeeService)
         {
             _sectionService = sectionService;
+            CourseService = courseService;
+            EmployeeService = employeeService;
+        }
+
+        public SectionModelBuilder()
+        {
+            CourseService = Startup.AutofacContainer.Resolve<ICourseService>();
+            _sectionService = Startup.AutofacContainer.Resolve<ISectionService>();
+            EmployeeService = Startup.AutofacContainer.Resolve<IEmployeeService>();
         }
         public void SaveSection(SectionModel model)
         {
@@ -74,11 +87,11 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                         select new object[]
                         {
                             record.Name,
+                            record.Capacity,
                             record.Course.Name,
                             record.Employee.Name,
-                            record.Capacity,
-                            record.Description,
                             record.Status,
+                            record.Description,
                             record.Id.ToString(),
                         }
                     ).ToArray()
@@ -96,8 +109,23 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                 CourseId = exSection.CourseId,
                 TeacherId = exSection.TeacherId,
                 Description = exSection.Description,
-                Status = exSection.Status
+                Status = exSection.Status,
+                TeacherList = GetTeacherList(exSection.TeacherId),
+                CourseList = GetCourseList(exSection.CourseId)
             };
+        }
+
+
+        public SelectList GetTeacherList(object selectedTeacher = null)
+        {
+            var teachers = EmployeeService.GetAllEmployees();
+            return new SelectList(teachers, "Id", "Name", selectedTeacher);
+        }
+
+        public SelectList GetCourseList(object selectedCourse = null)
+        {
+            var courses = CourseService.GetCourses();
+            return new SelectList(courses, "Id", "Name", selectedCourse);
         }
     }
 }

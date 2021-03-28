@@ -29,13 +29,13 @@ namespace Foundation.Library.Services
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 result = _management.CourseRepository.GetDynamic(null,
-                    orderBy, "Sections,Subjects,Department", pageIndex, pageSize, false);
+                    orderBy, "Sections,Subjects,Department", pageIndex, pageSize);
 
             }
             else
             {
                 result = _management.CourseRepository.GetDynamic(x => x.Name == searchText,
-                    orderBy, "Sections,Subjects,Department", pageIndex, pageSize, false);
+                    orderBy, "Sections,Subjects,Department", pageIndex, pageSize);
             }
 
             var data = (from x in result.data
@@ -69,7 +69,7 @@ namespace Foundation.Library.Services
 
         public IList<Course> GetCourses()
         {
-            return _management.CourseRepository.Get(null,null, "Department,Students", false);
+            return _management.CourseRepository.GetAll();
         }
 
         public void Update(Course course)
