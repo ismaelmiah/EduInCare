@@ -14,8 +14,8 @@ namespace Foundation.Library.Entities
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public Guid GroupId { get; set; }
-        public virtual Group Group { get; set; }
+        //public Guid GroupId { get; set; }
+        //public virtual Group Group { get; set; }
         public int Duration { get; set; }
         public bool HaveCompulsorySubject { get; set; }
         public int MaxCompulsorySubject { get; set; }

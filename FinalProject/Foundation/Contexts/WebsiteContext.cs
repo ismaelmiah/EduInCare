@@ -100,10 +100,10 @@ namespace Foundation.Library.Contexts
                 .WithOne(x => x.JobInfo)
                 .HasForeignKey<AppointmentImage>(x => x.JobInfoId);
 
-            builder.Entity<Group>()
-                .HasOne(x => x.Course)
-                .WithOne(x => x.Group)
-                .HasForeignKey<Course>(x => x.GroupId);
+            //builder.Entity<Group>()
+            //    .HasOne(x => x.Course)
+            //    .WithOne(x => x.Group)
+            //    .HasForeignKey<Course>(x => x.GroupId);
 
             builder.Entity<Section>()
                 .HasOne(x => x.Course)

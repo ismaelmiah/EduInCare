@@ -43,7 +43,6 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                 tableModel.GetSortText(new[]
                 {
                     "Name",
-                    "Group",
                     "Subjects",
                     "Department",
                     "Duration",
@@ -60,7 +59,6 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                         select new object[]
                         {
                             record.Name,
-                            record.Group.Name,
                             record.Subjects.Count(),
                             record.Department.Name,
                             record.Duration,
@@ -84,7 +82,6 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             return new Foundation.Library.Entities.Course()
             {
                 Name = model.Title,
-                GroupId = model.GroupId,
                 DepartmentId = model.DepartmentId,
                 Duration = model.Duration,
                 Status = model.Status,
