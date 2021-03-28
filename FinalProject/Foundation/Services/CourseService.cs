@@ -29,13 +29,13 @@ namespace Foundation.Library.Services
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 result = _management.CourseRepository.GetDynamic(null,
-                    orderBy, "Sections,Subjects,Department", pageIndex, pageSize, true);
+                    orderBy, "Sections,Subjects,Department", pageIndex, pageSize, false);
 
             }
             else
             {
                 result = _management.CourseRepository.GetDynamic(x => x.Name == searchText,
-                    orderBy, "Sections,Subjects,Department", pageIndex, pageSize, true);
+                    orderBy, "Sections,Subjects,Department", pageIndex, pageSize, false);
             }
 
             var data = (from x in result.data

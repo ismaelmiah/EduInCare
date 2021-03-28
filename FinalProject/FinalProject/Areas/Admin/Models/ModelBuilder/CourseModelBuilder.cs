@@ -12,27 +12,18 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
     {
         private readonly ICourseService _courseService;
         private readonly IDepartmentService _department;
-        private readonly IGroupService _groupService;
 
-        public CourseModelBuilder(ICourseService courseService, IDepartmentService department, IGroupService groupService)
+        public CourseModelBuilder(ICourseService courseService, IDepartmentService department)
         {
             _courseService = courseService;
             _department = department;
-            _groupService = groupService;
         }
 
         public CourseModelBuilder()
         {
-            _groupService = Startup.AutofacContainer.Resolve<IGroupService>();
             _courseService = Startup.AutofacContainer.Resolve<ICourseService>();
             _department = Startup.AutofacContainer.Resolve<IDepartmentService>();
         }
-
-        internal List<SelectListItem> GetDepartmentList() => _department.GetDepartments().Select(x => new SelectListItem
-            {
-                Text = x.Name,
-                Value = x.Id.ToString()
-            }).ToList();
 
         internal object GetClasses(DataTablesAjaxRequestModel tableModel)
         {
@@ -96,20 +87,33 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             _courseService.Delete(id);
         }
 
-        public List<SelectListItem> GetGroupList() => _groupService.GetGroups().Select(x => new SelectListItem
-        {
-            Text = x.Name,
-            Value = x.Id.ToString()
-        }).ToList();
-
         public CourseModel BuildCourseModel(Guid id)
         {
-            throw new NotImplementedException();
+            var exCourse = _courseService.GetCourse(id);
+            return new CourseModel
+            {
+                Title = exCourse.Name,
+                DepartmentList = PopulateDepartmentsDropDownList(exCourse.DepartmentId),
+                DepartmentId = exCourse.DepartmentId,
+                Duration = exCourse.Duration,
+                Description = exCourse.Description,
+                HaveCompulsorySubject = exCourse.HaveCompulsorySubject,
+                Id = exCourse.Id,
+                MaxCompulsorySubject = exCourse.MaxCompulsorySubject,
+                Status = exCourse.Status
+            };
         }
 
         public void UpdateCourse(Guid modelId, CourseModel model)
         {
             throw new NotImplementedException();
+        }
+
+        internal SelectList PopulateDepartmentsDropDownList(object selectedDepartment = null)
+        {
+            var departmentList = from d in _department.GetDepartments() select d;
+
+            return new SelectList(departmentList, "Id","Name", selectedDepartment);
         }
     }
 }

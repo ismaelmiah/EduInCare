@@ -11,8 +11,7 @@ namespace FinalProject.Web.Areas.Admin.Models
         public CourseModel()
         {
             ModelBuilder = new CourseModelBuilder();
-            DepartmentList = ModelBuilder.GetDepartmentList();
-            GroupList = ModelBuilder.GetGroupList();
+            DepartmentList = ModelBuilder.PopulateDepartmentsDropDownList();
         }
 
         public Guid Id { get; set; }
@@ -23,8 +22,6 @@ namespace FinalProject.Web.Areas.Admin.Models
         public bool Status { get; set; }
         public string Description { get; set; }
         public Guid DepartmentId { get; set; }
-        public List<SelectListItem> DepartmentList { get; set; }
-        public Guid GroupId { get; set; }
-        public List<SelectListItem> GroupList { get; set; }
+        public SelectList DepartmentList { get; set; }
     }
 }
