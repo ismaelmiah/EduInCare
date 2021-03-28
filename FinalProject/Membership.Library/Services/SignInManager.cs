@@ -7,8 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Membership.Library.Services
 {
-    public class SignInManager
-        : SignInManager<ApplicationUser>
+    public class SignInManager : SignInManager<ApplicationUser>
     {
         public SignInManager(UserManager<ApplicationUser> userManager, 
             IHttpContextAccessor contextAccessor, 

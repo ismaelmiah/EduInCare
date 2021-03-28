@@ -1,0 +1,51 @@
+﻿@model RoleModel
+
+@{
+    ViewData["Title"] = "Upsert";
+    ViewData["subtitle"] = "Add Role";
+}
+
+<div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-6">
+        <div class="card card-info">
+            <div class="card-header">
+                <h3 class="card-title text-center">@ViewData["subtitle"]</h3>
+            </div>
+        </div>
+        <form class="form-horizontal" asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="UpsertRole">
+            <div class="card-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input asp-for="Id" type="hidden" />
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="RoleName"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="RoleName" class="form-control" />
+                        <span asp-validation-for="RoleName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="form-group row mb-0">
+                    <div class="col-6 text-left">
+                        @if (string.IsNullOrWhiteSpace(Model.Id))
+                        {
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        }
+                        else
+                        {
+                            <input type="submit" value="Update" class="btn btn-warning" />
+                        }
+                    </div>
+                    <div class="col-6 text-right">
+                        <a asp-area="Administrative" asp-controller="Administrative" asp-action="Roles">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-2"></div>
+</div>
