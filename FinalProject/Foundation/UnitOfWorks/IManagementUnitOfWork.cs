@@ -18,5 +18,6 @@ namespace Foundation.Library.UnitOfWorks
         public IDesignationRepository DesignationRepository { get; set; }
         public IGroupRepository GroupRepository { get; set; }
         public ISectionRepository SectionRepository { get; set; }
+        public ISubjectRepository SubjectRepository { get; set; }
     }
 }
