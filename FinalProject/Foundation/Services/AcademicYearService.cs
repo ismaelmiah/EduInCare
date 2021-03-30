@@ -59,8 +59,7 @@ namespace Foundation.Library.Services
 
         public AcademicYear GetAcademicYear(Guid id)
         {
-            return _management.AcademicYearRepository.Get(x => x.Id == id, null,
-                "", true).FirstOrDefault();
+            return _management.AcademicYearRepository.GetById(id);
         }
 
         public void Update(AcademicYear academicYear)
