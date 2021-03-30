@@ -118,6 +118,27 @@ namespace FinalProject.Web.Areas.Student.Models
         {
             _studentService.Delete(id);
         }
+
+        public StudentProfileView BuildStudentProfileView(Guid id)
+        {
+            var student = _studentService.GetStudent(id);
+            return new StudentProfileView
+            {
+                FirstName = student.FirstName,
+                MiddleName = student.MiddleName,
+                LastName = student.LastName,
+                Gender = student.Gender,
+                DateOfBirth = student.DateOfBirth,
+                YearOfEnroll = student.YearOfEnroll,
+                Nationality = student.Nationality,
+                MobileNo = student.MobileNo,
+                BirthCertificateNo = student.BirthCertificateNo,
+                NationalIdentificationNo = student.NationalIdentificationNo,
+                ParentsInfo = GetStudentParents(student.Parents),
+                EnrollCourse = CourseList(),
+                ImagePath = FormatImageUrl(student.ImageUrl)
+            };
+        }
         public StudentFormViewModel BuildStudentModel(Guid id)
         {
             var student = _studentService.GetStudent(id);

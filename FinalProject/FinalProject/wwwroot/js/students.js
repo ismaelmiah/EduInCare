@@ -13,7 +13,7 @@
             },
             {
                 "orderable": false,
-                "targets": 8,
+                "targets": 7,
                 "render": function (data, type, row) {
                     return `<a class="btn btn-info btn-sm" href='/student/Home/Profile/${data}'">
                                 <i class="fas fa-info-circle"></i>
