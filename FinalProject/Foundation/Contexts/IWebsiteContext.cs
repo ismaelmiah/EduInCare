@@ -24,7 +24,7 @@ namespace Foundation.Library.Contexts
         DbSet<AppointmentImage> AppointmentImages { get; set; }
         DbSet<Section> Sections { get; set; }
         DbSet<Group> Groups { get; set; }
-        DbSet<Shift> Shifts { get; set; }
+        //DbSet<Shift> Shifts { get; set; }
         DbSet<Registration> Registrations { get; set; }
         DbSet<AcademicYear> AcademicYears { get; set; }
         DbSet<Subject> Subjects { get; set; }

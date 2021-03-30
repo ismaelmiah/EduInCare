@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using FinalProject.Web.Areas.Course.Models.ModelBuilder;
 using Microsoft.AspNetCore.Mvc.Rendering;
 

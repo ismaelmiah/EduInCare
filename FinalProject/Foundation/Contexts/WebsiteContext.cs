@@ -149,10 +149,10 @@ namespace Foundation.Library.Contexts
                 .WithOne(x => x.Registration)
                 .HasForeignKey<Registration>(x => x.AcademicYearId);
 
-            builder.Entity<Registration>()
-                .HasOne(x => x.Shift)
-                .WithOne(x => x.Registration)
-                .HasForeignKey<Registration>(x => x.ShiftId);
+            //builder.Entity<Registration>()
+            //    .HasOne(x => x.Shift)
+            //    .WithOne(x => x.Registration)
+            //    .HasForeignKey<Registration>(x => x.ShiftId);
 
             builder.Entity<Registration>()
                 .HasOne(x => x.Student)
@@ -181,7 +181,7 @@ namespace Foundation.Library.Contexts
         public DbSet<AppointmentImage> AppointmentImages { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<Group> Groups { get; set; }
-        public DbSet<Shift> Shifts { get; set; }
+        //public DbSet<Shift> Shifts { get; set; }
         public DbSet<Registration> Registrations { get; set; }
         public DbSet<AcademicYear> AcademicYears { get; set; }
         public DbSet<Subject> Subjects { get; set; }
