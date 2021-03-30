@@ -1,0 +1,52 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLTE.cshtml";
+}
+@section Styles
+{
+    <style>
+        .administrative_menu {
+            background: #807f7f24;
+        }
+            .administrative_menu > ul > li:hover {
+                background-color: rgba(255, 255, 255, .1);
+                color: #fff;
+                background: #9f9c9cd6;
+                border-radius: 3px;
+            }
+
+        .administrative_menu > ul > li {
+            background-color: transparent;
+            text-decoration: none;
+        }
+    </style>
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2 sidebar administrative_menu">
+            <ul class="nav nav-pills nav-sidebar flex-column mt-5">
+                <li class="nav-item">
+                    <a asp-controller="Administrative" asp-area="Administrative" asp-action="Users" class="nav-link">
+                        <i class="fas fa-user-friends nav-icon"></i>
+                        <p>Users</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="Administrative" asp-area="Administrative" asp-action="Roles" class="nav-link">
+                        <i class="fab fa-r-project nav-icon"></i>
+                        <p>Roles</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="Administrative" asp-area="Administrative" asp-action="History" class="nav-link">
+                        <i class="fas fa-history nav-icon"></i>
+                        <p>Log History</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-10">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+@RenderSection("AdminScripts", false)

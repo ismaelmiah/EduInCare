@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Foundation.Library.Entities;
 using Foundation.Library.Enums;
 using Microsoft.AspNetCore.Http;
@@ -40,6 +41,7 @@ namespace FinalProject.Web.Areas.Employee.Models
         public string Name { get; set; }
         public string FatherName { get; set; }
         public string MotherName { get; set; }
+        [Display(Name = "National Identification Number")]
         public string Nid { get; set; }
         public Gender Gender { get; set; }
         public string MobileNo { get; set; }

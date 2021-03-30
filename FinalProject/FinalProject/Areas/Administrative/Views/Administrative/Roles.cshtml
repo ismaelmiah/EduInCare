@@ -1,14 +1,18 @@
-﻿<!-- Content Header (Page header) -->
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "_Administrative";
+}
+<!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Teachers</h1>
+                <h1>Roles</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home" asp-area="Admin">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Teachers</li>
+                    <li class="breadcrumb-item"><a asp-action="Users" asp-controller="Administrative" asp-area="Administrative">Users</a></li>
+                    <li class="breadcrumb-item active">Roles</li>
                 </ol>
             </div>
         </div>
@@ -23,26 +27,20 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-4 text-left">
-                            <h2 class="card-title">Current Teachers</h2>
+                            <h2 class="card-title">Current Roles</h2>
                         </div>
                         <div class="col-md-8 text-right">
-                            <a asp-action="Upsert" asp-controller="Home" asp-area="Employee" class="btn btn-outline-primary">Add Teacher</a>
+                            <a asp-action="UpsertRole" asp-controller="Administrative" asp-area="Administrative" class="btn btn-outline-primary">Add Role</a>
                         </div>
                     </div>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <partial name="_DeletePopupPartial" />
-                    <table id="teachers" class="table table-bordered table-striped">
+                    <table id="roles" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>UserName</th>
-                                <th>Section</th>
-                                <th>Photo</th>
-                                <th>Gender</th>
-                                <th>Present Address</th>
-                                <th>Joining Date</th>
+                                <th>Role</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -58,9 +56,12 @@
 </section>
 <!-- /.content -->
 
-@section scripts
+@section Adminscripts
 {
-    <script src="/AdminPanel/plugins/datatables/jquery.dataTables.js"></script>
-    <script src="/AdminPanel/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
-    <script src="~/js/teachers.js"></script>
+    <!-- jQuery -->
+    <script src="~/AdminPanel/plugins/jquery/jquery.min.js"></script>
+    <script src="~/AdminPanel/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/AdminPanel/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+    <script src="~/js/roles.js"></script>
+    <script>console.log("Roles Class")</script>
 }
