@@ -75,5 +75,10 @@ namespace Foundation.Library.Services
             _management.StudentRepository.Edit(student);
             _management.Save();
         }
+
+        public IList<Student> GetStudents()
+        {
+            return _management.StudentRepository.GetAll();
+        }
     }
 }

@@ -8,9 +8,7 @@
 }
 
 <div class="row">
-    <div class="col-md-2">
-    </div>
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="card card-info">
             <div class="card-header">
                 <h3 class="card-title text-center">@ViewData["subtitle"]</h3>
@@ -21,98 +19,115 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input asp-for="Id" type="hidden" />
                 <div class="row">
-                    <div class="col-6">
-                        <div class="form-group row">
-                            <div class="col-3">
-                                <label asp-for="RegistrationNo" class="custom-control-label"></label>
-                            </div>
-                            <div class="col-9">
-                                <input disabled="disabled" asp-for="RegistrationNo" class="form-control" />
-                                <span asp-validation-for="RegistrationNo" class="text-danger"></span>
-                            </div>
+                    <div class="form-group row col-3">
+                        <div class="col-6">
+                            <label for="AcademicYearId" class="">Academic Year</label>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-4">
-                                <label for="StudentId" class="control-label">Student</label>
-                            </div>
-                            <div class="col-8">
-                                <select asp-for="StudentId" asp-items="Model.StudentList" class="form-control"></select>
-                                <span asp-validation-for="StudentId" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-4">
-                                <label for="SectionId" class="control-label">Section</label>
-                            </div>
-                            <div class="col-8">
-                                <select asp-for="SectionId" asp-items="Model.SectionList" class="form-control"></select>
-                                <span asp-validation-for="SectionId" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-4">
-                                <label for="AcademicYearId" class="control-label">Academic Year</label>
-                            </div>
-                            <div class="col-8">
-                                <select asp-for="AcademicYearId" asp-items="Model.AcademicYearList" class="form-control"></select>
-                                <span asp-validation-for="AcademicYearId" class="text-danger"></span>
-                            </div>
+                        <div class="col-6">
+                            <select asp-for="AcademicYearId" asp-items="Model.AcademicYearList" class="form-control"></select>
+                            <span asp-validation-for="AcademicYearId" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="form-group row">
-                            <label asp-for="Shift" class="custom-control-label"></label>
+                    <div class="form-group row col-3 ml-2">
+                        <div class="col-3">
+                            <label for="CourseId" class="">Course</label>
+                        </div>
+                        <div class="col-9">
+                            <select asp-for="CourseId" asp-items="Model.CourseList" class="form-control"></select>
+                            <span asp-validation-for="CourseId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row col-3 ml-3">
+                        <div class="col-4">
+                            <label for="SectionId" class="">Section</label>
+                        </div>
+                        <div class="col-8">
+                            <select asp-for="SectionId" asp-items="Model.SectionList" class="form-control"></select>
+                            <span asp-validation-for="SectionId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row col-3 ml-2">
+                        <div class="col-4">
+                            <label asp-for="Shift" class=""></label>
+                        </div>
+                        <div class="col-8">
                             <select class="form-control" asp-for="Shift" asp-items="Html.GetEnumSelectList<ShiftType>()">
                             </select>
                             <span asp-validation-for="Shift" class="text-danger"></span>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-3">
-                                <label asp-for="RollNo"  class="custom-control-label"></label>
-                            </div>
-                            <div class="col-9">
-                                <input asp-for="RollNo" class="form-control" />
-                                <span asp-validation-for="RollNo" class="text-danger"></span>
-                            </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group row col">
+                        <div class="col-2">
+                            <label for="StudentId" class="">Student</label>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-3">
-                                <label for="BoardRegistrationNo" class="custom-control-label">Board Registration No </label>
-                            </div>
-                            <div class="col-9">
-                                <input asp-for="BoardRegistrationNo" class="form-control" />
-                                <span asp-validation-for="BoardRegistrationNo" class="text-danger"></span>
-                            </div>
+                        <div class="col-10">
+                            <select asp-for="StudentId" asp-items="Model.StudentList" class="form-control"></select>
+                            <span asp-validation-for="StudentId" class="text-danger"></span>
                         </div>
+                    </div>
+                    <div class="form-group row col">
+                        <div class="col-3">
+                            <label for="RegistrationNo" class="">Registration No</label>
+                        </div>
+                        <div class="col-9">
+                            <input asp-for="RegistrationNo" placeholder="Auto Generated" class="form-control" />
+                            <span asp-validation-for="RegistrationNo" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row col-2 ml-3">
+                        <div class="col-4">
+                            <label asp-for="RollNo" class=""></label>
+                        </div>
+                        <div class="col-8">
+                            <input asp-for="RollNo" class="form-control" />
+                            <span asp-validation-for="RollNo" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group row col">
+                        <div class="col-4">
+                            <label for="BoardRegistrationNo" class="">Board Registration No </label>
+                        </div>
+                        <div class="col-8">
+                            <input asp-for="BoardRegistrationNo" class="form-control" />
+                            <span asp-validation-for="BoardRegistrationNo" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row col">
+                        <div class="col-3">
+                            <label for="OldRegistrationId" class="">Old Registration No</label>
+                        </div>
+                        <div class="col-9">
+                            <input asp-for="OldRegistrationId" class="form-control" />
+                            <span asp-validation-for="OldRegistrationId" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
                         <div class="form-group row">
-                            <div class="col-3">
-                                <label for="IsPromoted" class="custom-control-label">Is Promoted</label>
+                            <div class="col-4">
+                                <label for="IsPromoted" class="">Is Promoted</label>
                             </div>
-                            <div class="col-9">
-                                <input asp-for="IsPromoted" class="form-control" />
+                            <div class="col-8">
+                                <input asp-for="IsPromoted" class="form-control"/>
                                 <span asp-validation-for="IsPromoted" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-3">
-                                <label for="OldRegistrationId" class="custom-control-label">Old Registration No</label>
+                            <div class="col-4">
+                                <label asp-for="Status" class=""></label>
                             </div>
-                            <div class="col-9">
-                                <input asp-for="OldRegistrationId" class="form-control" />
-                                <span asp-validation-for="OldRegistrationId" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-3">
-                                <label asp-for="Status" class="custom-control-label"></label>
-                            </div>
-                            <div class="col-9">
-                                <input asp-for="Status" class="form-control" />
+                            <div class="col-8">
+                                <input asp-for="Status" class="form-control"/>
                                 <span asp-validation-for="Status" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>                
             </div>
             <div class="card-footer">
                 <div class="form-group row mb-0">
@@ -133,5 +148,4 @@
             </div>
         </form>
     </div>
-    <div class="col-md-2"></div>
 </div>
