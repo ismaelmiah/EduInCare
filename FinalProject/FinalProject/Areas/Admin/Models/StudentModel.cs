@@ -28,7 +28,6 @@ namespace FinalProject.Web.Areas.Admin.Models
                     "LastName",
                     "Photo",
                     "Gender",
-                    "Class",
                     "DateOfBirth",
                     "YearOfEnroll"
                 }));
@@ -43,7 +42,8 @@ namespace FinalProject.Web.Areas.Admin.Models
                             record.FirstName,
                             record.MiddleName,
                             record.LastName,
-                            record.Gender,
+                            FormatImageUrl(record.ImageUrl),
+                            record.Gender.ToString(),
                             record.DateOfBirth.ToShortDateString(),
                             record.YearOfEnroll.ToShortDateString(),
                             record.Id.ToString(),

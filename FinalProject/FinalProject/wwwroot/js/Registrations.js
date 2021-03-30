@@ -2,11 +2,11 @@
     $('#Registrations').DataTable({
         "processing": true,
         "serverSide": true,
-        "ajax": "/course/Registration/GetClasses",
+        "ajax": "/course/Registration/GetRegisteredData",
         "columnDefs": [
             {
                 "orderable": false,
-                "targets": 5,
+                "targets": 8,
                 "render": function (data, type, row) {
                     return `
                                     <button class="btn btn-info btn-sm" onclick="window.location.href='/course/Registration/profile/${data}'" value='${data}'>

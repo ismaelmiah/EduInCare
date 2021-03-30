@@ -29,13 +29,13 @@ namespace Foundation.Library.Services
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 result = _management.StudentRepository.GetDynamic(null,
-                    orderBy, "Image,Address,Parents,Course", pageIndex, pageSize, false);
+                    orderBy, "", pageIndex, pageSize);
 
             }
             else
             {
                 result = _management.StudentRepository.GetDynamic(x => x.FirstName == searchText,
-                    orderBy, "Image,Address,Parents,Course", pageIndex, pageSize, false);
+                    orderBy, "", pageIndex, pageSize);
             }
 
             var data = (from x in result.data
@@ -52,7 +52,7 @@ namespace Foundation.Library.Services
                     NationalIdentificationNo = x.NationalIdentificationNo,
                     Nationality = x.Nationality,
                     YearOfEnroll = x.YearOfEnroll,
-                    Parents = x.Parents,
+                    Parents = x.Parents
                 }).ToList();
 
             return (result.total, result.totalDisplay, data);
@@ -74,6 +74,11 @@ namespace Foundation.Library.Services
         {
             _management.StudentRepository.Edit(student);
             _management.Save();
+        }
+
+        public IList<Student> GetStudents()
+        {
+            return _management.StudentRepository.GetAll();
         }
     }
 }

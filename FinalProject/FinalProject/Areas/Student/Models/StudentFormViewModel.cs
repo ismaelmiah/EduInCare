@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Foundation.Library.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -26,7 +27,7 @@ namespace FinalProject.Web.Areas.Student.Models
         public string BirthCertificateNo { get; set; }
         [Display(Name = "National Identification Number")]
         public string NationalIdentificationNo { get; set; }
-        public string Gender { get; set; }
+        public Gender Gender { get; set; }
         public string MobileNo { get; set; }
         [Display(Name = "Present Address")]
         public AddressModel PresentAddress { get; set; }

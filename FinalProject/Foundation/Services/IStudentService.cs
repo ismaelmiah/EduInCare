@@ -13,5 +13,6 @@ namespace Foundation.Library.Services
         void Delete(Guid id);
         Student GetStudent(Guid id);
         void Update(Student student);
+        IList<Student> GetStudents();
     }
 }

@@ -6,6 +6,8 @@ namespace Foundation.Library.UnitOfWorks
 {
     public class ManagementUnitOfWork : UnitOfWork, IManagementUnitOfWork
     {
+        private readonly IRegistrationStudentRepository _registrationStudent;
+
         public ManagementUnitOfWork(WebsiteContext dbContext,
             ICourseRepository course,
             IStudentRepository student,
@@ -21,8 +23,10 @@ namespace Foundation.Library.UnitOfWorks
             IGroupRepository group,
             ISectionRepository section,
             ISubjectRepository subject,
-            IAcademicYearRepository academicYear) : base(dbContext)
+            IAcademicYearRepository academicYear,
+            IRegistrationStudentRepository registrationStudent) : base(dbContext)
         {
+            _registrationStudent = registrationStudent;
             CourseRepository = course;
             StudentRepository = student;
             ParentsRepository = parents;
@@ -38,6 +42,7 @@ namespace Foundation.Library.UnitOfWorks
             SectionRepository = section;
             SubjectRepository = subject;
             AcademicYearRepository = academicYear;
+            RegistrationStudentRepository = registrationStudent;
         }
 
         public IStudentRepository StudentRepository { get; set; }
@@ -55,5 +60,6 @@ namespace Foundation.Library.UnitOfWorks
         public ISectionRepository SectionRepository { get; set; }
         public ISubjectRepository SubjectRepository { get; set; }
         public IAcademicYearRepository AcademicYearRepository { get; set; }
+        public IRegistrationStudentRepository RegistrationStudentRepository { get; set; }
     }
 }
