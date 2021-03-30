@@ -6,14 +6,14 @@
         "columnDefs": [
             {
                 "orderable": false,
-                "targets": 3,
+                "targets": 2,
                 "render": function (data, type, row) {
                     return `<img src=${data} width='50px' />`;
                 }
             },
             {
                 "orderable": false,
-                "targets": 7,
+                "targets": 6,
                 "render": function (data, type, row) {
                     return `<a class="btn btn-info btn-sm" href='/Employee/Home/Profile/${data}'">
                                 <i class="fas fa-info-circle"></i>

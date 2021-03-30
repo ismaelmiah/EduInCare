@@ -58,18 +58,18 @@ namespace FinalProject.Web.Areas.Admin.Controllers
         //    return View(model);
         //}
         //[HttpPost]
-        public async Task<IActionResult> Register(string email, string username, string password, string phoneNumber)
+        public async Task<IActionResult> Register(string email, string username, string password, string phoneNumber, RoleType isEmployee)
         {
             //if (string.IsNullOrWhiteSpace(email) ||
             //    string.IsNullOrWhiteSpace(username) ||
             //    string.IsNullOrWhiteSpace(password))
             //    return RedirectToRoute(new {Area="", Controller="Account", Action="Error"});
-            var user = new ApplicationUser { UserName = username, Email = email, PhoneNumber = phoneNumber};
+            var user = new ApplicationUser { UserName = username, Email = email, PhoneNumber = phoneNumber, RoleType = isEmployee};
             var result = await _userManager.CreateAsync(user, password);
             if (result.Succeeded)
             {
                 _logger.LogInformation("User created a new account with password.");
-                return RedirectToRoute(new { Area = "", Controller = "Home", Action = "Index" });
+                return RedirectToRoute(new { Area = "Admin", Controller = "Employee", Action = "Index" });
             }
             else
             {

@@ -3,6 +3,7 @@ using System;
 using FinalProject.Web.Areas.Admin.Models;
 using FinalProject.Web.Areas.Employee.Models;
 using FinalProject.Web.Areas.Student.Models;
+using Membership.Library.Entities;
 
 namespace FinalProject.Web.Areas.Employee.Controllers
 {
@@ -26,28 +27,18 @@ namespace FinalProject.Web.Areas.Employee.Controllers
         public IActionResult Upsert(EmployeeFormViewModel model)
         {
             if (!ModelState.IsValid)
-                return RedirectToRoute(new {Area = "", controller = "Home", action = "Index"});
+                return View(model);
             if (model.Id == new Guid())
             {
                 //Create
                 model.ModelBuilder.SaveEmployee(model);
-                return RedirectToRoute(new
-                {
-                    Area = "Admin",
-                    controller = "Account",
-                    action = "Register",
-                    password = model.Password,
-                    email = model.Email,
-                    phoneNumber = model.MobileNo,
-                    username = model.UserName
-                });
             }
             else
             {
                 //Update
                 model.ModelBuilder.UpdateEmployee(model.Id, model);
-                return RedirectToRoute(new { Area = "Admin", controller = "Employee", action = "Index" });
             }
+            return RedirectToRoute(new { Area = "Admin", controller = "Employee", action = "Index" });
         }
 
         public IActionResult Delete(Guid id)

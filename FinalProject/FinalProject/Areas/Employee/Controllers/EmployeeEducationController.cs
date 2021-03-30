@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FinalProject.Web.Areas.Admin.Models;
+using FinalProject.Web.Areas.Admin.Models.ModelBuilder;
 using FinalProject.Web.Areas.Employee.Models;
+using FinalProject.Web.Areas.Employee.Models.ModelBuilder;
 using FinalProject.Web.Models;
 
 namespace FinalProject.Web.Areas.Employee.Controllers
@@ -53,7 +55,7 @@ namespace FinalProject.Web.Areas.Employee.Controllers
         public IActionResult GetEmployeeEducations()
         {
             var tableModel = new DataTablesAjaxRequestModel(Request);
-            var model = new EmployeeModel();
+            var model = new EmployeeModelBuilder();
             var data = model.GetEmployeeEducations(tableModel);
             return Json(data);
         }

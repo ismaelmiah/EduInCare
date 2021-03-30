@@ -17,6 +17,12 @@ namespace Foundation.Library.Enums
         Others = 5
     }
 
+    public enum MaritalStatus
+    {
+        Married,
+        Unmarried,
+        Other
+    }
     public enum ResultType
     {
         Grade = 1,
@@ -33,4 +39,5 @@ namespace Foundation.Library.Enums
         [Display(Name = "Do Not Mention")]
         DoNotMention = 9
     }
+
 }

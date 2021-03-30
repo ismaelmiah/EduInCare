@@ -14,19 +14,15 @@ namespace Foundation.Library.Services
         {
             _management = management;
         }
-        public EmployeeEducation GetEmployeeEducationWithoutTrack(Guid id)
-        {
-            throw new NotImplementedException();
-        }
 
         public EmployeeEducation GetEmployeeEducation(Guid id)
         {
-            throw new NotImplementedException();
+            return _management.EmployeeEducationRepository.GetById(id);
         }
 
         public void DeleteEmployeeEducation(Guid id)
         {
-            throw new NotImplementedException();
+            _management.EmployeeEducationRepository.Remove(id);
         }
 
         public void UpdateEmployeeEducation(EmployeeEducation employee)
@@ -40,6 +36,11 @@ namespace Foundation.Library.Services
             _management.Save();
         }
 
+        public IList<EmployeeEducation> GetEducations()
+        {
+            return _management.EmployeeEducationRepository.GetAll();
+        }
+
         public (int total, int totalDisplay, IList<EmployeeEducation> records) GetEmployeeEducationList(int pageIndex, int pageSize, string searchText,
             string orderBy)
         {
@@ -48,12 +49,11 @@ namespace Foundation.Library.Services
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 result = _management.EmployeeEducationRepository.GetDynamic(null,
-                    orderBy, "Employee", pageIndex, pageSize, false);
+                    orderBy, "Employee", pageIndex, pageSize);
             }
             else
             {
-                result = _management.EmployeeEducationRepository.GetDynamic(x => x.Major == searchText,
-                    orderBy, "Employee", pageIndex, pageSize, false);
+                result = _management.EmployeeEducationRepository.GetDynamic(x => x.Major == searchText, orderBy, "Employee", pageIndex, pageSize);
             }
 
             var data = (from x in result.data
