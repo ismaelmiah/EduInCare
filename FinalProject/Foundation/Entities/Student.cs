@@ -1,6 +1,7 @@
 ﻿using System;
 using DataAccessLayer;
 using DataAccessLayer.Library;
+using Foundation.Library.Enums;
 
 namespace Foundation.Library.Entities
 {
@@ -14,7 +15,7 @@ namespace Foundation.Library.Entities
         public DateTime DateOfBirth { get; set; }
         public string BirthCertificateNo { get; set; }
         public string NationalIdentificationNo { get; set; }
-        public string Gender { get; set; }
+        public Gender Gender { get; set; }
         public string MobileNo { get; set; }
         public string ImageUrl { get; set; }
         public string ImageAlternativeText { get; set; }

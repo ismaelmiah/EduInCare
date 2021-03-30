@@ -2,6 +2,7 @@
 using System.Linq;
 using Autofac;
 using FinalProject.Web.Models;
+using Foundation.Library.Entities;
 using Foundation.Library.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -91,17 +92,49 @@ namespace FinalProject.Web.Areas.Course.Models.ModelBuilder
 
         public void SaveRegistration(RegistrationModel model)
         {
-            throw new NotImplementedException();
+            var entity = ConvertToEntity(model);
+            _registration.AddRegistration(entity);
         }
 
-        public void UpdateRegistration(Guid modelId, RegistrationModel model)
+        private static Registration ConvertToEntity(RegistrationModel model)
         {
-            throw new NotImplementedException();
+            return new Registration
+            {
+                CourseId = model.CourseId,
+                AcademicYearId = model.AcademicYearId,
+                StudentId = model.StudentId,
+                BoardRegistrationNo = model.BoardRegistrationNo,
+                CardNo = model.IdCardNo,
+                IsPromoted = model.IsPromoted,
+                Status = model.Status,
+                Shift = model.Shift,
+                SectionId = model.SectionId,
+                RollNo = model.RollNo,
+                OldRegistrationId = model.OldRegistrationId
+            };
+        }
+
+        public void UpdateRegistration(Guid id, RegistrationModel model)
+        {
+            var exEntity = _registration.GetRegistration(id);
+            exEntity.Status = model.Status;
+            exEntity.RollNo = model.RollNo;
+            exEntity.Shift = model.Shift;
+            exEntity.SectionId = model.SectionId;
+            exEntity.CourseId = model.CourseId;
+            exEntity.AcademicYearId = model.AcademicYearId;
+            exEntity.StudentId = model.StudentId;
+            exEntity.OldRegistrationId = model.OldRegistrationId;
+            exEntity.RegistrationNo = model.BoardRegistrationNo;
+            exEntity.BoardRegistrationNo = model.BoardRegistrationNo;
+            exEntity.IsPromoted = model.IsPromoted;
+
+            _registration.Update(exEntity);
         }
 
         public void DeleteRegistration(Guid id)
         {
-            throw new NotImplementedException();
+            _registration.Delete(id);
         }
 
         public SelectList GetCourseList(object selectedItem = null)
@@ -124,7 +157,7 @@ namespace FinalProject.Web.Areas.Course.Models.ModelBuilder
             var studentList = _student.GetStudents().Select(x => 
                 new { Id = x.Id, Name = $"{x.FirstName} {x.MiddleName} {x.LastName}" }).ToList();
 
-            return new SelectList(studentList, "Id", "", selectedItem);
+            return new SelectList(studentList, "Id", "Name", selectedItem);
         }
     }
 }
