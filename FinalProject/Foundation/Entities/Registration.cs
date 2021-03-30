@@ -1,6 +1,7 @@
 ﻿using System;
 using DataAccessLayer;
 using DataAccessLayer.Library;
+using Foundation.Library.Enums;
 
 namespace Foundation.Library.Entities
 {
@@ -23,8 +24,9 @@ namespace Foundation.Library.Entities
         public virtual Section Section { get; set; }
         public Guid AcademicYearId { get; set; }
         public virtual AcademicYear AcademicYear { get; set; }
-        public Guid ShiftId { get; set; }
-        public virtual Shift Shift { get; set; }
+        //public Guid ShiftId { get; set; }
+        //public virtual Shift Shift { get; set; }
+        public ShiftType Shift { get; set; }
         public int RollNo { get; set; }
         public string CardNo { get; set; }
         public string BoardRegistrationNo { get; set; }

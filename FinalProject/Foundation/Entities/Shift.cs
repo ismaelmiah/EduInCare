@@ -1,5 +1,4 @@
 ﻿using System;
-using DataAccessLayer;
 using DataAccessLayer.Library;
 
 namespace Foundation.Library.Entities

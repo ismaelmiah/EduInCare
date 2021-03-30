@@ -23,6 +23,15 @@ namespace Foundation.Library.Enums
         Unmarried,
         Other
     }
+
+    public enum ShiftType
+    {
+        [Display(Name = "First Shift")]
+        FirstShift = 1,
+        [Display(Name = "Second Shift")]
+        SecondShift = 2
+    }
+
     public enum ResultType
     {
         Grade = 1,
