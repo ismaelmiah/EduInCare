@@ -47,7 +47,7 @@ namespace FinalProject.Web.Models
 
         public string FormatImageUrl(string imageName)
         {
-            if (string.IsNullOrWhiteSpace(imageName)) return "";
+            if (string.IsNullOrWhiteSpace(imageName)) return "/temp/No-image-available.png";
             var indexOfFileName = imageName.LastIndexOf('\\');
             if (indexOfFileName < 0) return "";
             var fileName = imageName.Substring(indexOfFileName);

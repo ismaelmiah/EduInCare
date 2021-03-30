@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using FinalProject.Web.Areas.Employee.Models.ModelBuilder;
 using Foundation.Library.Entities;
 using Foundation.Library.Enums;
+using Membership.Library.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -14,28 +17,8 @@ namespace FinalProject.Web.Areas.Employee.Models
         public EmployeeFormViewModel()
         {
             ModelBuilder = new EmployeeModelBuilder();
-            Roles = new List<SelectListItem>
-            {
-                new SelectListItem{Text = "Admin", Value = "Admin"},
-                new SelectListItem{Text = "Teacher", Value = "Teacher"},
-                new SelectListItem{Text = "Guardian", Value = "Guardian"},
-                new SelectListItem{Text = "Other", Value = "Other"},
-            };
-
-            EducationLevel = new List<SelectListItem>
-            {
-                new SelectListItem{Text = "HSC", Value = "HSC"},
-                new SelectListItem{Text = "SSC", Value = "SSC"},
-                new SelectListItem{Text = "Degree", Value = "Degree"},
-                new SelectListItem{Text = "BSC", Value = "BSC"},
-                new SelectListItem{Text = "MSC", Value = "MSC"},
-            };
-
-            ExamTitle = new List<SelectListItem>
-            {
-                new SelectListItem{Text = "MidTerm", Value = "MidTerm"},
-                new SelectListItem{Text = "Final", Value = "Final"},
-            };
+            EducationLevel = ModelBuilder.GetEducationLevel();
+            ExamTitle = ModelBuilder.GetExamTitleList();
         }
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -47,7 +30,7 @@ namespace FinalProject.Web.Areas.Employee.Models
         public string MobileNo { get; set; }
         public string PresentAddress { get; set; }
         public string PermanentAddress { get; set; }
-        public string MaritalStatus { get; set; }
+        public MaritalStatus MaritalStatus { get; set; }
         public Religion Religion { get; set; }
         public string Nationality { get; set; }
         public DateTime JoinOfDate { get; set; }
@@ -57,8 +40,7 @@ namespace FinalProject.Web.Areas.Employee.Models
         public string UserName { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
-        public string Role { get; set; }
-        public List<SelectListItem> Roles { get; set; }
+        public RoleType Role { get; set; }
         public Guid EducationLevelId { get; set; }
         public List<SelectListItem> EducationLevel { get; set; }
         public Guid ExamTitleId { get; set; }

@@ -1,4 +1,5 @@
 ﻿@using Foundation.Library.Enums
+@using Membership.Library.Entities
 @model EmployeeFormViewModel
 @{
     ViewData["Title"] = "Employee Application";
@@ -52,7 +53,7 @@
                         </div>
                         <div class="form-group col">
                             <label asp-for="Religion" class="control-label"></label>
-                            <select class="form-control" asp-for="Gender" asp-items="Html.GetEnumSelectList<Religion>()">
+                            <select class="form-control" asp-for="Religion" asp-items="Html.GetEnumSelectList<Religion>()">
                             </select>
                             <span asp-validation-for="Religion" class="text-danger"></span>
                         </div>
@@ -79,7 +80,8 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="MaritalStatus" class="control-label"></label>
-                        <input asp-for="MaritalStatus" class="form-control" />
+                        <select class="form-control" asp-for="MaritalStatus" asp-items="Html.GetEnumSelectList<MaritalStatus>()">
+                        </select>
                         <span asp-validation-for="MaritalStatus" class="text-danger"></span>
                     </div>
                 </div>
@@ -89,11 +91,12 @@
                         <input asp-for="Nationality" class="form-control" />
                         <span asp-validation-for="Nationality" class="text-danger"></span>
                     </div>
-                    @*<div class="form-group">
+                    <div class="form-group">
                         <label asp-for="Role" class="control-label"></label>
-                        <select asp-for="Role" asp-items="Model.Roles" class="form-control"></select>
+                        <select class="form-control" asp-for="Role" asp-items="Html.GetEnumSelectList<RoleType>()">
+                        </select>
                         <span asp-validation-for="Role" class="text-danger"></span>
-                    </div>*@
+                    </div>
                     <div class="form-group">
                         <label asp-for="JoinOfDate" class="control-label"></label>
                         <input asp-for="JoinOfDate" class="form-control" />

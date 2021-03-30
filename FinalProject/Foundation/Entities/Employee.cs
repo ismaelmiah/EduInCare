@@ -26,7 +26,7 @@ namespace Foundation.Library.Entities
         public Gender Gender { get; set; }
         public string Nid { get; set; }
         public string MobileNo { get; set; }
-        public string MaritalStatus { get; set; }
+        public MaritalStatus MaritalStatus { get; set; }
         public Religion Religion { get; set; }
         public DateTime JoinOfDate { get; set; }
         public DateTime BirthDate { get; set; }
