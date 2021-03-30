@@ -1,0 +1,85 @@
+﻿@model AcademicYearModel
+
+@{
+    ViewData["Title"] = "Upsert";
+    ViewData["subtitle"] = "Add Academic Year";
+}
+
+<div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-6">
+        <div class="card card-info">
+            <div class="card-header">
+                <h3 class="card-title text-center">@ViewData["subtitle"]</h3>
+            </div>
+        </div>
+        <form class="form-horizontal" asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
+            <div class="card-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-7">
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <label asp-for="Title"></label>
+                            </div>
+                            <div class="col-8">
+                                <input asp-for="Title" class="form-control" />
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <label asp-for="StartDate"></label>
+                            </div>
+                            <div class="col-8">
+                                <input asp-for="StartDate" class="form-control" />
+                                <span asp-validation-for="StartDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <label asp-for="EndDate"></label>
+                            </div>
+                            <div class="col-8">
+                                <input asp-for="EndDate" class="form-control" />
+                                <span asp-validation-for="EndDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <label for="IsOpenForAdmission" class="control-label">Is Open For Admission</label>
+                            </div>
+                            <div class="col-8">
+                                <input asp-for="IsOpenForAdmission" class="form-control" />
+                                <span asp-validation-for="IsOpenForAdmission" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-8">
+                                <label asp-for="Status"></label>
+                            </div>
+                            <div class="col-4">
+                                <input asp-for="Status" class="form-control" />
+                                <span asp-validation-for="Status" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="form-group row mb-0">
+                    <div class="col-6 text-left">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                    <div class="col-6 text-right">
+                        <a asp-area="Admin" asp-controller="AcademicYear" asp-action="Index">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-2"></div>
+</div>

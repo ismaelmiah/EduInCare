@@ -20,7 +20,8 @@ namespace Foundation.Library.UnitOfWorks
             IDesignationRepository designation,
             IGroupRepository group,
             ISectionRepository section,
-            ISubjectRepository subject) : base(dbContext)
+            ISubjectRepository subject,
+            IAcademicYearRepository academicYear) : base(dbContext)
         {
             CourseRepository = course;
             StudentRepository = student;
@@ -36,6 +37,7 @@ namespace Foundation.Library.UnitOfWorks
             GroupRepository = group;
             SectionRepository = section;
             SubjectRepository = subject;
+            AcademicYearRepository = academicYear;
         }
 
         public IStudentRepository StudentRepository { get; set; }
@@ -52,5 +54,6 @@ namespace Foundation.Library.UnitOfWorks
         public IGroupRepository GroupRepository { get; set; }
         public ISectionRepository SectionRepository { get; set; }
         public ISubjectRepository SubjectRepository { get; set; }
+        public IAcademicYearRepository AcademicYearRepository { get; set; }
     }
 }
