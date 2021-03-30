@@ -124,9 +124,7 @@ namespace FinalProject.Web.Areas.Student.Models
             var student = _studentService.GetStudent(id);
             return new StudentProfileView
             {
-                FirstName = student.FirstName,
-                MiddleName = student.MiddleName,
-                LastName = student.LastName,
+                Name = student.FirstName + " " + student.MiddleName + " " + student.LastName,
                 Gender = student.Gender,
                 DateOfBirth = student.DateOfBirth,
                 YearOfEnroll = student.YearOfEnroll,
@@ -135,7 +133,6 @@ namespace FinalProject.Web.Areas.Student.Models
                 BirthCertificateNo = student.BirthCertificateNo,
                 NationalIdentificationNo = student.NationalIdentificationNo,
                 ParentsInfo = GetStudentParents(student.Parents),
-                EnrollCourse = CourseList(),
                 ImagePath = FormatImageUrl(student.ImageUrl)
             };
         }
@@ -178,7 +175,7 @@ namespace FinalProject.Web.Areas.Student.Models
             }
             _studentService.Update(exStudent);
         }
-        
+
         public void SaveStudent(StudentFormViewModel model)
         {
             var student = ConvertToEntityStudent(model);

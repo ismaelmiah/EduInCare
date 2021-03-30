@@ -17,6 +17,25 @@ namespace Foundation.Library.Enums
         Others = 5
     }
 
+    public enum BloodGroup
+    {
+        [Display(Name = "AB -")]
+        AbNegative,
+        [Display(Name = "AB +")]
+        AbPositive,
+        [Display(Name = "B +")]
+        BPositive,
+        [Display(Name = "B -")]
+        BNegative,
+        [Display(Name = "O +")]
+        OPositive,
+        [Display(Name = "O -")]
+        ONegative,
+        [Display(Name = "A -")]
+        ANegative,
+        [Display(Name = "A +")]
+        APositive
+    }
     public enum MaritalStatus
     {
         Married,

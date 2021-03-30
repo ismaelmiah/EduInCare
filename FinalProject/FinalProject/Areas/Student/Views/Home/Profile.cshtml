@@ -62,10 +62,10 @@
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link active"  data-toggle="tab" aria-current="page" href="#information">Profile</a>
+                                <a class="nav-link active" data-toggle="tab" aria-current="page" href="#information">Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link"  data-toggle="tab" href="#subject">Subjects</a>
+                                <a class="nav-link" data-toggle="tab" href="#subject">Subjects</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#attendance">Attendance</a>
@@ -88,13 +88,13 @@
                                         <label for="">Full Name</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: Annetta Gutkowski IV </p>
+                                        <p for="">: @Model.Name</p>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="">Date of Birth</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: 22/10/2013</p>
+                                        <p for="">: @Model.DateOfBirth.ToShortDateString()</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -102,13 +102,13 @@
                                         <label for="">Gender</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: Male</p>
+                                        <p for="">: @Model.Gender.ToString()</p>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="">Religion</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: Buddhist</p>
+                                        <p for="">: @Model.Religion.ToString()</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -116,13 +116,13 @@
                                         <label for="">Blood Group</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: AB-</p>
+                                        <p for="">: @Model.BloodGroup.ToString()</p>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="">Nationality</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: Cocos (Keeling) Islands</p>
+                                        <p for="">: @Model.Nationality</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -130,27 +130,13 @@
                                         <label for="">Email</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: herman.lelah@example.com</p>
+                                        <p for="">: @Model.Email</p>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="">Phone No.</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: +5118716558596</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label for="">Extra Curricular Activities </label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p for="">: </p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="">Note</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p for="">: </p>
+                                        <p for="">: @Model.MobileNo</p>
                                     </div>
                                 </div>
                                 <p class="text-info" style="font-size: 16px; border-bottom: 1px solid #eee;">Parents Info:</p>
@@ -159,13 +145,13 @@
                                         <label for="">Father Name </label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: Malachi West</p>
+                                        <p for="">: @Model.ParentsInfo.FatherName</p>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="">Father Phone No.</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: +2437439917344</p>
+                                        <p for="">: @Model.ParentsInfo.FatherMobileNo</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -173,13 +159,13 @@
                                         <label for="">Mother Name </label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: Nella Bayer</p>
+                                        <p for="">: @Model.ParentsInfo.MotherName</p>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="">Mother Phone No.</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: +2852651549849</p>
+                                        <p for="">: @Model.ParentsInfo.MotherMobileNo</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -187,13 +173,13 @@
                                         <label for="">Guardian Name </label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: </p>
+                                        <p for="">: @Model.ParentsInfo.GuardianName</p>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="">Guardian Phone No.</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: </p>
+                                        <p for="">: @Model.ParentsInfo.GuardianMobileNo</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -202,8 +188,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <p for="">
-                                            : 97961 Aliza Motorway
-                                            Hermanville, IN 00053-2066
+                                            : @Model.PresentAddress
                                         </p>
                                     </div>
                                     <div class="col-md-3">
@@ -211,8 +196,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <p for="">
-                                            : 79094 Mosciski Islands
-                                            Port Antoinette, SC 42643
+                                            : @Model.PermanentAddress
                                         </p>
                                     </div>
                                 </div>
@@ -222,13 +206,13 @@
                                         <label for="">Academic Year</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: 2021</p>
+                                        <p for="">: @Model.AcademicYearModel.Title</p>
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="">Registraton No </label>
+                                        <label for="">Registration No </label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: 212001</p>
+                                        <p for="">: @Model.RegistrationModel.RegistrationNo</p>
                                     </div>
 
                                 </div>
@@ -237,13 +221,13 @@
                                         <label for="">Class</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: Two</p>
+                                        <p for="">: @Model.CourseModel.Title</p>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="">Section </label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: N</p>
+                                        <p for="">: @Model.SectionModel.Name</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -251,13 +235,13 @@
                                         <label for="">Roll No.</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: 6</p>
+                                        <p for="">: @Model.RegistrationModel.RollNo</p>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="">Shift</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: Morning</p>
+                                        <p for="">: @Model.RegistrationModel.Shift.ToString()</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -265,36 +249,22 @@
                                         <label for="">Board Registration No.</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: </p>
+                                        <p for="">: @Model.RegistrationModel.BoardRegistrationNo</p>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="">Card No.</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: </p>
+                                        <p for="">: @Model.RegistrationModel.IdCardNo</p>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <label for="">Notification SMS No.</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p for="">: Father's Phone No.</p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="">Siblings</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p for="">: </p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
                                         <label for="">Username</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: makenna54</p>
+                                        <p for="">: @Model.userName</p>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="">Status</label>
@@ -302,12 +272,17 @@
                                     <div class="col-md-3">
                                         <p for="">
                                             :
-                                            <span class="bg-green badge">Active</span>
+                                            @if (Model.RegistrationModel.Status == true)
+                                            {
+                                                <span class="bg-green badge">Active</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="bg-green badge">In Active</span>
+                                            }
                                         </p>
                                     </div>
                                 </div>
-
-
                             </div>
                             <div class="tab-pane" id="subject">
                                 <table id="subjectTable" class="table table-responsive table-bordered table-hover table-td-center">
