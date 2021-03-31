@@ -1,5 +1,4 @@
 ﻿using System;
-using DataAccessLayer;
 using DataAccessLayer.Library;
 
 namespace Foundation.Library.Entities
@@ -12,6 +11,7 @@ namespace Foundation.Library.Entities
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
+        public bool Type { get; set; }
         public Guid CourseId { get; set; }
         public virtual Course Course { get; set; }
         public bool ExcludeInResult { get; set; }

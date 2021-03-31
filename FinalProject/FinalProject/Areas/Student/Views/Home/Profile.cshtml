@@ -42,20 +42,20 @@
                             <div class="text-center">
                                 <img class="profile-user-img img-circle" src="@Model.ImagePath">
                             </div>
-                            <h3 class="profile-username text-center">Annetta Gutkowski IV</h3>
-                            <p class="text-muted text-center">Two</p>
+                            <h3 class="profile-username text-center">@Model.Name</h3>
+                            <p class="text-muted text-center">@Model.CourseModel.Title</p>
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item" style="background-color: #FFF">
-                                    <b>Registration No.</b> <a class="pull-right">212001</a>
+                                    <b>Registration No.</b> <a class="pull-right">@Model.RegistrationModel.RegistrationNo</a>
                                 </li>
                                 <li class="list-group-item" style="background-color: #FFF">
-                                    <b>ID Card No.</b> <a class="pull-right"></a>
+                                    <b>ID Card No.</b> <a class="pull-right">@Model.RegistrationModel.IdCardNo</a>
                                 </li>
                                 <li class="list-group-item" style="background-color: #FFF">
-                                    <b>Phone</b> <a class="pull-right">+5118716558596</a>
+                                    <b>Phone</b> <a class="pull-right">@Model.MobileNo</a>
                                 </li>
                                 <li class="list-group-item" style="background-color: #FFF">
-                                    <b>Email</b> <a class="pull-right">herman.lelah@example.com</a>
+                                    <b>Email</b> <a class="pull-right">@Model.Email</a>
                                 </li>
                             </ul>
                         </div>
@@ -296,9 +296,19 @@
                                             <th class="text-center">Name</th>
                                             <th class="text-center">Code</th>
                                             <th class="text-center">Type</th>
+                                            <th class="text-center">Exclude In Result</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach (var item in Model.SubjectModels)
+                                        {
+                                        <tr>
+                                            <td>@item.Name</td>
+                                            <td>@item.Code</td>
+                                            <td>@item.Type</td>
+                                            <td>@item.ExcludeInResult</td>
+                                        </tr>
+                                        }
                                     </tbody>
                                 </table>
                             </div>

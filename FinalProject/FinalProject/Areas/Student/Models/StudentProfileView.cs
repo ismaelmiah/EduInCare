@@ -36,5 +36,6 @@ namespace FinalProject.Web.Areas.Student.Models
         public RegistrationModel RegistrationModel { get; set; }
         public CourseModel CourseModel { get; set; }
         public SectionModel SectionModel { get; set; }
+        public List<SubjectModel> SubjectModels { get; set; }
     }
 }

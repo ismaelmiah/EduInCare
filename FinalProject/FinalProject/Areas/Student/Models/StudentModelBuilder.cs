@@ -21,9 +21,10 @@ namespace FinalProject.Web.Areas.Student.Models
         private readonly IAcademicYearService _academic;
         private readonly ApplicationDbContext _dbContext;
         private readonly ISectionService _section;
+        private readonly ISubjectService _subject;
 
 
-        public StudentModelBuilder(IStudentService studentService, ICourseService courseService, IStudentParentService parentService, IRegistrationStudentService registration, IAcademicYearService academic, ApplicationDbContext dbContext, ISectionService section)
+        public StudentModelBuilder(IStudentService studentService, ICourseService courseService, IStudentParentService parentService, IRegistrationStudentService registration, IAcademicYearService academic, ApplicationDbContext dbContext, ISectionService section, ISubjectService subject)
         {
             _studentService = studentService;
             _courseService = courseService;
@@ -32,6 +33,7 @@ namespace FinalProject.Web.Areas.Student.Models
             _academic = academic;
             _dbContext = dbContext;
             _section = section;
+            _subject = subject;
         }
         public StudentModelBuilder()
         {
@@ -42,13 +44,14 @@ namespace FinalProject.Web.Areas.Student.Models
             _registration = Startup.AutofacContainer.Resolve<IRegistrationStudentService>();
             _dbContext = Startup.AutofacContainer.Resolve<ApplicationDbContext>();
             _section = Startup.AutofacContainer.Resolve<ISectionService>();
+            _subject = Startup.AutofacContainer.Resolve<ISubjectService>();
         }
         private Foundation.Library.Entities.Student ConvertToEntityStudent(StudentFormViewModel model)
         {
             var student = new Foundation.Library.Entities.Student();
             if (model.Photo != null)
             {
-                var imageInfo = StoreFile(model.Photo);
+                StoreFile(model.Photo);
             }
 
             student.FirstName = model.FirstName;
@@ -164,10 +167,22 @@ namespace FinalProject.Web.Areas.Student.Models
                 AcademicYearModel = GetAcademicYearModel(academicYear),
                 RegistrationModel = GetRegistrationModel(registrationInfo),
                 CourseModel = GetCourseModel(courseInfo),
-                SectionModel = GetSectionModel(sectionInfo)
+                SectionModel = GetSectionModel(sectionInfo),
+                SubjectModels = GetSubjects(sectionInfo.CourseId)
             };
         }
 
+        private List<SubjectModel> GetSubjects(Guid courseId)
+        {
+
+            return _subject.GetSubjects(courseId).Select(x => new SubjectModel
+            {
+                Name = x.Name,
+                Code = x.Code,
+                ExcludeInResult = x.ExcludeInResult,
+                Type = x.Type
+            }).ToList();
+        }
         private static SectionModel GetSectionModel(Section x)
         {
             return new SectionModel
