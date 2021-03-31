@@ -275,5 +275,16 @@ namespace FinalProject.Web.Areas.Student.Models
             var student = ConvertToEntityStudent(model);
             _studentService.AddStudent(student);
         }
+
+        public IList<SubjectModel> GetSubjectModels()
+        {
+            return _subject.GetSubjects().Select(x => new SubjectModel
+            {
+                Name = x.Name,
+                Code = x.Code,
+                ExcludeInResult = x.ExcludeInResult,
+                Type = x.Type
+            }).ToList();
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using FinalProject.Web.Areas.Course.Models;
 using Foundation.Library.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,6 +15,7 @@ namespace FinalProject.Web.Areas.Student.Models
         {
             ModelBuilder = new StudentModelBuilder();
             EnrollCourse = ModelBuilder.CourseList();
+            SubjectModels = ModelBuilder.GetSubjectModels();
         }
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
@@ -28,11 +30,12 @@ namespace FinalProject.Web.Areas.Student.Models
         [Display(Name = "National Identification Number")]
         public string NationalIdentificationNo { get; set; }
         public Gender Gender { get; set; }
+        public Religion Religion { get; set; }
         public string MobileNo { get; set; }
         [Display(Name = "Present Address")]
-        public AddressModel PresentAddress { get; set; }
+        public string PresentAddress { get; set; }
         [Display(Name = "Permanent Address")]
-        public AddressModel PermanentAddress { get; set; }
+        public string PermanentAddress { get; set; }
         public string Nationality { get; set; }
         [Display(Name = "Year Of Enroll")]
         public DateTime YearOfEnroll { get; set; }
@@ -43,5 +46,6 @@ namespace FinalProject.Web.Areas.Student.Models
         public IList<SelectListItem> EnrollCourse { get; set; }
         public Guid CourseId { get; set; }
         public Guid Id { get; set; }
+        public IList<SubjectModel> SubjectModels { get; set; }
     }
 }

@@ -12,8 +12,7 @@
     }
 }
 <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
+    <div class="col-md-12">
         <div class="card card-info">
             <div class="card-header">
                 <h3 class="card-title text-center">@ViewData["Title"]</h3>
@@ -23,105 +22,127 @@
                 {
                     <input type="hidden" asp-for="Id" />
                 }
-                <div class="card-body row">
+                <div class="card-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="col-md-8">
-                        <label class="control-label">Students Info</label>
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label asp-for="FirstName" class="control-label"></label>
-                                    <input asp-for="FirstName" class="form-control" />
-                                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label asp-for="MiddleName" class="control-label"></label>
-                                    <input asp-for="MiddleName" class="form-control" />
-                                    <span asp-validation-for="MiddleName" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label asp-for="LastName" class="control-label"></label>
-                                    <input asp-for="LastName" class="form-control" />
-                                    <span asp-validation-for="LastName" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="DateOfBirth" class="control-label"></label>
-                            <input asp-for="DateOfBirth" class="form-control" />
-                            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Gender" class="control-label"></label>
-                            <select class="form-control" asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()"></select>
-                            <span asp-validation-for="Gender" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="BirthCertificateNo" class="control-label"></label>
-                            <input asp-for="BirthCertificateNo" class="form-control" />
-                            <span asp-validation-for="BirthCertificateNo" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="NationalIdentificationNo" class="control-label"></label>
-                            <input asp-for="NationalIdentificationNo" class="form-control" />
-                            <span asp-validation-for="NationalIdentificationNo" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="MobileNo" class="control-label"></label>
-                            <input asp-for="MobileNo" class="form-control" />
-                            <span asp-validation-for="MobileNo" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Nationality" class="control-label"></label>
-                            <input asp-for="Nationality" class="form-control" />
-                            <span asp-validation-for="Nationality" class="text-danger"></span>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="control-label">Course</label>
-                            <select asp-for="CourseId" asp-items="Model.EnrollCourse" class="form-control"></select>
-                            <span asp-validation-for="CourseId" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="YearOfEnroll" class="control-label"></label>
-                            <input asp-for="YearOfEnroll" class="form-control" />
-                            <span asp-validation-for="YearOfEnroll" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Photo" class="control-label"></label>
-                            <input asp-for="Photo" onchange="readURL(this);" class="form-control" />
-                            <span asp-validation-for="Photo" class="text-danger"></span>
-                        </div>
-                        <div id="previewstudentphoto">
-
-                            @if (Model.ImagePath != null)
-                            {
-                                <img id="blah" style="width: 150px; height: 200px;" src="@Model.ImagePath" alt="Student Photo">
-                            }
-                            else
-                            {
-                                <img id="blah" style="width: 150px; height: 200px;" src="#" alt="Student Photo">
-                            }
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div>
-                            <label>Present Address</label>
-                            <partial name="_PresentAddressFormVIew" model="Model" />
-                        </div>
-                        <div>
-                            <label>Permanent Address</label>
-                            <partial name="_PermanentAddressFormVIew" model="Model" />
-                        </div>
-                        <div>
-                            <div>
-                                <label class="text-bold">Parents Info</label>
+                    <label class="control-label text-info font-weight-bold">Students Info</label>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label asp-for="FirstName" class="control-label"></label>
+                                        <input asp-for="FirstName" class="form-control" />
+                                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label asp-for="MiddleName" class="control-label"></label>
+                                        <input asp-for="MiddleName" class="form-control" />
+                                        <span asp-validation-for="MiddleName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label asp-for="LastName" class="control-label"></label>
+                                        <input asp-for="LastName" class="form-control" />
+                                        <span asp-validation-for="LastName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label asp-for="DateOfBirth" class="control-label"></label>
+                                        <input asp-for="DateOfBirth" class="form-control" />
+                                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label asp-for="Gender" class="control-label"></label>
+                                        <select class="form-control" asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()"></select>
+                                        <span asp-validation-for="Gender" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label asp-for="Religion" class="control-label"></label>
+                                        <select class="form-control" asp-for="Religion" asp-items="Html.GetEnumSelectList<Religion>()"></select>
+                                        <span asp-validation-for="Religion" class="text-danger"></span>
+                                    </div>
+                                </div>
                             </div>
-                            <partial name="_ParentsFromView" model="Model" />
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label asp-for="BirthCertificateNo" class="control-label"></label>
+                                    <input asp-for="BirthCertificateNo" class="form-control" />
+                                    <span asp-validation-for="BirthCertificateNo" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label asp-for="NationalIdentificationNo" class="control-label"></label>
+                                    <input asp-for="NationalIdentificationNo" class="form-control" />
+                                    <span asp-validation-for="NationalIdentificationNo" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label asp-for="MobileNo" class="control-label"></label>
+                                    <input asp-for="MobileNo" class="form-control" />
+                                    <span asp-validation-for="MobileNo" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label asp-for="Nationality" class="control-label"></label>
+                                    <input asp-for="Nationality" class="form-control" />
+                                    <span asp-validation-for="Nationality" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label asp-for="Photo" class="control-label"></label>
+                                    <input asp-for="Photo" onchange="readURL(this);" class="form-control" />
+                                    <span asp-validation-for="Photo" class="text-danger"></span>
+                                </div>
+                                <div class="col">
+                                    <div id="previewstudentphoto" style="height: 200px; width: 220px;" class="border">
+                                        @if (Model.ImagePath != null)
+                                        {
+                                            <img id="blah" style="width: 220px; height: 200px;" src="@Model.ImagePath" alt="Student Photo">
+                                        }
+                                        else
+                                        {
+                                            <img id="blah" style="width: 220px; height: 200px;" src="#" alt="Student Photo">
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label class="control-label text-info font-weight-bold">Guardians Info</label>
+                                    <partial name="_ParentsFromView" model="Model" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label class="control-label text-info font-weight-bold">Present Address</label>
+                                    <partial name="_PresentAddressFormVIew" model="Model" />
+                                </div>
+                                <div class="col">
+                                    <label class="control-label text-info font-weight-bold">Permanent Address</label>
+                                    <partial name="_PermanentAddressFormVIew" model="Model" />
+                                </div>
+                            </div>
+                            <label class="control-label text-info font-weight-bold">Academic Info</label>
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label class="control-label">Course</label>
+                                    <select asp-for="CourseId" asp-items="Model.EnrollCourse" class="form-control"></select>
+                                    <span asp-validation-for="CourseId" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label for="SubjectModels" class="control-label text-info font-weight-bold">Subjects</label>
+                                    @foreach (var item in Model.SubjectModels)
+                                    {
+                                        <div class="d-inline">@item.Name,</div>
+                                    }
+                                    <span asp-validation-for="SubjectModels" class="text-danger"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -146,7 +167,6 @@
 
         </div>
     </div>
-    <div class="col-md-1"></div>
 </div>
 
 @section Scripts
@@ -162,7 +182,6 @@
             imageTag.style.removeProperty('padding');
             imageTag.style.removeProperty('border');
         }
-        console.log(imageTag);
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -170,7 +189,7 @@
                     document.getElementById('blah').style.removeProperty('padding');
                     document.getElementById('blah').style.removeProperty('border');
                     document.getElementById('blah').src = e.target.result;
-                    document.getElementById('blah').width = 150;
+                    document.getElementById('blah').width = 220;
                     document.getElementById('blah').height = 200;
                 };
 
