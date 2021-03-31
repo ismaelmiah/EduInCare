@@ -52,7 +52,7 @@ namespace Foundation.Library.Services
                     NationalIdentificationNo = x.NationalIdentificationNo,
                     Nationality = x.Nationality,
                     YearOfEnroll = x.YearOfEnroll,
-                    Parents = x.Parents
+                    Parents = x.Parents,
                 }).ToList();
 
             return (result.total, result.totalDisplay, data);
@@ -67,7 +67,7 @@ namespace Foundation.Library.Services
         public Student GetStudent(Guid id)
         {
             return _management.StudentRepository.Get(x => x.Id == id, null,
-                "Parents", false).FirstOrDefault();
+                "Parents,Registration", false).FirstOrDefault();
         }
 
         public void Update(Student student)

@@ -1,11 +1,14 @@
 ﻿@model SubjectModel
 
 @{
-    ViewData["Title"] = "Upsert";
     ViewData["subtitle"] = "Add Subject";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLTE.cshtml";
 }
 
+@section Title
+{
+    <title>Create Subject</title>
+}
 <div class="row">
     <div class="col-md-2">
     </div>
@@ -18,7 +21,7 @@
         <form class="form-horizontal" asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
             <div class="card-body">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input asp-for="Id" type="hidden"/>
+                <input asp-for="Id" type="hidden" />
                 <div class="row">
                     <div class="col-8">
                         <div class="form-group row">

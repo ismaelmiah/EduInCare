@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Autofac;
+using FinalProject.Web.Areas.Admin.Models;
+using FinalProject.Web.Areas.Course.Models;
 using FinalProject.Web.Models;
 using Foundation.Library.Entities;
 using Foundation.Library.Services;
+using Membership.Library.Contexts;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FinalProject.Web.Areas.Student.Models
@@ -14,19 +17,31 @@ namespace FinalProject.Web.Areas.Student.Models
         private readonly IStudentService _studentService;
         private readonly ICourseService _courseService;
         private readonly IStudentParentService _parentService;
+        private readonly IRegistrationStudentService _registration;
+        private readonly IAcademicYearService _academic;
+        private readonly ApplicationDbContext _dbContext;
+        private readonly ISectionService _section;
 
-        public StudentModelBuilder(IStudentService studentService, ICourseService courseService,
-            IStudentParentService parentService)
+
+        public StudentModelBuilder(IStudentService studentService, ICourseService courseService, IStudentParentService parentService, IRegistrationStudentService registration, IAcademicYearService academic, ApplicationDbContext dbContext, ISectionService section)
         {
             _studentService = studentService;
             _courseService = courseService;
             _parentService = parentService;
+            _registration = registration;
+            _academic = academic;
+            _dbContext = dbContext;
+            _section = section;
         }
         public StudentModelBuilder()
         {
             _parentService = Startup.AutofacContainer.Resolve<IStudentParentService>();
             _studentService = Startup.AutofacContainer.Resolve<IStudentService>();
             _courseService = Startup.AutofacContainer.Resolve<ICourseService>();
+            _academic = Startup.AutofacContainer.Resolve<IAcademicYearService>();
+            _registration = Startup.AutofacContainer.Resolve<IRegistrationStudentService>();
+            _dbContext = Startup.AutofacContainer.Resolve<ApplicationDbContext>();
+            _section = Startup.AutofacContainer.Resolve<ISectionService>();
         }
         private Foundation.Library.Entities.Student ConvertToEntityStudent(StudentFormViewModel model)
         {
@@ -122,6 +137,12 @@ namespace FinalProject.Web.Areas.Student.Models
         public StudentProfileView BuildStudentProfileView(Guid id)
         {
             var student = _studentService.GetStudent(id);
+            //var userInfo = _dbContext.Users.Find(student.UserId);
+            var registrationInfo = _registration.GetRegistration(student.Registration.Id);
+            var courseInfo = _courseService.GetCourse(registrationInfo.CourseId);
+            var academicYear = _academic.GetAcademicYear(registrationInfo.AcademicYearId);
+            var sectionInfo = _section.GetSection(registrationInfo.SectionId);
+
             return new StudentProfileView
             {
                 Name = student.FirstName + " " + student.MiddleName + " " + student.LastName,
@@ -133,9 +154,67 @@ namespace FinalProject.Web.Areas.Student.Models
                 BirthCertificateNo = student.BirthCertificateNo,
                 NationalIdentificationNo = student.NationalIdentificationNo,
                 ParentsInfo = GetStudentParents(student.Parents),
-                ImagePath = FormatImageUrl(student.ImageUrl)
+                ImagePath = FormatImageUrl(student.ImageUrl),
+                Religion = student.Religion,
+                BloodGroup = student.BloodGroup,
+                //Email = userInfo.Email,
+                //UserName = userInfo.UserName,
+                PresentAddress = student.PresentAddress,
+                PermanentAddress = student.PermanentAddress,
+                AcademicYearModel = GetAcademicYearModel(academicYear),
+                RegistrationModel = GetRegistrationModel(registrationInfo),
+                CourseModel = GetCourseModel(courseInfo),
+                SectionModel = GetSectionModel(sectionInfo)
             };
         }
+
+        private static SectionModel GetSectionModel(Section x)
+        {
+            return new SectionModel
+            {
+                Name = x.Name,
+                Capacity = x.Capacity,
+                Status = x.Status,
+                Description = x.Description
+            };
+        }
+        private static CourseModel GetCourseModel(Foundation.Library.Entities.Course x)
+        {
+            return new CourseModel
+            {
+                Title = x.Name,
+                Duration = x.Duration,
+                HaveCompulsorySubject = x.HaveCompulsorySubject,
+                MaxCompulsorySubject = x.MaxCompulsorySubject,
+                Status = x.Status,
+                Description = x.Description,
+            };
+        }
+        private static AcademicYearModel GetAcademicYearModel(AcademicYear x)
+        {
+            return new AcademicYearModel
+            {
+                StartDate = x.StartDate,
+                EndDate = x.EndDate,
+                IsOpenForAdmission = x.IsOpenForAdmission,
+                Status = x.Status,
+                Title = x.Title
+            };
+        }
+
+        private static RegistrationModel GetRegistrationModel(Registration x)
+        {
+            return new RegistrationModel
+            {
+                BoardRegistrationNo = x.BoardRegistrationNo,
+                IdCardNo = x.CardNo,
+                IsPromoted = x.IsPromoted,
+                Status = x.Status,
+                Shift = x.Shift,
+                RollNo = x.RollNo,
+            };
+        }
+
         public StudentFormViewModel BuildStudentModel(Guid id)
         {
             var student = _studentService.GetStudent(id);

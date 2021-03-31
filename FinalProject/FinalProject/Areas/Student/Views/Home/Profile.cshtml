@@ -1,10 +1,13 @@
-﻿@model StudentProfileView
+﻿@using Foundation.Library.Enums
+@model StudentProfileView
 
 @{
-    ViewData["Title"] = "Profile";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLTE.cshtml";
 }
-
+@section Title
+{ 
+    <title>Profile</title>
+}
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
@@ -116,7 +119,8 @@
                                         <label for="">Blood Group</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: @Model.BloodGroup.ToString()</p>
+                                        @{var bloodType = EnumHelper<BloodGroup>.GetDisplayValue(Model.BloodGroup);}
+                                        <p for="">: @bloodType</p>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="">Nationality</label>
@@ -241,7 +245,8 @@
                                         <label for="">Shift</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: @Model.RegistrationModel.Shift.ToString()</p>
+                                        @{var shift = EnumHelper<ShiftType>.GetDisplayValue(Model.RegistrationModel.Shift);}
+                                        <p for="">: @shift</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -264,7 +269,7 @@
                                         <label for="">Username</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p for="">: @Model.userName</p>
+                                        <p for="">: @Model.UserName</p>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="">Status</label>

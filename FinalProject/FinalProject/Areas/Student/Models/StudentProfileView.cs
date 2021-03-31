@@ -25,9 +25,9 @@ namespace FinalProject.Web.Areas.Student.Models
         public BloodGroup BloodGroup { get; set; }
         public string MobileNo { get; set; }
         public string Email { get; set; }
-        public string userName { get; set; }
-        public AddressModel PresentAddress { get; set; }
-        public AddressModel PermanentAddress { get; set; }
+        public string UserName { get; set; }
+        public string PresentAddress { get; set; }
+        public string PermanentAddress { get; set; }
         public string Nationality { get; set; }
         public DateTime YearOfEnroll { get; set; }
         public ParentsModel ParentsInfo { get; set; }
