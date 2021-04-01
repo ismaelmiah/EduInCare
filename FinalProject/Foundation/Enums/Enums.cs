@@ -51,6 +51,12 @@ namespace Foundation.Library.Enums
         SecondShift = 2
     }
 
+    public enum WorkShift
+    {
+        Day = 1,
+        Night = 2
+    }
+
     public enum ResultType
     {
         Grade = 1,

@@ -19,6 +19,7 @@ namespace FinalProject.Web.Areas.Employee.Models
             ModelBuilder = new EmployeeModelBuilder();
             EducationLevel = ModelBuilder.GetEducationLevel();
             ExamTitle = ModelBuilder.GetExamTitleList();
+            DesignationList = ModelBuilder.GetDesignationList();
         }
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -56,11 +57,10 @@ namespace FinalProject.Web.Areas.Employee.Models
         public string Achievement { get; set; }
         public string CompanyName { get; set; }
         public string CompanyLocation { get; set; }
-        public string Designation { get; set; }
+        public Guid DesignationId { get; set; }
+        public SelectList DesignationList { get; set; }
         public DateTime From { get; set; }
         public DateTime To { get; set; }
-        public Guid DesignationId { get; set; }
-        public Designation NewDesignation { get; set; }
         public DateTime Doj { get; set; }
         public decimal Salary { get; set; }
         public int TotalLeave { get; set; }

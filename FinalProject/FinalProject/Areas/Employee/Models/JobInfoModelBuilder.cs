@@ -42,11 +42,11 @@ namespace FinalProject.Web.Areas.Employee.Models
         {
             return new JobInfo
             {
-                DesignationId = model.DesignationId,
+                //DesignationId = model.DesignationId,
                 JoiningDate = model.JoiningDate,
                 Salary = model.Salary,
                 TotalLeave = model.TotalLeave,
-                EmployeeId = model.EmployeeId
+                //EmployeeId = model.EmployeeId
             };
         }
 

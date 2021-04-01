@@ -186,7 +186,7 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
                             record.Cgpa.ToString(CultureInfo.InvariantCulture),
                             record.PassingYear,
                             record.Duration.ToString(),
-                            record.Employee.Name,
+                            //record.Employee.Name,
                             record.Id.ToString(),
                         }
                     ).ToArray()
@@ -324,8 +324,8 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
                 data = (from record in records
                         select new[]
                         {
-                            record.Employee.Name,
-                            record.Designation.Name,
+                            //record.Employee.Name,
+                            //record.Designation.Name,
                             record.JoiningDate.ToShortDateString(),
                             record.Salary.ToString(CultureInfo.InvariantCulture),
                             record.TotalLeave.ToString(),
@@ -522,6 +522,11 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
         public void DeleteEmployee(Guid id)
         {
             _employeeService.DeleteEmployee(id);
+        }
+
+        public SelectList GetDesignationList(object selected = null)
+        {
+            return new SelectList(_designationService.GetDesignations(), "Id", "Name", selected);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DataAccessLayer;
 using DataAccessLayer.Library;
 using Foundation.Library.Enums;
+using Membership.Library.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace Foundation.Library.Entities
@@ -20,7 +21,11 @@ namespace Foundation.Library.Entities
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
+        public RoleType Role { get; set; }
+        public Guid CardId { get; set; }
         public string Name { get; set; }
+        public Guid DesignationId { get; set; }
+        public virtual Designation Designation { get; set; }
         public string FatherName { get; set; }
         public string MotherName { get; set; }
         public Gender Gender { get; set; }
@@ -29,7 +34,9 @@ namespace Foundation.Library.Entities
         public MaritalStatus MaritalStatus { get; set; }
         public Religion Religion { get; set; }
         public DateTime JoinOfDate { get; set; }
+        public DateTime LeavingDate { get; set; }
         public DateTime BirthDate { get; set; }
+        public WorkShift? WorkShift { get; set; }
         public string Nationality { get; set; }
         public string PresentAddress { get; set; }
         public string PermanentAddress { get; set; }
@@ -37,9 +44,10 @@ namespace Foundation.Library.Entities
         public string ImageAlternativeText { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
-        public virtual ICollection<EmployeeEducation> EmployeeEducation { get; set; }
-        public virtual ICollection<EmploymentHistory> EmploymentHistory { get; set; }
-        public virtual ICollection<JobInfo> JobInfo { get; set; }
+        public bool Status { get; set; }
+        //public virtual ICollection<EmployeeEducation> EmployeeEducation { get; set; }
+        //public virtual ICollection<EmploymentHistory> EmploymentHistory { get; set; }
+        //public virtual ICollection<JobInfo> JobInfo { get; set; }
         public virtual Section Section { get; set; }
     }
 }

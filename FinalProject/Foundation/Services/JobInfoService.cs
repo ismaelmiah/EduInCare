@@ -53,7 +53,7 @@ namespace Foundation.Library.Services
             }
             else
             {
-                result = _management.JobInfoRepository.GetDynamic(x => x.Employee.Name == searchText,
+                result = _management.JobInfoRepository.GetDynamic(x => x.Salary.ToString() == searchText,
                     orderBy, "Employee,Designation", pageIndex, pageSize, false);
             }
 
@@ -61,11 +61,11 @@ namespace Foundation.Library.Services
                 select new JobInfo
                 {
                     Id = x.Id,
-                    Employee = x.Employee,
+                    //Employee = x.Employee,
                     Appointment = x.Appointment,
-                    Designation = x.Designation,
-                    DesignationId = x.DesignationId,
-                    EmployeeId = x.EmployeeId,
+                    //Designation = x.Designation,
+                    //DesignationId = x.DesignationId,
+                    //EmployeeId = x.EmployeeId,
                     JoiningDate = x.JoiningDate,
                     Salary = x.Salary,
                     TotalLeave = x.TotalLeave

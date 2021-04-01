@@ -21,7 +21,7 @@ namespace Foundation.Library.Entities
         public string PassingYear { get; set; }
         public int Duration { get; set; }
         public string Achievement { get; set; }
-        public Guid EmployeeId { get; set; }
-        public Employee Employee { get; set; }
+        //public Guid EmployeeId { get; set; }
+        //public Employee Employee { get; set; }
     }
 }

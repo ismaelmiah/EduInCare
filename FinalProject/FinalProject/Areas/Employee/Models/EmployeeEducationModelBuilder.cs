@@ -32,7 +32,7 @@ namespace FinalProject.Web.Areas.Employee.Models
         {
             return new EmployeeEducation
             {
-                EmployeeId = model.EmployeeId,
+                //EmployeeId = model.EmployeeId,
                 ExamTitleId = model.ExamTitleId,
                 EducationLevelId = model.EducationLevelId,
                 Achievement = model.Achievement,

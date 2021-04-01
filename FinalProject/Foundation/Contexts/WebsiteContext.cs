@@ -42,63 +42,63 @@ namespace Foundation.Library.Contexts
                 .HasPrincipalKey<Student>(x=>x.Id)
                 .IsRequired();
 
-            builder.Entity<JobInfo>()
-                .HasOne(x => x.Employee)
-                .WithMany(x => x.JobInfo)
-                .HasForeignKey(x => x.EmployeeId)
-                .HasPrincipalKey(x => x.Id)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+            //builder.Entity<JobInfo>()
+            //    .HasOne(x => x.Employee)
+            //    .WithMany(x => x.JobInfo)
+            //    .HasForeignKey(x => x.EmployeeId)
+            //    .HasPrincipalKey(x => x.Id)
+            //    .IsRequired()
+            //    .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<EmploymentHistory>()
-                .HasOne(x => x.Employee)
-                .WithMany(x => x.EmploymentHistory)
-                .HasForeignKey(x => x.EmployeeId)
-                .HasPrincipalKey(x => x.Id)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+            //builder.Entity<EmploymentHistory>()
+            //    .HasOne(x => x.Employee)
+            //    .WithMany(x => x.EmploymentHistory)
+            //    .HasForeignKey(x => x.EmployeeId)
+            //    .HasPrincipalKey(x => x.Id)
+            //    .IsRequired()
+            //    .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<EmployeeEducation>()
-                .HasOne(x => x.Employee)
-                .WithMany(x => x.EmployeeEducation)
-                .HasForeignKey(x => x.EmployeeId)
-                .HasPrincipalKey(x => x.Id)
+            //builder.Entity<EmployeeEducation>()
+            //    .HasOne(x => x.Employee)
+            //    .WithMany(x => x.EmployeeEducation)
+            //    .HasForeignKey(x => x.EmployeeId)
+            //    .HasPrincipalKey(x => x.Id)
+            //    .IsRequired()
+            //    .OnDelete(DeleteBehavior.Restrict);
+
+            //builder.Entity<EmployeeEducation>()
+            //    .HasOne(x => x.EducationLevel)
+            //    .WithOne(x => x.EmployeeEducation)
+            //    .HasForeignKey<EmployeeEducation>(x => x.EducationLevelId)
+            //    .IsRequired()
+            //    .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Employee>()
+                .HasOne(x => x.Designation)
+                .WithMany(x => x.Employees)
+                .HasForeignKey(x => x.DesignationId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<EmployeeEducation>()
-                .HasOne(x => x.EducationLevel)
-                .WithOne(x => x.EmployeeEducation)
-                .HasForeignKey<EmployeeEducation>(x => x.EducationLevelId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+            //builder.Entity<ExamTitle>()
+            //    .HasOne(x => x.EducationLevel)
+            //    .WithOne(x => x.ExamTitle)
+            //    .HasForeignKey<ExamTitle>(x => x.EducationLevelId);
 
-            builder.Entity<EmployeeEducation>()
-                .HasOne(x => x.ExamTitle)
-                .WithOne(x => x.EmployeeEducation)
-                .HasForeignKey<EmployeeEducation>(x => x.ExamTitleId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+            //builder.Entity<Designation>()
+            //    .HasOne(x => x.JobInfo)
+            //    .WithOne(x => x.Designation)
+            //    .HasForeignKey<JobInfo>(x => x.DesignationId);
 
-            builder.Entity<ExamTitle>()
-                .HasOne(x => x.EducationLevel)
-                .WithOne(x => x.ExamTitle)
-                .HasForeignKey<ExamTitle>(x => x.EducationLevelId);
+            //builder.Entity<JobInfo>()
+            //    .HasOne(x => x.Appointment)
+            //    .WithOne(x => x.JobInfo)
+            //    .HasForeignKey<AppointmentImage>(x => x.JobInfoId);
 
-            builder.Entity<Designation>()
-                .HasOne(x => x.JobInfo)
-                .WithOne(x => x.Designation)
-                .HasForeignKey<JobInfo>(x => x.DesignationId);
-            
-            builder.Entity<JobInfo>()
-                .HasOne(x => x.Appointment)
-                .WithOne(x => x.JobInfo)
-                .HasForeignKey<AppointmentImage>(x => x.JobInfoId);
-
-            builder.Entity<JobInfo>()
-                .HasOne(x => x.Appointment)
-                .WithOne(x => x.JobInfo)
-                .HasForeignKey<AppointmentImage>(x => x.JobInfoId);
+            //builder.Entity<JobInfo>()
+            //    .HasOne(x => x.Appointment)
+            //    .WithOne(x => x.JobInfo)
+            //    .HasForeignKey<AppointmentImage>(x => x.JobInfoId);
 
             //builder.Entity<Group>()
             //    .HasOne(x => x.Course)
@@ -188,11 +188,11 @@ namespace Foundation.Library.Contexts
         public DbSet<Course> Courses { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<EmployeeEducation> EmployeeEducations { get; set; }
-        public DbSet<EmploymentHistory> EmploymentHistories { get; set; }
-        public DbSet<JobInfo> JobInfos { get; set; }
-        public DbSet<EducationLevel> EducationLevels { get; set; }
-        public DbSet<ExamTitle> ExamTitles { get; set; }
+        //public DbSet<EmployeeEducation> EmployeeEducations { get; set; }
+        //public DbSet<EmploymentHistory> EmploymentHistories { get; set; }
+        //public DbSet<JobInfo> JobInfos { get; set; }
+        //public DbSet<EducationLevel> EducationLevels { get; set; }
+        //public DbSet<ExamTitle> ExamTitles { get; set; }
         public DbSet<Designation> Designations { get; set; }
         public DbSet<AppointmentImage> AppointmentImages { get; set; }
         public DbSet<Section> Sections { get; set; }

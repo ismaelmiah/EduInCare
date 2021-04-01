@@ -9,7 +9,7 @@ namespace Foundation.Library.Entities
         public Guid Id { get; set; }
         public string Url { get; set; }
         public string AlternativeText { get; set; }
-        public Guid JobInfoId { get; set; }
-        public virtual JobInfo JobInfo { get; set; }
+        //public Guid JobInfoId { get; set; }
+        //public virtual JobInfo JobInfo { get; set; }
     }
 }
