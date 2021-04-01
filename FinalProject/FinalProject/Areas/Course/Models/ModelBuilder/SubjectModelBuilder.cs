@@ -34,7 +34,8 @@ namespace FinalProject.Web.Areas.Course.Models.ModelBuilder
             var exSubject = _subject.GetSubject(id);
             exSubject.Name = model.Name;
             exSubject.CourseId = model.CourseId;
-            exSubject.Code = model.Code;
+			exSubject.Code = model.Code;
+			exSubject.Type = model.Type;
             exSubject.ExcludeInResult = model.ExcludeInResult;
             _subject.Update(exSubject);
         }
@@ -46,6 +47,7 @@ namespace FinalProject.Web.Areas.Course.Models.ModelBuilder
                 Name = model.Name,
                 Code = model.Code,
                 CourseId = model.CourseId,
+                Type = model.Type,
                 ExcludeInResult = model.ExcludeInResult
             };
         }
@@ -63,6 +65,7 @@ namespace FinalProject.Web.Areas.Course.Models.ModelBuilder
             {
                 Name = exSubject.Name,
                 Code = exSubject.Code,
+                Type = exSubject.Type,
                 CourseList = GetCourseList(exSubject.CourseId),
                 ExcludeInResult = exSubject.ExcludeInResult,
                 Id = exSubject.Id
@@ -81,6 +84,7 @@ namespace FinalProject.Web.Areas.Course.Models.ModelBuilder
                     "Name",
                     "Code",
                     "Course",
+                    "Type",
                     "ExcludeInResult",
                 }));
 
@@ -94,6 +98,7 @@ namespace FinalProject.Web.Areas.Course.Models.ModelBuilder
                             record.Name,
                             record.Code,
                             record.Course.Name,
+                            record.Type ? "Core" : "Regular",
                             record.ExcludeInResult,
                             record.Id.ToString(),
                         }

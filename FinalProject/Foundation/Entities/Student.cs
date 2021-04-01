@@ -16,6 +16,8 @@ namespace Foundation.Library.Entities
         public string BirthCertificateNo { get; set; }
         public string NationalIdentificationNo { get; set; }
         public Gender Gender { get; set; }
+        public Religion Religion { get; set; }
+        public BloodGroup BloodGroup { get; set; }
         public string MobileNo { get; set; }
         public string ImageUrl { get; set; }
         public string ImageAlternativeText { get; set; }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using FinalProject.Web.Areas.Admin.Models;
+using FinalProject.Web.Areas.Course.Models;
 using FinalProject.Web.Areas.Employee.Models;
 using Membership.Library.Entities;
 using Microsoft.AspNetCore.Authentication;

@@ -1,6 +1,366 @@
-﻿@{
-    ViewData["Title"] = "Profile";
+﻿@using Foundation.Library.Enums
+@model StudentProfileView
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLTE.cshtml";
 }
+@section Title
+{ 
+    <title>Profile</title>
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a href="#" class="btn btn-sm btn-outline-primary"><i class="fa fa-print"></i> Print</a>
+                    <a href="#" target="_blank" class="btn btn-sm btn-outline-info"><i class="far fa-id-card"></i> ID Card</a>
+                    <a href="#" class="btn btn-sm btn-outline-warning"><i class="fas fa-edit"></i> Edit</a>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home" asp-area="Admin">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home" asp-area="Admin">Student</a></li>
+                    <li class="breadcrumb-item active">Profile</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
 
-<h1>Profile</h1>
+<!-- ./Section header -->
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="card card-info">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <img class="profile-user-img img-circle" src="@Model.ImagePath">
+                            </div>
+                            <h3 class="profile-username text-center">@Model.Name</h3>
+                            <p class="text-muted text-center">@Model.CourseModel.Title</p>
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item" style="background-color: #FFF">
+                                    <b>Registration No.</b> <a class="pull-right">@Model.RegistrationModel.RegistrationNo</a>
+                                </li>
+                                <li class="list-group-item" style="background-color: #FFF">
+                                    <b>ID Card No.</b> <a class="pull-right">@Model.RegistrationModel.IdCardNo</a>
+                                </li>
+                                <li class="list-group-item" style="background-color: #FFF">
+                                    <b>Phone</b> <a class="pull-right">@Model.MobileNo</a>
+                                </li>
+                                <li class="list-group-item" style="background-color: #FFF">
+                                    <b>Email</b> <a class="pull-right">@Model.Email</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" aria-current="page" href="#information">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#subject">Subjects</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#attendance">Attendance</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#marks">Marks &amp; Result</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#invoices">Invoice</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#payments">Payment</a>
+                            </li>
+                        </ul>
+                        <div class="mt-3 tab-content">
+                            <div class="tab-pane active" id="information">
+                                <p class="text-info" style="font-size: 16px; border-bottom: 1px solid #eee;">Personal Info:</p>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="">Full Name</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.Name</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Date of Birth</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.DateOfBirth.ToShortDateString()</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="">Gender</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.Gender.ToString()</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Religion</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.Religion.ToString()</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="">Blood Group</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @{var bloodType = EnumHelper<BloodGroup>.GetDisplayValue(Model.BloodGroup);}
+                                        <p for="">: @bloodType</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Nationality</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.Nationality</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="">Email</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.Email</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Phone No.</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.MobileNo</p>
+                                    </div>
+                                </div>
+                                <p class="text-info" style="font-size: 16px; border-bottom: 1px solid #eee;">Parents Info:</p>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="">Father Name </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.ParentsInfo.FatherName</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Father Phone No.</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.ParentsInfo.FatherMobileNo</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="">Mother Name </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.ParentsInfo.MotherName</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Mother Phone No.</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.ParentsInfo.MotherMobileNo</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="">Guardian Name </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.ParentsInfo.GuardianName</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Guardian Phone No.</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.ParentsInfo.GuardianMobileNo</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="">Present Address </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">
+                                            : @Model.PresentAddress
+                                        </p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Permanent Address</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">
+                                            : @Model.PermanentAddress
+                                        </p>
+                                    </div>
+                                </div>
+                                <p class="text-info" style="font-size: 16px; border-bottom: 1px solid #eee;">Academic Info:</p>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="">Academic Year</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.AcademicYearModel.Title</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Registration No </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.RegistrationModel.RegistrationNo</p>
+                                    </div>
 
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="">Class</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.CourseModel.Title</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Section </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.SectionModel.Name</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="">Roll No.</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.RegistrationModel.RollNo</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Shift</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @{var shift = EnumHelper<ShiftType>.GetDisplayValue(Model.RegistrationModel.Shift);}
+                                        <p for="">: @shift</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="">Board Registration No.</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.RegistrationModel.BoardRegistrationNo</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Card No.</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.RegistrationModel.IdCardNo</p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="">Username</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.UserName</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Status</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">
+                                            :
+                                            @if (Model.RegistrationModel.Status == true)
+                                            {
+                                                <span class="bg-green badge">Active</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="bg-green badge">In Active</span>
+                                            }
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="subject">
+                                <table id="subjectTable" class="table table-responsive table-bordered table-hover table-td-center">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Name</th>
+                                            <th class="text-center">Code</th>
+                                            <th class="text-center">Type</th>
+                                            <th class="text-center">Exclude In Result</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.SubjectModels)
+                                        {
+                                        <tr>
+                                            <td>@item.Name</td>
+                                            <td>@item.Code</td>
+                                            <td>@item.Type</td>
+                                            <td>@item.ExcludeInResult</td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="attendance">
+                                <table id="attendanceTable" class="table table-responsive table-bordered table-hover table-td-center">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Date</th>
+                                            <th class="text-center">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="marks">
+                                <h1>This is Marks View</h1>
+                            </div>
+                            <div class="tab-pane" id="invoices">
+                                <table id="invoiceTable" class="table table-responsive table-bordered table-hover table-td-center">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Date</th>
+                                            <th class="text-center">Invoice No.</th>
+                                            <th class="text-center">Amount</th>
+                                            <th class="text-center">Paid</th>
+                                            <th class="text-center">Due</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="payments">
+                                <table id="paymentTable" class="table table-responsive table-bordered table-hover table-td-center">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Date</th>
+                                            <th class="text-center">Method</th>
+                                            <th class="text-center">Referance</th>
+                                            <th class="text-center">Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

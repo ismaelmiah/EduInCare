@@ -61,6 +61,12 @@ namespace Foundation.Library.Services
             return _management.SubjectRepository.GetAll();
         }
 
+        public IList<Subject> GetSubjects(Guid courseId)
+        {
+            var subjects = _management.SubjectRepository.Get(x => x.CourseId == courseId);
+            return subjects;
+        }
+
         public Subject GetSubject(Guid id)
         {
             return _management.SubjectRepository.GetById(id);

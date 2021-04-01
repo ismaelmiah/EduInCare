@@ -6,7 +6,7 @@
         "columnDefs": [
             {
                 "orderable": false,
-                "targets": 4,
+                "targets": 5,
                 "render": function (data, type, row) {
                     return `
                                     <button class="btn btn-info btn-sm" onclick="window.location.href='/course/subject/profile/${data}'" value='${data}'>

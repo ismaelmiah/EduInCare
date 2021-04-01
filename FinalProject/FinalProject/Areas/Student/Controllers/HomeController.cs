@@ -57,9 +57,9 @@ namespace FinalProject.Web.Areas.Student.Controllers
 
         public IActionResult Profile(Guid id)
         {
-            var model = new StudentFormViewModel();
+            var model = new StudentProfileView();
 
-            model = model.ModelBuilder.BuildStudentModel(id);
+            model = model.ModelBuilder.BuildStudentProfileView(id);
             if (model == null)
                 return NotFound();
             return View(model);
