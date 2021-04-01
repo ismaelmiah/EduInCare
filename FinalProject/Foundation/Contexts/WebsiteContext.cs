@@ -106,8 +106,24 @@ namespace Foundation.Library.Contexts
             //    .HasForeignKey<Course>(x => x.GroupId);
 
             builder.Entity<Section>()
+                .HasOne(x => x.Subject)
+                .WithMany(x => x.Sections)
+                .HasForeignKey(x => x.SubjectId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Section>()
                 .HasOne(x => x.Course)
                 .WithMany(x => x.Sections)
+                .HasForeignKey(x => x.CourseId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Subject>()
+                .HasOne(x => x.Course)
+                .WithMany(x => x.Subjects)
                 .HasForeignKey(x => x.CourseId)
                 .HasPrincipalKey(x => x.Id)
                 .IsRequired()
