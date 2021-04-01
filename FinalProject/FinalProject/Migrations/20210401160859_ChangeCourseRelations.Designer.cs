@@ -4,14 +4,16 @@ using Foundation.Library.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FinalProject.Web.Migrations
 {
     [DbContext(typeof(WebsiteContext))]
-    partial class WebsiteContextModelSnapshot : ModelSnapshot
+    [Migration("20210401160859_ChangeCourseRelations")]
+    partial class ChangeCourseRelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -608,9 +610,6 @@ namespace FinalProject.Web.Migrations
                     b.Property<string>("BirthCertificateNo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("BloodGroup")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
@@ -647,9 +646,6 @@ namespace FinalProject.Web.Migrations
                     b.Property<string>("PresentAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Religion")
-                        .HasColumnType("int");
-
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
@@ -678,9 +674,6 @@ namespace FinalProject.Web.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Type")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

@@ -38,7 +38,6 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                     "Department",
                     "Duration",
                     "Status",
-                    "HaveCompulsorySubject",
                     "MaxCompulsorySubject",
                 }));
 
@@ -54,7 +53,6 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                             record.Department.Name,
                             record.Duration,
                             record.Status,
-                            record.HaveCompulsorySubject,
                             record.MaxCompulsorySubject,
                             record.Id.ToString(),
                         }

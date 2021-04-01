@@ -34,7 +34,8 @@ namespace FinalProject.Web.Areas.Course.Models.ModelBuilder
             var exSubject = _subject.GetSubject(id);
             exSubject.Name = model.Name;
             exSubject.CourseId = model.CourseId;
-            exSubject.Type = model.Type;
+			exSubject.Code = model.Code;
+			exSubject.Type = model.Type;
             exSubject.ExcludeInResult = model.ExcludeInResult;
             _subject.Update(exSubject);
         }

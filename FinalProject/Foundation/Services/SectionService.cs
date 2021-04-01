@@ -28,13 +28,13 @@ namespace Foundation.Library.Services
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 result = _management.SectionRepository.GetDynamic(null,
-                    orderBy, "Course,Employee", pageIndex, pageSize, false);
+                    orderBy, "Course,Subject,Employee", pageIndex, pageSize);
 
             }
             else
             {
                 result = _management.SectionRepository.GetDynamic(x => x.Name == searchText,
-                    orderBy, "Course,Employee", pageIndex, pageSize, false);
+                    orderBy, "Course,Subject,Employee", pageIndex, pageSize);
             }
 
             var data = (from x in result.data
@@ -43,12 +43,14 @@ namespace Foundation.Library.Services
                             Id = x.Id,
                             Name = x.Name,
                             Description = x.Description,
-                            Course = x.Course,
+                            Capacity = x.Capacity,
                             Status = x.Status,
                             Employee = x.Employee,
                             TeacherId = x.TeacherId,
-                            Capacity = x.Capacity,
-                            CourseId = x.CourseId
+                            Subject = x.Subject,
+                            SubjectId = x.SubjectId,
+                            CourseId = x.CourseId,
+                            Course = x.Course
                         }).ToList();
 
             return (result.total, result.totalDisplay, data);
@@ -67,7 +69,7 @@ namespace Foundation.Library.Services
 
         public IList<Section> GetSections()
         {
-            return _management.SectionRepository.Get(null, null, "Course,Employee", false);
+            return _management.SectionRepository.Get(null, null, "Course,Subject,Employee", false);
         }
 
         public void Update(Section section)

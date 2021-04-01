@@ -1,5 +1,6 @@
 ﻿using System;
 using DataAccessLayer.Library;
+using System.Collections.Generic;
 
 namespace Foundation.Library.Entities
 {
@@ -15,5 +16,6 @@ namespace Foundation.Library.Entities
         public Guid CourseId { get; set; }
         public virtual Course Course { get; set; }
         public bool ExcludeInResult { get; set; }
+        public virtual ICollection<Section> Sections { get; set; }
     }
 }
