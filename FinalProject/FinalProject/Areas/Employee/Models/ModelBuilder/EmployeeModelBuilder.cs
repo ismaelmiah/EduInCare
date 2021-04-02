@@ -380,7 +380,6 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
                 Name = employee.Name,
                 Gender = employee.Gender,
                 JoinOfDate = employee.JoinOfDate,
-                Nationality = employee.Nationality,
                 MobileNo = employee.MobileNo,
                 UserName = employee.UserName,
             };
@@ -468,7 +467,6 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
             employee.JoinOfDate = model.JoinOfDate;
             employee.MaritalStatus = model.MaritalStatus;
             employee.Religion = model.Religion;
-            employee.Nationality = model.Nationality;
             employee.Nid = model.Nid;
             employee.PresentAddress = model.PresentAddress;
             employee.PermanentAddress = model.PermanentAddress;
@@ -487,7 +485,6 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
             exEmployee.Name = model.Name;
             exEmployee.Gender = model.Gender;
             exEmployee.MobileNo = model.MobileNo;
-            exEmployee.Nationality = model.Nationality;
             if (model.Photo != null)
             {
                 var imageInfo = StoreFile(model.Photo);

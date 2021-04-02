@@ -24,20 +24,16 @@ namespace Foundation.Library.Entities
         public RoleType Role { get; set; }
         public Guid CardId { get; set; }
         public string Name { get; set; }
-        public Guid DesignationId { get; set; }
-        public virtual Designation Designation { get; set; }
         public string FatherName { get; set; }
         public string MotherName { get; set; }
         public Gender Gender { get; set; }
         public string Nid { get; set; }
         public string MobileNo { get; set; }
+        public Guid DesignationId { get; set; }
         public MaritalStatus MaritalStatus { get; set; }
         public Religion Religion { get; set; }
         public DateTime JoinOfDate { get; set; }
-        public DateTime LeavingDate { get; set; }
-        public DateTime BirthDate { get; set; }
-        public WorkShift? WorkShift { get; set; }
-        public string Nationality { get; set; }
+        public virtual Designation Designation { get; set; }
         public string PresentAddress { get; set; }
         public string PermanentAddress { get; set; }
         public string ImageUrl { get; set; }

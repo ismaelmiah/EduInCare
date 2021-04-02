@@ -69,7 +69,6 @@ namespace Foundation.Library.Services
                             Nid = x.Nid,
                             ImageUrl = x.ImageUrl,
                             UserName = x.UserName,
-                            Nationality = x.Nationality,
                             UserId = x.UserId,
                             JoinOfDate = x.JoinOfDate,
                         }).ToList();
