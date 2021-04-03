@@ -538,5 +538,15 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
                     Value = ((int)x).ToString()
                 }).ToList();
         }
+
+        public IList<SelectListItem> GetQualificationTypes()
+        {
+            return Enum.GetValues(typeof(QualificationType))
+                .Cast<QualificationType>().Select(x=> new SelectListItem()
+                {
+                    Text = x.ToString(),
+                    Value = ((int)x).ToString()
+                }).ToList();
+        }
     }
 }

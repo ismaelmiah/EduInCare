@@ -186,6 +186,9 @@ namespace FinalProject.Web.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Nationality")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Nid")
                         .HasColumnType("nvarchar(max)");
 

@@ -18,6 +18,7 @@ namespace FinalProject.Web.Areas.Employee.Models
             ModelBuilder = new EmployeeModelBuilder();
             QualificationType = (List<SelectListItem>)ModelBuilder.GetQualificationTypes();
             DesignationList = ModelBuilder.GetDesignationList();
+            QualificationType = (List<SelectListItem>)ModelBuilder.GetQualificationTypes();
         }
         public Guid Id { get; set; }
         public string Name { get; set; }
