@@ -36,8 +36,13 @@ namespace Foundation.Library.Entities
         public virtual Designation Designation { get; set; }
         public string PresentAddress { get; set; }
         public string PermanentAddress { get; set; }
+        public DateTime LeavingDate { get; set; }
+        public DateTime BirthDate { get; set; }
+        public WorkShift? WorkShift { get; set; }
+        public string Nationality { get; set; }
         public string ImageUrl { get; set; }
         public string ImageAlternativeText { get; set; }
+        public string Qualifications { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
         public bool Status { get; set; }

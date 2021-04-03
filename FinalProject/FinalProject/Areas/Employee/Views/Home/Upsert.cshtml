@@ -13,6 +13,10 @@
     }
 
 }
+@section Styles
+{
+    <link href="~/css/chosen.min.css" rel="stylesheet" />
+}
 <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-10">
@@ -20,15 +24,13 @@
             <div class="card-header">
                 <h3 class="card-title text-center">@ViewData["Title"]</h3>
             </div>
-            <form class="form-horizontal" asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
+            <form asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
                 @if (Model.Id != new Guid())
                 {
                     <input type="hidden" asp-for="Id" />
                 }
                 <div class="card-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                    <label class="text-info font-weight-bold">Employee Info</label>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row">
@@ -60,6 +62,11 @@
                                         <span asp-validation-for="Nid" class="text-danger"></span>
                                     </div>
                                 </div>
+                                <div class="form-group col">
+                                    <label asp-for="MobileNo"></label>
+                                    <input asp-for="MobileNo" class="form-control" />
+                                    <span asp-validation-for="MobileNo" class="text-danger"></span>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col">
@@ -82,33 +89,19 @@
                                     <span asp-validation-for="MaritalStatus" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col">
-                                    <label asp-for="MobileNo"></label>
-                                    <input asp-for="MobileNo" class="form-control" />
-                                    <span asp-validation-for="MobileNo" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col">
-                                    <label asp-for="Photo"></label>
-                                    <input asp-for="Photo" onchange="readURL(this);" class="form-control-file" />
-                                    <span asp-validation-for="Photo" class="text-danger"></span>
+                                    <label asp-for="Qualifications"></label>
+                                    <select multiple asp-for="Qualifications" asp-items="Model.QualificationType" class="chosen-select form-control">
+                                    </select>
+                                    <span asp-validation-for="Qualifications" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col">
                                     <label for="DesignationId">Designation</label>
                                     <select class="form-control" asp-for="DesignationId" asp-items="Model.DesignationList"></select>
                                     <span asp-validation-for="DesignationId" class="text-danger"></span>
                                 </div>
-                                <div class="col">
-                                    <label>Present Address</label>
-                                    <partial name="~/Areas/Student/Views/Home/_PermanentAddressFormVIew.cshtml" for="PermanentAddress" />
-                                </div>
-                                <div class="col">
-                                    <label>Permanent Address</label>
-                                    <partial name="~/Areas/Student/Views/Home/_PresentAddressFormVIew.cshtml" for="PresentAddress" />
-                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-1">
+                                <div class="col-2 mt-4" style="margin-right: 40px;">
                                     <div id="previewstudentphoto" style="height: 200px; width: 220px;" class="border">
                                         @if (Model.ImagePath != null)
                                         {
@@ -118,6 +111,53 @@
                                         {
                                             <img id="blah" style="width: 220px; height: 200px;" src="#" alt="Photo">
                                         }
+                                    </div>
+
+                                    <div class="form-group col" style="position: relative; top: -40px; left: 20px;">
+                                        <div class="custom-file">
+                                            <input asp-for="Photo" onchange="readURL(this);" class="custom-file-input">
+                                            <label class="custom-file-label" asp-for="Photo">Choose file...</label>
+                                            <span asp-validation-for="Photo" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col">
+                                    <label for="DateOfBirth">Date Of Birth</label>
+                                    <input asp-for="DateOfBirth" class="form-control" />
+                                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label for="IdCardNo">ID Card No</label>
+                                    <input asp-for="IdCardNo" class="form-control" />
+                                    <span asp-validation-for="IdCardNo" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label for="JoinOfDate">Join Of Date</label>
+                                    <input asp-for="JoinOfDate" class="form-control" />
+                                    <span asp-validation-for="JoinOfDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="PermanentAddress">Present Address</label>
+                                    <partial name="~/Areas/Student/Views/Home/_PermanentAddressFormVIew.cshtml" for="PermanentAddress" />
+                                </div>
+                                <div class="col">
+                                    <label for="PresentAddress">Permanent Address</label>
+                                    <partial name="~/Areas/Student/Views/Home/_PresentAddressFormVIew.cshtml" for="PresentAddress" />
+                                </div>
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col-md-6 row">
+                                    <div class="form-group col">
+                                        <label for="UserName">Username</label>
+                                        <input asp-for="UserName" class="form-control" />
+                                        <span asp-validation-for="UserName" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col">
+                                        <label asp-for="Password"></label>
+                                        <input asp-for="Password" class="form-control" />
+                                        <span asp-validation-for="Password" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +186,10 @@
 
 @section Scripts
 {
+    <script src="~/js/chosen.jquery.min.js"></script>
     <script>
+        $(".chosen-select").chosen({ width: "100%", placeholder_text_multiple: "Select Your Qualifications" });
+
         var imageTag = document.getElementById('blah');
         imageTag.style.border = "2px solid";
         imageTag.style.paddingTop = "100px";
@@ -167,7 +210,6 @@
                     document.getElementById('blah').width = 220;
                     document.getElementById('blah').height = 200;
                 };
-
                 reader.readAsDataURL(input.files[0]);
             }
         }

@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using FinalProject.Web.Areas.Admin.Models;
 using FinalProject.Web.Areas.Employee.Models;
 using FinalProject.Web.Areas.Student.Models;
-using Membership.Library.Entities;
 
 namespace FinalProject.Web.Areas.Employee.Controllers
 {

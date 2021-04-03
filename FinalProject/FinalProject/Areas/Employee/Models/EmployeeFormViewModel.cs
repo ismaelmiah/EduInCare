@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using FinalProject.Web.Areas.Employee.Models.ModelBuilder;
 using Foundation.Library.Enums;
@@ -15,6 +16,7 @@ namespace FinalProject.Web.Areas.Employee.Models
         {
             ModelBuilder = new EmployeeModelBuilder();
             DesignationList = ModelBuilder.GetDesignationList();
+            QualificationType = (List<SelectListItem>)ModelBuilder.GetQualificationTypes();
         }
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -29,12 +31,15 @@ namespace FinalProject.Web.Areas.Employee.Models
         public MaritalStatus MaritalStatus { get; set; }
         public Religion Religion { get; set; }
         public DateTime JoinOfDate { get; set; }
+        public string IdCardNo { get; set; }
+        public DateTime DateOfBirth { get; set; }
         public string ImagePath { get; set; }
         public IFormFile Photo { get; set; }
         public string Email { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public string ConfirmPassword { get; set; }
+        public IList<int> Qualifications { get; set; }
+        public List<SelectListItem> QualificationType { get; set; }
         public RoleType Role { get; set; }
         public ResultType ResultType { get; set; }
         public Guid DesignationId { get; set; }

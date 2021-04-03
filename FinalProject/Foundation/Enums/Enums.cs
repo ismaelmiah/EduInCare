@@ -74,4 +74,14 @@ namespace Foundation.Library.Enums
         DoNotMention = 9
     }
 
+    public enum QualificationType
+    {
+        Ssc,
+        Hsc,
+        Bsc,
+        Ba,
+        Ma,
+        Msc,
+        Phd
+    }
 }
