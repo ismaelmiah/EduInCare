@@ -143,7 +143,6 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
                             record.Gender.ToString(),
                             record.Section?.Name,
                             record.JoinOfDate.ToShortDateString(),
-                            record.Id.ToString(),
                         }
                     ).ToArray()
 
@@ -527,16 +526,6 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
         public SelectList GetDesignationList(object selected = null)
         {
             return new SelectList(_designationService.GetDesignations().OrderBy(x=>x.Name), "Id", "Name", selected);
-        }
-
-        public IList<SelectListItem> GetQualificationTypes()
-        {
-            return Enum.GetValues(typeof(QualificationType))
-                .Cast<QualificationType>().Select(x=> new SelectListItem()
-                {
-                    Text = x.ToString(),
-                    Value = ((int)x).ToString()
-                }).ToList();
         }
 
         public IList<SelectListItem> GetQualificationTypes()

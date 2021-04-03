@@ -41,19 +41,10 @@
                                         <span asp-validation-for="Name" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label asp-for="FatherName"></label>
-                                        <input asp-for="FatherName" class="form-control" />
-                                        <span asp-validation-for="FatherName" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label asp-for="MotherName"></label>
-                                        <input asp-for="MotherName" class="form-control" />
-                                        <span asp-validation-for="MotherName" class="text-danger"></span>
-                                    </div>
+                                <div class="form-group col">
+                                    <label asp-for="Email"></label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
@@ -66,6 +57,11 @@
                                     <label asp-for="MobileNo"></label>
                                     <input asp-for="MobileNo" class="form-control" />
                                     <span asp-validation-for="MobileNo" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label for="DesignationId">Designation</label>
+                                    <select asp-for="DesignationId" asp-items="Model.DesignationList" class="form-control"></select>
+                                    <span asp-validation-for="DesignationId" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="row">
@@ -95,7 +91,7 @@
                                     <span asp-validation-for="Qualifications" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col">
-                                    <label asp-for="Role">Designation</label>
+                                    <label asp-for="Role"></label>
                                     <select class="form-control" asp-for="Role" asp-items="Html.GetEnumSelectList<RoleType>()"></select>
                                     <span asp-validation-for="Role" class="text-danger"></span>
                                 </div>
@@ -113,7 +109,7 @@
                                         }
                                     </div>
 
-                                    <div class="form-group col" style="position: relative; top: -38px;">
+                                    <div class="form-group col" style="position: relative; top: -35px;">
                                         <div class="custom-file">
                                             <input asp-for="Photo" onchange="readURL(this);" class="custom-file-input" required>
                                             <label class="custom-file-label" asp-for="Photo">Choose file...</label>
@@ -153,25 +149,15 @@
                                 </div>
                             </div>
                             <div class="row mt-5">
-                                <div class="form-group col">
+                                <div class="form-group col-2">
                                     <label for="UserName">Username</label>
                                     <input asp-for="UserName" class="form-control" />
                                     <span asp-validation-for="UserName" class="text-danger"></span>
                                 </div>
-                                <div class="form-group col">
-                                    <label asp-for="Email"></label>
-                                    <input asp-for="Email" class="form-control" />
-                                    <span asp-validation-for="Email" class="text-danger"></span>
-                                </div>
-                                <div class="form-group col">
+                                <div class="form-group col-2">
                                     <label asp-for="Password"></label>
                                     <input asp-for="Password" class="form-control" />
                                     <span asp-validation-for="Password" class="text-danger"></span>
-                                </div>
-                                <div class="form-group col">
-                                    <label for="DesignationId">Designation</label>
-                                    <select asp-for="DesignationId" asp-items="Model.DesignationList" class="form-control"></select>
-                                    <span asp-validation-for="DesignationId" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
