@@ -70,7 +70,7 @@ namespace Foundation.Library.Services
                     Marks = x.Marks,
                     PassingYear = x.PassingYear,
                     Duration = x.Duration,
-                    Employee = x.Employee
+                    //Employee = x.Employee
                 }).ToList();
 
             return (result.total, result.totalDisplay, data);

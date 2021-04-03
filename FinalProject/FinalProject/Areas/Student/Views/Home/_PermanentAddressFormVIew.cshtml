@@ -1,10 +1,9 @@
-﻿@model StudentFormViewModel
+﻿@model string
 
 <div class="row">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group col">
-        <label asp-for="PermanentAddress" class="control-label"></label>
-        <textarea asp-for="PermanentAddress" class="form-control"></textarea>
-        <span asp-validation-for="PermanentAddress" class="text-danger"></span>
+        <textarea asp-for="@Model" class="form-control"></textarea>
+        <span asp-validation-for="@Model" class="text-danger"></span>
     </div>
 </div>

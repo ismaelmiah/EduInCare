@@ -15,7 +15,7 @@ namespace Foundation.Library.Entities
         public int Capacity { get; set; }
         public Guid CourseId { get; set; }
         public virtual Course Course { get; set; }
-        public Guid SubjectId { get; set; }
+        public Guid? SubjectId { get; set; }
         public virtual Subject Subject { get; set; }
         public Guid TeacherId { get; set; }
         public virtual Employee Employee { get; set; }

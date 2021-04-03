@@ -1,0 +1,279 @@
+﻿@using Foundation.Library.Enums
+@model EmployeeProfileView
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLTE.cshtml";
+}
+@section Title
+{
+    <title>Profile</title>
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a href="#" class="btn btn-sm btn-outline-primary"><i class="fa fa-print"></i> Print</a>
+                    <a href="#" target="_blank" class="btn btn-sm btn-outline-info"><i class="far fa-id-card"></i> ID Card</a>
+                    <a href="#" class="btn btn-sm btn-outline-warning"><i class="fas fa-edit"></i> Edit</a>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home" asp-area="Admin">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home" asp-area="Admin">Employee</a></li>
+                    <li class="breadcrumb-item active">Profile</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- ./Section header -->
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="card card-info">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <img class="profile-user-img img-circle" style="height: 140px; width: 140px;" src="@Model.ImagePath" alt="@Model.AlterImageName">
+                            </div>
+                            <h3 class="profile-username text-center">@Model.Name</h3>
+                            <p class="text-muted text-center">@Model.Designation</p>
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item" style="background-color: #FFF">
+                                    <b>ID Card No.</b> <a class="float-right">@Model.IdCardNo</a>
+                                </li>
+                                <li class="list-group-item" style="background-color: #FFF">
+                                    <b>Phone</b> <a class="float-right">@Model.MobileNo</a>
+                                </li>
+                                <li class="list-group-item" style="background-color: #FFF">
+                                    <b>Email</b> <a class="float-right">@Model.Email</a>
+                                </li>
+                                <li class="list-group-item" style="background-color: #FFF">
+                                    <b>Shift</b> <a class="float-right">@Model.WorkShift.ToString()</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" aria-current="page" href="#information">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#leavebalance">Leave Balance</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#attendance">Attendance</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#marks">Marks Entry</a>
+                            </li>
+                        </ul>
+                        <div class="mt-3 tab-content">
+                            <div class="tab-pane active" id="information">
+                                <p class="text-info" style="font-size: 16px; border-bottom: 1px solid #eee;">Personal Info:</p>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="">Full Name</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.Name</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Date of Birth</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.DateOfBirth.ToShortDateString()</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="">Gender</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.Gender.ToString()</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Religion</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.Religion.ToString()</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="">Email</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.Email</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Phone No.</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.MobileNo</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="">Date Of Join</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.JoinDate.ToShortDateString()</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Qualifications</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">
+                                            <span>: </span>
+                                            @foreach (var item in Model.Qualifications)
+                                            {
+                                                <span>@item</span>
+                                                @if (!item.Equals(Model.Qualifications.Last()))
+                                                {
+                                                    <span>,</span>
+                                                }
+                                            }
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="">Present Address </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">
+                                            : @Model.PresentAddress
+                                        </p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Permanent Address</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">
+                                            : @Model.PermanentAddress
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="">Username</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p for="">: @Model.UserName</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Status</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @if (Model.Status == true)
+                                        {
+                                            <span class="bg-green badge">Active</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="bg-green badge">In Active</span>
+                                        }
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane" id="leavebalance">
+                                <div class="row tile_count text-center">
+                                    <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count tile_stats_count_nb">
+                                        <span class="count_top"><i class="fa fa-2x fa-level-down text-green"></i><b class="text-info"> Casual Leave(CL)</b></span>
+                                        <div class="count text-blue"> 0 /14</div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+                                        <span class="count_top"><i class="fa fa-2x fa-level-down text-green"></i><b class="text-info"> Sick Leave(SL)</b></span>
+                                        <div class="count text-red"> 0 /10</div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+                                        <span class="count_top"><i class="fa fa-2x fa-level-down text-green"></i><b class="text-info"> Undefined Leave(UL)</b></span>
+                                        <div class="count text-purple"> 0 /∞</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="attendance">
+                                <table id="attendanceTable" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center">Date</th>
+                                        <th class="text-center">Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="text-center">20/03/2021</td>
+                                        <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">21/03/2021</td>
+                                        <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">22/03/2021</td>
+                                        <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">23/03/2021</td>
+                                        <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">24/03/2021</td>
+                                        <td class="text-center"> <span class="badge bg-red">Absent</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">25/03/2021</td>
+                                        <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">27/03/2021</td>
+                                        <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">28/03/2021</td>
+                                        <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">29/03/2021</td>
+                                        <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">30/03/2021</td>
+                                        <td class="text-center"> <span class="badge bg-red">Absent</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">31/03/2021</td>
+                                        <td class="text-center"> <span class="badge bg-red">Absent</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">01/04/2021</td>
+                                        <td class="text-center"> <span class="badge bg-red">Absent</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">03/04/2021</td>
+                                        <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="marks">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

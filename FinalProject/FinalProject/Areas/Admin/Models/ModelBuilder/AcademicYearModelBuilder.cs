@@ -91,8 +91,8 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                         select new object[]
                         {
                             record.Title,
-                            record.StartDate,
-                            record.EndDate,
+                            record.StartDate.ToShortDateString(),
+                            record.EndDate.ToShortDateString(),
                             record.Status,
                             record.IsOpenForAdmission,
                             record.Id.ToString(),

@@ -13,6 +13,10 @@
     }
 
 }
+@section Styles
+{
+    <link href="~/css/chosen.min.css" rel="stylesheet" />
+}
 <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-10">
@@ -20,140 +24,156 @@
             <div class="card-header">
                 <h3 class="card-title text-center">@ViewData["Title"]</h3>
             </div>
-            <form class="form-horizontal" asp-antiforgery="true" method="post" enctype="multipart/form-data"
-                  asp-controller="Home" asp-area="Employee" asp-action="Upsert">
+            <form asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
                 @if (Model.Id != new Guid())
                 {
                     <input type="hidden" asp-for="Id" />
                 }
-            <div class="card-body row">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="Name" class="control-label"></label>
-                        <input asp-for="Name" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="FatherName" class="control-label"></label>
-                        <input asp-for="FatherName" class="form-control" />
-                        <span asp-validation-for="FatherName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="MotherName" class="control-label"></label>
-                        <input asp-for="MotherName" class="form-control" />
-                        <span asp-validation-for="MotherName" class="text-danger"></span>
-                    </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="row">
-                        <div class="form-group col">
-                            <label asp-for="Gender" class="control-label"></label>
-                            <select class="form-control" asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()">
-                            </select>
-                            <span asp-validation-for="Gender" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col">
-                            <label asp-for="Religion" class="control-label"></label>
-                            <select class="form-control" asp-for="Religion" asp-items="Html.GetEnumSelectList<Religion>()">
-                            </select>
-                            <span asp-validation-for="Religion" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Nid" class="control-label"></label>
-                        <input asp-for="Nid" class="form-control" />
-                        <span asp-validation-for="Nid" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="MobileNo" class="control-label"></label>
-                        <input asp-for="MobileNo" class="form-control" />
-                        <span asp-validation-for="MobileNo" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="PresentAddress" class="control-label"></label>
-                        <input asp-for="PresentAddress" class="form-control" />
-                        <span asp-validation-for="PresentAddress" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="PermanentAddress" class="control-label"></label>
-                        <input asp-for="PermanentAddress" class="form-control" />
-                        <span asp-validation-for="PermanentAddress" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="MaritalStatus" class="control-label"></label>
-                        <select class="form-control" asp-for="MaritalStatus" asp-items="Html.GetEnumSelectList<MaritalStatus>()">
-                        </select>
-                        <span asp-validation-for="MaritalStatus" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="Nationality" class="control-label"></label>
-                        <input asp-for="Nationality" class="form-control" />
-                        <span asp-validation-for="Nationality" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Role" class="control-label"></label>
-                        <select class="form-control" asp-for="Role" asp-items="Html.GetEnumSelectList<RoleType>()">
-                        </select>
-                        <span asp-validation-for="Role" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="JoinOfDate" class="control-label"></label>
-                        <input asp-for="JoinOfDate" class="form-control" />
-                        <span asp-validation-for="JoinOfDate" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Email" class="control-label"></label>
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="UserName" class="control-label"></label>
-                        <input asp-for="UserName" class="form-control" />
-                        <span asp-validation-for="UserName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Password" class="control-label"></label>
-                        <input asp-for="Password" class="form-control" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ConfirmPassword" class="control-label"></label>
-                        <input asp-for="ConfirmPassword" class="form-control" />
-                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Photo" class="control-label"></label>
-                        <input asp-for="Photo" onchange="readURL(this);" class="form-control" />
-                        <span asp-validation-for="Photo" class="text-danger"></span>
-                    </div>
-                    <div id="previewstudentphoto">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label asp-for="Name"></label>
+                                        <input asp-for="Name" class="form-control" />
+                                        <span asp-validation-for="Name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group col">
+                                    <label asp-for="Email"></label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label asp-for="Nid"></label>
+                                        <input asp-for="Nid" class="form-control" />
+                                        <span asp-validation-for="Nid" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group col">
+                                    <label asp-for="MobileNo"></label>
+                                    <input asp-for="MobileNo" class="form-control" />
+                                    <span asp-validation-for="MobileNo" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label for="DesignationId">Designation</label>
+                                    <select asp-for="DesignationId" asp-items="Model.DesignationList" class="form-control"></select>
+                                    <span asp-validation-for="DesignationId" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label asp-for="Gender"></label>
+                                        <select class="form-control" asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()"></select>
+                                        <span asp-validation-for="Gender" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label asp-for="Religion"></label>
+                                        <select class="form-control" asp-for="Religion" asp-items="Html.GetEnumSelectList<Religion>()"></select>
+                                        <span asp-validation-for="Religion" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group col">
+                                    <label asp-for="MaritalStatus"></label>
+                                    <select class="form-control" asp-for="MaritalStatus" asp-items="Html.GetEnumSelectList<MaritalStatus>()"></select>
+                                    <span asp-validation-for="MaritalStatus" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label asp-for="Qualifications"></label>
+                                    <select multiple asp-for="Qualifications" asp-items="Model.QualificationType" class="chosen-select form-control">
+                                    </select>
+                                    <span asp-validation-for="Qualifications" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label asp-for="Role"></label>
+                                    <select class="form-control" asp-for="Role" asp-items="Html.GetEnumSelectList<RoleType>()"></select>
+                                    <span asp-validation-for="Role" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mt-4">
+                                    <div id="previewstudentphoto" style="height: 200px; width: 220px;" class="border">
+                                        @if (Model.ImagePath != null)
+                                        {
+                                            <img id="blah" style="width: 220px; height: 200px;" src="@Model.ImagePath" alt="Photo">
+                                        }
+                                        else
+                                        {
+                                            <img id="blah" style="width: 220px; height: 200px;" src="#" alt="Photo">
+                                        }
+                                    </div>
 
-                        @if (Model.ImagePath != null)
-                        {
-                            <img id="blah" style="width: 150px; height: 200px;" src="@Model.ImagePath" alt="Student Photo">
-                        }
-                        else
-                        {
-                            <img id="blah" style="width: 150px; height: 200px;" src="#" alt="Student Photo">
-                        }
+                                    <div class="form-group col" style="position: relative; top: -35px;">
+                                        <div class="custom-file">
+                                            <input asp-for="Photo" onchange="readURL(this);" class="custom-file-input" required>
+                                            <label class="custom-file-label" asp-for="Photo">Choose file...</label>
+                                            <span asp-validation-for="Photo" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col">
+                                    <label for="DateOfBirth">Date Of Birth</label>
+                                    <input asp-for="DateOfBirth" type="date" class="form-control" />
+                                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label for="IdCardNo">ID Card No</label>
+                                    <input asp-for="IdCardNo" class="form-control" />
+                                    <span asp-validation-for="IdCardNo" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label for="JoinOfDate">Join Of Date</label>
+                                    <input asp-for="JoinOfDate" type="date" class="form-control" />
+                                    <span asp-validation-for="JoinOfDate" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label asp-for="Shift"></label>
+                                    <select asp-for="Shift" asp-items="Html.GetEnumSelectList<WorkShift>()" class="form-control"></select>
+                                    <span asp-validation-for="Shift" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="PermanentAddress">Present Address</label>
+                                    <partial name="~/Areas/Student/Views/Home/_PermanentAddressFormVIew.cshtml" for="PermanentAddress" />
+                                </div>
+                                <div class="col">
+                                    <label for="PresentAddress">Permanent Address</label>
+                                    <partial name="~/Areas/Student/Views/Home/_PresentAddressFormVIew.cshtml" for="PresentAddress" />
+                                </div>
+                            </div>
+                            <div class="row mt-5">
+                                <div class="form-group col-2">
+                                    <label for="UserName">Username</label>
+                                    <input asp-for="UserName" class="form-control" />
+                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-2">
+                                    <label asp-for="Password"></label>
+                                    <input asp-for="Password" class="form-control" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
                 <div class="card-footer">
                     <div class="form-group row mb-0">
-                        <div class="col-6 text-left">
+                        <div class="col text-center">
                             @if (Model.Id == new Guid())
                             {
-                                <input type="submit" value="Create" class="btn btn-primary" />
+                                <input type="submit" value="Application Submit" class="btn btn-lg btn-outline-primary" />
                             }
                             else
                             {
-                                <input type="submit" value="Update" class="btn btn-warning" />
+                                <input type="submit" value="Application Update" class="btn btn-lg btn-outline-warning" />
                             }
-                        </div>
-                        <div class="col-6 text-right">
-                            <a asp-area="" asp-controller="Home" asp-action="Index">Back to List</a>
                         </div>
                     </div>
                 </div>
@@ -165,7 +185,10 @@
 
 @section Scripts
 {
+    <script src="~/js/chosen.jquery.min.js"></script>
     <script>
+        $(".chosen-select").chosen({ width: "100%", placeholder_text_multiple: "Select Your Qualifications" });
+
         var imageTag = document.getElementById('blah');
         imageTag.style.border = "2px solid";
         imageTag.style.paddingTop = "100px";
@@ -176,7 +199,6 @@
             imageTag.style.removeProperty('padding');
             imageTag.style.removeProperty('border');
         }
-        console.log(imageTag);
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -184,10 +206,9 @@
                     document.getElementById('blah').style.removeProperty('padding');
                     document.getElementById('blah').style.removeProperty('border');
                     document.getElementById('blah').src = e.target.result;
-                    document.getElementById('blah').width = 150;
+                    document.getElementById('blah').width = 220;
                     document.getElementById('blah').height = 200;
                 };
-
                 reader.readAsDataURL(input.files[0]);
             }
         }

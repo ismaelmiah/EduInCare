@@ -16,13 +16,13 @@ namespace Foundation.Library.Services
 
         public Employee GetEmployeeWithoutTrack(Guid id)
         {
-            return _management.EmployeeRepository.Get(x => x.Id == id, null, "Image,Address,Department", false)
+            return _management.EmployeeRepository.Get(x => x.Id == id, null, "Designation,Section", false)
                 .FirstOrDefault();
         }
 
         public Employee GetEmployee(Guid id)
         {
-            return _management.EmployeeRepository.Get(x => x.Id == id, null, "Image,Address,Department", false)
+            return _management.EmployeeRepository.Get(x => x.Id == id, null, "Designation,Section", false)
                 .FirstOrDefault();
         }
 
@@ -51,12 +51,12 @@ namespace Foundation.Library.Services
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 result = _management.EmployeeRepository.GetDynamic(null,
-                    orderBy, "Section", pageIndex, pageSize, false);
+                    orderBy, "Designation,Section", pageIndex, pageSize, false);
             }
             else
             {
                 result = _management.EmployeeRepository.GetDynamic(x => x.Name == searchText,
-                    orderBy, "Section", pageIndex, pageSize, false);
+                    orderBy, "Designation,Section", pageIndex, pageSize, false);
             }
 
             var data = (from x in result.data
@@ -69,7 +69,6 @@ namespace Foundation.Library.Services
                             Nid = x.Nid,
                             ImageUrl = x.ImageUrl,
                             UserName = x.UserName,
-                            Nationality = x.Nationality,
                             UserId = x.UserId,
                             JoinOfDate = x.JoinOfDate,
                         }).ToList();

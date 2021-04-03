@@ -42,7 +42,7 @@ namespace Foundation.Library.Services
                 {
                     Id = x.Id,
                     TitleName = x.TitleName,
-                    EducationLevel = x.EducationLevel
+                    //EducationLevel = x.EducationLevel
                 }).ToList();
 
             return (result.total, result.totalDisplay, data);

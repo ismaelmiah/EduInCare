@@ -22,9 +22,6 @@ namespace Membership.Library.Entities
     public enum RoleType
     {
         Teacher = 1,
-        Student = 2,
-        Employee = 3,
-        Admin = 4,
-        SuperAdmin = 5,
+        Employee = 2,
     }
 }

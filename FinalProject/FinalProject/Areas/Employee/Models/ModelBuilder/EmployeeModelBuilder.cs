@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Linq;
 using Autofac;
 using FinalProject.Web.Models;
-using Foundation.Library.Entities;
 using Foundation.Library.Enums;
 using Foundation.Library.Services;
 using Membership.Library.Contexts;
@@ -14,7 +13,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
 {
-    public partial class EmployeeModelBuilder : BaseModel
+    public class EmployeeModelBuilder : BaseModel
     {
         private readonly ApplicationDbContext _db;
         private readonly IEmployeeEducationService _employeeEducationService;
@@ -112,7 +111,7 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
         /// <returns></returns>
         public object GetTeachers(DataTablesAjaxRequestModel tableModel)
         {
-            var (total, totalDisplay, records) = _employeeService.GetEmployeeList(
+            var (_, totalDisplay, records) = _employeeService.GetEmployeeList(
                 tableModel.PageIndex,
                 tableModel.PageSize,
                 tableModel.SearchText,
@@ -142,7 +141,6 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
                             record.Gender.ToString(),
                             record.Section?.Name,
                             record.JoinOfDate.ToShortDateString(),
-                            record.Id.ToString(),
                         }
                     ).ToArray()
 
@@ -186,7 +184,7 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
                             record.Cgpa.ToString(CultureInfo.InvariantCulture),
                             record.PassingYear,
                             record.Duration.ToString(),
-                            record.Employee.Name,
+                            //record.Employee.Name,
                             record.Id.ToString(),
                         }
                     ).ToArray()
@@ -324,8 +322,8 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
                 data = (from record in records
                         select new[]
                         {
-                            record.Employee.Name,
-                            record.Designation.Name,
+                            //record.Employee.Name,
+                            //record.Designation.Name,
                             record.JoiningDate.ToShortDateString(),
                             record.Salary.ToString(CultureInfo.InvariantCulture),
                             record.TotalLeave.ToString(),
@@ -380,7 +378,6 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
                 Name = employee.Name,
                 Gender = employee.Gender,
                 JoinOfDate = employee.JoinOfDate,
-                Nationality = employee.Nationality,
                 MobileNo = employee.MobileNo,
                 UserName = employee.UserName,
             };
@@ -455,30 +452,30 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
         /// <returns></returns>
         private Foundation.Library.Entities.Employee ConvertToEntity(EmployeeFormViewModel model)
         {
-            var employee = new Foundation.Library.Entities.Employee();
-            if (model.Photo != null)
+            var (fileName, filePath) = StoreFile(model.Photo);
+
+            return new Foundation.Library.Entities.Employee
             {
-                StoreFile(model.Photo);
-            }
-
-            employee.Name = model.Name;
-            employee.FatherName = model.FatherName;
-            employee.MotherName = model.MotherName;
-            employee.Gender = model.Gender;
-            employee.JoinOfDate = model.JoinOfDate;
-            employee.MaritalStatus = model.MaritalStatus;
-            employee.Religion = model.Religion;
-            employee.Nationality = model.Nationality;
-            employee.Nid = model.Nid;
-            employee.PresentAddress = model.PresentAddress;
-            employee.PermanentAddress = model.PermanentAddress;
-            employee.MobileNo = model.MobileNo;
-            employee.UserName = model.UserName;
-
-            return employee;
+                Name = model.Name,
+                BirthDate = model.DateOfBirth,
+                CardId = model.IdCardNo,
+                Email = model.Email,
+                UserName = model.UserName,
+                Gender = model.Gender,
+                ImageUrl = filePath,
+                ImageAlternativeText = fileName,
+                Nid = model.Nid,
+                JoinOfDate = model.JoinOfDate,
+                MobileNo = model.MobileNo,
+                PresentAddress = model.PresentAddress,
+                PermanentAddress = model.PermanentAddress,
+                WorkShift = model.Shift,
+                Qualifications = string.Join(",", model.Qualifications.Select(i => (QualificationType)i).ToList()
+                    .Select(s => Enum.GetName(typeof(QualificationType), s))),
+                Status = false,
+                DesignationId = model.DesignationId
+            };
         }
-
-        private Department GetSelectedDepartment(Guid departmentId) => _department.GetDepartment(departmentId);
 
         public void UpdateEmployee(Guid modelId, EmployeeFormViewModel model)
         {
@@ -487,41 +484,61 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
             exEmployee.Name = model.Name;
             exEmployee.Gender = model.Gender;
             exEmployee.MobileNo = model.MobileNo;
-            exEmployee.Nationality = model.Nationality;
             if (model.Photo != null)
             {
-                var imageInfo = StoreFile(model.Photo);
-                
+                var (fileName, filePath) = StoreFile(model.Photo);
+                exEmployee.ImageUrl = filePath;
+                exEmployee.ImageAlternativeText = fileName;
             }
             _employeeService.UpdateEmployee(exEmployee);
         }
-
-
-        public IList<SelectListItem> GetTypeList()
-        {
-            return new List<SelectListItem>
-            {
-                new SelectListItem
-                {
-                    Text = "Admin",
-                    Value = "admin"
-                },
-                new SelectListItem
-                {
-                    Text = "Teacher",
-                    Value = "teacher"
-                },
-                new SelectListItem
-                {
-                    Text = "Employee",
-                    Value = "employee"
-                },
-            };
-        }
-
+        
         public void DeleteEmployee(Guid id)
         {
             _employeeService.DeleteEmployee(id);
+        }
+
+        public SelectList GetDesignationList(object selected = null)
+        {
+            return new SelectList(_designationService.GetDesignations().OrderBy(x=>x.Name), "Id", "Name", selected);
+        }
+
+        public IList<SelectListItem> GetQualificationTypes()
+        {
+            return Enum.GetValues(typeof(QualificationType))
+                .Cast<QualificationType>().Select(x=> new SelectListItem()
+                {
+                    Text = x.ToString(),
+                    Value = ((int)x).ToString()
+                }).ToList();
+        }
+
+        public EmployeeProfileView BuildEmployeeProfile(Guid id)
+        {
+
+            var employee = _employeeService.GetEmployee(id);
+
+            return new EmployeeProfileView()
+            {
+                Name = employee.Name,
+                Gender = employee.Gender,
+                DateOfBirth = employee.BirthDate,
+                MobileNo = employee.MobileNo,
+                JoinDate = employee.JoinOfDate,
+                NationalIdentificationNo = employee.Nid,
+                ImagePath = FormatImageUrl(employee.ImageUrl),
+                Religion = employee.Religion,
+                Email = employee.Email,
+                UserName = employee.UserName,
+                PresentAddress = employee.PresentAddress,
+                PermanentAddress = employee.PermanentAddress,
+                WorkShift = employee.WorkShift??WorkShift.Day,
+                Status = employee.Status,
+                Qualifications = employee.Qualifications.Split(',').ToList(),
+                Designation = employee.Designation.Name,
+                IdCardNo = employee.CardId,
+                AlterImageName = employee.ImageAlternativeText
+            };
         }
     }
 }

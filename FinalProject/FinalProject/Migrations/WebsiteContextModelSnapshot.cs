@@ -74,16 +74,10 @@ namespace FinalProject.Web.Migrations
                     b.Property<string>("AlternativeText")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("JobInfoId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("JobInfoId")
-                        .IsUnique();
 
                     b.ToTable("AppointmentImages");
                 });
@@ -150,20 +144,6 @@ namespace FinalProject.Web.Migrations
                     b.ToTable("Designations");
                 });
 
-            modelBuilder.Entity("Foundation.Library.Entities.EducationLevel", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("EducationLevelName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EducationLevels");
-                });
-
             modelBuilder.Entity("Foundation.Library.Entities.Employee", b =>
                 {
                     b.Property<Guid>("Id")
@@ -173,10 +153,13 @@ namespace FinalProject.Web.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("CardId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FatherName")
+                    b.Property<Guid>("DesignationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Gender")
@@ -191,19 +174,16 @@ namespace FinalProject.Web.Migrations
                     b.Property<DateTime>("JoinOfDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("LeavingDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("MaritalStatus")
                         .HasColumnType("int");
 
                     b.Property<string>("MobileNo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MotherName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nationality")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nid")
@@ -215,8 +195,17 @@ namespace FinalProject.Web.Migrations
                     b.Property<string>("PresentAddress")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Qualifications")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Religion")
                         .HasColumnType("int");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -224,115 +213,14 @@ namespace FinalProject.Web.Migrations
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("WorkShift")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("DesignationId");
 
                     b.ToTable("Employees");
-                });
-
-            modelBuilder.Entity("Foundation.Library.Entities.EmployeeEducation", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Achievement")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Cgpa")
-                        .HasColumnType("real");
-
-                    b.Property<int>("Duration")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("EducationLevelId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("EmployeeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ExamTitleId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("InstituteName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Major")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Marks")
-                        .HasColumnType("real");
-
-                    b.Property<string>("PassingYear")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ResultType")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Scale")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EducationLevelId")
-                        .IsUnique();
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("ExamTitleId")
-                        .IsUnique();
-
-                    b.ToTable("EmployeeEducations");
-                });
-
-            modelBuilder.Entity("Foundation.Library.Entities.EmploymentHistory", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("CompanyLocation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompanyName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Designation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("EmployeeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("From")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("To")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("EmploymentHistories");
-                });
-
-            modelBuilder.Entity("Foundation.Library.Entities.ExamTitle", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("EducationLevelId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("TitleName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EducationLevelId")
-                        .IsUnique();
-
-                    b.ToTable("ExamTitles");
                 });
 
             modelBuilder.Entity("Foundation.Library.Entities.Footer", b =>
@@ -384,37 +272,6 @@ namespace FinalProject.Web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Headers");
-                });
-
-            modelBuilder.Entity("Foundation.Library.Entities.JobInfo", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("DesignationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("EmployeeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("JoiningDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("Salary")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("TotalLeave")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DesignationId")
-                        .IsUnique();
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("JobInfos");
                 });
 
             modelBuilder.Entity("Foundation.Library.Entities.Notice", b =>
@@ -581,7 +438,7 @@ namespace FinalProject.Web.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("SubjectId")
+                    b.Property<Guid?>("SubjectId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("TeacherId")
@@ -689,15 +546,6 @@ namespace FinalProject.Web.Migrations
                     b.ToTable("Subjects");
                 });
 
-            modelBuilder.Entity("Foundation.Library.Entities.AppointmentImage", b =>
-                {
-                    b.HasOne("Foundation.Library.Entities.JobInfo", "JobInfo")
-                        .WithOne("Appointment")
-                        .HasForeignKey("Foundation.Library.Entities.AppointmentImage", "JobInfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Foundation.Library.Entities.Course", b =>
                 {
                     b.HasOne("Foundation.Library.Entities.Department", "Department")
@@ -707,57 +555,12 @@ namespace FinalProject.Web.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Foundation.Library.Entities.EmployeeEducation", b =>
-                {
-                    b.HasOne("Foundation.Library.Entities.EducationLevel", "EducationLevel")
-                        .WithOne("EmployeeEducation")
-                        .HasForeignKey("Foundation.Library.Entities.EmployeeEducation", "EducationLevelId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Foundation.Library.Entities.Employee", "Employee")
-                        .WithMany("EmployeeEducation")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Foundation.Library.Entities.ExamTitle", "ExamTitle")
-                        .WithOne("EmployeeEducation")
-                        .HasForeignKey("Foundation.Library.Entities.EmployeeEducation", "ExamTitleId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Foundation.Library.Entities.EmploymentHistory", b =>
-                {
-                    b.HasOne("Foundation.Library.Entities.Employee", "Employee")
-                        .WithMany("EmploymentHistory")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Foundation.Library.Entities.ExamTitle", b =>
-                {
-                    b.HasOne("Foundation.Library.Entities.EducationLevel", "EducationLevel")
-                        .WithOne("ExamTitle")
-                        .HasForeignKey("Foundation.Library.Entities.ExamTitle", "EducationLevelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Foundation.Library.Entities.JobInfo", b =>
+            modelBuilder.Entity("Foundation.Library.Entities.Employee", b =>
                 {
                     b.HasOne("Foundation.Library.Entities.Designation", "Designation")
-                        .WithOne("JobInfo")
-                        .HasForeignKey("Foundation.Library.Entities.JobInfo", "DesignationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Foundation.Library.Entities.Employee", "Employee")
-                        .WithMany("JobInfo")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithMany("Employees")
+                        .HasForeignKey("DesignationId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -808,8 +611,7 @@ namespace FinalProject.Web.Migrations
                     b.HasOne("Foundation.Library.Entities.Subject", "Subject")
                         .WithMany("Sections")
                         .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Foundation.Library.Entities.Employee", "Employee")
                         .WithOne("Section")
