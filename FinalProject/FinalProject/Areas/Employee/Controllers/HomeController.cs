@@ -52,9 +52,8 @@ namespace FinalProject.Web.Areas.Employee.Controllers
 
         public IActionResult Profile(Guid id)
         {
-            var model = new StudentFormViewModel();
-
-            model = model.ModelBuilder.BuildStudentModel(id);
+            var model = new EmployeeProfileView();
+            model = model.ModelBuilder.BuildEmployeeProfile(id);
             if (model == null)
                 return NotFound();
             return View(model);

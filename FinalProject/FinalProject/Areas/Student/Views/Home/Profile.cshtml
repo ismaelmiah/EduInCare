@@ -5,7 +5,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLTE.cshtml";
 }
 @section Title
-{ 
+{
     <title>Profile</title>
 }
 <!-- Content Header (Page header) -->
@@ -290,7 +290,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane" id="subject">
-                                <table id="subjectTable" class="table table-responsive table-bordered table-hover table-td-center">
+                                <table id="subjectTable" class="table table-bordered table-hover text-center">
                                     <thead>
                                         <tr>
                                             <th class="text-center">Name</th>
@@ -302,18 +302,18 @@
                                     <tbody>
                                         @foreach (var item in Model.SubjectModels)
                                         {
-                                        <tr>
-                                            <td>@item.Name</td>
-                                            <td>@item.Code</td>
-                                            <td>@item.Type</td>
-                                            <td>@item.ExcludeInResult</td>
-                                        </tr>
+                                            <tr>
+                                                <td>@item.Name</td>
+                                                <td>@item.Code</td>
+                                                <td>@item.Type</td>
+                                                <td>@item.ExcludeInResult</td>
+                                            </tr>
                                         }
                                     </tbody>
                                 </table>
                             </div>
                             <div class="tab-pane" id="attendance">
-                                <table id="attendanceTable" class="table table-responsive table-bordered table-hover table-td-center">
+                                <table id="attendanceTable" class="table table-bordered table-hover text-center">
                                     <thead>
                                         <tr>
                                             <th class="text-center">Date</th>
@@ -321,40 +321,183 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <tr>
+                                            <td class="text-center">20/03/2021</td>
+                                            <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">21/03/2021</td>
+                                            <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">22/03/2021</td>
+                                            <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">23/03/2021</td>
+                                            <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">24/03/2021</td>
+                                            <td class="text-center"> <span class="badge bg-red">Absent</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">25/03/2021</td>
+                                            <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">27/03/2021</td>
+                                            <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">28/03/2021</td>
+                                            <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">29/03/2021</td>
+                                            <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">30/03/2021</td>
+                                            <td class="text-center"> <span class="badge bg-red">Absent</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">31/03/2021</td>
+                                            <td class="text-center"> <span class="badge bg-red">Absent</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">01/04/2021</td>
+                                            <td class="text-center"> <span class="badge bg-red">Absent</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">03/04/2021</td>
+                                            <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                        </tr>
                                     </tbody>
-
                                 </table>
                             </div>
                             <div class="tab-pane" id="marks">
-                                <h1>This is Marks View</h1>
-                            </div>
-                            <div class="tab-pane" id="invoices">
-                                <table id="invoiceTable" class="table table-responsive table-bordered table-hover table-td-center">
+                                <h4 class="title text-info">1st Term Exam</h4>
+                                <table class="table table-bordered table-hover text-center">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">Date</th>
-                                            <th class="text-center">Invoice No.</th>
-                                            <th class="text-center">Amount</th>
-                                            <th class="text-center">Paid</th>
-                                            <th class="text-center">Due</th>
+                                            <td rowspan="2" class="text-center">Subject</td>
+                                            <td rowspan="2" class="text-center">Code</td>
+                                            <td colspan="3" class="text-center">Marks</td>
+                                            <td rowspan="2" class="text-center">Total Marks</td>
+                                            <td rowspan="2" class="text-center">Grade</td>
+                                            <td rowspan="2" class="text-center">Point</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Written</td>
+                                            <td>MCQ</td>
+                                            <td>Practical</td>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <tr>
+                                            <td>Bangla 1st</td>
+                                            <td>101</td>
+                                            <td>19</td>
+                                            <td>9</td>
+                                            <td>0</td>
+                                            <td>28</td>
+                                            <td>F</td>
+                                            <td>0.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bangla 2nd</td>
+                                            <td>102</td>
+                                            <td>32</td>
+                                            <td>2</td>
+                                            <td>0</td>
+                                            <td>34</td>
+                                            <td>A-</td>
+                                            <td>3.50</td>
+                                        </tr>
+                                        <tr>
+                                            <td>English 1st</td>
+                                            <td>107</td>
+                                            <td>28</td>
+                                            <td>2</td>
+                                            <td>0</td>
+                                            <td>30</td>
+                                            <td>F</td>
+                                            <td>0.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>English 2nd</td>
+                                            <td>108</td>
+                                            <td>3</td>
+                                            <td>10</td>
+                                            <td>0</td>
+                                            <td>13</td>
+                                            <td>F</td>
+                                            <td>0.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Math</td>
+                                            <td>111</td>
+                                            <td>23</td>
+                                            <td>5</td>
+                                            <td>0</td>
+                                            <td>28</td>
+                                            <td>F</td>
+                                            <td>0.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Computer</td>
+                                            <td>112</td>
+                                            <td>12</td>
+                                            <td>19</td>
+                                            <td>8</td>
+                                            <td>39</td>
+                                            <td>F</td>
+                                            <td>0.00</td>
+                                        </tr>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5">Result</td>
+                                            <td>138</td>
+                                            <td>F</td>
+                                            <td>0.50</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="invoices">
+                                <table id="invoiceTable" class="table table-bordered table-hover text-center">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center">Date</th>
+                                        <th class="text-center">Invoice No.</th>
+                                        <th class="text-center">Amount</th>
+                                        <th class="text-center">Paid</th>
+                                        <th class="text-center">Due</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody><tr><td>29/03/2021</td><td>INV-001</td><td>1488.00</td>
+                                        <td>1368.00</td><td>120.00</td></tr><tr><td>03/04/2021</td><td>INV-017</td><td>4726.00</td>
+                                        <td>4726.00</td><td>0.00</td></tr><tr><td>03/04/2021</td><td>INV-022</td><td>60.00</td>
+                                        <td>60.00</td><td>0.00</td></tr></tbody>
                                 </table>
                             </div>
                             <div class="tab-pane" id="payments">
-                                <table id="paymentTable" class="table table-responsive table-bordered table-hover table-td-center">
+                                <table id="paymentTable" class="table table-bordered table-hover text-center">
                                     <thead>
-                                        <tr>
-                                            <th class="text-center">Date</th>
-                                            <th class="text-center">Method</th>
-                                            <th class="text-center">Referance</th>
-                                            <th class="text-center">Amount</th>
-                                        </tr>
+                                    <tr>
+                                        <th class="text-center">Date</th>
+                                        <th class="text-center">Method</th>
+                                        <th class="text-center">Referance</th>
+                                        <th class="text-center">Amount</th>
+                                    </tr>
                                     </thead>
-                                    <tbody>
-                                    </tbody>
+                                    <tbody><tr><td>29/03/2021</td><td>Cash</td>
+                                        <td></td><td>1368.00</td></tr><tr><td>03/04/2021</td><td>Cash</td>
+                                        <td></td><td>4726.00</td></tr><tr><td>03/04/2021</td><td>Cash</td>
+                                        <td></td><td>60.00</td></tr></tbody>
+
                                 </table>
                             </div>
                         </div>

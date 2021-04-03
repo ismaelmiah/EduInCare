@@ -4,18 +4,16 @@ using System.Globalization;
 using System.Linq;
 using Autofac;
 using FinalProject.Web.Models;
-using Foundation.Library.Entities;
 using Foundation.Library.Enums;
 using Foundation.Library.Services;
 using Membership.Library.Contexts;
 using Membership.Library.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
 {
-    public partial class EmployeeModelBuilder : BaseModel
+    public class EmployeeModelBuilder : BaseModel
     {
         private readonly ApplicationDbContext _db;
         private readonly IEmployeeEducationService _employeeEducationService;
@@ -113,7 +111,7 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
         /// <returns></returns>
         public object GetTeachers(DataTablesAjaxRequestModel tableModel)
         {
-            var (total, totalDisplay, records) = _employeeService.GetEmployeeList(
+            var (_, totalDisplay, records) = _employeeService.GetEmployeeList(
                 tableModel.PageIndex,
                 tableModel.PageSize,
                 tableModel.SearchText,
@@ -468,6 +466,7 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
                 ImageAlternativeText = fileName,
                 Nid = model.Nid,
                 JoinOfDate = model.JoinOfDate,
+                MobileNo = model.MobileNo,
                 PresentAddress = model.PresentAddress,
                 PermanentAddress = model.PermanentAddress,
                 WorkShift = model.Shift,
@@ -478,8 +477,6 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
             };
         }
 
-        private Department GetSelectedDepartment(Guid departmentId) => _department.GetDepartment(departmentId);
-
         public void UpdateEmployee(Guid modelId, EmployeeFormViewModel model)
         {
             var exEmployee = _employeeService.GetEmployee(modelId);
@@ -489,35 +486,13 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
             exEmployee.MobileNo = model.MobileNo;
             if (model.Photo != null)
             {
-                var imageInfo = StoreFile(model.Photo);
-                
+                var (fileName, filePath) = StoreFile(model.Photo);
+                exEmployee.ImageUrl = filePath;
+                exEmployee.ImageAlternativeText = fileName;
             }
             _employeeService.UpdateEmployee(exEmployee);
         }
-
-
-        public IList<SelectListItem> GetTypeList()
-        {
-            return new List<SelectListItem>
-            {
-                new SelectListItem
-                {
-                    Text = "Admin",
-                    Value = "admin"
-                },
-                new SelectListItem
-                {
-                    Text = "Teacher",
-                    Value = "teacher"
-                },
-                new SelectListItem
-                {
-                    Text = "Employee",
-                    Value = "employee"
-                },
-            };
-        }
-
+        
         public void DeleteEmployee(Guid id)
         {
             _employeeService.DeleteEmployee(id);
@@ -536,6 +511,34 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
                     Text = x.ToString(),
                     Value = ((int)x).ToString()
                 }).ToList();
+        }
+
+        public EmployeeProfileView BuildEmployeeProfile(Guid id)
+        {
+
+            var employee = _employeeService.GetEmployee(id);
+
+            return new EmployeeProfileView()
+            {
+                Name = employee.Name,
+                Gender = employee.Gender,
+                DateOfBirth = employee.BirthDate,
+                MobileNo = employee.MobileNo,
+                JoinDate = employee.JoinOfDate,
+                NationalIdentificationNo = employee.Nid,
+                ImagePath = FormatImageUrl(employee.ImageUrl),
+                Religion = employee.Religion,
+                Email = employee.Email,
+                UserName = employee.UserName,
+                PresentAddress = employee.PresentAddress,
+                PermanentAddress = employee.PermanentAddress,
+                WorkShift = employee.WorkShift??WorkShift.Day,
+                Status = employee.Status,
+                Qualifications = employee.Qualifications.Split(',').ToList(),
+                Designation = employee.Designation.Name,
+                IdCardNo = employee.CardId,
+                AlterImageName = employee.ImageAlternativeText
+            };
         }
     }
 }

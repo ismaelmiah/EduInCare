@@ -120,18 +120,6 @@ namespace FinalProject.Web.Areas.Student.Models
                 GuardianMobileNo = model.GuardianMobileNo,
             };
         }
-
-        public AddressModel BuildAddressModel(string address)
-        {
-            var fullAddress = address.Split(",");
-            var addressModel = new AddressModel
-            {
-                City = fullAddress[1],
-                Street = fullAddress[0],
-                ZipCode = fullAddress[2]
-            };
-            return addressModel;
-        }
         public void DeleteStudent(Guid id)
         {
             _studentService.Delete(id);

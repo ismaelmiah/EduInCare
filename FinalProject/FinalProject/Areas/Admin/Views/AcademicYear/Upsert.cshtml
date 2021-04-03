@@ -17,11 +17,11 @@
                 <h3 class="card-title text-center">@ViewData["subtitle"]</h3>
             </div>
         </div>
-        <form class="form-horizontal" asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
+        <form asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
             <div class="card-body">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="row">
-                    <div class="col-7">
+                    <div class="col-6">
                         <div class="form-group row">
                             <div class="col-4">
                                 <label asp-for="Title"></label>
@@ -36,7 +36,7 @@
                                 <label asp-for="StartDate"></label>
                             </div>
                             <div class="col-8">
-                                <input asp-for="StartDate" class="form-control" />
+                                <input asp-for="StartDate" type="Date" class="form-control" />
                                 <span asp-validation-for="StartDate" class="text-danger"></span>
                             </div>
                         </div>
@@ -45,17 +45,17 @@
                                 <label asp-for="EndDate"></label>
                             </div>
                             <div class="col-8">
-                                <input asp-for="EndDate" class="form-control" />
+                                <input asp-for="EndDate" type="Date" class="form-control" />
                                 <span asp-validation-for="EndDate" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
-                    <div class="col-5">
+                    <div class="col-6">
                         <div class="form-group row">
-                            <div class="col-4">
+                            <div class="col-8">
                                 <label for="IsOpenForAdmission" >Is Open For Admission</label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-4">
                                 <input asp-for="IsOpenForAdmission" class="form-control" />
                                 <span asp-validation-for="IsOpenForAdmission" class="text-danger"></span>
                             </div>

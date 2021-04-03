@@ -186,9 +186,6 @@ namespace FinalProject.Web.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nationality")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Nid")
                         .HasColumnType("nvarchar(max)");
 
@@ -441,7 +438,7 @@ namespace FinalProject.Web.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("SubjectId")
+                    b.Property<Guid?>("SubjectId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("TeacherId")
@@ -614,8 +611,7 @@ namespace FinalProject.Web.Migrations
                     b.HasOne("Foundation.Library.Entities.Subject", "Subject")
                         .WithMany("Sections")
                         .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Foundation.Library.Entities.Employee", "Employee")
                         .WithOne("Section")

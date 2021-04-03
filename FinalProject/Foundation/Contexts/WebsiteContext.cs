@@ -110,7 +110,6 @@ namespace Foundation.Library.Contexts
                 .WithMany(x => x.Sections)
                 .HasForeignKey(x => x.SubjectId)
                 .HasPrincipalKey(x => x.Id)
-                .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Section>()
