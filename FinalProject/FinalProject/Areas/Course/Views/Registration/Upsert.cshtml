@@ -18,14 +18,14 @@
                 <h3 class="card-title text-center">@ViewData["subtitle"]</h3>
             </div>
         </div>
-        <form class="form-horizontal" asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
+        <form asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
             <div class="card-body">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input asp-for="Id" type="hidden" />
                 <div class="row">
                     <div class="form-group row col-3">
                         <div class="col-6">
-                            <label for="AcademicYearId" class="">Academic Year</label>
+                            <label asp-for="AcademicYearId"></label>
                         </div>
                         <div class="col-6">
                             <select asp-for="AcademicYearId" asp-items="Model.AcademicYearList" class="form-control"></select>
@@ -34,7 +34,7 @@
                     </div>
                     <div class="form-group row col-3 ml-2">
                         <div class="col-3">
-                            <label for="CourseId" class="">Course</label>
+                            <label asp-for="CourseId"></label>
                         </div>
                         <div class="col-9">
                             <select asp-for="CourseId" asp-items="Model.CourseList" class="form-control"></select>
@@ -43,7 +43,7 @@
                     </div>
                     <div class="form-group row col-3 ml-3">
                         <div class="col-4">
-                            <label for="SectionId" class="">Section</label>
+                            <label asp-for="SectionId"></label>
                         </div>
                         <div class="col-8">
                             <select asp-for="SectionId" asp-items="Model.SectionList" class="form-control"></select>
@@ -52,7 +52,7 @@
                     </div>
                     <div class="form-group row col-3 ml-2">
                         <div class="col-4">
-                            <label asp-for="Shift" class=""></label>
+                            <label asp-for="Shift"></label>
                         </div>
                         <div class="col-8">
                             <select class="form-control" asp-for="Shift" asp-items="Html.GetEnumSelectList<ShiftType>()">
@@ -64,7 +64,7 @@
                 <div class="row">
                     <div class="form-group row col">
                         <div class="col-2">
-                            <label for="StudentId" class="">Student</label>
+                            <label asp-for="StudentId"></label>
                         </div>
                         <div class="col-10">
                             <select asp-for="StudentId" asp-items="Model.StudentList" class="form-control"></select>
@@ -73,7 +73,7 @@
                     </div>
                     <div class="form-group row col">
                         <div class="col-3">
-                            <label for="RegistrationNo" class="">Registration No</label>
+                            <label asp-for="RegistrationNo">Registration No</label>
                         </div>
                         <div class="col-9">
                             <input asp-for="RegistrationNo" placeholder="Auto Generated" class="form-control" />
@@ -82,7 +82,7 @@
                     </div>
                     <div class="form-group row col-2 ml-3">
                         <div class="col-4">
-                            <label asp-for="RollNo" class=""></label>
+                            <label asp-for="RollNo"></label>
                         </div>
                         <div class="col-8">
                             <input asp-for="RollNo" class="form-control" />
@@ -93,7 +93,7 @@
                 <div class="row">
                     <div class="form-group row col">
                         <div class="col-4">
-                            <label for="BoardRegistrationNo" class="">Board Registration No </label>
+                            <label asp-for="BoardRegistrationNo"></label>
                         </div>
                         <div class="col-8">
                             <input asp-for="BoardRegistrationNo" class="form-control" />
@@ -102,7 +102,7 @@
                     </div>
                     <div class="form-group row col">
                         <div class="col-3">
-                            <label for="OldRegistrationId" class="">Old Registration No</label>
+                            <label asp-for="OldRegistrationId"></label>
                         </div>
                         <div class="col-9">
                             <input asp-for="OldRegistrationId" class="form-control" />
@@ -114,7 +114,7 @@
                     <div class="col-md-3">
                         <div class="form-group row">
                             <div class="col-4">
-                                <label for="IsPromoted" class="">Is Promoted</label>
+                                <label asp-for="IsPromoted"></label>
                             </div>
                             <div class="col-8">
                                 <input asp-for="IsPromoted" class="form-control" />
@@ -153,3 +153,24 @@
         </form>
     </div>
 </div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+            $.ajax({
+                method: "GET",
+                url: "GetAcademicYears",
+                dataType: "json",
+                success: function (data) {
+                    var s = "";
+                    for (var i = 0; i < data.length; i++) {
+                        s += '<option value="' + data[i].value + '">' + data[i].text + '</option>';
+                    }
+                    $("#AcademicYearId").html(s);
+                }
+            });
+        });
+    </script>
+}

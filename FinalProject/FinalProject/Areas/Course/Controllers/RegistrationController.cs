@@ -55,7 +55,12 @@ namespace FinalProject.Web.Areas.Course.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
+        public IActionResult GetAcademicYears()
+        {
+            var model = new RegistrationModel();
+            var data = model.ModelBuilder.GetAcademicYearList();
+            return Json(data);
+        }
         public IActionResult Delete(Guid id)
         {
             var model = new RegistrationModel();
