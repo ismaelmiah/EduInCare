@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using DataAccessLayer;
 using DataAccessLayer.Library;
 using Foundation.Library.Enums;
 using Membership.Library.Entities;
-using Microsoft.AspNetCore.Identity;
 
 namespace Foundation.Library.Entities
 {
@@ -22,10 +19,8 @@ namespace Foundation.Library.Entities
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public RoleType Role { get; set; }
-        public Guid CardId { get; set; }
+        public string CardId { get; set; }
         public string Name { get; set; }
-        public string FatherName { get; set; }
-        public string MotherName { get; set; }
         public Gender Gender { get; set; }
         public string Nid { get; set; }
         public string MobileNo { get; set; }
@@ -36,8 +31,12 @@ namespace Foundation.Library.Entities
         public virtual Designation Designation { get; set; }
         public string PresentAddress { get; set; }
         public string PermanentAddress { get; set; }
+        public DateTime LeavingDate { get; set; }
+        public DateTime BirthDate { get; set; }
+        public WorkShift? WorkShift { get; set; }
         public string ImageUrl { get; set; }
         public string ImageAlternativeText { get; set; }
+        public string Qualifications { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
         public bool Status { get; set; }

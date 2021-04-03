@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Autofac;
 using Foundation.Library.Entities;
 using Foundation.Library.Services;
@@ -26,8 +25,8 @@ namespace FinalProject.Web.Areas.Employee.Models
 
         public void SaveDesignationModel(DesignationModel model)
         {
-            var Entity = ConvertToEntity(model);
-            _designation.AddDesignation(Entity);
+            var entity = ConvertToEntity(model);
+            _designation.AddDesignation(entity);
         }
 
         private Designation ConvertToEntity(DesignationModel model)

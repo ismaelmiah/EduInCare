@@ -11,6 +11,7 @@ using Membership.Library.Contexts;
 using Membership.Library.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
 {
@@ -454,26 +455,28 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
         /// <returns></returns>
         private Foundation.Library.Entities.Employee ConvertToEntity(EmployeeFormViewModel model)
         {
-            var employee = new Foundation.Library.Entities.Employee();
-            if (model.Photo != null)
+            var (fileName, filePath) = StoreFile(model.Photo);
+
+            return new Foundation.Library.Entities.Employee
             {
-                StoreFile(model.Photo);
-            }
-
-            employee.Name = model.Name;
-            employee.FatherName = model.FatherName;
-            employee.MotherName = model.MotherName;
-            employee.Gender = model.Gender;
-            employee.JoinOfDate = model.JoinOfDate;
-            employee.MaritalStatus = model.MaritalStatus;
-            employee.Religion = model.Religion;
-            employee.Nid = model.Nid;
-            employee.PresentAddress = model.PresentAddress;
-            employee.PermanentAddress = model.PermanentAddress;
-            employee.MobileNo = model.MobileNo;
-            employee.UserName = model.UserName;
-
-            return employee;
+                Name = model.Name,
+                BirthDate = model.DateOfBirth,
+                CardId = model.IdCardNo,
+                Email = model.Email,
+                UserName = model.UserName,
+                Gender = model.Gender,
+                ImageUrl = filePath,
+                ImageAlternativeText = fileName,
+                Nid = model.Nid,
+                JoinOfDate = model.JoinOfDate,
+                PresentAddress = model.PresentAddress,
+                PermanentAddress = model.PermanentAddress,
+                WorkShift = model.Shift,
+                Qualifications = string.Join(",", model.Qualifications.Select(i => (QualificationType)i).ToList()
+                    .Select(s => Enum.GetName(typeof(QualificationType), s))),
+                Status = false,
+                DesignationId = model.DesignationId
+            };
         }
 
         private Department GetSelectedDepartment(Guid departmentId) => _department.GetDepartment(departmentId);
@@ -523,7 +526,17 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
 
         public SelectList GetDesignationList(object selected = null)
         {
-            return new SelectList(_designationService.GetDesignations(), "Id", "Name", selected);
+            return new SelectList(_designationService.GetDesignations().OrderBy(x=>x.Name), "Id", "Name", selected);
+        }
+
+        public IList<SelectListItem> GetQualificationTypes()
+        {
+            return Enum.GetValues(typeof(QualificationType))
+                .Cast<QualificationType>().Select(x=> new SelectListItem()
+                {
+                    Text = x.ToString(),
+                    Value = ((int)x).ToString()
+                }).ToList();
         }
     }
 }
