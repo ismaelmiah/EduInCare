@@ -30,6 +30,10 @@
     <Compile Remove="Migrations\20210322140744_EmployeeTableReGenerate.Designer.cs" />
     <Compile Remove="Migrations\20210322141130_EmployeeTableReGenerate.cs" />
     <Compile Remove="Migrations\20210322141130_EmployeeTableReGenerate.Designer.cs" />
+    <Compile Remove="Migrations\20210404034517_CourseTableHasAcademicYearDependancy.cs" />
+    <Compile Remove="Migrations\20210404034517_CourseTableHasAcademicYearDependancy.Designer.cs" />
+    <Compile Remove="Migrations\20210404034646_CourseTableHasAcademicYearDependancy.cs" />
+    <Compile Remove="Migrations\20210404034646_CourseTableHasAcademicYearDependancy.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

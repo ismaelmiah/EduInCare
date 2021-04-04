@@ -163,6 +163,14 @@ namespace Foundation.Library.Contexts
                 .HasOne(x => x.AcademicYear)
                 .WithOne(x => x.Registration)
                 .HasForeignKey<Registration>(x => x.AcademicYearId);
+            
+            builder.Entity<Course>()
+                .HasOne(x => x.AcademicYear)
+                .WithMany(x => x.Courses)
+                .HasForeignKey(x => x.AcademicYearId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             //builder.Entity<Registration>()
             //    .HasOne(x => x.Shift)

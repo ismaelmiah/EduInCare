@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Autofac;
 using FinalProject.Web.Models;
@@ -12,17 +11,20 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
     {
         private readonly ICourseService _courseService;
         private readonly IDepartmentService _department;
+        private readonly IAcademicYearService _academicYear;
 
-        public CourseModelBuilder(ICourseService courseService, IDepartmentService department)
+        public CourseModelBuilder(ICourseService courseService, IDepartmentService department, IAcademicYearService academicYear)
         {
             _courseService = courseService;
             _department = department;
+            _academicYear = academicYear;
         }
 
         public CourseModelBuilder()
         {
             _courseService = Startup.AutofacContainer.Resolve<ICourseService>();
             _department = Startup.AutofacContainer.Resolve<IDepartmentService>();
+            _academicYear = Startup.AutofacContainer.Resolve<IAcademicYearService>();
         }
 
         internal object GetClasses(DataTablesAjaxRequestModel tableModel)
@@ -76,7 +78,8 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                 Status = model.Status,
                 Description = model.Description,
                 HaveCompulsorySubject = model.HaveCompulsorySubject,
-                MaxCompulsorySubject = model.MaxCompulsorySubject
+                MaxCompulsorySubject = model.MaxCompulsorySubject,
+                AcademicYearId = model.AcademicYearId
             };
         }
 
@@ -98,7 +101,9 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                 HaveCompulsorySubject = exCourse.HaveCompulsorySubject,
                 Id = exCourse.Id,
                 MaxCompulsorySubject = exCourse.MaxCompulsorySubject,
-                Status = exCourse.Status
+                Status = exCourse.Status,
+                AcademicYearId = exCourse.AcademicYearId,
+                AcademicYearList = PopulateAcademicYearDropDownList(exCourse.AcademicYearId)
             };
         }
 
@@ -111,6 +116,7 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             exCourse.Status = model.Status;
             exCourse.Duration = model.Duration;
             exCourse.MaxCompulsorySubject = model.MaxCompulsorySubject;
+            exCourse.AcademicYearId = model.AcademicYearId;
             exCourse.HaveCompulsorySubject = model.HaveCompulsorySubject;
             _courseService.Update(exCourse);
         }
@@ -120,6 +126,13 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             var departmentList = from d in _department.GetDepartments() select d;
 
             return new SelectList(departmentList, "Id","Name", selectedDepartment);
+        }
+
+        public SelectList PopulateAcademicYearDropDownList(object selectedYear = null)
+        {
+            var academicYears = from d in _academicYear.GetAcademicYears() select d;
+
+            return new SelectList(academicYears, "Id", "Title", selectedYear);
         }
     }
 }

@@ -4,14 +4,16 @@ using Foundation.Library.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FinalProject.Web.Migrations
 {
     [DbContext(typeof(WebsiteContext))]
-    partial class WebsiteContextModelSnapshot : ModelSnapshot
+    [Migration("20210404035137_CourseTableHasAcademicYearDependancy")]
+    partial class CourseTableHasAcademicYearDependancy
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,7 +116,8 @@ namespace FinalProject.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AcademicYearId");
+                    b.HasIndex("AcademicYearId")
+                        .IsUnique();
 
                     b.HasIndex("DepartmentId");
 
@@ -554,8 +557,8 @@ namespace FinalProject.Web.Migrations
             modelBuilder.Entity("Foundation.Library.Entities.Course", b =>
                 {
                     b.HasOne("Foundation.Library.Entities.AcademicYear", "AcademicYear")
-                        .WithMany("Courses")
-                        .HasForeignKey("AcademicYearId")
+                        .WithOne("Course")
+                        .HasForeignKey("Foundation.Library.Entities.Course", "AcademicYearId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 

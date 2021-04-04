@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FinalProject.Web.Areas.Admin.Models;
-using FinalProject.Web.Areas.Admin.Models.ModelBuilder;
 using FinalProject.Web.Areas.Employee.Models;
 using FinalProject.Web.Areas.Employee.Models.ModelBuilder;
 using FinalProject.Web.Models;
@@ -49,7 +44,7 @@ namespace FinalProject.Web.Areas.Employee.Controllers
                 }
             }
 
-            return RedirectToRoute(new { Area = "Admin", controller = "Employee", action = "Index" });
+            return RedirectToAction(nameof(Index));
         }
 
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using FinalProject.Web.Areas.Course.Models;
 using FinalProject.Web.Areas.Student.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -53,6 +54,13 @@ namespace FinalProject.Web.Areas.Student.Controllers
         public IActionResult StudentReport(Guid id)
         {
             return View();
+        }
+
+        public IActionResult GetSubjectsByCourse(Guid courseId)
+        {
+            var model = new StudentFormViewModel();
+            var data = model.ModelBuilder.GetSubjectModels(courseId);
+            return Json(data);
         }
 
         public IActionResult Profile(Guid id)

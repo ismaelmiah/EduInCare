@@ -264,9 +264,9 @@ namespace FinalProject.Web.Areas.Student.Models
             _studentService.AddStudent(student);
         }
 
-        public IList<SubjectModel> GetSubjectModels()
+        public IList<SubjectModel> GetSubjectModels(Guid courseId)
         {
-            return _subject.GetSubjects().Select(x => new SubjectModel
+            return _subject.GetSubjects(courseId).Select(x => new SubjectModel
             {
                 Name = x.Name,
                 Code = x.Code,

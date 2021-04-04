@@ -15,7 +15,6 @@ namespace FinalProject.Web.Areas.Student.Models
         {
             ModelBuilder = new StudentModelBuilder();
             EnrollCourse = ModelBuilder.CourseList();
-            SubjectModels = ModelBuilder.GetSubjectModels();
         }
         [Display(Name = "First Name")]
         public string FirstName { get; set; }

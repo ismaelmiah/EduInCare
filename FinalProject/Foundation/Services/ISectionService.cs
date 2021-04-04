@@ -15,5 +15,6 @@ namespace Foundation.Library.Services
         Section GetSection(Guid id);
         void Update(Section section);
         IList<Section> GetSections();
+        IList<Section> GetSections(Guid courseId);
     }
 }

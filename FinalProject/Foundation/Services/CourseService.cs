@@ -71,6 +71,12 @@ namespace Foundation.Library.Services
         {
             return _management.CourseRepository.GetAll();
         }
+        
+
+        public IList<Course> GetCourses(Guid yearId)
+        {
+            return _management.CourseRepository.Get(x=>x.AcademicYearId==yearId);
+        }
 
         public void Update(Course course)
         {

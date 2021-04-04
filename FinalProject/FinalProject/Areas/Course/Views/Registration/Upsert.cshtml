@@ -169,8 +169,49 @@
                         s += '<option value="' + data[i].value + '">' + data[i].text + '</option>';
                     }
                     $("#AcademicYearId").html(s);
+                    populateCourse(data[0].value);
                 }
             });
+
+            $("#AcademicYearId").change(function() {
+                populateCourse(this.value);
+            });
+
+
+            $("#CourseId").change(function () {
+                populateSection(this.value);
+            });
+
+            function populateCourse(yearId) {
+                $.ajax({
+                    method: "GET",
+                    url: "GetCoursesByYear?yearId="+yearId,
+                    dataType: "json",
+                    success: function (data) {
+                        var s = "";
+                        for (var i = 0; i < data.length; i++) {
+                            s += '<option value="' + data[i].value + '">' + data[i].text + '</option>';
+                        }
+                        $("#CourseId").html(s);
+                        populateSection(data[0].value);
+                    }
+                });
+            }
+
+            function populateSection(courseId) {
+                $.ajax({
+                    method: "GET",
+                    url: "GetSectionsByCourse?courseId=" + courseId,
+                    dataType: "json",
+                    success: function (data) {
+                        var s = "";
+                        for (var i = 0; i < data.length; i++) {
+                            s += '<option value="' + data[i].value + '">' + data[i].text + '</option>';
+                        }
+                        $("#SectionId").html(s);
+                    }
+                });
+            }
         });
     </script>
 }

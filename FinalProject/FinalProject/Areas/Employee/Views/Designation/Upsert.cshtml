@@ -1,14 +1,13 @@
 ﻿@model FinalProject.Web.Areas.Employee.Models.DesignationModel
 
 @{
-    ViewData["Title"] = "Upsert";
-    Layout = "~/Areas/Student/Views/Shared/_StudentLayout.cshtml";
+    ViewData["Title"] = "Create Designation";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLTE.cshtml";
 }
-
-<h1>Upsert</h1>
-
-<h4>DesignationModel</h4>
-<hr />
+@section Title
+{
+    <title>@ViewData["Title"]</title>
+}
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Upsert">

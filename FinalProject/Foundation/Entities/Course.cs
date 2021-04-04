@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataAccessLayer;
 using DataAccessLayer.Library;
 
 namespace Foundation.Library.Entities
@@ -26,6 +25,8 @@ namespace Foundation.Library.Entities
         public Guid DepartmentId { get; set; }
         public virtual Department Department { get; set; }
         public virtual Registration Registration { get; set; }
+        public Guid AcademicYearId { get; set; }
+        public virtual AcademicYear AcademicYear { get; set; }
         //TODO: Course & Department Might be Many TO Many Relationship
         //TODO: Maintain Only One To Many Relations with Dept & Course
     }

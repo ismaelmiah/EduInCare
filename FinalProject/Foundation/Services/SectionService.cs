@@ -72,6 +72,11 @@ namespace Foundation.Library.Services
             return _management.SectionRepository.Get(null, null, "Course,Subject,Employee", false);
         }
 
+        public IList<Section> GetSections(Guid courseId)
+        {
+            return _management.SectionRepository.Get(x => x.CourseId == courseId);
+        }
+
         public void Update(Section section)
         {
             _management.SectionRepository.Edit(section);

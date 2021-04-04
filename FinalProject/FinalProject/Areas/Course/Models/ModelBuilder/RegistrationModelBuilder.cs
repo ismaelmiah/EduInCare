@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Autofac;
 using FinalProject.Web.Models;
 using Foundation.Library.Entities;
@@ -137,14 +138,15 @@ namespace FinalProject.Web.Areas.Course.Models.ModelBuilder
             _registration.Delete(id);
         }
 
-        public SelectList GetCourseList(object selectedItem = null)
+        public SelectList GetCourseList(Guid yearId, object selectedItem = null)
         {
-            return new SelectList(_course.GetCourses(), "Id", "Name", selectedItem);
+            var courses = _course.GetCourses(yearId);
+            return new SelectList(courses, "Id", "Name", selectedItem);
         }
 
-        public SelectList GetSectionList(object selectedItem = null)
+        public SelectList GetSectionList(Guid courseId, object selectedItem = null)
         {
-            return new SelectList(_section.GetSections(), "Id", "Name", selectedItem);
+            return new SelectList(_section.GetSections(courseId), "Id", "Name", selectedItem);
         }
 
         public SelectList GetAcademicYearList(object selectedItem = null)

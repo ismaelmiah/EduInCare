@@ -13,8 +13,6 @@ namespace FinalProject.Web.Areas.Course.Models
         {
             ModelBuilder = new RegistrationModelBuilder();
             StudentList = ModelBuilder.GetStudentList();
-            CourseList = ModelBuilder.GetCourseList();
-            SectionList = ModelBuilder.GetSectionList();
         }
 
         public Guid Id { get; set; }
