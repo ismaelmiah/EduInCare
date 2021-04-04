@@ -74,6 +74,13 @@ namespace FinalProject.Web.Areas.Course.Controllers
             var data = model.ModelBuilder.GetSectionList(courseId);
             return Json(data);
         }
+
+        public IActionResult GetStudents(Guid courseId, Guid sectionId, int shift = 1)
+        {
+            var model = new RegistrationModel();
+            var data = model.ModelBuilder.GetStudentList(courseId, sectionId, shift);
+            return Json(data);
+        }
         public IActionResult Delete(Guid id)
         {
             var model = new RegistrationModel();

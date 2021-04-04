@@ -154,9 +154,9 @@ namespace FinalProject.Web.Areas.Course.Models.ModelBuilder
             return new SelectList(_academic.GetAcademicYears(), "Id", "Title", selectedItem);
         }
 
-        public SelectList GetStudentList(object selectedItem = null)
+        public SelectList GetStudentList(Guid courseId, Guid sectionId, int shift)
         {
-            var studentList = _student.GetStudents().Select(x => 
+            var studentList = _student.GetStudents(courseId, sectionId, shift).Select(x => 
                 new { Id = x.Id, Name = $"{x.FirstName} {x.MiddleName} {x.LastName}" }).ToList();
 
             return new SelectList(studentList, "Id", "Name", selectedItem);

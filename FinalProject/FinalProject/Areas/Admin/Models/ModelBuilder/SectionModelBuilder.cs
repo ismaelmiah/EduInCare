@@ -72,9 +72,9 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                 tableModel.GetSortText(new[]
                 {
                     "Name",
-                    "Capacity",
                     "Course",
                     "Employee",
+                    "Capacity",
                     "Status",
                     "Description",
                 }));
@@ -87,9 +87,9 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                         select new object[]
                         {
                             record.Name,
-                            record.Capacity,
                             record.Course.Name,
                             record.Employee.Name,
+                            record.Capacity,
                             record.Status,
                             record.Description,
                             record.Id.ToString(),

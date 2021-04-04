@@ -25,6 +25,7 @@ namespace Foundation.Library.Entities
         public string PermanentAddress { get; set; }
         public string Nationality { get; set; }
         public DateTime YearOfEnroll { get; set; }
+        public ShiftType Shift { get; set; }
         public virtual Parents Parents { get; set; }
         public virtual Registration Registration { get; set; }
     }

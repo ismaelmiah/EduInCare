@@ -30,6 +30,7 @@ namespace FinalProject.Web.Areas.Student.Models
         public string NationalIdentificationNo { get; set; }
         public Gender Gender { get; set; }
         public Religion Religion { get; set; }
+        public ShiftType Shift { get; set; }
         public string MobileNo { get; set; }
         [Display(Name = "Present Address")]
         public string PresentAddress { get; set; }

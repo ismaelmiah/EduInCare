@@ -80,5 +80,10 @@ namespace Foundation.Library.Services
         {
             return _management.StudentRepository.GetAll();
         }
+
+        public IList<Student> GetStudents(Guid courseId, Guid sectionId, int shift)
+        {
+            return _management.StudentRepository.GetAll();
+        }
     }
 }

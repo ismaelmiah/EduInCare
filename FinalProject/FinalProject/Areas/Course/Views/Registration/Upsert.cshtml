@@ -181,6 +181,11 @@
             $("#CourseId").change(function () {
                 populateSection(this.value);
             });
+            
+
+            $("#Shift").change(function () {
+                populateSection(this.value);
+            });
 
             function populateCourse(yearId) {
                 $.ajax({
@@ -209,6 +214,21 @@
                             s += '<option value="' + data[i].value + '">' + data[i].text + '</option>';
                         }
                         $("#SectionId").html(s);
+                    }
+                });
+            }
+
+            function populateStudent(courseId, sectionId, shift) {
+                $.ajax({
+                    method: "GET",
+                    url: "GetStudents?courseId=" + courseId+"?section="+sectionId+"?shift="+shift,
+                    dataType: "json",
+                    success: function (data) {
+                        var s = "";
+                        for (var i = 0; i < data.length; i++) {
+                            s += '<option value="' + data[i].value + '">' + data[i].text + '</option>';
+                        }
+                        $("#StudentId").html(s);
                     }
                 });
             }

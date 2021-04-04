@@ -14,5 +14,6 @@ namespace Foundation.Library.Services
         Student GetStudent(Guid id);
         void Update(Student student);
         IList<Student> GetStudents();
+        IList<Student> GetStudents(Guid courseId, Guid sectionId, int shift);
     }
 }
