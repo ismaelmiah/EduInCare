@@ -158,7 +158,7 @@
 {
     <script type="text/javascript">
         $(document).ready(function () {
-            
+
             $.ajax({
                 method: "GET",
                 url: "GetAcademicYears",
@@ -172,25 +172,27 @@
                     populateCourse(data[0].value);
                 }
             });
+            //populateStudent($("#CourseId").val(), $("#Shift").val());
 
-            $("#AcademicYearId").change(function() {
+            $("#AcademicYearId").change(function () {
                 populateCourse(this.value);
             });
 
 
             $("#CourseId").change(function () {
                 populateSection(this.value);
+                populateStudent(this.value, $("#Shift").val());
             });
-            
+
 
             $("#Shift").change(function () {
-                populateSection(this.value);
+                populateStudent($("#CourseId").val(), this.value);
             });
 
             function populateCourse(yearId) {
                 $.ajax({
                     method: "GET",
-                    url: "GetCoursesByYear?yearId="+yearId,
+                    url: "GetCoursesByYear?yearId=" + yearId,
                     dataType: "json",
                     success: function (data) {
                         var s = "";
@@ -199,6 +201,7 @@
                         }
                         $("#CourseId").html(s);
                         populateSection(data[0].value);
+                        populateStudent(data[0].value, $("#Shift").val());
                     }
                 });
             }
@@ -218,10 +221,11 @@
                 });
             }
 
-            function populateStudent(courseId, sectionId, shift) {
+            function populateStudent(courseId, shift) {
+                console.log(courseId + ' ' + shift);
                 $.ajax({
                     method: "GET",
-                    url: "GetStudents?courseId=" + courseId+"?section="+sectionId+"?shift="+shift,
+                    url: "GetStudents?courseId=" + courseId + "&shift=" + shift,
                     dataType: "json",
                     success: function (data) {
                         var s = "";

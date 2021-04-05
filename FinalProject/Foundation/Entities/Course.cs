@@ -22,6 +22,7 @@ namespace Foundation.Library.Entities
         public string Description { get; set; }
         public virtual ICollection<Section> Sections { get; set; }
         public virtual ICollection<Subject> Subjects { get; set; }
+        public virtual ICollection<Student> Students { get; set; }
         public Guid DepartmentId { get; set; }
         public virtual Department Department { get; set; }
         public virtual Registration Registration { get; set; }

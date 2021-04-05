@@ -7,7 +7,6 @@ using FinalProject.Web.Areas.Course.Models;
 using FinalProject.Web.Models;
 using Foundation.Library.Entities;
 using Foundation.Library.Services;
-using Membership.Library.Contexts;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FinalProject.Web.Areas.Student.Models
@@ -16,33 +15,27 @@ namespace FinalProject.Web.Areas.Student.Models
     {
         private readonly IStudentService _studentService;
         private readonly ICourseService _courseService;
-        private readonly IStudentParentService _parentService;
         private readonly IRegistrationStudentService _registration;
         private readonly IAcademicYearService _academic;
-        private readonly ApplicationDbContext _dbContext;
         private readonly ISectionService _section;
         private readonly ISubjectService _subject;
 
 
-        public StudentModelBuilder(IStudentService studentService, ICourseService courseService, IStudentParentService parentService, IRegistrationStudentService registration, IAcademicYearService academic, ApplicationDbContext dbContext, ISectionService section, ISubjectService subject)
+        public StudentModelBuilder(IStudentService studentService, ICourseService courseService, IRegistrationStudentService registration, IAcademicYearService academic, ISectionService section, ISubjectService subject)
         {
             _studentService = studentService;
             _courseService = courseService;
-            _parentService = parentService;
             _registration = registration;
             _academic = academic;
-            _dbContext = dbContext;
             _section = section;
             _subject = subject;
         }
         public StudentModelBuilder()
         {
-            _parentService = Startup.AutofacContainer.Resolve<IStudentParentService>();
             _studentService = Startup.AutofacContainer.Resolve<IStudentService>();
             _courseService = Startup.AutofacContainer.Resolve<ICourseService>();
             _academic = Startup.AutofacContainer.Resolve<IAcademicYearService>();
             _registration = Startup.AutofacContainer.Resolve<IRegistrationStudentService>();
-            _dbContext = Startup.AutofacContainer.Resolve<ApplicationDbContext>();
             _section = Startup.AutofacContainer.Resolve<ISectionService>();
             _subject = Startup.AutofacContainer.Resolve<ISubjectService>();
         }
@@ -213,7 +206,6 @@ namespace FinalProject.Web.Areas.Student.Models
                 IdCardNo = x.CardNo,
                 IsPromoted = x.IsPromoted,
                 Status = x.Status,
-                Shift = x.Shift,
                 RollNo = x.RollNo,
             };
         }
@@ -253,7 +245,9 @@ namespace FinalProject.Web.Areas.Student.Models
             exStudent.Parents = GetParentsChanges(model.ParentsInfo);
             if (model.Photo != null)
             {
-                var imageInfo = StoreFile(model.Photo);
+                var (fileName, filePath) = StoreFile(model.Photo);
+                exStudent.ImageUrl = filePath;
+                exStudent.ImageAlternativeText = fileName;
             }
             _studentService.Update(exStudent);
         }

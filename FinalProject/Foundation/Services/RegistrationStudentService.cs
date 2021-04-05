@@ -53,7 +53,6 @@ namespace Foundation.Library.Services
                     CourseId = x.CourseId,
                     IsPromoted = x.IsPromoted,
                     RollNo = x.RollNo,
-                    Shift = x.Shift,
                     OldRegistrationId = x.OldRegistrationId
                 }).ToList();
 

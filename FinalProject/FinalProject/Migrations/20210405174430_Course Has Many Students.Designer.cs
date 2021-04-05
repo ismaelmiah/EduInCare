@@ -4,14 +4,16 @@ using Foundation.Library.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FinalProject.Web.Migrations
 {
     [DbContext(typeof(WebsiteContext))]
-    partial class WebsiteContextModelSnapshot : ModelSnapshot
+    [Migration("20210405174430_Course Has Many Students")]
+    partial class CourseHasManyStudents
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,71 +65,6 @@ namespace FinalProject.Web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Advertises");
-                });
-
-            modelBuilder.Entity("Foundation.Library.Entities.Applicants", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("BirthCertificateNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("BloodGroup")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("CourseId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImageAlternativeText")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MiddleName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MobileNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NationalIdentificationNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nationality")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PermanentAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PresentAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Religion")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("StudentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Applicants");
                 });
 
             modelBuilder.Entity("Foundation.Library.Entities.AppointmentImage", b =>
@@ -461,6 +398,9 @@ namespace FinalProject.Web.Migrations
                     b.Property<Guid>("SectionId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("Shift")
+                        .HasColumnType("int");
+
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
@@ -535,7 +475,7 @@ namespace FinalProject.Web.Migrations
                     b.Property<int>("BloodGroup")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("CourseId")
+                    b.Property<Guid>("CourseId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateOfBirth")
@@ -577,8 +517,8 @@ namespace FinalProject.Web.Migrations
                     b.Property<int>("Religion")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
+                    b.Property<int>("Shift")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -703,9 +643,11 @@ namespace FinalProject.Web.Migrations
 
             modelBuilder.Entity("Foundation.Library.Entities.Student", b =>
                 {
-                    b.HasOne("Foundation.Library.Entities.Course", null)
+                    b.HasOne("Foundation.Library.Entities.Course", "Course")
                         .WithMany("Students")
-                        .HasForeignKey("CourseId");
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Foundation.Library.Entities.Subject", b =>

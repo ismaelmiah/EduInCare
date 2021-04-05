@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Foundation.Library.Entities;
+using Foundation.Library.Enums;
 using Foundation.Library.UnitOfWorks;
 
 namespace Foundation.Library.Services
@@ -39,21 +40,21 @@ namespace Foundation.Library.Services
             }
 
             var data = (from x in result.data
-                select new Student
-                {
-                    Id = x.Id,
-                    FirstName = x.FirstName,
-                    MiddleName = x.MiddleName,
-                    LastName = x.LastName,
-                    Gender = x.Gender,
-                    MobileNo = x.MobileNo,
-                    DateOfBirth = x.DateOfBirth,
-                    BirthCertificateNo = x.BirthCertificateNo,
-                    NationalIdentificationNo = x.NationalIdentificationNo,
-                    Nationality = x.Nationality,
-                    YearOfEnroll = x.YearOfEnroll,
-                    Parents = x.Parents,
-                }).ToList();
+                        select new Student
+                        {
+                            Id = x.Id,
+                            FirstName = x.FirstName,
+                            MiddleName = x.MiddleName,
+                            LastName = x.LastName,
+                            Gender = x.Gender,
+                            MobileNo = x.MobileNo,
+                            DateOfBirth = x.DateOfBirth,
+                            BirthCertificateNo = x.BirthCertificateNo,
+                            NationalIdentificationNo = x.NationalIdentificationNo,
+                            Nationality = x.Nationality,
+                            YearOfEnroll = x.YearOfEnroll,
+                            Parents = x.Parents,
+                        }).ToList();
 
             return (result.total, result.totalDisplay, data);
         }
@@ -81,9 +82,10 @@ namespace Foundation.Library.Services
             return _management.StudentRepository.GetAll();
         }
 
-        public IList<Student> GetStudents(Guid courseId, Guid sectionId, int shift)
+        public IList<Student> GetStudents(Guid courseId, ShiftType shift)
         {
-            return _management.StudentRepository.GetAll();
+            var studentsByCourseId = _management.StudentRepository.Get(null);
+            return studentsByCourseId;
         }
     }
 }

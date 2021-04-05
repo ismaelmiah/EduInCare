@@ -67,7 +67,7 @@ namespace FinalProject.Web.Areas.Course.Controllers
             var data = model.ModelBuilder.GetCourseList(yearId);
             return Json(data);
         }
-        
+
         public IActionResult GetSectionsByCourse(Guid courseId)
         {
             var model = new RegistrationModel();
@@ -75,10 +75,10 @@ namespace FinalProject.Web.Areas.Course.Controllers
             return Json(data);
         }
 
-        public IActionResult GetStudents(Guid courseId, Guid sectionId, int shift = 1)
+        public IActionResult GetStudents(Guid courseId, int shift)
         {
             var model = new RegistrationModel();
-            var data = model.ModelBuilder.GetStudentList(courseId, sectionId, shift);
+            var data = model.ModelBuilder.GetStudentList(courseId, shift);
             return Json(data);
         }
         public IActionResult Delete(Guid id)

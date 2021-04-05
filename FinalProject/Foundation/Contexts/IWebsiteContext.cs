@@ -15,18 +15,13 @@ namespace Foundation.Library.Contexts
         DbSet<Course> Courses { get; set; }
         DbSet<Department> Departments { get; set; }
         DbSet<Employee> Employees { get; set; }
-        //DbSet<EmployeeEducation> EmployeeEducations { get; set; }
-        //DbSet<EmploymentHistory> EmploymentHistories { get; set; }
-        //DbSet<JobInfo> JobInfos { get; set; }
-        //DbSet<EducationLevel> EducationLevels { get; set; }
-        //DbSet<ExamTitle> ExamTitles { get; set; }
         DbSet<Designation> Designations { get; set; }
         DbSet<AppointmentImage> AppointmentImages { get; set; }
         DbSet<Section> Sections { get; set; }
         DbSet<Group> Groups { get; set; }
-        //DbSet<Shift> Shifts { get; set; }
         DbSet<Registration> Registrations { get; set; }
         DbSet<AcademicYear> AcademicYears { get; set; }
         DbSet<Subject> Subjects { get; set; }
+        DbSet<Applicants> Applicants { get; set; }
     }
 }

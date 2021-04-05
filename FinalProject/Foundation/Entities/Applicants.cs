@@ -4,10 +4,9 @@ using Foundation.Library.Enums;
 
 namespace Foundation.Library.Entities
 {
-    public class Student : IEntity<Guid>
+    public class Applicants : IEntity<Guid>
     {
         public Guid Id { get; set; }
-        public Guid UserId { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
@@ -23,9 +22,8 @@ namespace Foundation.Library.Entities
         public string PresentAddress { get; set; }
         public string PermanentAddress { get; set; }
         public string Nationality { get; set; }
-        public DateTime YearOfEnroll { get; set; }
-        public virtual Parents Parents { get; set; }
-        public virtual Registration Registration { get; set; }
         public bool Status { get; set; }
+        public Guid? StudentId { get; set; }
+        public Guid CourseId { get; set; }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using Autofac;
 using FinalProject.Web.Models;
 using Foundation.Library.Entities;
+using Foundation.Library.Enums;
 using Foundation.Library.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -47,7 +47,6 @@ namespace FinalProject.Web.Areas.Course.Models.ModelBuilder
                     "RollNo",
                     "Section",
                     "Course",
-                    "Shift",
                     "AcademicYear",
                     "Status",
                 }));
@@ -64,7 +63,6 @@ namespace FinalProject.Web.Areas.Course.Models.ModelBuilder
                             record.RollNo,
                             record.Section.Name,
                             record.Course.Name,
-                            record.Shift.ToString(),
                             record.AcademicYear.Title,
                             record.Status,
                             record.Id.ToString(),
@@ -85,7 +83,6 @@ namespace FinalProject.Web.Areas.Course.Models.ModelBuilder
                 IdCardNo = exEntity.CardNo,
                 IsPromoted = exEntity.IsPromoted,
                 Status = exEntity.Status,
-                Shift = exEntity.Shift,
                 SectionList = GetSectionList(exEntity.SectionId),
                 RollNo = exEntity.RollNo,
             };
@@ -108,7 +105,6 @@ namespace FinalProject.Web.Areas.Course.Models.ModelBuilder
                 CardNo = model.IdCardNo,
                 IsPromoted = model.IsPromoted,
                 Status = model.Status,
-                Shift = model.Shift,
                 SectionId = model.SectionId,
                 RollNo = model.RollNo,
                 OldRegistrationId = model.OldRegistrationId
@@ -120,7 +116,6 @@ namespace FinalProject.Web.Areas.Course.Models.ModelBuilder
             var exEntity = _registration.GetRegistration(id);
             exEntity.Status = model.Status;
             exEntity.RollNo = model.RollNo;
-            exEntity.Shift = model.Shift;
             exEntity.SectionId = model.SectionId;
             exEntity.CourseId = model.CourseId;
             exEntity.AcademicYearId = model.AcademicYearId;
@@ -154,12 +149,21 @@ namespace FinalProject.Web.Areas.Course.Models.ModelBuilder
             return new SelectList(_academic.GetAcademicYears(), "Id", "Title", selectedItem);
         }
 
-        public SelectList GetStudentList(Guid courseId, Guid sectionId, int shift)
+        public SelectList GetStudentList(Guid courseId, int shift)
         {
-            var studentList = _student.GetStudents(courseId, sectionId, shift).Select(x => 
-                new { Id = x.Id, Name = $"{x.FirstName} {x.MiddleName} {x.LastName}" }).ToList();
+            var shiftType = Enum.GetName(typeof(ShiftType), shift);
+            var studentList = _student.GetStudents(courseId, EnumHelper<ShiftType>.Parse(shiftType)).Select(x => 
+                new {x.Id, Name = $"{x.FirstName} {x.MiddleName} {x.LastName}" }).ToList();
 
-            return new SelectList(studentList, "Id", "Name", selectedItem);
+            return new SelectList(studentList, "Id", "Name");
+        }
+
+        public SelectList GetStudentList(object studentId = null)
+        {
+            var studentList = _student.GetStudents().Select(x => 
+                new {x.Id, Name = $"{x.FirstName} {x.MiddleName} {x.LastName}" }).ToList();
+
+            return new SelectList(studentList, "Id", "Name", studentId);
         }
     }
 }
