@@ -24,7 +24,8 @@ namespace Foundation.Library.UnitOfWorks
             ISectionRepository section,
             ISubjectRepository subject,
             IAcademicYearRepository academicYear,
-            IRegistrationStudentRepository registrationStudent) : base(dbContext)
+            IRegistrationStudentRepository registrationStudent,
+            IApplicantRepository applicant) : base(dbContext)
         {
             _registrationStudent = registrationStudent;
             CourseRepository = course;
@@ -43,6 +44,7 @@ namespace Foundation.Library.UnitOfWorks
             SubjectRepository = subject;
             AcademicYearRepository = academicYear;
             RegistrationStudentRepository = registrationStudent;
+            ApplicantRepository = applicant;
         }
 
         public IStudentRepository StudentRepository { get; set; }
@@ -61,5 +63,6 @@ namespace Foundation.Library.UnitOfWorks
         public ISubjectRepository SubjectRepository { get; set; }
         public IAcademicYearRepository AcademicYearRepository { get; set; }
         public IRegistrationStudentRepository RegistrationStudentRepository { get; set; }
+        public IApplicantRepository ApplicantRepository { get; set; }
     }
 }

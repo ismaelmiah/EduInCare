@@ -21,5 +21,6 @@ namespace Foundation.Library.UnitOfWorks
         public ISubjectRepository SubjectRepository { get; set; }
         public IAcademicYearRepository AcademicYearRepository { get; set; }
         public IRegistrationStudentRepository RegistrationStudentRepository { get; set; }
+        public IApplicantRepository ApplicantRepository { get; set; }
     }
 }
