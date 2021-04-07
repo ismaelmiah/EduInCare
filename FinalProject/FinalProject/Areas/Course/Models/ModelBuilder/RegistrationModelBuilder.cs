@@ -149,14 +149,13 @@ namespace FinalProject.Web.Areas.Course.Models.ModelBuilder
             return new SelectList(_academic.GetAcademicYears(), "Id", "Title", selectedItem);
         }
 
-        public SelectList GetStudentList(Guid courseId, int shift)
-        {
-            var shiftType = Enum.GetName(typeof(ShiftType), shift);
-            var studentList = _student.GetStudents(courseId, EnumHelper<ShiftType>.Parse(shiftType)).Select(x => 
-                new {x.Id, Name = $"{x.FirstName} {x.MiddleName} {x.LastName}" }).ToList();
+        //public SelectList GetStudentList(Guid courseId, int shift)
+        //{
+        //    var studentList = _student.GetStudents(courseId.Select(x => 
+        //        new {x.Id, Name = $"{x.FirstName} {x.MiddleName} {x.LastName}" }).ToList();
 
-            return new SelectList(studentList, "Id", "Name");
-        }
+        //    return new SelectList(studentList, "Id", "Name");
+        //}
 
         public SelectList GetStudentList(object studentId = null)
         {

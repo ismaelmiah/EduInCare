@@ -1,0 +1,145 @@
+﻿@model Foundation.Library.Entities.Applicants
+@{
+    var fullName = $"{Model.FirstName} {Model.MiddleName} {Model.LastName}";
+}
+<div class="modal-header">
+    <h4 class="modal-title">Applicants Details</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 align-items-center">
+                        <div class="row">
+                            <div class="col-12">
+                                <img class="img-fluid img-thumbnail float-left"
+                                     src="@Model.ImageUrl"
+                                alt="@Model.ImageAlternativeText" id="applicants_image" height="250" />
+                            </div>
+                            <div class="col-12 mt-2">
+                                <small>
+                                    <i class="fa fa-mobile mr-1"></i>@Model.MobileNo
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2><label for="name" class="col-12 col-form-label text-center text-muted">@fullName</label></h2>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-7">
+                                    <label for="back" class="col-form-label">Gender</label>
+                                </div>
+                                <div class="col-5">
+                                    <p>@Model.Gender.ToString()</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-7">
+                                    <label for="Course" class="col-form-label">Applied For</label>
+                                </div>
+                                <div class="col-5">
+                                    <p>@Model.Course.Name </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-7">
+                                    <label for="back" class="col-form-label">Date of Birth</label>
+                                </div>
+                                <div class="col-5">
+                                    <p>@Model.DateOfBirth.ToShortDateString() </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-7">
+                                    <label for="back" class="col-form-label">Birth Certificate Number</label>
+                                </div>
+                                <div class="col-5">
+                                    <p>@Model.BirthCertificateNo  </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-7">
+                                    <label for="back" class="col-form-label">Religion</label>
+                                </div>
+                                <div class="col-5">
+                                    <p>@Model.Religion.ToString() </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-7">
+                                    <label for="back" class="col-form-label">Blood Group</label>
+                                </div>
+                                <div class="col-5">
+                                    <p>@Model.BloodGroup.ToString() </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-7">
+                                    <label for="back" class="col-form-label">Nationality</label>
+                                </div>
+                                <div class="col-5">
+                                    <p>@Model.Nationality </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-7">
+                                    <label for="back" class="col-form-label">Present Address</label>
+                                </div>
+                                <div class="col-5">
+                                    <p>@Model.PresentAddress </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-7">
+                                    <label for="back" class="col-form-label">Permanent Address</label>
+                                </div>
+                                <div class="col-5">
+                                    <p>@Model.PermanentAddress </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-7">
+                                    <label for="back" class="col-form-label">Applied Date</label>
+                                </div>
+                                <div class="col-5">
+                                    <p>@Model.RecordMeta?.CreatedAt.ToShortDateString() </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

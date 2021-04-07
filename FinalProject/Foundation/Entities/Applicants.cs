@@ -22,8 +22,10 @@ namespace Foundation.Library.Entities
         public string PresentAddress { get; set; }
         public string PermanentAddress { get; set; }
         public string Nationality { get; set; }
-        public bool Status { get; set; }
+        public Status Status { get; set; }
         public Guid? StudentId { get; set; }
         public Guid CourseId { get; set; }
+        public Course Course { get; set; }
+        public RecordMeta RecordMeta { get; set; }
     }
 }

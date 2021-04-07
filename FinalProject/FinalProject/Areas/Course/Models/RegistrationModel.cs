@@ -29,7 +29,6 @@ namespace FinalProject.Web.Areas.Course.Models
         [Display(Name = "AcademicYear")]
         public Guid AcademicYearId { get; set; }
         public SelectList AcademicYearList { get; set; }
-        public ShiftType Shift { get; set; }
         public int RollNo { get; set; }
         public string IdCardNo { get; set; }
         [Display(Name = "Board Registration No")]

@@ -4,14 +4,16 @@ using Foundation.Library.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FinalProject.Web.Migrations
 {
     [DbContext(typeof(WebsiteContext))]
-    partial class WebsiteContextModelSnapshot : ModelSnapshot
+    [Migration("20210407152441_ChangeStatusType")]
+    partial class ChangeStatusType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

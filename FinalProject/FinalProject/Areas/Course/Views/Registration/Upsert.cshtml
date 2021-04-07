@@ -50,16 +50,6 @@
                             <span asp-validation-for="SectionId" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="form-group row col-3 ml-2">
-                        <div class="col-4">
-                            <label asp-for="Shift"></label>
-                        </div>
-                        <div class="col-8">
-                            <select class="form-control" asp-for="Shift" asp-items="Html.GetEnumSelectList<ShiftType>()">
-                            </select>
-                            <span asp-validation-for="Shift" class="text-danger"></span>
-                        </div>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="form-group row col">

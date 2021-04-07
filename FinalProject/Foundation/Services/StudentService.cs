@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Foundation.Library.Entities;
-using Foundation.Library.Enums;
 using Foundation.Library.UnitOfWorks;
 
 namespace Foundation.Library.Services
@@ -82,7 +81,7 @@ namespace Foundation.Library.Services
             return _management.StudentRepository.GetAll();
         }
 
-        public IList<Student> GetStudents(Guid courseId, ShiftType shift)
+        public IList<Student> GetStudents(Guid courseId, Guid sectionId)
         {
             var studentsByCourseId = _management.StudentRepository.Get(null);
             return studentsByCourseId;

@@ -1,7 +1,143 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLTE.cshtml";
 }
+@section Title
+{
+    <title>Applicants</title>
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Applicants</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home" asp-area="Admin">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Applicants</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
 
-<h1>Index</h1>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-4 text-left">
+                            <h2 class="card-title">Current Applicants</h2>
+                        </div>
+                        <div class="col-md-8 text-right">
+                            <a asp-action="Upsert" asp-controller="Home" asp-area="Student" class="btn btn-outline-primary">Add Applicant</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="applicants" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Photo</th>
+                                <th>Mobile</th>
+                                <th>Applied Course</th>
+                                <th>Application Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
 
+
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Application Reject</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="rejectForm" asp-action="Reject" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="rejectId" value="" name="id" />
+
+                    <div class="row">
+                        <div class="col-12">
+                            <label for="back" class="col-form-label">Feedback:</label>
+                        </div>
+                        <div class="col-12">
+                            <textarea rows="4" name="StatusComment" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" id="rejectButton" class="btn btn-danger">Yes, Reject!</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<div class="modal fade" id="modal-student">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Student Confirm</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>One fine body&hellip;</p>
+                <form id="approveForm" asp-action="Approve" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="approveId" value="" name="id" />
+                </form>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" id="approveButton" class="btn btn-success">Yes, Approve!</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="modal-student-details" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="contentArea">
+
+        </div>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+
+
+@section scripts
+{
+    <script src="/AdminPanel/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="/AdminPanel/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+    <script src="~/js/applicants.js"></script>
+}

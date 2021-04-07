@@ -6,11 +6,11 @@ using Foundation.Library.UnitOfWorks;
 
 namespace Foundation.Library.Services
 {
-    public class ApplicantsService : IApplicantsService
+    public class ApplicantService : IApplicantService
     {
         private readonly IManagementUnitOfWork _management;
 
-        public ApplicantsService(IManagementUnitOfWork management)
+        public ApplicantService(IManagementUnitOfWork management)
         {
             _management = management;
         }
@@ -29,13 +29,13 @@ namespace Foundation.Library.Services
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 result = _management.ApplicantRepository.GetDynamic(null,
-                    orderBy, "", pageIndex, pageSize);
+                    orderBy, "Course,RecordMeta", pageIndex, pageSize);
 
             }
             else
             {
-                result = _management.ApplicantRepository.GetDynamic(x => x.FirstName == searchText,
-                    orderBy, "", pageIndex, pageSize);
+                result = _management.ApplicantRepository.GetDynamic(x => x.MobileNo == searchText,
+                    orderBy, "Course,RecordMeta", pageIndex, pageSize);
             }
 
             var data = (from x in result.data
@@ -52,6 +52,9 @@ namespace Foundation.Library.Services
                     NationalIdentificationNo = x.NationalIdentificationNo,
                     Nationality = x.Nationality,
                     CourseId = x.CourseId,
+                    Course = x.Course,
+                    RecordMeta = x.RecordMeta,
+                    Status = x.Status
                 }).ToList();
 
             return (result.total, result.totalDisplay, data);
@@ -77,6 +80,18 @@ namespace Foundation.Library.Services
         public IList<Applicants> GetApplicants()
         {
             return _management.ApplicantRepository.GetAll();
+        }
+
+        public void ApproveApplication(Applicants applicants)
+        {
+            _management.ApplicantRepository.Edit(applicants);
+            _management.Save();
+        }
+
+        public void RejectApplication(Applicants applicants)
+        {
+            _management.ApplicantRepository.Edit(applicants);
+            _management.Save();
         }
     }
 }
