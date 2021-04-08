@@ -138,6 +138,11 @@
                             <label class="text-info font-weight-bold">Academic Info</label>
                             <div class="row">
                                 <div class="form-group col">
+                                    <label asp-for="Email"></label>
+                                    <input asp-for="Email" class="form-control"/>
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
                                     <label>Course</label>
                                     <select asp-for="CourseId" asp-items="Model.EnrollCourse" class="form-control"></select>
                                     <span asp-validation-for="CourseId" class="text-danger"></span>

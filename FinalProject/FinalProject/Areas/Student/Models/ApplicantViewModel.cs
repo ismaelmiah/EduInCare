@@ -41,6 +41,7 @@ namespace FinalProject.Web.Areas.Student.Models
         public string ImagePath { get; set; }
         public IFormFile Photo { get; set; }
         public SelectList EnrollCourse { get; set; }
+        public string Email { get; set; }
         public Guid CourseId { get; set; }
         public Guid Id { get; set; }
     }

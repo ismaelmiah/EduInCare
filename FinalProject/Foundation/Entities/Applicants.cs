@@ -26,6 +26,7 @@ namespace Foundation.Library.Entities
         public Guid? StudentId { get; set; }
         public Guid CourseId { get; set; }
         public Course Course { get; set; }
+        public string Email { get; set; }
         public RecordMeta RecordMeta { get; set; }
     }
 }
