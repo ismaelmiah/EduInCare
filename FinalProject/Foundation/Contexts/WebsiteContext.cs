@@ -42,68 +42,12 @@ namespace Foundation.Library.Contexts
                 .HasPrincipalKey<Student>(x=>x.Id)
                 .IsRequired();
 
-            //builder.Entity<JobInfo>()
-            //    .HasOne(x => x.Employee)
-            //    .WithMany(x => x.JobInfo)
-            //    .HasForeignKey(x => x.EmployeeId)
-            //    .HasPrincipalKey(x => x.Id)
-            //    .IsRequired()
-            //    .OnDelete(DeleteBehavior.Cascade);
-
-            //builder.Entity<EmploymentHistory>()
-            //    .HasOne(x => x.Employee)
-            //    .WithMany(x => x.EmploymentHistory)
-            //    .HasForeignKey(x => x.EmployeeId)
-            //    .HasPrincipalKey(x => x.Id)
-            //    .IsRequired()
-            //    .OnDelete(DeleteBehavior.Cascade);
-
-            //builder.Entity<EmployeeEducation>()
-            //    .HasOne(x => x.Employee)
-            //    .WithMany(x => x.EmployeeEducation)
-            //    .HasForeignKey(x => x.EmployeeId)
-            //    .HasPrincipalKey(x => x.Id)
-            //    .IsRequired()
-            //    .OnDelete(DeleteBehavior.Restrict);
-
-            //builder.Entity<EmployeeEducation>()
-            //    .HasOne(x => x.EducationLevel)
-            //    .WithOne(x => x.EmployeeEducation)
-            //    .HasForeignKey<EmployeeEducation>(x => x.EducationLevelId)
-            //    .IsRequired()
-            //    .OnDelete(DeleteBehavior.Restrict);
-
             builder.Entity<Employee>()
                 .HasOne(x => x.Designation)
                 .WithMany(x => x.Employees)
                 .HasForeignKey(x => x.DesignationId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
-
-            //builder.Entity<ExamTitle>()
-            //    .HasOne(x => x.EducationLevel)
-            //    .WithOne(x => x.ExamTitle)
-            //    .HasForeignKey<ExamTitle>(x => x.EducationLevelId);
-
-            //builder.Entity<Designation>()
-            //    .HasOne(x => x.JobInfo)
-            //    .WithOne(x => x.Designation)
-            //    .HasForeignKey<JobInfo>(x => x.DesignationId);
-
-            //builder.Entity<JobInfo>()
-            //    .HasOne(x => x.Appointment)
-            //    .WithOne(x => x.JobInfo)
-            //    .HasForeignKey<AppointmentImage>(x => x.JobInfoId);
-
-            //builder.Entity<JobInfo>()
-            //    .HasOne(x => x.Appointment)
-            //    .WithOne(x => x.JobInfo)
-            //    .HasForeignKey<AppointmentImage>(x => x.JobInfoId);
-
-            //builder.Entity<Group>()
-            //    .HasOne(x => x.Course)
-            //    .WithOne(x => x.Group)
-            //    .HasForeignKey<Course>(x => x.GroupId);
 
             builder.Entity<Section>()
                 .HasOne(x => x.Subject)
@@ -163,11 +107,14 @@ namespace Foundation.Library.Contexts
                 .HasOne(x => x.AcademicYear)
                 .WithOne(x => x.Registration)
                 .HasForeignKey<Registration>(x => x.AcademicYearId);
-
-            //builder.Entity<Registration>()
-            //    .HasOne(x => x.Shift)
-            //    .WithOne(x => x.Registration)
-            //    .HasForeignKey<Registration>(x => x.ShiftId);
+            
+            builder.Entity<Course>()
+                .HasOne(x => x.AcademicYear)
+                .WithMany(x => x.Courses)
+                .HasForeignKey(x => x.AcademicYearId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Registration>()
                 .HasOne(x => x.Student)
@@ -187,18 +134,13 @@ namespace Foundation.Library.Contexts
         public DbSet<Course> Courses { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        //public DbSet<EmployeeEducation> EmployeeEducations { get; set; }
-        //public DbSet<EmploymentHistory> EmploymentHistories { get; set; }
-        //public DbSet<JobInfo> JobInfos { get; set; }
-        //public DbSet<EducationLevel> EducationLevels { get; set; }
-        //public DbSet<ExamTitle> ExamTitles { get; set; }
         public DbSet<Designation> Designations { get; set; }
         public DbSet<AppointmentImage> AppointmentImages { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<Group> Groups { get; set; }
-        //public DbSet<Shift> Shifts { get; set; }
         public DbSet<Registration> Registrations { get; set; }
         public DbSet<AcademicYear> AcademicYears { get; set; }
         public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Applicants> Applicants { get; set; }
     }
 }

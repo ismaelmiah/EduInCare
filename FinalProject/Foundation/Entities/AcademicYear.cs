@@ -1,5 +1,5 @@
 ﻿using System;
-using DataAccessLayer;
+using System.Collections.Generic;
 using DataAccessLayer.Library;
 
 namespace Foundation.Library.Entities
@@ -16,5 +16,6 @@ namespace Foundation.Library.Entities
         public bool IsOpenForAdmission { get; set; }
         public bool Status { get; set; }
         public virtual Registration Registration { get; set; }
+        public virtual ICollection<Course> Courses { get; set; }
     }
 }

@@ -65,6 +65,81 @@ namespace FinalProject.Web.Migrations
                     b.ToTable("Advertises");
                 });
 
+            modelBuilder.Entity("Foundation.Library.Entities.Applicants", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("BirthCertificateNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("BloodGroup")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageAlternativeText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MiddleName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MobileNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NationalIdentificationNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nationality")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PermanentAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PresentAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("RecordMetaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Religion")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("RecordMetaId");
+
+                    b.ToTable("Applicants");
+                });
+
             modelBuilder.Entity("Foundation.Library.Entities.AppointmentImage", b =>
                 {
                     b.Property<Guid>("Id")
@@ -86,6 +161,9 @@ namespace FinalProject.Web.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AcademicYearId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("DepartmentId")
@@ -110,6 +188,8 @@ namespace FinalProject.Web.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AcademicYearId");
 
                     b.HasIndex("DepartmentId");
 
@@ -358,6 +438,23 @@ namespace FinalProject.Web.Migrations
                     b.ToTable("Posts");
                 });
 
+            modelBuilder.Entity("Foundation.Library.Entities.RecordMeta", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifiedLast")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RecordMeta");
+                });
+
             modelBuilder.Entity("Foundation.Library.Entities.Registration", b =>
                 {
                     b.Property<Guid>("Id")
@@ -390,9 +487,6 @@ namespace FinalProject.Web.Migrations
 
                     b.Property<Guid>("SectionId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Shift")
-                        .HasColumnType("int");
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
@@ -468,6 +562,9 @@ namespace FinalProject.Web.Migrations
                     b.Property<int>("BloodGroup")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("CourseId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
@@ -507,6 +604,9 @@ namespace FinalProject.Web.Migrations
                     b.Property<int>("Religion")
                         .HasColumnType("int");
 
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
@@ -514,6 +614,8 @@ namespace FinalProject.Web.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
 
                     b.ToTable("Students");
                 });
@@ -546,8 +648,27 @@ namespace FinalProject.Web.Migrations
                     b.ToTable("Subjects");
                 });
 
+            modelBuilder.Entity("Foundation.Library.Entities.Applicants", b =>
+                {
+                    b.HasOne("Foundation.Library.Entities.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Foundation.Library.Entities.RecordMeta", "RecordMeta")
+                        .WithMany()
+                        .HasForeignKey("RecordMetaId");
+                });
+
             modelBuilder.Entity("Foundation.Library.Entities.Course", b =>
                 {
+                    b.HasOne("Foundation.Library.Entities.AcademicYear", "AcademicYear")
+                        .WithMany("Courses")
+                        .HasForeignKey("AcademicYearId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("Foundation.Library.Entities.Department", "Department")
                         .WithMany("Courses")
                         .HasForeignKey("DepartmentId")
@@ -618,6 +739,13 @@ namespace FinalProject.Web.Migrations
                         .HasForeignKey("Foundation.Library.Entities.Section", "TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Foundation.Library.Entities.Student", b =>
+                {
+                    b.HasOne("Foundation.Library.Entities.Course", null)
+                        .WithMany("Students")
+                        .HasForeignKey("CourseId");
                 });
 
             modelBuilder.Entity("Foundation.Library.Entities.Subject", b =>

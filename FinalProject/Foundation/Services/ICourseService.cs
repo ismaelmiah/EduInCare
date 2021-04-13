@@ -13,6 +13,7 @@ namespace Foundation.Library.Services
         Course GetCourse(Guid id);
         void Delete(Guid id);
         IList<Course> GetCourses();
+        IList<Course> GetCourses(Guid yearId);
         void Update(Course course);
     }
 }

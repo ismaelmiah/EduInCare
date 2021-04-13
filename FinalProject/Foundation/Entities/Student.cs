@@ -1,5 +1,4 @@
 ﻿using System;
-using DataAccessLayer;
 using DataAccessLayer.Library;
 using Foundation.Library.Enums;
 
@@ -27,5 +26,6 @@ namespace Foundation.Library.Entities
         public DateTime YearOfEnroll { get; set; }
         public virtual Parents Parents { get; set; }
         public virtual Registration Registration { get; set; }
+        public bool Status { get; set; }
     }
 }

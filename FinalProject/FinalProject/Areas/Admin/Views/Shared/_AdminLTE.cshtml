@@ -26,8 +26,10 @@
     <link rel="stylesheet" href="/AdminPanel/plugins/summernote/summernote-bs4.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="~/css/selectize.css" rel="stylesheet" />
     <!-- jQuery -->
     <script src="~/AdminPanel/plugins/jquery/jquery.min.js"></script>
+    <script src="~/js/selectize.min.js"></script>
     @RenderSection("Styles", required: false)
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -138,8 +140,8 @@
                 </li>
             </ul>
         </nav>
-    <!-- /.navbar -->
-    <!-- Main Sidebar Container -->
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Sidebar -->
             <div class="sidebar">
@@ -219,11 +221,11 @@
                                             </a>
                                         </li>
                                         @*<li class="nav-item">
-                                            <a asp-action="Index" asp-area="Admin" asp-controller="Group" class="nav-link">
-                                                <i class="fas fa-boxes nav-icon"></i>
-                                                <p>Group</p>
-                                            </a>
-                                        </li>*@
+                                                <a asp-action="Index" asp-area="Admin" asp-controller="Group" class="nav-link">
+                                                    <i class="fas fa-boxes nav-icon"></i>
+                                                    <p>Group</p>
+                                                </a>
+                                            </li>*@
                                         <li class="nav-item">
                                             <a asp-action="Index" asp-area="Admin" asp-controller="Section" class="nav-link">
                                                 <i class="fas fa-cubes nav-icon"></i>
@@ -249,11 +251,11 @@
                                             </a>
                                         </li>
                                         @*<li class="nav-item">
-                                            <a asp-action="Index" asp-area="Admin" asp-controller="Attendance" class="nav-link">
-                                                <i class="fas fa-vector-square nav-icon"></i>
-                                                <p>Class Routine</p>
-                                            </a>
-                                        </li>*@
+                                                <a asp-action="Index" asp-area="Admin" asp-controller="Attendance" class="nav-link">
+                                                    <i class="fas fa-vector-square nav-icon"></i>
+                                                    <p>Class Routine</p>
+                                                </a>
+                                            </li>*@
                                     </ul>
                                 </li>
                             </ul>
@@ -277,13 +279,13 @@
                                     </a>
                                     <ul class="nav nav-treeview ml-3">
                                         <li class="nav-item">
-                                            <a asp-action="Index" asp-area="Admin" asp-controller="Attendance" class="nav-link">
+                                            <a asp-action="Index" asp-area="Student" asp-controller="Home" class="nav-link">
                                                 <i class="fas fa-th nav-icon"></i>
                                                 <p>Applicants</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a asp-action="Index" asp-area="Admin" asp-controller="Attendance" class="nav-link">
+                                            <a asp-action="Upsert" asp-area="Student" asp-controller="Home" class="nav-link">
                                                 <i class="fas fa-boxes nav-icon"></i>
                                                 <p>Online Application</p>
                                             </a>

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using FinalProject.Web.Areas.Admin.Models.ModelBuilder;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -12,6 +12,7 @@ namespace FinalProject.Web.Areas.Admin.Models
         {
             ModelBuilder = new CourseModelBuilder();
             DepartmentList = ModelBuilder.PopulateDepartmentsDropDownList();
+            AcademicYearList = ModelBuilder.PopulateAcademicYearDropDownList();
         }
 
         public Guid Id { get; set; }
@@ -21,7 +22,13 @@ namespace FinalProject.Web.Areas.Admin.Models
         public int MaxCompulsorySubject { get; set; }
         public bool Status { get; set; }
         public string Description { get; set; }
+        [Required]
+        [Display(Name = "Department")]
         public Guid DepartmentId { get; set; }
         public SelectList DepartmentList { get; set; }
+        [Display(Name = "Academic Year")]
+        [Required]
+        public Guid AcademicYearId { get; set; }
+        public SelectList AcademicYearList { get; set; }
     }
 }

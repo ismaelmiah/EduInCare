@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using FinalProject.Web.Areas.Admin.Models;
 using FinalProject.Web.Areas.Course.Models;
+using FinalProject.Web.Areas.Student.Models.ModelBuilder;
 using Foundation.Library.Enums;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FinalProject.Web.Areas.Student.Models
 {

@@ -6,6 +6,9 @@
     <title>@ViewData["Title"] - FinalProject</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/css/selectize.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/selectize.min.js"></script>
     @await RenderSectionAsync("Styles", false);
 
 </head>
@@ -17,7 +20,6 @@
         <div>@RenderBody()</div>
         <div class="fixed-bottom">Footer</div>
     </div>
-    <script src="~/lib/jquery/dist/jquery.js"></script>
     @await RenderSectionAsync("Scripts", false);
 </body>
 </html>

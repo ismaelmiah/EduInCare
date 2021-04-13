@@ -39,21 +39,21 @@ namespace Foundation.Library.Services
             }
 
             var data = (from x in result.data
-                select new Student
-                {
-                    Id = x.Id,
-                    FirstName = x.FirstName,
-                    MiddleName = x.MiddleName,
-                    LastName = x.LastName,
-                    Gender = x.Gender,
-                    MobileNo = x.MobileNo,
-                    DateOfBirth = x.DateOfBirth,
-                    BirthCertificateNo = x.BirthCertificateNo,
-                    NationalIdentificationNo = x.NationalIdentificationNo,
-                    Nationality = x.Nationality,
-                    YearOfEnroll = x.YearOfEnroll,
-                    Parents = x.Parents,
-                }).ToList();
+                        select new Student
+                        {
+                            Id = x.Id,
+                            FirstName = x.FirstName,
+                            MiddleName = x.MiddleName,
+                            LastName = x.LastName,
+                            Gender = x.Gender,
+                            MobileNo = x.MobileNo,
+                            DateOfBirth = x.DateOfBirth,
+                            BirthCertificateNo = x.BirthCertificateNo,
+                            NationalIdentificationNo = x.NationalIdentificationNo,
+                            Nationality = x.Nationality,
+                            YearOfEnroll = x.YearOfEnroll,
+                            Parents = x.Parents,
+                        }).ToList();
 
             return (result.total, result.totalDisplay, data);
         }
@@ -79,6 +79,12 @@ namespace Foundation.Library.Services
         public IList<Student> GetStudents()
         {
             return _management.StudentRepository.GetAll();
+        }
+
+        public IList<Student> GetStudents(Guid courseId, Guid sectionId)
+        {
+            var studentsByCourseId = _management.StudentRepository.Get(null);
+            return studentsByCourseId;
         }
     }
 }

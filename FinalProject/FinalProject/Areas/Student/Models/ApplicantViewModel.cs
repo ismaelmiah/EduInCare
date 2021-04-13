@@ -1,21 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using FinalProject.Web.Areas.Course.Models;
+using FinalProject.Web.Areas.Student.Models.ModelBuilder;
 using Foundation.Library.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FinalProject.Web.Areas.Student.Models
 {
-    public class StudentFormViewModel
+    public class ApplicantViewModel
     {
-        internal StudentModelBuilder ModelBuilder;
-        public StudentFormViewModel()
+        internal ApplicantModelBuilder ModelBuilder;
+        public ApplicantViewModel()
         {
-            ModelBuilder = new StudentModelBuilder();
+            ModelBuilder = new ApplicantModelBuilder();
             EnrollCourse = ModelBuilder.CourseList();
-            SubjectModels = ModelBuilder.GetSubjectModels();
         }
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
@@ -31,21 +29,20 @@ namespace FinalProject.Web.Areas.Student.Models
         public string NationalIdentificationNo { get; set; }
         public Gender Gender { get; set; }
         public Religion Religion { get; set; }
+        public BloodGroup BloodGroup { get; set; }
         public string MobileNo { get; set; }
         [Display(Name = "Present Address")]
         public string PresentAddress { get; set; }
         [Display(Name = "Permanent Address")]
         public string PermanentAddress { get; set; }
         public string Nationality { get; set; }
-        [Display(Name = "Year Of Enroll")]
-        public DateTime YearOfEnroll { get; set; }
         [Display(Name = "Parents Information")]
         public ParentsModel ParentsInfo { get; set; }
         public string ImagePath { get; set; }
         public IFormFile Photo { get; set; }
-        public IList<SelectListItem> EnrollCourse { get; set; }
+        public SelectList EnrollCourse { get; set; }
+        public string Email { get; set; }
         public Guid CourseId { get; set; }
         public Guid Id { get; set; }
-        public IList<SubjectModel> SubjectModels { get; set; }
     }
 }

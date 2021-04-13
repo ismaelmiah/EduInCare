@@ -23,5 +23,6 @@ namespace Membership.Library.Entities
     {
         Teacher = 1,
         Employee = 2,
+        Student = 3
     }
 }

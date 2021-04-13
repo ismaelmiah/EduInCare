@@ -43,12 +43,11 @@ namespace Foundation.Library.Enums
         Other
     }
 
-    public enum ShiftType
+    public enum Status
     {
-        [Display(Name = "First Shift")]
-        FirstShift = 1,
-        [Display(Name = "Second Shift")]
-        SecondShift = 2
+        Pending,
+        Approved,
+        Rejected
     }
 
     public enum WorkShift
