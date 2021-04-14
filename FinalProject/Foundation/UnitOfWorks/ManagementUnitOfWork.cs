@@ -20,7 +20,10 @@ namespace Foundation.Library.UnitOfWorks
             ISubjectRepository subject,
             IAcademicYearRepository academicYear,
             IRegistrationStudentRepository registrationStudent,
-            IApplicantRepository applicant) : base(dbContext)
+            IApplicantRepository applicant,
+            IExamRepository exam,
+            IExamRuleRepository examRule,
+            IGradeRepository grade) : base(dbContext)
         {
             _registrationStudent = registrationStudent;
             CourseRepository = course;
@@ -35,6 +38,9 @@ namespace Foundation.Library.UnitOfWorks
             AcademicYearRepository = academicYear;
             RegistrationStudentRepository = registrationStudent;
             ApplicantRepository = applicant;
+            ExamRepository = exam;
+            ExamRuleRepository = examRule;
+            GradeRepository = grade;
         }
 
         public IStudentRepository StudentRepository { get; set; }
@@ -49,5 +55,8 @@ namespace Foundation.Library.UnitOfWorks
         public IAcademicYearRepository AcademicYearRepository { get; set; }
         public IRegistrationStudentRepository RegistrationStudentRepository { get; set; }
         public IApplicantRepository ApplicantRepository { get; set; }
+        public IExamRepository ExamRepository { get; set; }
+        public IGradeRepository GradeRepository { get; set; }
+        public IExamRuleRepository ExamRuleRepository { get; set; }
     }
 }

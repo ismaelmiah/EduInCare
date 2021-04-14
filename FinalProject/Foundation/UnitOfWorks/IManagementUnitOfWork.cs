@@ -17,5 +17,8 @@ namespace Foundation.Library.UnitOfWorks
         public IAcademicYearRepository AcademicYearRepository { get; set; }
         public IRegistrationStudentRepository RegistrationStudentRepository { get; set; }
         public IApplicantRepository ApplicantRepository { get; set; }
+        public IExamRepository ExamRepository { get; set; }
+        public IGradeRepository GradeRepository { get; set; }
+        public IExamRuleRepository ExamRuleRepository { get; set; }
     }
 }
