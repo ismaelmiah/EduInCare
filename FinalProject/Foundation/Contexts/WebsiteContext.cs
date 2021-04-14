@@ -121,6 +121,46 @@ namespace Foundation.Library.Contexts
                 .WithOne(x => x.Registration)
                 .HasForeignKey<Registration>(x => x.StudentId);
 
+            builder.Entity<Course>()
+                .HasOne(x => x.Exam)
+                .WithOne(x => x.Course)
+                .HasForeignKey<Exam>(x => x.CourseId);
+
+            builder.Entity<Exam>()
+                .HasOne(x => x.ExamRules)
+                .WithOne(x => x.Exam)
+                .HasForeignKey<ExamRules>(x => x.ExamId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Grade>()
+                .HasOne(x => x.ExamRules)
+                .WithOne(x => x.Grade)
+                .HasForeignKey<ExamRules>(x => x.GradeId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict); ;
+
+            builder.Entity<Course>()
+                .HasOne(x => x.ExamRules)
+                .WithOne(x => x.Course)
+                .HasForeignKey<ExamRules>(x => x.CourseId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Subject>()
+                .HasOne(x => x.ExamRules)
+                .WithOne(x => x.Subject)
+                .HasForeignKey<ExamRules>(x => x.SubjectId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Subject>()
+                .HasOne(x => x.ExamRules)
+                .WithOne(x => x.Subject)
+                .HasForeignKey<ExamRules>(x => x.SubjectId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
             base.OnModelCreating(builder);
         }
 
@@ -142,5 +182,8 @@ namespace Foundation.Library.Contexts
         public DbSet<AcademicYear> AcademicYears { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Applicants> Applicants { get; set; }
+        public DbSet<Exam> Exams { get; set; }
+        public DbSet<ExamRules> ExamRules { get; set; }
+        public DbSet<Grade> Grades { get; set; }
     }
 }

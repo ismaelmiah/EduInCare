@@ -23,5 +23,8 @@ namespace Foundation.Library.Contexts
         DbSet<AcademicYear> AcademicYears { get; set; }
         DbSet<Subject> Subjects { get; set; }
         DbSet<Applicants> Applicants { get; set; }
+        DbSet<Exam> Exams { get; set; }
+        DbSet<ExamRules> ExamRules { get; set; }
+        DbSet<Grade> Grades { get; set; }
     }
 }

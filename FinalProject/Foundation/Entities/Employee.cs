@@ -8,9 +8,6 @@ namespace Foundation.Library.Entities
 
     /// <summary>
     /// Teacher Is A Employee
-    /// Teacher Has Many EmployeeEducation
-    /// Teacher Has Many EmploymentHistory
-    /// Teacher Has Many JobInfo
     /// Each Teacher Is A User
     /// Each Teacher Has One Section To-Advise
     /// </summary>
@@ -40,9 +37,6 @@ namespace Foundation.Library.Entities
         public string UserName { get; set; }
         public string Email { get; set; }
         public bool Status { get; set; }
-        //public virtual ICollection<EmployeeEducation> EmployeeEducation { get; set; }
-        //public virtual ICollection<EmploymentHistory> EmploymentHistory { get; set; }
-        //public virtual ICollection<JobInfo> JobInfo { get; set; }
         public virtual Section Section { get; set; }
     }
 }

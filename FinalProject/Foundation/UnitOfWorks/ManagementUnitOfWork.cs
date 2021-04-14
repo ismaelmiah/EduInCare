@@ -14,11 +14,6 @@ namespace Foundation.Library.UnitOfWorks
             IParentsRepository parents,
             IDepartmentRepository department,
             IEmployeeRepository employee,
-            IEmployeeEducationRepository education,
-            IEducationLevelRepository educationLevel,
-            IExamTitleRepository examTitle,
-            IEmploymentHistoryRepository employmentHistory,
-            IJobInfoRepository jobInfoRepository,
             IDesignationRepository designation,
             IGroupRepository group,
             ISectionRepository section,
@@ -33,11 +28,6 @@ namespace Foundation.Library.UnitOfWorks
             ParentsRepository = parents;
             DepartmentRepository = department;
             EmployeeRepository = employee;
-            EmployeeEducationRepository = education;
-            EducationLevelRepository = educationLevel;
-            ExamTitleRepository = examTitle;
-            EmploymentHistoryRepository = employmentHistory;
-            JobInfoRepository = jobInfoRepository;
             DesignationRepository = designation;
             GroupRepository = group;
             SectionRepository = section;
@@ -52,11 +42,6 @@ namespace Foundation.Library.UnitOfWorks
         public ICourseRepository CourseRepository { get; set; }
         public IDepartmentRepository DepartmentRepository { get; set; }
         public IEmployeeRepository EmployeeRepository { get; set; }
-        public IEmployeeEducationRepository EmployeeEducationRepository { get; set; }
-        public IEducationLevelRepository EducationLevelRepository { get; set; }
-        public IExamTitleRepository ExamTitleRepository { get; set; }
-        public IEmploymentHistoryRepository EmploymentHistoryRepository { get; set; }
-        public IJobInfoRepository JobInfoRepository { get; set; }
         public IDesignationRepository DesignationRepository { get; set; }
         public IGroupRepository GroupRepository { get; set; }
         public ISectionRepository SectionRepository { get; set; }
