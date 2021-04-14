@@ -3,12 +3,12 @@ using FinalProject.Web.Areas.Admin.Models.ModelBuilder;
 
 namespace FinalProject.Web.Areas.Admin.Models
 {
-    public class ExamModel
+    public class GradeModel
     {
-        internal ExamModelBuilder ModelBuilder;
-        public ExamModel()
+        internal GradeModelBuilder ModelBuilder;
+        public GradeModel()
         {
-            ModelBuilder = new ExamModelBuilder();
+            ModelBuilder = new GradeModelBuilder();
         }
 
         public Guid Id { get; set; }

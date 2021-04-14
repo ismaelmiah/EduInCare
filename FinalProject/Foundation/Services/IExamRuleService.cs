@@ -4,7 +4,7 @@ using Foundation.Library.Entities;
 
 namespace Foundation.Library.Services
 {
-    public interface IExamRuleRuleService
+    public interface IExamRuleService
     {
         void AddExamRule(ExamRules examRule);
         (int total, int totalDisplay, IList<ExamRules> records) GetExamRuleList(int pageIndex,

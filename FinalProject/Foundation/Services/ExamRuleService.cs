@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Foundation.Library.Services
 {
-    public class ExamRuleService : IExamRuleRuleService
+    public class ExamRuleService : IExamRuleService
     {
         private readonly IManagementUnitOfWork _management;
 

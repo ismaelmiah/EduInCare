@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinalProject.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class ExamController : Controller
+    public class ExamRulesController : Controller
     {
         public IActionResult Index()
         {
@@ -15,12 +15,12 @@ namespace FinalProject.Web.Areas.Admin.Controllers
 
         public IActionResult Upsert(Guid? id)
         {
-            var model = new ExamModel();
+            var model = new ExamRulesModel();
 
             if (id == null)
                 return View(model);
 
-            model = model.ModelBuilder.BuildExamModel(id.GetValueOrDefault());
+            model = model.ModelBuilder.BuildExamRulesModel(id.GetValueOrDefault());
             if (model == null)
                 return NotFound();
             return View(model);
@@ -28,19 +28,19 @@ namespace FinalProject.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(ExamModel model)
+        public IActionResult Upsert(ExamRulesModel model)
         {
             if (ModelState.IsValid)
             {
                 if (model.Id == new Guid())
                 {
                     //Create
-                    model.ModelBuilder.SaveExam(model);
+                    model.ModelBuilder.SaveExamRules(model);
                 }
                 else
                 {
                     //Update
-                    model.ModelBuilder.UpdateExam(model.Id, model);
+                    model.ModelBuilder.UpdateExamRules(model.Id, model);
                 }
             }
             return RedirectToAction(nameof(Index));
@@ -48,16 +48,16 @@ namespace FinalProject.Web.Areas.Admin.Controllers
 
         public IActionResult Delete(Guid id)
         {
-            var model = new ExamModel();
-            model.ModelBuilder.DeleteExam(id);
+            var model = new ExamRulesModel();
+            model.ModelBuilder.DeleteExamRules(id);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult GetExams()
+        public IActionResult GetExamRules()
         {
             var tableModel = new DataTablesAjaxRequestModel(Request);
-            var model = new ExamModel();
-            var data = model.ModelBuilder.GetExams(tableModel);
+            var model = new ExamRulesModel();
+            var data = model.ModelBuilder.GetExamRules(tableModel);
             return Json(data);
         }
     }
