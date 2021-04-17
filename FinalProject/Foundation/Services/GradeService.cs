@@ -42,6 +42,7 @@ namespace Foundation.Library.Services
                         {
                             Id = x.Id,
                             Name = x.Name,
+                            Rule = x.Rule
                         }).ToList();
 
             return (result.total, result.totalDisplay, data);
