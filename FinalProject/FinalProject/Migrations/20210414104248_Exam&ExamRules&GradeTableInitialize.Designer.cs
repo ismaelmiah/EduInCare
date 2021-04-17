@@ -4,14 +4,16 @@ using Foundation.Library.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FinalProject.Web.Migrations
 {
     [DbContext(typeof(WebsiteContext))]
-    partial class WebsiteContextModelSnapshot : ModelSnapshot
+    [Migration("20210414104248_Exam&ExamRules&GradeTableInitialize")]
+    partial class ExamExamRulesGradeTableInitialize
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -323,7 +325,8 @@ namespace FinalProject.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseId");
+                    b.HasIndex("CourseId")
+                        .IsUnique();
 
                     b.ToTable("Exams");
                 });
@@ -771,9 +774,9 @@ namespace FinalProject.Web.Migrations
             modelBuilder.Entity("Foundation.Library.Entities.Exam", b =>
                 {
                     b.HasOne("Foundation.Library.Entities.Course", "Course")
-                        .WithMany("Exams")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .WithOne("Exam")
+                        .HasForeignKey("Foundation.Library.Entities.Exam", "CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 

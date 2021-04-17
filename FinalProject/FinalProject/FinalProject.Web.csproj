@@ -34,6 +34,8 @@
     <Compile Remove="Migrations\20210404034517_CourseTableHasAcademicYearDependancy.Designer.cs" />
     <Compile Remove="Migrations\20210404034646_CourseTableHasAcademicYearDependancy.cs" />
     <Compile Remove="Migrations\20210404034646_CourseTableHasAcademicYearDependancy.Designer.cs" />
+    <Compile Remove="Migrations\20210414102218_Exam&amp;ExamRules&amp;GradeTableInitialize.cs" />
+    <Compile Remove="Migrations\20210414102218_Exam&amp;ExamRules&amp;GradeTableInitialize.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -27,9 +27,13 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link href="~/css/selectize.css" rel="stylesheet" />
+    <link href="~/css/bootstrap-multiselect.min.css" rel="stylesheet" />
+    <link href="~/css/bootstrap-select.css" rel="stylesheet" />
     <!-- jQuery -->
     <script src="~/AdminPanel/plugins/jquery/jquery.min.js"></script>
     <script src="~/js/selectize.min.js"></script>
+    <script src="~/js/bootstrap-multiselect.min.js"></script>
+    <script src="~/js/lc_switch.min.js"></script>
     @RenderSection("Styles", required: false)
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -303,7 +307,7 @@
                         <li>
                             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                                 <li class="nav-item has-treeview">
-                                    <a asp-action="Index" asp-area="Admin" asp-controller="Attendance" class="nav-link">
+                                    <a asp-action="Index" asp-area="Admin" asp-controller="Exam" class="nav-link">
                                         <i class="fas fa-hourglass-half nav-icon"></i>
                                         <p>
                                             Exam
@@ -312,19 +316,19 @@
                                     </a>
                                     <ul class="nav nav-treeview ml-3">
                                         <li class="nav-item">
-                                            <a asp-action="Index" asp-area="Admin" asp-controller="Attendance" class="nav-link">
+                                            <a asp-action="Index" asp-area="Admin" asp-controller="ExamRules" class="nav-link">
                                                 <i class="fas fa-th nav-icon"></i>
                                                 <p>Rule</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a asp-action="Index" asp-area="Admin" asp-controller="Attendance" class="nav-link">
+                                            <a asp-action="Index" asp-area="Admin" asp-controller="Exam" class="nav-link">
                                                 <i class="fas fa-boxes nav-icon"></i>
                                                 <p>Exam</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a asp-action="Index" asp-area="Admin" asp-controller="Attendance" class="nav-link">
+                                            <a asp-action="Index" asp-area="Admin" asp-controller="Grade" class="nav-link">
                                                 <i class="far fa-address-card nav-icon"></i>
                                                 <p>Grade</p>
                                             </a>
@@ -746,6 +750,7 @@
     <script src="/AdminPanel/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="/AdminPanel/js/demo.js"></script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

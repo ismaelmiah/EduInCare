@@ -16,35 +16,20 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
     public class EmployeeModelBuilder : BaseModel
     {
         private readonly ApplicationDbContext _db;
-        private readonly IEmployeeEducationService _employeeEducationService;
-        private readonly IEmploymentHistoryService _employmentHistory;
-        private readonly IJobInfoService _jobInfoService;
-        private readonly IExamTitleService _examTitleService;
         private readonly IDesignationService _designationService;
         private readonly IDepartmentService _department;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmployeeService _employeeService;
-        private readonly IEducationLevelService _educationLevelService;
 
         public EmployeeModelBuilder(
             ApplicationDbContext db,
             IEmployeeService employeeService,
-            IEmployeeEducationService employeeEducationService,
-            IEducationLevelService educationLevelService,
-            IExamTitleService examTitleService,
-            IEmploymentHistoryService employmentHistory,
-            IJobInfoService jobInfo,
             IDesignationService designationService,
             IDepartmentService department,
             UserManager<ApplicationUser> userManager)
         {
             _db = db;
             _employeeService = employeeService;
-            _employeeEducationService = employeeEducationService;
-            _educationLevelService = educationLevelService;
-            _examTitleService = examTitleService;
-            _employmentHistory = employmentHistory;
-            _jobInfoService = jobInfo;
             _designationService = designationService;
             _department = department;
             _userManager = userManager;
@@ -55,11 +40,6 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
             _db = Startup.AutofacContainer.Resolve<ApplicationDbContext>();
             _userManager = Startup.AutofacContainer.Resolve<UserManager<ApplicationUser>>();
             _employeeService = Startup.AutofacContainer.Resolve<IEmployeeService>();
-            _employeeEducationService = Startup.AutofacContainer.Resolve<IEmployeeEducationService>();
-            _educationLevelService = Startup.AutofacContainer.Resolve<IEducationLevelService>();
-            _examTitleService = Startup.AutofacContainer.Resolve<IExamTitleService>();
-            _employmentHistory = Startup.AutofacContainer.Resolve<IEmploymentHistoryService>();
-            _jobInfoService = Startup.AutofacContainer.Resolve<IJobInfoService>();
             _designationService = Startup.AutofacContainer.Resolve<IDesignationService>();
             _department = Startup.AutofacContainer.Resolve<IDepartmentService>();
         }
@@ -146,194 +126,7 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
 
             };
         }
-
-        /// <summary>
-        /// Get Employee Educations
-        /// </summary>
-        /// <param name="tableModel"></param>
-        /// <returns></returns>
-        public object GetEmployeeEducations(DataTablesAjaxRequestModel tableModel)
-        {
-            var (total, totalDisplay, records) = _employeeEducationService.GetEmployeeEducationList(
-                tableModel.PageIndex,
-                tableModel.PageSize,
-                tableModel.SearchText,
-                tableModel.GetSortText(new[]
-                {
-                    "Major",
-                    "Major",
-                    "Major",
-                    "InstituteName",
-                    "Cgpa",
-                    "PassingYear",
-                    "Duration",
-                    "Employee",
-                }));
-
-            return new
-            {
-                recordsTotal = total,
-                recordsFiltered = totalDisplay,
-                data = (from record in records
-                        select new[]
-                        {
-                            record.Major,
-                            record.Major,
-                            record.Major,
-                            record.InstituteName,
-                            record.Cgpa.ToString(CultureInfo.InvariantCulture),
-                            record.PassingYear,
-                            record.Duration.ToString(),
-                            //record.Employee.Name,
-                            record.Id.ToString(),
-                        }
-                    ).ToArray()
-
-            };
-        }
-
-        /// <summary>
-        /// Get Employee Education Levels
-        /// </summary>
-        /// <param name="tableModel"></param>
-        /// <returns></returns>
-        public object GetEducationLevels(DataTablesAjaxRequestModel tableModel)
-        {
-            var (total, totalDisplay, records) = _educationLevelService.GetEducationLevelList(
-                tableModel.PageIndex,
-                tableModel.PageSize,
-                tableModel.SearchText,
-                tableModel.GetSortText(new[]
-                {
-                    "EducationLevelName",
-                }));
-
-            return new
-            {
-                recordsTotal = total,
-                recordsFiltered = totalDisplay,
-                data = (from record in records
-                        select new[]
-                        {
-                            record.EducationLevelName,
-                            record.Id.ToString(),
-                        }
-                    ).ToArray()
-
-            };
-        }
-
-        /// <summary>
-        /// Get Employee Exam Titles
-        /// </summary>
-        /// <param name="tableModel"></param>
-        /// <returns></returns>
-        public object GetExamTitles(DataTablesAjaxRequestModel tableModel)
-        {
-            var (total, totalDisplay, records) = _examTitleService.GetExamTitleList(
-                tableModel.PageIndex,
-                tableModel.PageSize,
-                tableModel.SearchText,
-                tableModel.GetSortText(new[]
-                {
-                    "TitleName",
-                }));
-
-            return new
-            {
-                recordsTotal = total,
-                recordsFiltered = totalDisplay,
-                data = (from record in records
-                        select new[]
-                        {
-                            record.TitleName,
-                            record.Id.ToString(),
-                        }
-                    ).ToArray()
-
-            };
-        }
-
-        /// <summary>
-        /// Get Employment Histories
-        /// </summary>
-        /// <param name="tableModel"></param>
-        /// <returns></returns>
-        public object GetEmploymentHistories(DataTablesAjaxRequestModel tableModel)
-        {
-            var (total, totalDisplay, records) = _employmentHistory.GetEmploymentHistoryList(
-                tableModel.PageIndex,
-                tableModel.PageSize,
-                tableModel.SearchText,
-                tableModel.GetSortText(new[]
-                {
-                    "Employee",
-                    "Designation",
-                    "CompanyName",
-                    "CompanyLocation",
-                    "From",
-                    "To",
-                }));
-
-            return new
-            {
-                recordsTotal = total,
-                recordsFiltered = totalDisplay,
-                data = (from record in records
-                        select new[]
-                        {
-                            record.Employee.Name,
-                            record.Designation,
-                            record.CompanyName,
-                            record.CompanyLocation,
-                            record.From.ToShortDateString(),
-                            record.To.ToShortDateString(),
-                            record.Id.ToString(),
-                        }
-                    ).ToArray()
-
-            };
-        }
-
-        /// <summary>
-        /// Get Employee Job Infos
-        /// </summary>
-        /// <param name="tableModel"></param>
-        /// <returns></returns>
-        public object GetJobInfos(DataTablesAjaxRequestModel tableModel)
-        {
-            var (total, totalDisplay, records) = _jobInfoService.GetEmployeeList(
-                tableModel.PageIndex,
-                tableModel.PageSize,
-                tableModel.SearchText,
-                tableModel.GetSortText(new[]
-                {
-                    "Employee",
-                    "Designation",
-                    "JoiningDate",
-                    "Salary",
-                    "TotalLeave",
-                }));
-
-            return new
-            {
-                recordsTotal = total,
-                recordsFiltered = totalDisplay,
-                data = (from record in records
-                        select new[]
-                        {
-                            //record.Employee.Name,
-                            //record.Designation.Name,
-                            record.JoiningDate.ToShortDateString(),
-                            record.Salary.ToString(CultureInfo.InvariantCulture),
-                            record.TotalLeave.ToString(),
-                            record.Id.ToString(),
-                        }
-                    ).ToArray()
-
-            };
-        }
-
+        
         /// <summary>
         /// Get Designations
         /// </summary>
@@ -395,25 +188,7 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
                 Value = x.Id.ToString()
             }).ToList();
         }
-
-        internal List<SelectListItem> GetExamTitleList()
-        {
-            return _examTitleService.ExamTitles().Select(x => new SelectListItem
-            {
-                Text = x.TitleName,
-                Value = x.Id.ToString()
-            }).ToList();
-        }
-
-        internal List<SelectListItem> GetEducationLevel()
-        {
-            return _educationLevelService.GetEducationLevels().Select(x => new SelectListItem
-            {
-                Text = x.EducationLevelName,
-                Value = x.Id.ToString()
-            }).ToList();
-        }
-
+        
         internal List<SelectListItem> GetRolesItems()
         {
             return Enum.GetValues(typeof(RoleType)).Cast<RoleType>().Select(v => new SelectListItem
@@ -422,16 +197,7 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
                 Value = ((int)v).ToString()
             }).ToList();
         }
-
-        internal List<SelectListItem> GetEducationItems()
-        {
-            return _employeeEducationService.GetEducations().Select(x => new SelectListItem
-            {
-                Text = x.PassingYear,
-                Value = x.Id.ToString()
-            }).ToList();
-        }
-
+        
         public void SaveEmployee(EmployeeFormViewModel model)
         {
             var userId = CreateUser(model.Email, model.UserName, model.Password, model.MobileNo, model.Role);

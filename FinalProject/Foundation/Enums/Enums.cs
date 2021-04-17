@@ -73,6 +73,15 @@ namespace Foundation.Library.Enums
         DoNotMention = 9
     }
 
+    public enum MarksDistribution
+    {
+        Written,
+        Mcq,
+        Attendance,
+        Assignment,
+        LabReport
+    }
+
     public enum QualificationType
     {
         Ssc,
