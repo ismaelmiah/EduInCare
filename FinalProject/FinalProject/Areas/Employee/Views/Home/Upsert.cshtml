@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="form-group col">
                                     <label asp-for="Qualifications"></label>
-                                    <select multiple asp-for="Qualifications" asp-items="Model.QualificationType" class="chosen-select form-control">
+                                    <select multiple asp-for="Qualifications" asp-items="Model.QualificationType" class="chosen form-control">
                                     </select>
                                     <span asp-validation-for="Qualifications" class="text-danger"></span>
                                 </div>
@@ -185,9 +185,14 @@
 
 @section Scripts
 {
-    <script src="~/js/chosen.jquery.min.js"></script>
+    
     <script>
-        $(".chosen-select").chosen({ width: "100%", placeholder_text_multiple: "Select Your Qualifications" });
+        //$(".chosen").chosen({ width: "100%", display_disabled_options: true, placeholder_text_multiple: "Select Your Qualifications" });
+        $(".chosen").select2({
+            closeOnSelect: true,
+            placeholder: "Qualifications",
+            allowClear: true
+        });
 
         var imageTag = document.getElementById('blah');
         imageTag.style.border = "2px solid";

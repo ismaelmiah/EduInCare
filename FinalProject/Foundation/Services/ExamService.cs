@@ -29,13 +29,13 @@ namespace Foundation.Library.Services
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 result = _management.ExamRepository.GetDynamic(null,
-                    orderBy, "", pageIndex, pageSize);
+                    orderBy, "Course", pageIndex, pageSize);
 
             }
             else
             {
                 result = _management.ExamRepository.GetDynamic(x => x.Name == searchText,
-                    orderBy, "", pageIndex, pageSize);
+                    orderBy, "Course", pageIndex, pageSize);
             }
 
             var data = (from x in result.data
@@ -43,6 +43,8 @@ namespace Foundation.Library.Services
                 {
                     Id = x.Id,
                     Name = x.Name,
+                    MarksDistributionTypes = x.MarksDistributionTypes,
+                    Course = x.Course,
                     Status = x.Status,
                 }).ToList();
 
@@ -55,7 +57,7 @@ namespace Foundation.Library.Services
             _management.Save();
         }
 
-        public Exam GetExam(Guid id) => _management.ExamRepository.GetById(id);
+        public Exam GetExam(Guid id) => _management.ExamRepository.Get(x=>x.Id == id, null, "Course", false).FirstOrDefault();
 
         public void Update(Exam exam)
         {

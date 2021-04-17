@@ -121,10 +121,13 @@ namespace Foundation.Library.Contexts
                 .WithOne(x => x.Registration)
                 .HasForeignKey<Registration>(x => x.StudentId);
 
-            builder.Entity<Course>()
-                .HasOne(x => x.Exam)
-                .WithOne(x => x.Course)
-                .HasForeignKey<Exam>(x => x.CourseId);
+            builder.Entity<Exam>()
+                .HasOne(x => x.Course)
+                .WithMany(x => x.Exams)
+                .HasForeignKey(x => x.CourseId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Exam>()
                 .HasOne(x => x.ExamRules)

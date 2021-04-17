@@ -26,7 +26,7 @@ namespace Foundation.Library.Entities
         public Guid DepartmentId { get; set; }
         public virtual Department Department { get; set; }
         public virtual Registration Registration { get; set; }
-        public virtual Exam Exam { get; set; }
+        public virtual ICollection<Exam> Exams { get; set; }
         public virtual ExamRules ExamRules { get; set; }
         public Guid AcademicYearId { get; set; }
         public virtual AcademicYear AcademicYear { get; set; }

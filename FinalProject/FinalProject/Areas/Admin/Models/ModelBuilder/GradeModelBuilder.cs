@@ -1,4 +1,5 @@
 ﻿using System;
+using Autofac;
 using FinalProject.Web.Models;
 using Foundation.Library.Services;
 
@@ -11,6 +12,11 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
         public GradeModelBuilder(IGradeService gradeService)
         {
             _gradeService = gradeService;
+        }
+
+        public GradeModelBuilder()
+        {
+            _gradeService = Startup.AutofacContainer.Resolve<IGradeService>();
         }
         public void SaveGrade(GradeModel model)
         {
