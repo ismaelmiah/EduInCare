@@ -38,7 +38,7 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
         {
             var grade = _gradeService.GetGrade(id);
             grade.Name = model.Name;
-            grade.Rule = string.Join(", ", model.Rules);
+            grade.Rule = JsonConvert.SerializeObject(model.Rules);
 
             _gradeService.Update(grade);
         }

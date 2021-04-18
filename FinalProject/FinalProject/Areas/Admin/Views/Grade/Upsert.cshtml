@@ -1,13 +1,13 @@
 ﻿@model GradeModel
 
 @{
-    ViewData["subtitle"] = "Add Exam";
+    ViewData["subtitle"] = "Add Grade";
 }
 
 
 @section Title
 {
-    <title>Create Exam</title>
+    <title>Create Grade</title>
 }
 <div class="row">
     <div class="col-md-2">
@@ -39,26 +39,13 @@
                                         <th>Grade</th>
                                         <th>Point</th>
                                         <th>Marks From</th>
-                                        <th>Marks Upto</th>
+                                        <th>Marks UpTo</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @for (int i = 0; i < Model.Rules.Count; i++)
+                                    @for(var i = 0; i < Model.Rules.Count; i++)
                                     {
-                                            <tr>
-                                                <td>
-                                                    <input disabled="disabled" asp-for="@Model.Rules[i].Name"/>
-                                                </td>
-                                                <td>
-                                                    <input class="form-control" asp-for="@Model.Rules[i].Point" />
-                                                </td>
-                                                <td>
-                                                    <input class="form-control" asp-for="@Model.Rules[i].Minimum" />
-                                                </td>
-                                                <td>
-                                                    <input class="form-control" asp-for="@Model.Rules[i].Maximum" />
-                                                </td>
-                                            </tr>
+                                        <partial name="_GradeEdit" for="@Model.Rules[i]"/>
                                     }
                                 </tbody>
                             </table>
