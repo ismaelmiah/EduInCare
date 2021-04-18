@@ -14,5 +14,6 @@ namespace Foundation.Library.Services
         Exam GetExam(Guid id);
         void Update(Exam exam);
         IList<Exam> GetExams();
+        IList<Exam> GetExams(Guid courseId);
     }
 }

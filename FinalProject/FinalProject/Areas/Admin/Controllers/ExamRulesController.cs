@@ -60,5 +60,25 @@ namespace FinalProject.Web.Areas.Admin.Controllers
             var data = model.ModelBuilder.GetExamRules(tableModel);
             return Json(data);
         }
+
+        public IActionResult GetSubjects(Guid courseId)
+        {
+            var model = new ExamRulesModel();
+            var data = model.ModelBuilder.GetSubjectList(courseId);
+            return Json(data);
+        }
+        public IActionResult GetExams(Guid courseId)
+        {
+            var model = new ExamRulesModel();
+            var data = model.ModelBuilder.GetExamList(courseId);
+            return Json(data);
+        }
+
+        public IActionResult GetMarkDistributions(Guid examId)
+        {
+            var model = new ExamRulesModel();
+            var data = model.ModelBuilder.GetMarksDistributions(examId);
+            return Json(data);
+        }
     }
 }
