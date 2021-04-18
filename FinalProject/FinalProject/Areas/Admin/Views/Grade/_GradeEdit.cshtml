@@ -1,0 +1,16 @@
+﻿@model Rules
+<tr>
+    <td>
+        <input type="hidden" asp-for="Name" />
+        @Model.Name
+    </td>
+    <td>
+        <input class="form-control" asp-for="Point" />
+    </td>
+    <td>
+        <input class="form-control" asp-for="Minimum" />
+    </td>
+    <td>
+        <input class="form-control" asp-for="Maximum" />
+    </td>
+</tr>

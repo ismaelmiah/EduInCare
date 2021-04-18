@@ -1,5 +1,75 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model GradeModel
+
 @{
+    ViewData["subtitle"] = "Add Grade";
 }
+
+
+@section Title
+{
+    <title>Create Grade</title>
+}
+<div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8">
+        <div class="card card-info">
+            <div class="card-header">
+                <h3 class="card-title text-center">@ViewData["subtitle"]</h3>
+            </div>
+        </div>
+        <form asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
+            <div class="card-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="row">
+                        <div class="form-group col row">
+                            <div class="col-2">
+                                <label asp-for="Name"></label>
+                            </div>
+                            <div class="col-10">
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group text-center  col">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Grade</th>
+                                        <th>Point</th>
+                                        <th>Marks From</th>
+                                        <th>Marks UpTo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for(var i = 0; i < Model.Rules.Count; i++)
+                                    {
+                                        <partial name="_GradeEdit" for="@Model.Rules[i]"/>
+                                    }
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="form-group row mb-0">
+                    <div class="col-6 text-left">
+                        @if (Model.Id == new Guid())
+                        {
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        }
+                        else
+                        {
+                            <input type="submit" value="Update" class="btn btn-warning" />
+                        }
+                    </div>
+                    <div class="col-6 text-right">
+                        <a asp-area="Admin" asp-controller="Grade" asp-action="Index">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-2"></div>
+</div>
