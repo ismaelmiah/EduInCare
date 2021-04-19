@@ -34,7 +34,7 @@ namespace Foundation.Library.Services
             }
             else
             {
-                result = _management.ExamRuleRepository.GetDynamic(x => x.Exam.Name == searchText,
+                result = _management.ExamRuleRepository.GetDynamic(x => x.TotalExamMarks.ToString() == searchText,
                     orderBy, "Subject,Grade", pageIndex, pageSize);
             }
 

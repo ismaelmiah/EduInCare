@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Autofac;
@@ -46,10 +47,11 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             var examRules = _examRuleService.GetExamRule(id);
             return new ExamRulesModel()
             {
+                Id = examRules.Id,
                 CourseList = GetCourseList(examRules.CourseId),
-                SubjectList = GetSubjectList(examRules.SubjectId),
+                SubjectList = GetSubjectList(examRules.CourseId, examRules.SubjectId),
                 GradeList = GetGradeList(examRules.GradeId),
-                ExamList = GetExamList(examRules.ExamId),
+                ExamList = GetExamList(examRules.CourseId, examRules.ExamId),
                 TotalExamMarks = examRules.TotalExamMarks,
                 PassMarks = examRules.PassMarks,
                 DistributionModels = JsonConvert.DeserializeObject<List<DistributionModel>>(examRules.MarksDistribution)
@@ -146,10 +148,9 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             };
         }
 
-        public object GetMarksDistributions(Guid examId, object selectedItem = null)
+        public object GetMarksDistributions(Guid examId)
         {
             return _examService.GetExam(examId);
-            //return new SelectList(data, "Id", "MarksDistributionTypes", selectedItem);
         }
     }
 }

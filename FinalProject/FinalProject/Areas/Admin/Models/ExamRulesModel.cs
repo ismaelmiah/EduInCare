@@ -45,7 +45,7 @@ namespace FinalProject.Web.Areas.Admin.Models
 
     public class DistributionModel
     {
-        public string MarksDistribution { get; set; }
+        public string DistributionType { get; set; }
         public int TotalMarks { get; set; }
         public int PassMarks { get; set; }
     }

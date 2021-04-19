@@ -4,14 +4,16 @@ using Foundation.Library.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FinalProject.Web.Migrations
 {
     [DbContext(typeof(WebsiteContext))]
-    partial class WebsiteContextModelSnapshot : ModelSnapshot
+    [Migration("20210419140001_UpdateRelationshipWithExamRules")]
+    partial class UpdateRelationshipWithExamRules
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -788,7 +790,7 @@ namespace FinalProject.Web.Migrations
                     b.HasOne("Foundation.Library.Entities.Exam", "Exam")
                         .WithOne("ExamRules")
                         .HasForeignKey("Foundation.Library.Entities.ExamRules", "ExamId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Foundation.Library.Entities.Grade", "Grade")

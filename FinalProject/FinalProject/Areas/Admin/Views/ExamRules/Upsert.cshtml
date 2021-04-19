@@ -91,6 +91,24 @@
                             </tr>
                         </thead>
                         <tbody id="marksdistributionbody">
+                            @if (Model.DistributionModels != null)
+                            {
+                                for (int i = 0; i < Model.DistributionModels.Count; i++)
+                                {
+                                    <tr class="text-center">
+                                        <td class="w-25">
+                                            <input type="hidden" asp-for="DistributionModels[i].DistributionType" />
+                                            @Model.DistributionModels[i].DistributionType
+                                        </td>
+                                        <td class="w-25">
+                                            <input asp-for="DistributionModels[i].TotalMarks" class="form-control" />
+                                        </td>
+                                        <td class="w-25">
+                                            <input asp-for="DistributionModels[i].PassMarks" class="form-control" />
+                                        </td>
+                                    </tr>
+                                }
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -108,7 +126,7 @@
                         }
                     </div>
                     <div class="col-6 text-right">
-                        <a asp-area="Course" asp-controller="Registration" asp-action="Index">Back to List</a>
+                        <a asp-area="Course" asp-controller="ExamRules" asp-action="Index">Back to List</a>
                     </div>
                 </div>
             </div>
@@ -121,7 +139,7 @@
 @section Scripts
 {
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             $.ajax({
                 method: "GET",
@@ -134,6 +152,7 @@
                     }
                     $("#SubjectId").html(s);
                     populateExams($("#CourseId").val());
+                    populateMarks($("#GradeId option:selected").text().split(' ')[0]);
                 }
             });
 
@@ -145,7 +164,20 @@
             $("#ExamId").change(function() {
                 populateTable(this.value);
             });
-
+        
+            $("#GradeId").change(function() {
+                var mark = this.options[this.selectedIndex].text.split(' ')[0];
+                populateMarks(mark);
+            });
+            function populateMarks(mark) {
+                if (mark > 50) {
+                    $('#TotalExamMarks').val(mark);
+                    $('#PassMarks').val(parseInt(mark / 3));
+                } else {
+                    $('#TotalExamMarks').val(mark);
+                    $('#PassMarks').val(parseInt(mark / 3)+1);
+                }
+            }
             function populateExams(courseId) {
                 $.ajax({
                     method: "GET",
@@ -157,6 +189,7 @@
                             s += '<option value="' + data[i].value + '">' + data[i].text + '</option>';
                         }
                         $("#ExamId").html(s);
+                        populateTable(data[0].value);
                     }
                 });
             }
@@ -189,7 +222,8 @@
                         marksDistribution.forEach((item, index) => {
                             var row = `<tr>
                                             <td class="w-25">
-                                                <label id="DistributionModels_${index}__MarksDistribution" name="DistributionModels[${index}].MarksDistribution">${item}</label>
+                                                <input type="hidden" id="DistributionModels_${index}__DistributionType" name="DistributionModels[${index}].DistributionType" value="${item}" />
+                                                <label>${item}</label>
                                             </td>
                                             <td class="w-25">
                                                 <input class="form-control" id="DistributionModels_[${index}]_TotalMarks" type="number" name="DistributionModels[${index}].TotalMarks" />
