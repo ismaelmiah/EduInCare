@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DataAccessLayer.Library;
 
 namespace Foundation.Library.Entities
@@ -8,6 +9,6 @@ namespace Foundation.Library.Entities
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Rule { get; set; }
-        public virtual ExamRules ExamRules { get; set; }
+        public virtual ICollection<ExamRules> ExamRules { get; set; }
     }
 }

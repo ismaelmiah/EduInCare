@@ -4,14 +4,16 @@ using Foundation.Library.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FinalProject.Web.Migrations
 {
     [DbContext(typeof(WebsiteContext))]
-    partial class WebsiteContextModelSnapshot : ModelSnapshot
+    [Migration("20210418172053_AddedMarksDistributionColumn")]
+    partial class AddedMarksDistributionColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -357,14 +359,17 @@ namespace FinalProject.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseId");
+                    b.HasIndex("CourseId")
+                        .IsUnique();
 
                     b.HasIndex("ExamId")
                         .IsUnique();
 
-                    b.HasIndex("GradeId");
+                    b.HasIndex("GradeId")
+                        .IsUnique();
 
-                    b.HasIndex("SubjectId");
+                    b.HasIndex("SubjectId")
+                        .IsUnique();
 
                     b.ToTable("ExamRules");
                 });
@@ -780,26 +785,26 @@ namespace FinalProject.Web.Migrations
             modelBuilder.Entity("Foundation.Library.Entities.ExamRules", b =>
                 {
                     b.HasOne("Foundation.Library.Entities.Course", "Course")
-                        .WithMany("ExamRules")
-                        .HasForeignKey("CourseId")
+                        .WithOne("ExamRules")
+                        .HasForeignKey("Foundation.Library.Entities.ExamRules", "CourseId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Foundation.Library.Entities.Exam", "Exam")
                         .WithOne("ExamRules")
                         .HasForeignKey("Foundation.Library.Entities.ExamRules", "ExamId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Foundation.Library.Entities.Grade", "Grade")
-                        .WithMany("ExamRules")
-                        .HasForeignKey("GradeId")
+                        .WithOne("ExamRules")
+                        .HasForeignKey("Foundation.Library.Entities.ExamRules", "GradeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Foundation.Library.Entities.Subject", "Subject")
-                        .WithMany("ExamRules")
-                        .HasForeignKey("SubjectId")
+                        .WithOne("ExamRules")
+                        .HasForeignKey("Foundation.Library.Entities.ExamRules", "SubjectId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

@@ -133,34 +133,29 @@ namespace Foundation.Library.Contexts
                 .HasOne(x => x.ExamRules)
                 .WithOne(x => x.Exam)
                 .HasForeignKey<ExamRules>(x => x.ExamId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+                .IsRequired();
 
-            builder.Entity<Grade>()
-                .HasOne(x => x.ExamRules)
-                .WithOne(x => x.Grade)
-                .HasForeignKey<ExamRules>(x => x.GradeId)
+            builder.Entity<ExamRules>()
+                .HasOne(x => x.Grade)
+                .WithMany(x => x.ExamRules)
+                .HasForeignKey(x => x.GradeId)
+                .HasPrincipalKey(x => x.Id)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict); ;
 
-            builder.Entity<Course>()
-                .HasOne(x => x.ExamRules)
-                .WithOne(x => x.Course)
-                .HasForeignKey<ExamRules>(x => x.CourseId)
+            builder.Entity<ExamRules>()
+                .HasOne(x => x.Course)
+                .WithMany(x => x.ExamRules)
+                .HasForeignKey(x => x.CourseId)
+                .HasPrincipalKey(x => x.Id)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<Subject>()
-                .HasOne(x => x.ExamRules)
-                .WithOne(x => x.Subject)
-                .HasForeignKey<ExamRules>(x => x.SubjectId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<Subject>()
-                .HasOne(x => x.ExamRules)
-                .WithOne(x => x.Subject)
-                .HasForeignKey<ExamRules>(x => x.SubjectId)
+            builder.Entity<ExamRules>()
+                .HasOne(x => x.Subject)
+                .WithMany(x => x.ExamRules)
+                .HasForeignKey(x => x.SubjectId)
+                .HasPrincipalKey(x => x.Id)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 

@@ -15,6 +15,7 @@ namespace Foundation.Library.Entities
         public Guid ExamId { get; set; }
         public Exam Exam { get; set; }
         public double TotalExamMarks { get; set; }
-        public double PassMarks { get; set; }
+        public double PassMarks { get; set; } 
+        public string MarksDistribution { get; set; }
     }
 }

@@ -53,6 +53,14 @@ namespace FinalProject.Web.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ExamStatus()
+        {
+
+            return RedirectToAction(nameof(Index));
+        }
+
         public IActionResult GetExams()
         {
             var tableModel = new DataTablesAjaxRequestModel(Request);

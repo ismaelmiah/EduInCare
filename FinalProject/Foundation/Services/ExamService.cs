@@ -66,5 +66,9 @@ namespace Foundation.Library.Services
         }
 
         public IList<Exam> GetExams() => _management.ExamRepository.GetAll();
+        public IList<Exam> GetExams(Guid courseId)
+        {
+            return _management.ExamRepository.Get(x => x.CourseId == courseId);
+        }
     }
 }

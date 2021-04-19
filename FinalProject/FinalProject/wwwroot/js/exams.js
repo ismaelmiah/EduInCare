@@ -3,22 +3,19 @@
         "processing": true,
         "serverSide": true,
         "ajax": "/Admin/exam/GetExams",
-        "initComplete": function (settings, json) {
-            lc_switch('#Status');
-        },
         "columnDefs": [
             {
                 "orderable": false,
-                "targets": 3,
-                "render": function(data, type, row) {
-                    return `<input type="checkbox" id="Status" ${data == true ? 'checked' : ''}/>`;
+                "targets": 2,
+                "render": function (data, type, row) {
+                    return `${data.split(',').map(w => '<span class="lead"><span class="badge badge-pill badge-info">' + w.charAt(0).toUpperCase() + w.slice(1) + '</span></span>').join(' ')}`;
                 }
             },
             {
                 "orderable": false,
-                "targets": 2,
-                "render": function(data, type, row) {
-                    return `${data.split(',').map(w => '<span class="lead"><span class="badge badge-pill badge-info">' + w.charAt(0).toUpperCase() + w.slice(1) +'</span></span>').join(' ')}`;
+                "targets": 3,
+                "render": function (data, type, row) {
+                    return `<label class="btn ${data === true ? 'btn-success' : 'btn-danger'} active">${data === true ? 'YES' : 'NO'}</label>`;
                 }
             },
             {
@@ -55,5 +52,4 @@
     $("#deleteButton").click(function () {
         $("#deleteForm").submit();
     });
-
 });

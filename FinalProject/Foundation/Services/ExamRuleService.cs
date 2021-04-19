@@ -29,20 +29,24 @@ namespace Foundation.Library.Services
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 result = _management.ExamRuleRepository.GetDynamic(null,
-                    orderBy, "", pageIndex, pageSize);
+                    orderBy, "Subject,Grade", pageIndex, pageSize);
 
             }
             else
             {
-                result = _management.ExamRuleRepository.GetDynamic(x => x.Exam.Name == searchText,
-                    orderBy, "", pageIndex, pageSize);
+                result = _management.ExamRuleRepository.GetDynamic(x => x.TotalExamMarks.ToString() == searchText,
+                    orderBy, "Subject,Grade", pageIndex, pageSize);
             }
 
             var data = (from x in result.data
                 select new ExamRules
                 {
                     Id = x.Id,
-                    Exam = x.Exam,
+                    Subject = x.Subject,
+                    Grade = x.Grade,
+                    MarksDistribution = x.MarksDistribution,
+                    TotalExamMarks = x.TotalExamMarks,
+                    PassMarks = x.PassMarks
                 }).ToList();
 
             return (result.total, result.totalDisplay, data);
@@ -54,7 +58,7 @@ namespace Foundation.Library.Services
             _management.Save();
         }
 
-        public ExamRules GetExamRule(Guid id) => _management.ExamRuleRepository.GetById(id);
+        public ExamRules GetExamRule(Guid id) => _management.ExamRuleRepository.Get(x=>x.Id == id, null, "Subject,Grade,Course,Exam", false).FirstOrDefault();
 
         public void Update(ExamRules examRule)
         {
