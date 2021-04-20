@@ -23,7 +23,8 @@ namespace Foundation.Library.UnitOfWorks
             IApplicantRepository applicant,
             IExamRepository exam,
             IExamRuleRepository examRule,
-            IGradeRepository grade) : base(dbContext)
+            IGradeRepository grade,
+            IMarkRepository mark) : base(dbContext)
         {
             _registrationStudent = registrationStudent;
             CourseRepository = course;
@@ -41,6 +42,7 @@ namespace Foundation.Library.UnitOfWorks
             ExamRepository = exam;
             ExamRuleRepository = examRule;
             GradeRepository = grade;
+            MarkRepository = mark;
         }
 
         public IStudentRepository StudentRepository { get; set; }
@@ -58,5 +60,6 @@ namespace Foundation.Library.UnitOfWorks
         public IExamRepository ExamRepository { get; set; }
         public IGradeRepository GradeRepository { get; set; }
         public IExamRuleRepository ExamRuleRepository { get; set; }
+        public IMarkRepository MarkRepository { get; set; }
     }
 }
