@@ -116,9 +116,10 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             _examRuleService.Delete(id);
         }
 
-        public object GetExamRules(DataTablesAjaxRequestModel tableModel)
+        public object GetExamRules(Guid courseId, DataTablesAjaxRequestModel tableModel)
         {
             var (total, totalDisplay, records) = _examRuleService.GetExamRuleList(
+                courseId,
                 tableModel.PageIndex,
                 tableModel.PageSize,
                 tableModel.SearchText,

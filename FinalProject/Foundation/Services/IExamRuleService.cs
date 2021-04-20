@@ -7,7 +7,7 @@ namespace Foundation.Library.Services
     public interface IExamRuleService
     {
         void AddExamRule(ExamRules examRule);
-        (int total, int totalDisplay, IList<ExamRules> records) GetExamRuleList(int pageIndex,
+        (int total, int totalDisplay, IList<ExamRules> records) GetExamRuleList(Guid courseId, int pageIndex,
             int pageSize, string searchText, string orderBy);
 
         void Delete(Guid id);

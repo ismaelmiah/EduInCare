@@ -10,7 +10,8 @@ namespace FinalProject.Web.Areas.Admin.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var model = new ExamRulesModel();
+            return View(model);
         }
 
         public IActionResult Upsert(Guid? id)
@@ -53,11 +54,11 @@ namespace FinalProject.Web.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult GetExamRules()
+        public IActionResult GetExamRules(Guid courseId)
         {
             var tableModel = new DataTablesAjaxRequestModel(Request);
             var model = new ExamRulesModel();
-            var data = model.ModelBuilder.GetExamRules(tableModel);
+            var data = model.ModelBuilder.GetExamRules(courseId, tableModel);
             return Json(data);
         }
 
@@ -67,6 +68,7 @@ namespace FinalProject.Web.Areas.Admin.Controllers
             var data = model.ModelBuilder.GetSubjectList(courseId);
             return Json(data);
         }
+
         public IActionResult GetExams(Guid courseId)
         {
             var model = new ExamRulesModel();

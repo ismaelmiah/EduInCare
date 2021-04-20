@@ -22,19 +22,19 @@ namespace Foundation.Library.Services
         }
 
         public (int total, int totalDisplay, IList<ExamRules> records)
-            GetExamRuleList(int pageIndex, int pageSize, string searchText, string orderBy)
+            GetExamRuleList(Guid courseId, int pageIndex, int pageSize, string searchText, string orderBy)
         {
             (IList<ExamRules> data, int total, int totalDisplay) result;
 
             if (string.IsNullOrWhiteSpace(searchText))
             {
-                result = _management.ExamRuleRepository.GetDynamic(null,
+                result = _management.ExamRuleRepository.GetDynamic(x=>x.CourseId == courseId,
                     orderBy, "Subject,Grade", pageIndex, pageSize);
 
             }
             else
             {
-                result = _management.ExamRuleRepository.GetDynamic(x => x.TotalExamMarks.ToString() == searchText,
+                result = _management.ExamRuleRepository.GetDynamic(x => x.CourseId == courseId,
                     orderBy, "Subject,Grade", pageIndex, pageSize);
             }
 

@@ -1,4 +1,6 @@
-﻿@section Title
+﻿@model ExamRulesModel
+
+@section Title
 {
     <title>Exam Rules</title>
 }
@@ -27,7 +29,15 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-4 text-left">
-                            <h2 class="card-title">Current Exam Rules</h2>
+                            <div class="form-group row col">
+                                <div class="col-3">
+                                    <label class="card-title" asp-for="CourseId"></label>
+                                </div>
+                                <div class="col-9">
+                                    <select asp-for="CourseId" asp-items="Model.CourseList" class="form-control"></select>
+                                    <span asp-validation-for="CourseId" class="text-danger"></span>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-8 text-right">
                             <a asp-action="Upsert" asp-controller="ExamRules" asp-area="Admin" class="btn btn-outline-primary">Add Exam Rule</a>
