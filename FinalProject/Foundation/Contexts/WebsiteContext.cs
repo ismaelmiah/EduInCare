@@ -159,6 +159,54 @@ namespace Foundation.Library.Contexts
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder.Entity<Mark>()
+                .HasOne(x => x.Student)
+                .WithMany(x => x.Marks)
+                .HasForeignKey(x => x.StudentId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Mark>()
+                .HasOne(x => x.Subject)
+                .WithMany(x => x.Marks)
+                .HasForeignKey(x => x.SubjectId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Mark>()
+                .HasOne(x => x.Course)
+                .WithMany(x => x.Marks)
+                .HasForeignKey(x => x.CourseId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Mark>()
+                .HasOne(x => x.Registration)
+                .WithMany(x => x.Marks)
+                .HasForeignKey(x => x.RegistrationId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Mark>()
+                .HasOne(x => x.Section)
+                .WithMany(x => x.Marks)
+                .HasForeignKey(x => x.SectionId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Mark>()
+                .HasOne(x => x.AcademicYear)
+                .WithMany(x => x.Marks)
+                .HasForeignKey(x => x.AcademicYearId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
             base.OnModelCreating(builder);
         }
 
@@ -183,5 +231,6 @@ namespace Foundation.Library.Contexts
         public DbSet<Exam> Exams { get; set; }
         public DbSet<ExamRules> ExamRules { get; set; }
         public DbSet<Grade> Grades { get; set; }
+        public DbSet<Mark> Marks { get; set; }
     }
 }

@@ -17,5 +17,6 @@ namespace Foundation.Library.Entities
         public bool Status { get; set; }
         public virtual Registration Registration { get; set; }
         public virtual ICollection<Course> Courses { get; set; }
+        public virtual ICollection<Mark> Marks { get; set; }
     }
 }

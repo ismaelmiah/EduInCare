@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DataAccessLayer;
 using DataAccessLayer.Library;
 
@@ -21,6 +22,7 @@ namespace Foundation.Library.Entities
         public virtual Employee Employee { get; set; }
         public bool Status { get; set; }
         public string Description { get; set; }
+        public virtual ICollection<Mark> Marks { get; set; }
         public virtual Registration Registration { get; set; }
     }
 }
