@@ -38,6 +38,11 @@ namespace Foundation.Library.Services
             return _management.MarkRepository.GetAll();
         }
 
+        public Mark GetMark(Guid id)
+        {
+            return _management.MarkRepository.GetById(id);
+        }
+
         public (int total, int totalDisplay, IList<Mark> records)
             GetMarkList(int pageIndex, int pageSize, string searchText, string orderBy)
         {
