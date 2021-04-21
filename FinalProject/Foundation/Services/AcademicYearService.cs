@@ -28,13 +28,13 @@ namespace Foundation.Library.Services
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 result = _management.AcademicYearRepository.GetDynamic(null,
-                    orderBy, "", pageIndex, pageSize);
+                    orderBy, "Registration,Courses,Marks", pageIndex, pageSize);
 
             }
             else
             {
                 result = _management.AcademicYearRepository.GetDynamic(x => x.Title == searchText,
-                    orderBy, "", pageIndex, pageSize);
+                    orderBy, "Registration,Courses,Marks", pageIndex, pageSize);
             }
 
             var data = (from x in result.data
@@ -42,6 +42,7 @@ namespace Foundation.Library.Services
                 {
                     Id = x.Id,
                     Title = x.Title,
+                    Registration = x.Registration,
                     EndDate = x.EndDate,
                     IsOpenForAdmission = x.IsOpenForAdmission,
                     Status = x.Status,

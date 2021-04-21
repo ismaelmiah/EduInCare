@@ -17,9 +17,11 @@ namespace FinalProject.Web.Areas.Admin.Models
         }
 
         public Guid Id { get; set; }
+        public Guid AcademicYearId { get; set; }
+        public SelectList AcademicYearList { get; set; }
         [Display(Name = "Course")]
         public Guid CourseId { get; set; }
-        public SelectList CourseList { get; set; }
+        public List<SelectListItem> CourseList { get; set; }
         [Display(Name = "Section")]
         public Guid SectionId { get; set; }
         public IList<SelectListItem> SectionList { get; set; }
@@ -32,7 +34,8 @@ namespace FinalProject.Web.Areas.Admin.Models
 
         private void PopulateDropdownList()
         {
-            CourseList = ModelBuilder.GetCourseList();
+            AcademicYearList = ModelBuilder.GetAcademicYearList();
+            CourseList = new List<SelectListItem>();
             SectionList = new List<SelectListItem>();
             SubjectList = new List<SelectListItem>();
             ExamList = new List<SelectListItem>();

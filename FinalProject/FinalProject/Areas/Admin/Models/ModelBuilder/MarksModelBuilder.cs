@@ -16,6 +16,7 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
         private readonly ICourseService _courseService;
         private readonly IExamService _examService;
         private readonly ISubjectService _subjectService;
+        private readonly IAcademicYearService _academic;
 
         public MarksModelBuilder(
             IExamRuleService examRuleService,
@@ -23,7 +24,8 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             IExamService examService,
             ISubjectService subjectService,
             IMarkService markService,
-            ISectionService sectionService)
+            ISectionService sectionService,
+            IAcademicYearService academic)
         {
             _examRuleService = examRuleService;
             _courseService = courseService;
@@ -31,6 +33,7 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             _subjectService = subjectService;
             _markService = markService;
             _sectionService = sectionService;
+            _academic = academic;
         }
 
         public MarksModelBuilder()
@@ -41,6 +44,7 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             _examRuleService = Startup.AutofacContainer.Resolve<IExamRuleService>();
             _markService = Startup.AutofacContainer.Resolve<IMarkService>();
             _sectionService = Startup.AutofacContainer.Resolve<ISectionService>();
+            _academic = Startup.AutofacContainer.Resolve<IAcademicYearService>();
         }
 
         public MarksModel BuildMarksModel(Guid id)
@@ -98,6 +102,10 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                         }
                     ).ToArray()
             };
+        }
+        public SelectList GetAcademicYearList(object selectedItem = null)
+        {
+            return new SelectList(_academic.GetAcademicYears(), "Id", "Title", selectedItem);
         }
 
         internal SelectList GetExamList(Guid courseId, object selectedItem = null)

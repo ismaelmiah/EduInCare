@@ -36,6 +36,15 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="form-group row col-3">
+                            <div class="col-6">
+                                <label asp-for="AcademicYearId"></label>
+                            </div>
+                            <div class="col-6">
+                                <select asp-for="AcademicYearId" asp-items="Model.AcademicYearList" class="form-control"></select>
+                                <span asp-validation-for="AcademicYearId" class="text-danger"></span>
+                            </div>
+                        </div>
                         <div class="form-group row col-md-3">
                             <div class="col-3">
                                 <label class="card-title" asp-for="CourseId"></label>
@@ -54,6 +63,8 @@
                                 <span asp-validation-for="SectionId" class="text-danger"></span>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="form-group row col-md-3">
                             <div class="col-3">
                                 <label class="card-title" asp-for="SubjectId"></label>
@@ -63,8 +74,6 @@
                                 <span asp-validation-for="SubjectId" class="text-danger"></span>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group row col-3">
                             <div class="col-3">
                                 <label class="card-title" asp-for="ExamId"></label>
@@ -109,5 +118,5 @@
 {
     <script src="/AdminPanel/plugins/datatables/jquery.dataTables.js"></script>
     <script src="/AdminPanel/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
-    @*<script src="~/js/grades.js"></script>*@
+    <script src="~/js/marks.js"></script>
 }

@@ -23,6 +23,6 @@ namespace Foundation.Library.Entities
         public bool Status { get; set; }
         public string Description { get; set; }
         public virtual ICollection<Mark> Marks { get; set; }
-        public virtual Registration Registration { get; set; }
+        public virtual ICollection<Registration> Registration { get; set; }
     }
 }

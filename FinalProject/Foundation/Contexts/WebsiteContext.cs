@@ -87,8 +87,11 @@ namespace Foundation.Library.Contexts
 
             builder.Entity<Registration>()
                 .HasOne(x => x.Section)
-                .WithOne(x => x.Registration)
-                .HasForeignKey<Registration>(x => x.SectionId);
+                .WithMany(x => x.Registration)
+                .HasForeignKey(x => x.SectionId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Course>()
                 .HasOne(x => x.Department)
@@ -100,13 +103,19 @@ namespace Foundation.Library.Contexts
 
             builder.Entity<Registration>()
                 .HasOne(x => x.Course)
-                .WithOne(x => x.Registration)
-                .HasForeignKey<Registration>(x => x.CourseId);
+                .WithMany(x => x.Registration)
+                .HasForeignKey(x => x.CourseId)
+                .HasPrincipalKey(x=>x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Registration>()
                 .HasOne(x => x.AcademicYear)
-                .WithOne(x => x.Registration)
-                .HasForeignKey<Registration>(x => x.AcademicYearId);
+                .WithMany(x => x.Registration)
+                .HasForeignKey(x => x.AcademicYearId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
             
             builder.Entity<Course>()
                 .HasOne(x => x.AcademicYear)

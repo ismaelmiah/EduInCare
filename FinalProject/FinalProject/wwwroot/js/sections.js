@@ -6,7 +6,7 @@
         "columnDefs": [
             {
                 "orderable": false,
-                "targets": 6,
+                "targets": 7,
                 "render": function (data, type, row) {
                     return `
                                     <button class="btn btn-info btn-sm" onclick="window.location.href='/admin/section/profile/${data}'" value='${data}'>

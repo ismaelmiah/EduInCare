@@ -88,10 +88,11 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                         {
                             record.Name,
                             record.Course.Name,
+                            record.Registration.Count(),
                             record.Employee.Name,
                             record.Capacity,
-                            record.Status,
                             record.Description,
+                            record.Status,
                             record.Id.ToString(),
                         }
                     ).ToArray()

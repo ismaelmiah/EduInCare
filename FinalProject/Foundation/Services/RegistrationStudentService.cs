@@ -34,7 +34,8 @@ namespace Foundation.Library.Services
             }
             else
             {
-                result = _management.RegistrationStudentRepository.GetDynamic(x => x.CardNo == searchText, orderBy, "AcademicYear,Course,Student,Section", pageIndex, pageSize);
+                result = _management.RegistrationStudentRepository.GetDynamic(x => x.CardNo == searchText,
+                    orderBy, "AcademicYear,Course,Student,Section", pageIndex, pageSize);
             }
 
             var data = (from x in result.data
