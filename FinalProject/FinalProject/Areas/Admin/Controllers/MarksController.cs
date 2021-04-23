@@ -55,6 +55,13 @@ namespace FinalProject.Web.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult GenerateTableByExamId(Guid examId)
+        {
+            var model = new MarksModel();
+            var data = model.ModelBuilder.GetExam(examId);
+            return Json(data);
+        }
+
         public IActionResult GetMarksResult()
         {
             var tableModel = new DataTablesAjaxRequestModel(Request);

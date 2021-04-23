@@ -127,5 +127,10 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
         {
             return new SelectList(_sectionService.GetSections(), "Id", "Name", selectedItem);
         }
+
+        public object GetExam(Guid examId)
+        {
+            return _examService.GetExam(examId);
+        }
     }
 }

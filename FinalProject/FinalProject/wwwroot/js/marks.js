@@ -1,5 +1,49 @@
 ﻿$(document).ready(function () {
 
+    function generateTable(url) {
+        return $.ajax({
+                method: "GET",
+                url: url,
+                dataType: "json"
+            });
+    };
+
+    $('#getMarks').on("click", function () {
+        
+    });
+
+    $('#updateMarks').on("click", function () {
+        
+    });
+
+    $('#btnAdd').on("click", function () {
+        let url = "GetStudentsAndExamRules?academicyearId=" + $("#AcademicYearId").val()
+            + "&courseId=" + $("#CourseId").val() + "&sectionId=" + $("#SectionId").val()
+            + "&examId=" + $("#ExamId").val();
+
+        let myTable = document.querySelector('#markTable');
+        generateTable("Marks/GenerateTableByExamId?examId=" + $('#ExamId').val()).done(function(response) {
+            let headers = response.marksDistributionTypes.split(',');
+
+            let table = document.createElement('table');
+            let headerRow = document.createElement('tr');
+
+            headers.forEach(header => {
+                let head = document.createElement('th');
+                let textNode = document.createTextNode(header);
+
+                head.appendChild(textNode);
+                headerRow.appendChild(head);
+            });
+
+            table.appendChild(headerRow);
+            myTable.appendChild(table);
+        });
+       
+
+        //loadDataTable(url);
+    });
+
     //loadDataTable();
     populateCourse($("#AcademicYearId").val());
     //populateSection($("#CourseId").val());
@@ -93,43 +137,12 @@ function populateExams(courseId) {
 }
 var dataTable;
 
-function loadDataTable() {
+function loadDataTable(url) {
     dataTable = $('#exams').DataTable({
         "processing": true,
         "serverSide": true,
-        "ajax": "/Admin/exam/GetExams",
+        "ajax": url,
         "columnDefs": [
-            {
-                "orderable": false,
-                "targets": 2,
-                "render": function (data, type, row) {
-                    return `${data.split(',').map(w => '<span class="lead"><span class="badge badge-pill badge-info">' + w.charAt(0).toUpperCase() + w.slice(1) + '</span></span>').join(' ')}`;
-                }
-            },
-            {
-                "orderable": false,
-                "targets": 3,
-                "render": function (data, type, row) {
-                    return `<label class="btn ${data === true ? 'btn-success' : 'btn-danger'} active">${data === true ? 'YES' : 'NO'}</label>`;
-                }
-            },
-            {
-                "orderable": false,
-                "targets": 4,
-                "render": function (data, type, row) {
-                    return `
-                                    <button type="submit" class="btn btn-warning btn-sm" onclick="window.location.href='/admin/exam/upsert/${data}'" value='${data}'>
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Edit
-                                    </button>
-                                    <button type="submit" class="btn btn-danger btn-sm show-bs-modal" href="#" data-id='${data}' value='${data}'>
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
-                                    </button>`;
-                }
-            }
         ]
     });
 }
