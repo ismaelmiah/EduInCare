@@ -61,6 +61,13 @@ namespace FinalProject.Web.Areas.Admin.Controllers
             var data = model.ModelBuilder.GetExam(examId);
             return Json(data);
         }
+        
+        public IActionResult GetStudentsAndExamRules(Guid academicYearId, Guid courseId, Guid sectionId, Guid examId)
+        {
+            var model = new MarksModel();
+            var data = model.ModelBuilder.GetStudentsAndExamRules(academicYearId, courseId, sectionId, examId);
+            return Json(data);
+        }
 
         public IActionResult GetMarksResult()
         {

@@ -17,6 +17,7 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
         private readonly IExamService _examService;
         private readonly ISubjectService _subjectService;
         private readonly IAcademicYearService _academic;
+        private readonly IRegistrationStudentService _registrationStudent;
 
         public MarksModelBuilder(
             IExamRuleService examRuleService,
@@ -25,7 +26,8 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             ISubjectService subjectService,
             IMarkService markService,
             ISectionService sectionService,
-            IAcademicYearService academic)
+            IAcademicYearService academic,
+            IRegistrationStudentService registrationStudent)
         {
             _examRuleService = examRuleService;
             _courseService = courseService;
@@ -34,6 +36,7 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             _markService = markService;
             _sectionService = sectionService;
             _academic = academic;
+            _registrationStudent = registrationStudent;
         }
 
         public MarksModelBuilder()
@@ -45,6 +48,7 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             _markService = Startup.AutofacContainer.Resolve<IMarkService>();
             _sectionService = Startup.AutofacContainer.Resolve<ISectionService>();
             _academic = Startup.AutofacContainer.Resolve<IAcademicYearService>();
+            _registrationStudent = Startup.AutofacContainer.Resolve<IRegistrationStudentService>();
         }
 
         public MarksModel BuildMarksModel(Guid id)
@@ -131,6 +135,19 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
         public object GetExam(Guid examId)
         {
             return _examService.GetExam(examId);
+        }
+
+        public object GetStudentsAndExamRules(Guid academicYearId, Guid courseId, Guid sectionId, Guid examId)
+        {
+            var registeredStudents = _registrationStudent.GetRegistrations()
+                .Where(x => x.AcademicYearId == academicYearId && x.CourseId == courseId
+                                                               && x.SectionId == sectionId).ToList();
+            var examRule = _examRuleService.GetExamRules().FirstOrDefault(x=>x.ExamId == examId);
+            return new
+            {
+                examRule,
+                registeredStudents
+            };
         }
     }
 }
