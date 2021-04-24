@@ -44,7 +44,16 @@ namespace FinalProject.Web.Areas.Admin.Models
 
     public class StudentMarks
     {
+        internal MarksModelBuilder ModelBuilder;
+        public StudentMarks()
+        {
+            ModelBuilder = new MarksModelBuilder();
+        }
         public Guid StudentId { get; set; }
+        public Guid SectionId { get; set; }
+        public Guid AcademicYearId { get; set; }
+        public Guid SubjectId { get; set; }
+        public Guid ExamId { get; set; }
         public List<int> Marks { get; set; }
         public bool Present { get; set; }
     }

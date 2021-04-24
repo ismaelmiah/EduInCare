@@ -30,6 +30,5 @@ namespace Foundation.Library.Entities
         public bool IsPromoted { get; set; }
         public string OldRegistrationId { get; set; }
         public bool Status { get; set; }
-        public virtual ICollection<Mark> Marks { get; set; }
     }
 }

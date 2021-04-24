@@ -40,6 +40,8 @@
     <Compile Remove="Migrations\20210419161023_UpdateRelationshipWithExamRules-1.Designer.cs" />
     <Compile Remove="Migrations\20210420165814_MarksTableInitized.cs" />
     <Compile Remove="Migrations\20210420165814_MarksTableInitized.Designer.cs" />
+    <Compile Remove="Migrations\20210424182203_UpdateRelationSubjectAndMark.cs" />
+    <Compile Remove="Migrations\20210424182203_UpdateRelationSubjectAndMark.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

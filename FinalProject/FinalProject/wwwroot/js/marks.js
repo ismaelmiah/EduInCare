@@ -37,14 +37,30 @@
         var record = $(this).data("id");
         var markArray = Array.from(document.getElementsByClassName(`StudentMarks[${record}]`));
         console.log(markArray);
+
         let mark = [];
-        markArray.forEach((item, index) => {
-            //console.log(item.value + ' - ' + index);
+        markArray.forEach(item => {
             var num = parseInt(item.value) || 0;
             mark.push(num);
         });
-        let isAttend = document.getElementById(`present[${record}]`).checked;
-        studentResultSave({ mark, isAttend, studentId});
+
+        let present = document.getElementById(`present[${record}]`).checked;
+        let examId = $('#ExamId').val();
+        let sectionId = $('#SectionId').val();
+        let academicYearId = $('#AcademicYearId').val();
+        let subjectId = $('#SubjectId').val();
+
+        studentResultSave(
+            {
+                Marks: mark,
+                Present: present,
+                StudentId: studentId,
+                ExamId: examId,
+                SectionId: sectionId,
+                AcademicYearId: academicYearId,
+                SubjectId: subjectId
+            }
+        );
     });
 
     $(document).on('change', "input[type='number']", function () {
@@ -191,7 +207,7 @@
     function studentResultSave(data) {
         $.ajax({
             method: "POST",
-            url: "Marks/AjaxMarkSave?studentId="+data.studentId,
+            url: "Marks/AjaxMarkSave",
             data: data,
             success: function(response) {
                 console.log(response);

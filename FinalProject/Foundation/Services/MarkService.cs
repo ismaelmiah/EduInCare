@@ -69,7 +69,6 @@ namespace Foundation.Library.Services
                     AcademicYearId = x.AcademicYearId,
                     ExamId = x.ExamId,
                     SectionId = x.SectionId,
-                    RegistrationId = x.RegistrationId,
                     Grade = x.Grade,
                     Marks = x.Marks,
                     Point = x.Point,

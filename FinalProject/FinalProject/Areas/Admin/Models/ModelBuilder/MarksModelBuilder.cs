@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Autofac;
+using FinalProject.Web.Areas.Admin.Controllers;
 using FinalProject.Web.Models;
 using Foundation.Library.Entities;
 using Foundation.Library.Services;
@@ -148,6 +149,11 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                 examRule,
                 registeredStudents
             };
+        }
+
+        public void StudentMarkSave(StudentMarks model)
+        {
+            throw new NotImplementedException();
         }
     }
 }

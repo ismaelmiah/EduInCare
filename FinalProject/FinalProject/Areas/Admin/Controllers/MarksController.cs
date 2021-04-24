@@ -69,6 +69,13 @@ namespace FinalProject.Web.Areas.Admin.Controllers
             return Json(data);
         }
 
+        [HttpPost]
+        public IActionResult AjaxMarkSave(StudentMarks studentMarks)
+        {
+            studentMarks.ModelBuilder.StudentMarkSave(studentMarks);
+            return Json(true);
+        }
+
         public IActionResult GetMarksResult()
         {
             var tableModel = new DataTablesAjaxRequestModel(Request);

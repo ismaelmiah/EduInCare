@@ -14,8 +14,6 @@ namespace Foundation.Library.Entities
         public virtual Course Course { get; set; }
         public Guid SubjectId { get; set; }
         public virtual Subject Subject { get; set; }
-        public Guid RegistrationId { get; set; }
-        public virtual Registration Registration { get; set; }
         public Guid ExamId { get; set; }
         public virtual Exam Exam { get; set; }
         public Guid AcademicYearId { get; set; }

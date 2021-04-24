@@ -178,11 +178,8 @@ namespace Foundation.Library.Contexts
 
             builder.Entity<Mark>()
                 .HasOne(x => x.Subject)
-                .WithMany(x => x.Marks)
-                .HasForeignKey(x => x.SubjectId)
-                .HasPrincipalKey(x => x.Id)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+                .WithOne(x => x.Mark)
+                .HasForeignKey<Mark>(x => x.SubjectId);
 
             builder.Entity<Mark>()
                 .HasOne(x => x.Course)
@@ -191,15 +188,7 @@ namespace Foundation.Library.Contexts
                 .HasPrincipalKey(x => x.Id)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<Mark>()
-                .HasOne(x => x.Registration)
-                .WithMany(x => x.Marks)
-                .HasForeignKey(x => x.RegistrationId)
-                .HasPrincipalKey(x => x.Id)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
-
+            
             builder.Entity<Mark>()
                 .HasOne(x => x.Section)
                 .WithMany(x => x.Marks)
