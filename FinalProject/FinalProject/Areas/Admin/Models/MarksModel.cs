@@ -32,7 +32,6 @@ namespace FinalProject.Web.Areas.Admin.Models
         [Display(Name = "Exam")]
         public Guid ExamId { get; set; }
         public IList<SelectListItem> ExamList { get; set; }
-
         private void PopulateDropdownList()
         {
             AcademicYearList = ModelBuilder.GetAcademicYearList();
@@ -41,5 +40,12 @@ namespace FinalProject.Web.Areas.Admin.Models
             SubjectList = new List<SelectListItem>();
             ExamList = new List<SelectListItem>();
         }
+    }
+
+    public class StudentMarks
+    {
+        public Guid StudentId { get; set; }
+        public List<int> Marks { get; set; }
+        public bool Present { get; set; }
     }
 }
