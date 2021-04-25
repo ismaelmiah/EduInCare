@@ -6,6 +6,7 @@ using FinalProject.Web.Models;
 using Foundation.Library.Entities;
 using Foundation.Library.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
 {
@@ -140,10 +141,10 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
 
         public object GetStudentsAndExamRules(Guid academicYearId, Guid courseId, Guid sectionId, Guid examId)
         {
-            var registeredStudents = _registrationStudent.GetRegistrations()
+            var registeredStudents = _markService.GetMarks()
                 .Where(x => x.AcademicYearId == academicYearId && x.CourseId == courseId
-                                                               && x.SectionId == sectionId).ToList();
-            var examRule = _examRuleService.GetExamRules().FirstOrDefault(x=>x.ExamId == examId);
+                                                               && x.SectionId == sectionId && x.IsMarkSet == false).ToList();
+            var examRule = _examRuleService.GetExamRules().FirstOrDefault(x=> x.ExamId == examId);
             return new
             {
                 examRule,

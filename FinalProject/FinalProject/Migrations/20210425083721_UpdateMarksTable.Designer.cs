@@ -4,14 +4,16 @@ using Foundation.Library.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FinalProject.Web.Migrations
 {
     [DbContext(typeof(WebsiteContext))]
-    partial class WebsiteContextModelSnapshot : ModelSnapshot
+    [Migration("20210425083721_UpdateMarksTable")]
+    partial class UpdateMarksTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -740,9 +742,6 @@ namespace FinalProject.Web.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Religion")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RollNo")
                         .HasColumnType("int");
 
                     b.Property<bool>("Status")

@@ -18,6 +18,19 @@ namespace Foundation.Library.Services
         public void AddRegistration(Registration registration)
         {
             _management.RegistrationStudentRepository.Add(registration);
+            var marks = new Mark()
+            {
+                AcademicYearId = registration.AcademicYearId,
+                CourseId = registration.CourseId,
+                SectionId = registration.SectionId,
+                StudentId = registration.StudentId
+            };
+            _management.MarkRepository.Add(marks);
+
+            var student = _management.StudentRepository.GetById(registration.StudentId);
+            student.RollNo = registration.RollNo;
+            _management.StudentRepository.Edit(student);
+
             _management.Save();
         }
 
@@ -62,7 +75,10 @@ namespace Foundation.Library.Services
 
         public void Delete(Guid id)
         {
+            var registration = _management.RegistrationStudentRepository.GetById(id);
             _management.RegistrationStudentRepository.Remove(id);
+            var marks = _management.MarkRepository.Get(x=>x.StudentId == registration.StudentId).FirstOrDefault();
+            _management.MarkRepository.Remove(marks);
             _management.Save();
         }
 
@@ -79,6 +95,7 @@ namespace Foundation.Library.Services
         public void Update(Registration registration)
         {
             _management.RegistrationStudentRepository.Edit(registration);
+            _management.Save();
         }
     }
 }

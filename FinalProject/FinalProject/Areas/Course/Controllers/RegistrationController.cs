@@ -75,7 +75,7 @@ namespace FinalProject.Web.Areas.Course.Controllers
             return Json(data);
         }
 
-        public IActionResult GetStudents(Guid courseId, int shift)
+        public IActionResult GetStudents(Guid courseId)
         {
             var model = new RegistrationModel();
             var data = model.ModelBuilder.GetStudentList(courseId);

@@ -94,14 +94,14 @@
                                     <span asp-validation-for="Nationality" class="text-danger"></span>
                                 </div>
                                 <div class="col mt-4">
-                                    <div id="previewstudentphoto" style="height: 200px; width: 220px;" class="border">
+                                    <div id="previewstudentphoto" style="height: 200px;" class="border">
                                         @if (Model.ImagePath != null)
                                         {
-                                            <img id="blah" style="width: 220px; height: 200px;" src="@Model.ImagePath" alt="Photo">
+                                            <img id="blah" style="width: 247px; height: 200px;" src="@Model.ImagePath" alt="Photo">
                                         }
                                         else
                                         {
-                                            <img id="blah" style="width: 220px; height: 200px;" src="#" alt="Photo">
+                                            <img id="blah" style="width: 247px; height: 200px;" src="#" alt="Photo">
                                         }
                                     </div>
 
@@ -220,8 +220,8 @@
                     success: function (data) {
                         var s = "";
                         for (var i = 0; i < data.length; i++) {
-                            s += data[i].name;
-                            if (i + 1 !== data.length) s += ', ';
+                            var tag = `<span class="lead"><span class="badge badge-pill badge-info">${data[i].name}</span></span>`;
+                            s += tag;
                         }
                         $("#subjectLists").html(s);
                     }

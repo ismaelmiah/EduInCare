@@ -12,9 +12,9 @@ namespace Foundation.Library.Entities
         public virtual Section Section { get; set; }
         public Guid CourseId { get; set; }
         public virtual Course Course { get; set; }
-        public Guid SubjectId { get; set; }
+        public Guid? SubjectId { get; set; }
         public virtual Subject Subject { get; set; }
-        public Guid ExamId { get; set; }
+        public Guid? ExamId { get; set; }
         public virtual Exam Exam { get; set; }
         public Guid AcademicYearId { get; set; }
         public virtual AcademicYear AcademicYear { get; set; }
@@ -22,5 +22,6 @@ namespace Foundation.Library.Entities
         public string Grade { get; set; }
         public double Point { get; set; }
         public bool Present { get; set; }
+        public bool IsMarkSet { get; set; }
     }
 }

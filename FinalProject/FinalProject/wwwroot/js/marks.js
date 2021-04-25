@@ -129,7 +129,7 @@
                 for (var i = 0; i < numberOfRows; i++) {
                     var studentName = response.registeredStudents[i].student.firstName
                         + " " + response.registeredStudents[i].student.middleName + " " + response.registeredStudents[i].student.lastName;
-                    var studentRole = response.registeredStudents[i].rollNo;
+                    var studentRole = response.registeredStudents[i].student.rollNo;
                     var studentId = response.registeredStudents[i].studentId;
                     var zero = 0;
 
@@ -222,10 +222,22 @@
 
     $("#AcademicYearId").change(function () {
         populateCourse(this.value);
+        currentAmount = 0;
+        let generatedTable = $('#generatedTable');
+        generatedTable.remove();
     });
 
     $("#CourseId").change(function () {
         populateSection(this.value);
+        currentAmount = 0;
+        let generatedTable = $('#generatedTable');
+        generatedTable.remove();
+    });
+
+    $("#SectionId").change(function () {
+        currentAmount = 0;
+        let generatedTable = $('#generatedTable');
+        generatedTable.remove();
     });
 
     $('#exams_filter').addClass("text-right");
