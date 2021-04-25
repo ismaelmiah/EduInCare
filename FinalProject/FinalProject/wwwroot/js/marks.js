@@ -1,20 +1,136 @@
 ﻿$(document).ready(function() {
 
-    function generateTable(url) {
-        return $.ajax({
+    var limit = 1;
+    var currentAmount = 0;
+    var numberOfRows;
+
+
+    function getStudents(url) {
+        $.ajax({
             method: "GET",
             url: url,
-            dataType: "json"
+            dataType: "json",
+            success: function(data) {
+                generateTable(data);
+            }
         });
     };
 
-    function getStudents(url) {
-        return $.ajax({
-            method: "GET",
-            url: url,
-            dataType: "json"
+    function generateTable(response) {
+        console.log(response);
+        let markDistributionHeader = response.examRule.exam.marksDistributionTypes.split(',');
+        let totalMark = response.examRule.totalExamMarks;
+        let passMark = response.examRule.passMarks;
+
+        let headers = ['#', 'Student Name', 'Role No'];
+        headers = headers.concat(markDistributionHeader);
+        headers = headers.concat(['Total Mark', 'Pass Mark', 'Absent', 'Action']);
+
+        let myTable = document.querySelector('#markTable');
+        let table = document.createElement('table');
+        table.setAttribute('class', 'table text-center table-hover table-bordered table-striped');
+        table.setAttribute('id', 'generatedTable');
+
+        let tableHeader = document.createElement('thead');
+        tableHeader.setAttribute('class', 'thead-dark');
+
+        let tableBody = document.createElement('tbody');
+
+        let headerRow = document.createElement('tr');
+
+        headers.forEach((header, index) => {
+            let head = document.createElement('th');
+
+            let textNode = document.createTextNode(header);
+
+            if (index > 1) {
+                head.setAttribute('style', 'width: 100px;');
+            }
+            if (index === 0) {
+                head.setAttribute('style', 'width: 10px;');
+            }
+
+            head.appendChild(textNode);
+            headerRow.appendChild(head);
         });
-    };
+        tableHeader.appendChild(headerRow);
+
+        let noOfColumn = (7 + markDistributionHeader.length);
+        numberOfRows = response.registeredStudents.length;
+
+        for (var i = 0; i < numberOfRows; i++) {
+            var studentName = response.registeredStudents[i].student.firstName
+                + " " + response.registeredStudents[i].student.middleName + " " + response.registeredStudents[i].student.lastName;
+            var studentRole = response.registeredStudents[i].student.rollNo;
+            var studentId = response.registeredStudents[i].studentId;
+            var zero = 0;
+
+            let row = document.createElement('tr');
+            row.setAttribute('class', `row_no`);
+            for (var j = 0; j < noOfColumn; j++) {
+                let tableData = document.createElement('td');
+                if (j === 0) {
+                    let textNode = document.createTextNode(i + 1);
+                    tableData.appendChild(textNode);
+                } else if (j === 1) {
+                    let textNode = document.createTextNode(studentName);
+                    tableData.setAttribute('style', 'width: 300px;');
+                    let input = document.createElement('INPUT');
+                    input.setAttribute('type', 'hidden');
+                    input.setAttribute('class', 'form-control');
+                    input.setAttribute('value', `${studentId}`);
+
+                    tableData.appendChild(textNode);
+                } else if (j === 2) {
+                    let textNode = document.createTextNode(studentRole);
+                    tableData.setAttribute('style', 'width: 10px;');
+                    tableData.appendChild(textNode);
+                } else if (j === noOfColumn - 1) {
+                    let button = document.createElement('button');
+                    button.setAttribute('class', 'btn btn-outline-success');
+                    button.setAttribute('type', 'button');
+                    button.setAttribute('id', 'resultSave');
+                    button.setAttribute('data-id', i);
+                    button.setAttribute('data-studentid', studentId);
+                    button.innerHTML = 'Save';
+                    tableData.appendChild(button);
+                } else if (j === noOfColumn - 2) {
+                    let input = document.createElement('INPUT');
+                    input.setAttribute('type', 'checkbox');
+                    input.setAttribute('class', `form-control`);
+                    input.setAttribute('id', `present[${i}]`);
+                    tableData.appendChild(input);
+                } else if (j === noOfColumn - 3) {
+                    let input = document.createElement('INPUT');
+                    input.setAttribute('readonly', 'readonly');
+                    input.setAttribute('type', 'text');
+                    input.setAttribute('value', passMark);
+                    input.setAttribute('class', 'form-control');
+                    tableData.appendChild(input);
+                } else if (j === noOfColumn - 4) {
+                    let input = document.createElement('INPUT');
+                    input.setAttribute('readonly', 'readonly');
+                    input.setAttribute('value', `${zero}`);
+                    input.setAttribute('type', 'text');
+                    input.setAttribute('id', `TotalMarks[${i}]`);
+                    input.setAttribute('class', `form-control`);
+                    tableData.appendChild(input);
+                } else {
+                    let input = document.createElement('INPUT');
+                    input.setAttribute('type', 'number');
+                    input.setAttribute('data-id', `${i}`);
+                    input.setAttribute('value', `${zero}`);
+                    input.setAttribute('class', `form-control StudentMarks[${i}]`);
+                    tableData.appendChild(input);
+                }
+                row.appendChild(tableData);
+            }
+            tableBody.appendChild(row);
+        }
+        table.appendChild(tableHeader);
+        table.appendChild(tableBody);
+        myTable.appendChild(table);
+    }
 
     $('#getMarks').on("click",
         function() {
@@ -25,10 +141,6 @@
         function() {
 
         });
-
-    var limit = 1;
-    var currentAmount = 0;
-    var numberOfRows;
 
     $(document).on('click', '#resultSave', function() {
         
@@ -83,122 +195,8 @@
             + "&courseId=" + $("#CourseId").val() + "&sectionId=" + $("#SectionId").val()
             + "&examId=" + $("#ExamId").val();
 
-        let myTable = document.querySelector('#markTable');
         if (currentAmount < limit) {
-            getStudents(studentsUrl).done(function (response) {
-                console.log(response);
-                let markDistributionHeader = response.examRule.exam.marksDistributionTypes.split(',');
-                let totalMark = response.examRule.totalExamMarks;
-                let passMark = response.examRule.passMarks;
-
-                let headers = ['#', 'Student Name', 'Role No'];
-                headers = headers.concat(markDistributionHeader);
-                headers = headers.concat(['Total Mark', 'Pass Mark', 'Absent', 'Action']);
-
-                let table = document.createElement('table');
-                table.setAttribute('class', 'table text-center table-hover table-bordered table-striped');
-                table.setAttribute('id', 'generatedTable');
-
-                let tableHeader = document.createElement('thead');
-                tableHeader.setAttribute('class', 'thead-dark');
-
-                let tableBody = document.createElement('tbody');
-
-                let headerRow = document.createElement('tr');
-
-                headers.forEach((header, index) => {
-                    let head = document.createElement('th');
-
-                    let textNode = document.createTextNode(header);
-
-                    if (index > 1) {
-                        head.setAttribute('style', 'width: 100px;');
-                    }
-                    if (index === 0) {
-                        head.setAttribute('style', 'width: 10px;');
-                    }
-
-                    head.appendChild(textNode);
-                    headerRow.appendChild(head);
-                });
-                tableHeader.appendChild(headerRow);
-
-                let noOfColumn = (7 + markDistributionHeader.length);
-                numberOfRows = response.registeredStudents.length;
-
-                for (var i = 0; i < numberOfRows; i++) {
-                    var studentName = response.registeredStudents[i].student.firstName
-                        + " " + response.registeredStudents[i].student.middleName + " " + response.registeredStudents[i].student.lastName;
-                    var studentRole = response.registeredStudents[i].student.rollNo;
-                    var studentId = response.registeredStudents[i].studentId;
-                    var zero = 0;
-
-                    let row = document.createElement('tr');
-                    row.setAttribute('class', `row_no`);
-                    for (var j = 0; j < noOfColumn; j++) {
-                        let tableData = document.createElement('td');
-                        if (j === 0) {
-                            let textNode = document.createTextNode(i + 1);
-                            tableData.appendChild(textNode);
-                        } else if (j === 1) {
-                            let textNode = document.createTextNode(studentName);
-                            tableData.setAttribute('style', 'width: 300px;');
-                            let input = document.createElement('INPUT');
-                            input.setAttribute('type', 'hidden');
-                            input.setAttribute('class', 'form-control');
-                            input.setAttribute('value', `${studentId}`);
-
-                            tableData.appendChild(textNode);
-                        } else if (j === 2) {
-                            let textNode = document.createTextNode(studentRole);
-                            tableData.setAttribute('style', 'width: 10px;');
-                            tableData.appendChild(textNode);
-                        } else if (j === noOfColumn - 1) {
-                            let button = document.createElement('button');
-                            button.setAttribute('class', 'btn btn-outline-success');
-                            button.setAttribute('type', 'button');
-                            button.setAttribute('id', 'resultSave');
-                            button.setAttribute('data-id', i);
-                            button.setAttribute('data-studentid', studentId);
-                            button.innerHTML = 'Save';
-                            tableData.appendChild(button);
-                        } else if (j === noOfColumn - 2) {
-                            let input = document.createElement('INPUT');
-                            input.setAttribute('type', 'checkbox');
-                            input.setAttribute('class', `form-control`);
-                            input.setAttribute('id', `present[${i}]`);
-                            tableData.appendChild(input);
-                        } else if (j === noOfColumn - 3) {
-                            let input = document.createElement('INPUT');
-                            input.setAttribute('readonly', 'readonly');
-                            input.setAttribute('type', 'text');
-                            input.setAttribute('value', passMark);
-                            input.setAttribute('class', 'form-control');
-                            tableData.appendChild(input);
-                        } else if (j === noOfColumn - 4) {
-                            let input = document.createElement('INPUT');
-                            input.setAttribute('readonly', 'readonly');
-                            input.setAttribute('value', `${zero}`);
-                            input.setAttribute('type', 'text');
-                            input.setAttribute('id', `TotalMarks[${i}]`);
-                            input.setAttribute('class', `form-control`);
-                            tableData.appendChild(input);
-                        } else {
-                            let input = document.createElement('INPUT');
-                            input.setAttribute('type', 'number');
-                            input.setAttribute('data-id', `${i}`);
-                            input.setAttribute('value', `${zero}`);
-                            input.setAttribute('class', `form-control StudentMarks[${i}]`);
-                            tableData.appendChild(input);
-                        }
-                        row.appendChild(tableData);
-                    }
-                    tableBody.appendChild(row);
-                }
-                table.appendChild(tableHeader);
-                table.appendChild(tableBody);
-                myTable.appendChild(table);
-            });
+            getStudents(studentsUrl);
             currentAmount++;
         }
     });
