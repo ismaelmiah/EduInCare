@@ -8,6 +8,7 @@ using Foundation.Library.Entities;
 using Foundation.Library.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Query;
+using Newtonsoft.Json;
 
 namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
 {
@@ -153,19 +154,27 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             };
         }
 
-        public void StudentMarkSave(StudentMarks model)
+        public bool StudentMarkSave(StudentMarks model)
         {
             var entity = _markService.GetMarks().FirstOrDefault(x => x.StudentId == model.StudentId);
             if (entity != null)
             {
                 entity.ExamId = model.ExamId;
                 entity.SubjectId = model.SubjectId;
+                entity.Marks = GenerationJsonMarks(model.StudentMark);
+                entity.Grade = "";
+                entity.IsMarkSet = true;
+                entity.Point = 3.4;
+
+                _markService.UpdateMark(entity);
+                return true;
             }
+            return false;
         }
 
-        private string GenerationJsonMarks(List<int> modelMarks)
+        private string GenerationJsonMarks(List<MarkDistribution> modelMarks)
         {
-            throw new NotImplementedException();
+            return JsonConvert.SerializeObject(modelMarks);
         }
     }
 }

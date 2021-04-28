@@ -14,14 +14,14 @@ namespace FinalProject.Web.Areas.Admin.Controllers
                 StudentMark = new List<MarkDistribution>()
                 {
                     new MarkDistribution {Name = "Writting", Mark = 3},
-                    new MarkDistribution {Name = "Writting", Mark = 3}
+                    new MarkDistribution {Name = "Reading", Mark = 30}
                 }
             };
             return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(StudentMarks model, List<MarkDistribution> mark)
+        public IActionResult Index(StudentMarks model)
         {
             return View();
         }

@@ -44,9 +44,19 @@
                 <input asp-for="ExamId" class="form-control" />
                 <span asp-validation-for="ExamId" class="text-danger"></span>
             </div>
-            @for (var item=0; item<Model.StudentMark.Count; item++)
+            @for (var i=0; i<Model.StudentMark.Count; i++)
             {
-                <partial name="_result" model="@Model.StudentMark[item]"/>
+                <div class="form-group">
+                    <label asp-for="@Model.StudentMark[i].Name" class="control-label"></label>
+                    <input asp-for="@Model.StudentMark[i].Name" class="form-control" />
+                    <span asp-validation-for="@Model.StudentMark[i].Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="@Model.StudentMark[i].Mark" class="control-label"></label>
+                    <input asp-for="@Model.StudentMark[i].Mark" class="form-control" />
+                    <span asp-validation-for="@Model.StudentMark[i].Mark" class="text-danger"></span>
+                </div>
             }
             <div class="form-group form-check">
                 <label class="form-check-label">

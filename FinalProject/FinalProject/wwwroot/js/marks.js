@@ -77,6 +77,9 @@
         let noOfColumn = (7 + markDistributionHeader.length);
         numberOfRows = response.registeredStudents.length;
 
+
+        let countDistributionType = 0;
+
         for (var i = 0; i < numberOfRows; i++) {
             var studentName = response.registeredStudents[i].student.firstName
                 + " " + response.registeredStudents[i].student.middleName + " " + response.registeredStudents[i].student.lastName;
@@ -139,13 +142,13 @@
                     input.setAttribute('type', 'number');
                     input.setAttribute('data-id', `${i}`);
                     input.setAttribute('data-input', `${j}`);
-                    input.setAttribute('id', `Marks_${i}__MarksDistribution`);
-                    input.setAttribute('name', `${j}`);
                     input.setAttribute('value', `${zero}`);
+                    input.setAttribute('data-name', `${distributionsData.list[countDistributionType]}`);
                     input.setAttribute('max', `${distributionsData.maxValue[i]}`);
                     input.setAttribute('min', `${zero}`);
                     input.setAttribute('class', `form-control StudentMarks[${i}]`);
                     tableData.appendChild(input);
+                    countDistributionType++;
                 }
                 row.appendChild(tableData);
             }
@@ -172,14 +175,17 @@
         var studentId = $(this).data("studentid");
         var record = $(this).data("id");
         var markArray = Array.from(document.getElementsByClassName(`StudentMarks[${record}]`));
-        console.log(markArray);
 
-        let mark = [];
+        let studentMarks = [];
         markArray.forEach(item => {
             var num = parseInt(item.value) || 0;
-            mark.push(num);
+            var name = $(item).data('name');
+            studentMarks.push({
+                Mark: num,
+                Name: name.toString()
+            });
         });
-
+        console.log(studentMarks);
         let present = document.getElementById(`present[${record}]`).checked;
         let examId = $('#ExamId').val();
         let sectionId = $('#SectionId').val();
@@ -188,13 +194,13 @@
 
         studentResultSave(
             {
-                Marks: mark,
                 Present: present,
                 StudentId: studentId,
                 ExamId: examId,
                 SectionId: sectionId,
                 AcademicYearId: academicYearId,
-                SubjectId: subjectId
+                SubjectId: subjectId,
+                StudentMark: studentMarks
             }
         );
     });
