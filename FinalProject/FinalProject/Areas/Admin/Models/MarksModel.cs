@@ -54,7 +54,13 @@ namespace FinalProject.Web.Areas.Admin.Models
         public Guid AcademicYearId { get; set; }
         public Guid SubjectId { get; set; }
         public Guid ExamId { get; set; }
-        public List<int> Marks { get; set; }
+        public List<MarkDistribution> StudentMark { get; set; }
         public bool Present { get; set; }
+    }
+
+    public class MarkDistribution
+    {
+        public string Name { get; set; }
+        public int Mark { get; set; }
     }
 }

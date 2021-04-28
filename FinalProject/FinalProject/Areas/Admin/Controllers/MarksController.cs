@@ -73,7 +73,7 @@ namespace FinalProject.Web.Areas.Admin.Controllers
         public IActionResult AjaxMarkSave(StudentMarks studentMarks)
         {
             studentMarks.ModelBuilder.StudentMarkSave(studentMarks);
-            return Json(true);
+            return Json(new { success = true, message = "Saved Successfully" });
         }
 
         public IActionResult GetMarksResult()

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Autofac;
 using FinalProject.Web.Areas.Admin.Controllers;
@@ -153,6 +154,16 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
         }
 
         public void StudentMarkSave(StudentMarks model)
+        {
+            var entity = _markService.GetMarks().FirstOrDefault(x => x.StudentId == model.StudentId);
+            if (entity != null)
+            {
+                entity.ExamId = model.ExamId;
+                entity.SubjectId = model.SubjectId;
+            }
+        }
+
+        private string GenerationJsonMarks(List<int> modelMarks)
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,4 @@
-﻿$(document).ready(function() {
+﻿$(document).ready(function () {
 
     var limit = 1;
     var currentAmount = 0;
@@ -10,15 +10,34 @@
             method: "GET",
             url: url,
             dataType: "json",
-            success: function(data) {
+            cache: true,
+            success: function (data) {
                 generateTable(data);
             }
         });
     };
 
+    function markDistributions(data) {
+        var list = [];
+        var maxValue = [];
+        data.forEach((item, idx) => {
+            let cnt = 0;
+            for (var key in item) {
+                if (item.hasOwnProperty(key) && 0 === cnt) list.push(item[key]);
+                if (item.hasOwnProperty(key) && cnt === 1) maxValue.push(item[key]);
+                cnt++;
+                if (cnt > 1) break;
+            }
+        });
+        return { list, maxValue };
+    }
+
     function generateTable(response) {
         console.log(response);
-        let markDistributionHeader = response.examRule.exam.marksDistributionTypes.split(',');
+        let parseJsonData = JSON.parse(response.examRule.marksDistribution);
+        var distributionsData = markDistributions(parseJsonData);
+        let markDistributionHeader = distributionsData.list;
+        console.log(markDistributionHeader);
         let totalMark = response.examRule.totalExamMarks;
         let passMark = response.examRule.passMarks;
 
@@ -119,7 +138,12 @@
                     let input = document.createElement('INPUT');
                     input.setAttribute('type', 'number');
                     input.setAttribute('data-id', `${i}`);
+                    input.setAttribute('data-input', `${j}`);
+                    input.setAttribute('id', `Marks_${i}__MarksDistribution`);
+                    input.setAttribute('name', `${j}`);
                     input.setAttribute('value', `${zero}`);
+                    input.setAttribute('max', `${distributionsData.maxValue[i]}`);
+                    input.setAttribute('min', `${zero}`);
                     input.setAttribute('class', `form-control StudentMarks[${i}]`);
                     tableData.appendChild(input);
                 }
@@ -133,17 +157,17 @@
     }
 
     $('#getMarks').on("click",
-        function() {
+        function () {
 
         });
 
     $('#updateMarks').on("click",
-        function() {
+        function () {
 
         });
 
-    $(document).on('click', '#resultSave', function() {
-        
+    $(document).on('click', '#resultSave', function () {
+
         //console.log($(this).data("id") + ' ' + $(this).data("studentid"));
         var studentId = $(this).data("studentid");
         var record = $(this).data("id");
@@ -185,7 +209,7 @@
         totalMarkField.value = totalMark;
     });
 
-    $('#ExamId').on('change', function() {
+    $('#ExamId').on('change', function () {
         currentAmount = 0;
         let generatedTable = $('#generatedTable');
         generatedTable.remove();
@@ -207,7 +231,7 @@
             method: "POST",
             url: "Marks/AjaxMarkSave",
             data: data,
-            success: function(response) {
+            success: function (response) {
                 console.log(response);
             }
         });
