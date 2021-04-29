@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Foundation.Library.Entities;
 using Foundation.Library.UnitOfWorks;
 
@@ -33,9 +34,9 @@ namespace Foundation.Library.Services
             _management.Save();
         }
 
-        public IList<Mark> GetMarks()
+        public IList<Mark> GetMarks(Expression<Func<Mark, bool>> filter, string includePamars)
         {
-            return _management.MarkRepository.GetAll();
+            return _management.MarkRepository.Get(filter, null, includePamars, false);
         }
 
         public Mark GetMark(Guid id)

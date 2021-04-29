@@ -143,9 +143,8 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
 
         public object GetStudentsAndExamRules(Guid academicYearId, Guid courseId, Guid sectionId, Guid examId)
         {
-            var registeredStudents = _markService.GetMarks()
-                .Where(x => x.AcademicYearId == academicYearId && x.CourseId == courseId
-                                                               && x.SectionId == sectionId && x.IsMarkSet == false).ToList();
+            var registeredStudents = _markService.GetMarks(x => x.AcademicYearId == academicYearId && x.CourseId == courseId
+                                                               && x.SectionId == sectionId && x.IsMarkSet == false, "Student,Section,Course,Subject,Exam,AcademicYear");
             var examRule = _examRuleService.GetExamRules().FirstOrDefault(x=> x.ExamId == examId);
             return new
             {
@@ -156,19 +155,19 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
 
         public bool StudentMarkSave(StudentMarks model)
         {
-            var entity = _markService.GetMarks().FirstOrDefault(x => x.StudentId == model.StudentId);
-            if (entity != null)
-            {
-                entity.ExamId = model.ExamId;
-                entity.SubjectId = model.SubjectId;
-                entity.Marks = GenerationJsonMarks(model.StudentMark);
-                entity.Grade = "";
-                entity.IsMarkSet = true;
-                entity.Point = 3.4;
+            //var entity = _markService.GetMarks().FirstOrDefault(x => x.StudentId == model.StudentId);
+            //if (entity != null)
+            //{
+            //    entity.ExamId = model.ExamId;
+            //    entity.SubjectId = model.SubjectId;
+            //    entity.Marks = GenerationJsonMarks(model.StudentMark);
+            //    entity.Grade = "";
+            //    entity.IsMarkSet = true;
+            //    entity.Point = 3.4;
 
-                _markService.UpdateMark(entity);
-                return true;
-            }
+            //    _markService.UpdateMark(entity);
+            //    return true;
+            //}
             return false;
         }
 
