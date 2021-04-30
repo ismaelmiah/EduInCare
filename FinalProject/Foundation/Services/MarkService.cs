@@ -39,6 +39,11 @@ namespace Foundation.Library.Services
             return _management.MarkRepository.Get(filter, null, includePamars, false);
         }
 
+        public Mark GetMarksByStudent(Expression<Func<Mark, bool>> filter)
+        {
+            return _management.MarkRepository.Get(filter).FirstOrDefault();
+        }
+
         public Mark GetMark(Guid id)
         {
             return _management.MarkRepository.GetById(id);

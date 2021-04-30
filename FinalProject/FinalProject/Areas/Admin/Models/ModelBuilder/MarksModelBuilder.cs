@@ -146,7 +146,7 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             var examRule = _examRuleService.GetExamRules().FirstOrDefault(x => x.ExamId == examId);
 
             var students = _markService.GetMarks(x => x.AcademicYearId == academicYearId
-                                                      && x.CourseId == courseId && x.SectionId == sectionId && x.IsMarkSet == false,
+                                                      && x.ExamId == examId && x.CourseId == courseId && x.SectionId == sectionId && x.IsMarkSet == false,
                 "Student,Section,Course,Subject,Exam,AcademicYear").Select(x => new StudentMarks
             {
                 StudentId = x.StudentId,
@@ -157,13 +157,6 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                 SectionId = x.SectionId,
                 StudentMark = BuildStudentMarks(examRule.MarksDistribution)
             }).ToList();
-            //var marksColumn = students[0].Exam.MarksDistributionTypes.Split(',');
-
-            //return new
-            //{
-            //    examRule,
-            //    registeredStudents
-            //};
             return students;
         }
 
@@ -182,20 +175,27 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
 
         public bool StudentMarkSave(StudentMarks model)
         {
-            //var entity = _markService.GetMarks().FirstOrDefault(x => x.StudentId == model.StudentId);
-            //if (entity != null)
-            //{
-            //    entity.ExamId = model.ExamId;
-            //    entity.SubjectId = model.SubjectId;
-            //    entity.Marks = GenerationJsonMarks(model.StudentMark);
-            //    entity.Grade = "";
-            //    entity.IsMarkSet = true;
-            //    entity.Point = 3.4;
+            var entity = _markService.GetMarksByStudent(x => x.StudentId == model.StudentId && x.ExamId == model.ExamId);
+            var grade = CalculateGrade(model.StudentMark).grade;
+            var point = CalculateGrade(model.StudentMark).point;
+            if (entity != null)
+            {
+                entity.SubjectId = model.SubjectId;
+                entity.Marks = GenerationJsonMarks(model.StudentMark);
+                entity.Grade = grade;
+                entity.IsMarkSet = true;
+                entity.Point = point;
 
-            //    _markService.UpdateMark(entity);
-            //    return true;
-            //}
+                _markService.UpdateMark(entity);
+                return true;
+            }
             return false;
+        }
+
+        private (string grade, double point) CalculateGrade(List<MarkDistribution> modelStudentMark)
+        {
+            throw new NotImplementedException();
+            //TODO: Calculate Grade & Point
         }
 
         private string GenerationJsonMarks(List<MarkDistribution> modelMarks)

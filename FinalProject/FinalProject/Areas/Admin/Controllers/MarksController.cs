@@ -21,6 +21,8 @@ namespace FinalProject.Web.Areas.Admin.Controllers
         {
             var model = new MarksModel();
             var data = model.ModelBuilder.GetStudentsAndExamRules(academicYearId, courseId, sectionId, examId);
+            if (data.Count == 0)
+                return Json(data);
             return PartialView(data);
         }
 

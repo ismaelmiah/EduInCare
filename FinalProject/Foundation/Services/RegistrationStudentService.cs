@@ -18,20 +18,25 @@ namespace Foundation.Library.Services
         public void AddRegistration(Registration registration)
         {
             _management.RegistrationStudentRepository.Add(registration);
-            var marks = new Mark()
+            var exams = _management.ExamRepository.Get(x => x.CourseId == registration.CourseId);
+            foreach (var exam in exams)
             {
-                AcademicYearId = registration.AcademicYearId,
-                CourseId = registration.CourseId,
-                SectionId = registration.SectionId,
-                StudentId = registration.StudentId
-            };
-            _management.MarkRepository.Add(marks);
+                var marks = new Mark()
+                {
+                    AcademicYearId = registration.AcademicYearId,
+                    CourseId = registration.CourseId,
+                    SectionId = registration.SectionId,
+                    StudentId = registration.StudentId,
+                    ExamId = exam.Id
+                };
+                _management.MarkRepository.Add(marks);
+
+                _management.Save();
+            }
 
             var student = _management.StudentRepository.GetById(registration.StudentId);
             student.RollNo = registration.RollNo;
             _management.StudentRepository.Edit(student);
-
-            _management.Save();
         }
 
         public (int total, int totalDisplay, IList<Registration> records) GetRegistrationList(int pageIndex, int pageSize, string searchText,
@@ -77,9 +82,13 @@ namespace Foundation.Library.Services
         {
             var registration = _management.RegistrationStudentRepository.GetById(id);
             _management.RegistrationStudentRepository.Remove(id);
-            var marks = _management.MarkRepository.Get(x=>x.StudentId == registration.StudentId).FirstOrDefault();
-            _management.MarkRepository.Remove(marks);
             _management.Save();
+            var marks = _management.MarkRepository.Get(x => x.StudentId == registration.StudentId);
+            foreach (var mark in marks)
+            {
+                _management.MarkRepository.Remove(mark);
+                _management.Save();
+            }
         }
 
         public Registration GetRegistration(Guid id)

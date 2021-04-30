@@ -46,11 +46,6 @@ namespace FinalProject.Web.Areas.Admin.Models
 
     public class StudentMarks
     {
-        //internal MarksModelBuilder ModelBuilder;
-        //public StudentMarks()
-        //{
-        //    ModelBuilder = new MarksModelBuilder();
-        //}
         public Guid StudentId { get; set; }
         public string StudentName { get; set; }
         public int RollNo { get; set; }

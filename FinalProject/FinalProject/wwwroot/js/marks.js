@@ -10,7 +10,6 @@
             method: "GET",
             url: url
         }).done(function (response) {
-            console.log(response);
             $("#markTable").html(response);
         }).fail(function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status);
@@ -170,24 +169,29 @@
 
         });
 
-    $(document).on('click', '#resultSave', function () {
+    $(document).on("click", '#result', function () {
 
-        //console.log($(this).data("id") + ' ' + $(this).data("studentid"));
         var studentId = $(this).data("studentid");
-        var record = $(this).data("id");
-        var markArray = Array.from(document.getElementsByClassName(`StudentMarks[${record}]`));
+        var record = $(this).data("row");
+        var markArray = Array.from(document.getElementsByClassName(`Marks[${record}]`));
+        var totalMarksArray = Array.from(document.getElementsByClassName(`TotalMarks[${record}]`));
+        var passMarkArray = Array.from(document.getElementsByClassName(`PassMarks[${record}]`));
 
         let studentMarks = [];
-        markArray.forEach(item => {
+        markArray.forEach((item, index) => {
             var num = parseInt(item.value) || 0;
-            var name = $(item).data('name');
+            var type = $(item).data('name');
+            var total = totalMarksArray[index].value;
+            var pass = passMarkArray[index].value;
             studentMarks.push({
                 Mark: num,
-                Name: name.toString()
+                Type: type.toString(),
+                TotalMark: total,
+                PassMark: pass
             });
         });
         console.log(studentMarks);
-        let present = document.getElementById(`present[${record}]`).checked;
+        let present = $(`#z${record}__Present:checked`).val();
         let examId = $('#ExamId').val();
         let sectionId = $('#SectionId').val();
         let academicYearId = $('#AcademicYearId').val();
@@ -218,8 +222,7 @@
 
     $('#ExamId').on('change', function () {
         currentAmount = 0;
-        let generatedTable = $('#generatedTable');
-        generatedTable.remove();
+        $('#markentry').remove();
     });
     $('#btnAdd').on("click", function () {
         let studentsUrl = "Marks/MarksEntry?academicYearId=" + $("#AcademicYearId").val()
@@ -252,21 +255,23 @@
     $("#AcademicYearId").change(function () {
         populateCourse(this.value);
         currentAmount = 0;
-        let generatedTable = $('#generatedTable');
-        generatedTable.remove();
+        $('#markentry').remove();
     });
 
     $("#CourseId").change(function () {
         populateSection(this.value);
         currentAmount = 0;
-        let generatedTable = $('#generatedTable');
-        generatedTable.remove();
+        $('#markentry').remove();
     });
 
     $("#SectionId").change(function () {
         currentAmount = 0;
-        let generatedTable = $('#generatedTable');
-        generatedTable.remove();
+        $('#markentry').remove();
+    });
+
+    $("#SubjectId").change(function () {
+        currentAmount = 0;
+        $('#markentry').remove();
     });
 
     $('#exams_filter').addClass("text-right");
