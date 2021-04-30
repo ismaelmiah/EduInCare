@@ -9,14 +9,7 @@ namespace FinalProject.Web.Areas.Admin.Controllers
     {
         public IActionResult Index()
         {
-            var model = new StudentMarks()
-            {
-                StudentMark = new List<MarkDistribution>()
-                {
-                    new MarkDistribution {Name = "Writting", Mark = 3},
-                    new MarkDistribution {Name = "Reading", Mark = 30}
-                }
-            };
+            var model = new StudentMarks();
             return View(model);
         }
         [HttpPost]

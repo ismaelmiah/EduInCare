@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using FinalProject.Web.Areas.Admin.Models;
 using FinalProject.Web.Areas.Course.Models;
 using FinalProject.Web.Models;
+using Foundation.Library.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProject.Web.Areas.Admin.Controllers
@@ -13,6 +15,13 @@ namespace FinalProject.Web.Areas.Admin.Controllers
         {
             var model = new MarksModel();
             return View(model);
+        }
+
+        public IActionResult MarksEntry(Guid academicYearId, Guid courseId, Guid sectionId, Guid examId)
+        {
+            var model = new MarksModel();
+            var data = model.ModelBuilder.GetStudentsAndExamRules(academicYearId, courseId, sectionId, examId);
+            return PartialView(data);
         }
 
         public IActionResult Upsert(Guid? id)
@@ -66,13 +75,14 @@ namespace FinalProject.Web.Areas.Admin.Controllers
         {
             var model = new MarksModel();
             var data = model.ModelBuilder.GetStudentsAndExamRules(academicYearId, courseId, sectionId, examId);
-            return Json(data);
+            return RedirectToAction(nameof(MarksEntry), data);
         }
 
         [HttpPost]
         public IActionResult AjaxMarkSave(StudentMarks studentMarks)
         {
-            var isSaved = studentMarks.ModelBuilder.StudentMarkSave(studentMarks);
+            var model = new MarksModel();
+            var isSaved = model.ModelBuilder.StudentMarkSave(studentMarks);
             return Json(new { success = isSaved, message = "Saved Successfully" });
         }
 

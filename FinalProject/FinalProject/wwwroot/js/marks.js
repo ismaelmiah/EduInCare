@@ -8,13 +8,14 @@
     function getStudents(url) {
         $.ajax({
             method: "GET",
-            url: url,
-            dataType: "json",
-            cache: true,
-            success: function (data) {
-                generateTable(data);
-            }
-        });
+            url: url
+        }).done(function (response) {
+            console.log(response);
+            $("#markTable").html(response);
+        }).fail(function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
+        });;
     };
 
     function markDistributions(data) {
@@ -221,7 +222,7 @@
         generatedTable.remove();
     });
     $('#btnAdd').on("click", function () {
-        let studentsUrl = "Marks/GetStudentsAndExamRules?academicYearId=" + $("#AcademicYearId").val()
+        let studentsUrl = "Marks/MarksEntry?academicYearId=" + $("#AcademicYearId").val()
             + "&courseId=" + $("#CourseId").val() + "&sectionId=" + $("#SectionId").val()
             + "&examId=" + $("#ExamId").val();
 

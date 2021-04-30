@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using FinalProject.Web.Areas.Admin.Models.ModelBuilder;
+using Foundation.Library.Entities;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FinalProject.Web.Areas.Admin.Models
@@ -32,6 +33,7 @@ namespace FinalProject.Web.Areas.Admin.Models
         [Display(Name = "Exam")]
         public Guid ExamId { get; set; }
         public IList<SelectListItem> ExamList { get; set; }
+        public IList<Mark> Marks { get; set; }
         private void PopulateDropdownList()
         {
             AcademicYearList = ModelBuilder.GetAcademicYearList();
@@ -44,12 +46,14 @@ namespace FinalProject.Web.Areas.Admin.Models
 
     public class StudentMarks
     {
-        internal MarksModelBuilder ModelBuilder;
-        public StudentMarks()
-        {
-            ModelBuilder = new MarksModelBuilder();
-        }
+        //internal MarksModelBuilder ModelBuilder;
+        //public StudentMarks()
+        //{
+        //    ModelBuilder = new MarksModelBuilder();
+        //}
         public Guid StudentId { get; set; }
+        public string StudentName { get; set; }
+        public int RollNo { get; set; }
         public Guid SectionId { get; set; }
         public Guid AcademicYearId { get; set; }
         public Guid SubjectId { get; set; }
@@ -60,7 +64,9 @@ namespace FinalProject.Web.Areas.Admin.Models
 
     public class MarkDistribution
     {
-        public string Name { get; set; }
+        public string Type { get; set; }
         public int Mark { get; set; }
+        public int TotalMark { get; set; }
+        public int PassMark { get; set; }
     }
 }

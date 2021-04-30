@@ -141,16 +141,43 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             return _examService.GetExam(examId);
         }
 
-        public object GetStudentsAndExamRules(Guid academicYearId, Guid courseId, Guid sectionId, Guid examId)
+        public List<StudentMarks> GetStudentsAndExamRules(Guid academicYearId, Guid courseId, Guid sectionId, Guid examId)
         {
-            var registeredStudents = _markService.GetMarks(x => x.AcademicYearId == academicYearId && x.CourseId == courseId
-                                                               && x.SectionId == sectionId && x.IsMarkSet == false, "Student,Section,Course,Subject,Exam,AcademicYear");
-            var examRule = _examRuleService.GetExamRules().FirstOrDefault(x=> x.ExamId == examId);
-            return new
+            var examRule = _examRuleService.GetExamRules().FirstOrDefault(x => x.ExamId == examId);
+
+            var students = _markService.GetMarks(x => x.AcademicYearId == academicYearId
+                                                      && x.CourseId == courseId && x.SectionId == sectionId && x.IsMarkSet == false,
+                "Student,Section,Course,Subject,Exam,AcademicYear").Select(x => new StudentMarks
             {
-                examRule,
-                registeredStudents
-            };
+                StudentId = x.StudentId,
+                StudentName = x.Student.FirstName + ' '+x.Student.MiddleName + ' '+x.Student.LastName,
+                RollNo = x.Student.RollNo,
+                AcademicYearId = x.AcademicYearId,
+                Present = x.Present,
+                SectionId = x.SectionId,
+                StudentMark = BuildStudentMarks(examRule.MarksDistribution)
+            }).ToList();
+            //var marksColumn = students[0].Exam.MarksDistributionTypes.Split(',');
+
+            //return new
+            //{
+            //    examRule,
+            //    registeredStudents
+            //};
+            return students;
+        }
+
+        private List<MarkDistribution> BuildStudentMarks(string examRuleMarksDistribution)
+        {
+            var rules = JsonConvert.DeserializeObject<List<DistributionModel>>(examRuleMarksDistribution);
+            var list = rules.Select(x => new MarkDistribution
+            {
+                Type = x.DistributionType,
+                Mark = 0,
+                PassMark = x.PassMarks,
+                TotalMark = x.TotalMarks
+            }).ToList();
+            return list;
         }
 
         public bool StudentMarkSave(StudentMarks model)
