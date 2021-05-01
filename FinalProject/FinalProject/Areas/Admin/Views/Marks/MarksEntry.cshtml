@@ -1,57 +1,58 @@
-﻿@using Foundation.Library.Enums
-@model List<StudentMarks>
+﻿@model List<StudentMarks>
 @{
-    var numberOfColumn = Model[0].StudentMark.Count;
     var count = 1;
     var isUpdate = true;
 }
 
 <div id="markentry">
-    <table class="table table-bordered table-striped">
+    <div class="text-center">
+        <h1>Entry Marks</h1>
+    </div>
+    <table id="marks" class="table table-bordered table-striped">
         <thead class="table-dark">
-            <tr>
-                <th>#</th>
-                <th style="width: 230px;">Student Name</th>
-                <th style="width: 80px;">Roll No</th>
-                @foreach (var header in Model[0].StudentMark)
-                {
-                    <th>@header.Type</th>
-                }
-                <th style="width: 110px;">Total Marks</th>
-                <th>Present</th>
-                <th>Action</th>
-            </tr>
+        <tr>
+            <th>#</th>
+            <th style="width: 230px;">Student Name</th>
+            <th>Roll No</th>
+            @foreach (var header in Model[0].StudentMark)
+            {
+                <th>@header.Type</th>
+            }
+            <th>Total Marks</th>
+            <th>Present</th>
+            <th>Action</th>
+        </tr>
         </thead>
         <tbody>
-            @for (var i = 0; i < Model.Count; i++)
-            {
-                <tr>
-                    <td>@count</td>
-                    <td>@Model[i].StudentName</td>
-                    <td>@Model[i].RollNo</td>
-                    @for(var j = 0; j < Model[i].StudentMark.Count; j++)
-                    {
-                <td>
-                    <div class="row">
-                        <input data-name="@Model[i].StudentMark[j].Type" 
-                               data-id="@i" max="@Model[i].StudentMark[j].TotalMark" min="0"
-                               asp-for="@Model[i].StudentMark[j].Mark" class="form-control Marks[@i]" />
-                    </div>
-                    <div class="row">
-                        <input readonly="readonly" asp-for="@Model[i].StudentMark[j].TotalMark"
-                               class="form-control col-6 TotalMarks[@i]" />
-                        <input readonly="readonly" asp-for="@Model[i].StudentMark[j].PassMark"
-                               class="form-control col-6 PassMarks[@i]" />
-                    </div>
-                </td>
-                    }
-                <td><input readonly="readonly" id="TotalMarks[@i]" class="form-control"/></td>
-                    <td><input asp-for="@Model[i].Present" class="form-control"/></td>
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>@count</td>
+                <td>@Model[i].StudentName</td>
+                <td>@Model[i].RollNo</td>
+                @for (var j = 0; j < Model[i].StudentMark.Count; j++)
+                {
                     <td>
-                        <button data-row="@i" id="result" data-studentid="@Model[i].StudentId" class="btn @(isUpdate ? "btn-outline-warning" : "btn-outline-success" )">@(isUpdate ? "Update" : "Save")</button>
+                        <div class="row">
+                            <input data-name="@Model[i].StudentMark[j].Type"
+                                   data-id="@i" max="@Model[i].StudentMark[j].TotalMark" min="0"
+                                   asp-for="@Model[i].StudentMark[j].Mark" class="form-control Marks[@i]"/>
+                        </div>
+                        <div class="row">
+                            <input readonly="readonly" asp-for="@Model[i].StudentMark[j].TotalMark"
+                                   class="form-control col-6 TotalMarks[@i]"/>
+                            <input readonly="readonly" asp-for="@Model[i].StudentMark[j].PassMark"
+                                   class="form-control col-6 PassMarks[@i]"/>
+                        </div>
                     </td>
-                </tr>
-            }
+                }
+                <td><input readonly="readonly" id="TotalMarks[@i]" class="form-control"/></td>
+                <td><input asp-for="@Model[i].Present" class="form-control"/></td>
+                <td>
+                    <button data-row="@i" id="result" data-studentid="@Model[i].StudentId" class="btn @(isUpdate ? "btn-outline-warning" : "btn-outline-success")">@(isUpdate ? "Update" : "Save")</button>
+                </td>
+            </tr>
+        }
         </tbody>
     </table>
 </div>

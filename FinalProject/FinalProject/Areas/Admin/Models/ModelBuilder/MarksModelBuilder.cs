@@ -22,6 +22,7 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
         private readonly ISubjectService _subjectService;
         private readonly IAcademicYearService _academic;
         private readonly IRegistrationStudentService _registrationStudent;
+        private readonly IGradeService _gradeService;
 
         public MarksModelBuilder(
             IExamRuleService examRuleService,
@@ -31,7 +32,8 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             IMarkService markService,
             ISectionService sectionService,
             IAcademicYearService academic,
-            IRegistrationStudentService registrationStudent)
+            IRegistrationStudentService registrationStudent,
+            IGradeService gradeService)
         {
             _examRuleService = examRuleService;
             _courseService = courseService;
@@ -41,10 +43,12 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             _sectionService = sectionService;
             _academic = academic;
             _registrationStudent = registrationStudent;
+            _gradeService = gradeService;
         }
 
         public MarksModelBuilder()
         {
+            _gradeService = Startup.AutofacContainer.Resolve<IGradeService>();
             _courseService = Startup.AutofacContainer.Resolve<ICourseService>();
             _examService = Startup.AutofacContainer.Resolve<IExamService>();
             _subjectService = Startup.AutofacContainer.Resolve<ISubjectService>();
@@ -115,17 +119,7 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
         {
             return new SelectList(_academic.GetAcademicYears(), "Id", "Title", selectedItem);
         }
-
-        internal SelectList GetExamList(Guid courseId, object selectedItem = null)
-        {
-            return new SelectList(_examService.GetExams(courseId), "Id", "Name", selectedItem);
-        }
-
-        internal SelectList GetSubjectList(Guid courseId, object selectedItem = null)
-        {
-            return new SelectList(_subjectService.GetSubjects(courseId), "Id", "Name", selectedItem);
-        }
-
+        
         internal SelectList GetCourseList(object selectedItem = null)
         {
             return new SelectList(_courseService.GetCourses(), "Id", "Name", selectedItem);
@@ -136,33 +130,64 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             return new SelectList(_sectionService.GetSections(), "Id", "Name", selectedItem);
         }
 
-        public object GetExam(Guid examId)
+        public List<StudentMarks> BuildStudentMarksList(Guid academicYearId, Guid courseId, Guid sectionId, Guid examId, bool isMarkSet = false)
         {
-            return _examService.GetExam(examId);
-        }
 
-        public List<StudentMarks> GetStudentsAndExamRules(Guid academicYearId, Guid courseId, Guid sectionId, Guid examId)
-        {
-            var examRule = _examRuleService.GetExamRules().FirstOrDefault(x => x.ExamId == examId);
-
-            var students = _markService.GetMarks(x => x.AcademicYearId == academicYearId
-                                                      && x.ExamId == examId && x.CourseId == courseId && x.SectionId == sectionId && x.IsMarkSet == false,
-                "Student,Section,Course,Subject,Exam,AcademicYear").Select(x => new StudentMarks
+            var students = _markService.GetMarks(x => x.AcademicYearId == academicYearId && x.ExamId == examId
+                    && x.CourseId == courseId && x.SectionId == sectionId && x.IsMarkSet == isMarkSet,
+                "Student,Section,Course,Subject,Exam,AcademicYear");
+            if (isMarkSet)
             {
-                StudentId = x.StudentId,
-                StudentName = x.Student.FirstName + ' '+x.Student.MiddleName + ' '+x.Student.LastName,
-                RollNo = x.Student.RollNo,
-                AcademicYearId = x.AcademicYearId,
-                Present = x.Present,
-                SectionId = x.SectionId,
-                StudentMark = BuildStudentMarks(examRule.MarksDistribution)
-            }).ToList();
-            return students;
+                var studentMarksList = students.Select(x => new StudentMarks
+                {
+                    StudentName = x.Student.FirstName + ' ' + x.Student.MiddleName + ' ' + x.Student.LastName,
+                    RollNo = x.Student.RollNo,
+                    Present = x.Present,
+                    TotalMark = GetTotalMarks(x.Marks),
+                    Grade = x.Grade,
+                    Point = x.Point,
+                    StudentMark = BuildStudentMarks(x.Marks)
+                }).ToList();
+                return studentMarksList;
+            }
+            else
+            {
+                var examRule = _examRuleService.GetExamRules().FirstOrDefault(x => x.ExamId == examId);
+                var studentMarksList = students.Select(x => new StudentMarks
+                {
+                    StudentId = x.StudentId,
+                    StudentName = x.Student.FirstName + ' ' + x.Student.MiddleName + ' ' + x.Student.LastName,
+                    RollNo = x.Student.RollNo,
+                    AcademicYearId = x.AcademicYearId,
+                    Present = x.Present,
+                    SectionId = x.SectionId,
+                    StudentMark = BuildStudentMarks(examRule.MarksDistribution, true)
+                }).ToList();
+                return studentMarksList;
+            }
         }
 
-        private List<MarkDistribution> BuildStudentMarks(string examRuleMarksDistribution)
+        /// <summary>
+        /// Get Total Marks by Retrieve Data
+        /// </summary>
+        /// <param name="argMarks"></param>
+        /// <returns></returns>
+        private static double GetTotalMarks(string argMarks)
         {
-            var rules = JsonConvert.DeserializeObject<List<DistributionModel>>(examRuleMarksDistribution);
+            var rules = JsonConvert.DeserializeObject<List<MarkDistribution>>(argMarks);
+            var mark = rules.Sum(x => x.Mark);
+            return mark;
+        }
+
+        /// <summary>
+        /// Build Student Marks
+        /// </summary>
+        /// <param name="markDistribution"></param>
+        /// <param name="examRule"></param>
+        /// <returns></returns>
+        private static List<MarkDistribution> BuildStudentMarks(string markDistribution, bool examRule)
+        {
+            var rules = JsonConvert.DeserializeObject<List<DistributionModel>>(markDistribution);
             var list = rules.Select(x => new MarkDistribution
             {
                 Type = x.DistributionType,
@@ -173,34 +198,69 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             return list;
         }
 
+        /// <summary>
+        /// Retrieve Student Marks
+        /// </summary>
+        /// <param name="marks"></param>
+        /// <returns></returns>
+        private static List<MarkDistribution> BuildStudentMarks(string marks)
+        {
+            var rules = JsonConvert.DeserializeObject<List<MarkDistribution>>(marks);
+            var list = rules.Select(x => new MarkDistribution
+            {
+                Type = x.Type,
+                Mark = x.Mark,
+                PassMark = x.PassMark,
+                TotalMark = x.TotalMark
+            }).ToList();
+            return list;
+        }
+
+        /// <summary>
+        /// Student Mark Save
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public bool StudentMarkSave(StudentMarks model)
         {
             var entity = _markService.GetMarksByStudent(x => x.StudentId == model.StudentId && x.ExamId == model.ExamId);
-            var grade = CalculateGrade(model.StudentMark).grade;
-            var point = CalculateGrade(model.StudentMark).point;
-            if (entity != null)
+            var grade = CalculateGradeAndPoint(model.StudentMark, model.ExamId).grade;
+            var point = CalculateGradeAndPoint(model.StudentMark, model.ExamId).point;
+            if (entity == null) return false;
+            entity.SubjectId = model.SubjectId;
+            entity.Marks = JsonConvert.SerializeObject(model.StudentMark);
+            entity.Grade = grade;
+            entity.IsMarkSet = true;
+            entity.Point = point;
+            entity.Present = model.Present;
+
+            _markService.UpdateMark(entity);
+            return true;
+        }
+
+        /// <summary>
+        /// Calculate Grade And Point Based on Mark
+        /// </summary>
+        /// <param name="mark"></param>
+        /// <param name="examId"></param>
+        /// <returns></returns>
+        private (string grade, double point) CalculateGradeAndPoint(List<MarkDistribution> mark, Guid examId)
+        {
+            var examRules = _examRuleService.GetExamRules().FirstOrDefault(x => x.ExamId == examId);
+            var totalMarks = GetTotalMarks(JsonConvert.SerializeObject(mark));
+            var exitsGrade = _gradeService.GetGrade(examRules.GradeId);
+            var rules = JsonConvert.DeserializeObject<List<Rules>>(exitsGrade.Rule);
+            var grade = "F";
+            var point = 0.0;
+            foreach (var g in rules.Where(g => totalMarks >= g.Minimum && totalMarks <= g.Maximum))
             {
-                entity.SubjectId = model.SubjectId;
-                entity.Marks = GenerationJsonMarks(model.StudentMark);
-                entity.Grade = grade;
-                entity.IsMarkSet = true;
-                entity.Point = point;
+                grade = g.Name;
+                point = g.Point;
 
-                _markService.UpdateMark(entity);
-                return true;
+                return (grade, point);
             }
-            return false;
-        }
 
-        private (string grade, double point) CalculateGrade(List<MarkDistribution> modelStudentMark)
-        {
-            throw new NotImplementedException();
-            //TODO: Calculate Grade & Point
-        }
-
-        private string GenerationJsonMarks(List<MarkDistribution> modelMarks)
-        {
-            return JsonConvert.SerializeObject(modelMarks);
+            return (grade, point);
         }
     }
 }

@@ -2,166 +2,31 @@
 
     var limit = 1;
     var currentAmount = 0;
-    var numberOfRows;
+    let examId = $('#ExamId').val();
+    let sectionId = $('#SectionId').val();
+    let academicYearId = $('#AcademicYearId').val();
+    let subjectId = $('#SubjectId').val();
 
-
-    function getStudents(url) {
-        $.ajax({
-            method: "GET",
-            url: url
-        }).done(function (response) {
-            $("#markTable").html(response);
-        }).fail(function (xhr, ajaxOptions, thrownError) {
-            console.log(xhr.status);
-            console.log(thrownError);
-        });;
-    };
-
-    function markDistributions(data) {
-        var list = [];
-        var maxValue = [];
-        data.forEach((item, idx) => {
-            let cnt = 0;
-            for (var key in item) {
-                if (item.hasOwnProperty(key) && 0 === cnt) list.push(item[key]);
-                if (item.hasOwnProperty(key) && cnt === 1) maxValue.push(item[key]);
-                cnt++;
-                if (cnt > 1) break;
-            }
-        });
-        return { list, maxValue };
-    }
-
-    function generateTable(response) {
-        console.log(response);
-        let parseJsonData = JSON.parse(response.examRule.marksDistribution);
-        var distributionsData = markDistributions(parseJsonData);
-        let markDistributionHeader = distributionsData.list;
-        console.log(markDistributionHeader);
-        let totalMark = response.examRule.totalExamMarks;
-        let passMark = response.examRule.passMarks;
-
-        let headers = ['#', 'Student Name', 'Role No'];
-        headers = headers.concat(markDistributionHeader);
-        headers = headers.concat(['Total Mark', 'Pass Mark', 'Absent', 'Action']);
-
-        let myTable = document.querySelector('#markTable');
-        let table = document.createElement('table');
-        table.setAttribute('class', 'table text-center table-hover table-bordered table-striped');
-        table.setAttribute('id', 'generatedTable');
-
-        let tableHeader = document.createElement('thead');
-        tableHeader.setAttribute('class', 'thead-dark');
-
-        let tableBody = document.createElement('tbody');
-
-        let headerRow = document.createElement('tr');
-
-        headers.forEach((header, index) => {
-            let head = document.createElement('th');
-
-            let textNode = document.createTextNode(header);
-
-            if (index > 1) {
-                head.setAttribute('style', 'width: 100px;');
-            }
-            if (index === 0) {
-                head.setAttribute('style', 'width: 10px;');
-            }
-
-            head.appendChild(textNode);
-            headerRow.appendChild(head);
-        });
-        tableHeader.appendChild(headerRow);
-
-        let noOfColumn = (7 + markDistributionHeader.length);
-        numberOfRows = response.registeredStudents.length;
-
-
-        let countDistributionType = 0;
-
-        for (var i = 0; i < numberOfRows; i++) {
-            var studentName = response.registeredStudents[i].student.firstName
-                + " " + response.registeredStudents[i].student.middleName + " " + response.registeredStudents[i].student.lastName;
-            var studentRole = response.registeredStudents[i].student.rollNo;
-            var studentId = response.registeredStudents[i].studentId;
-            var zero = 0;
-
-            let row = document.createElement('tr');
-            row.setAttribute('class', `row_no`);
-            for (var j = 0; j < noOfColumn; j++) {
-                let tableData = document.createElement('td');
-                if (j === 0) {
-                    let textNode = document.createTextNode(i + 1);
-                    tableData.appendChild(textNode);
-                } else if (j === 1) {
-                    let textNode = document.createTextNode(studentName);
-                    tableData.setAttribute('style', 'width: 300px;');
-                    let input = document.createElement('INPUT');
-                    input.setAttribute('type', 'hidden');
-                    input.setAttribute('class', 'form-control');
-                    input.setAttribute('value', `${studentId}`);
-
-                    tableData.appendChild(textNode);
-                } else if (j === 2) {
-                    let textNode = document.createTextNode(studentRole);
-                    tableData.setAttribute('style', 'width: 10px;');
-                    tableData.appendChild(textNode);
-                } else if (j === noOfColumn - 1) {
-                    let button = document.createElement('button');
-                    button.setAttribute('class', 'btn btn-outline-success');
-                    button.setAttribute('type', 'button');
-                    button.setAttribute('id', 'resultSave');
-                    button.setAttribute('data-id', i);
-                    button.setAttribute('data-studentid', studentId);
-                    button.innerHTML = 'Save';
-                    tableData.appendChild(button);
-                } else if (j === noOfColumn - 2) {
-                    let input = document.createElement('INPUT');
-                    input.setAttribute('type', 'checkbox');
-                    input.setAttribute('class', `form-control`);
-                    input.setAttribute('id', `present[${i}]`);
-                    tableData.appendChild(input);
-                } else if (j === noOfColumn - 3) {
-                    let input = document.createElement('INPUT');
-                    input.setAttribute('readonly', 'readonly');
-                    input.setAttribute('type', 'text');
-                    input.setAttribute('value', passMark);
-                    input.setAttribute('class', 'form-control');
-                    tableData.appendChild(input);
-                } else if (j === noOfColumn - 4) {
-                    let input = document.createElement('INPUT');
-                    input.setAttribute('readonly', 'readonly');
-                    input.setAttribute('value', `${zero}`);
-                    input.setAttribute('type', 'text');
-                    input.setAttribute('id', `TotalMarks[${i}]`);
-                    input.setAttribute('class', `form-control`);
-                    tableData.appendChild(input);
-                } else {
-                    let input = document.createElement('INPUT');
-                    input.setAttribute('type', 'number');
-                    input.setAttribute('data-id', `${i}`);
-                    input.setAttribute('data-input', `${j}`);
-                    input.setAttribute('value', `${zero}`);
-                    input.setAttribute('data-name', `${distributionsData.list[countDistributionType]}`);
-                    input.setAttribute('max', `${distributionsData.maxValue[i]}`);
-                    input.setAttribute('min', `${zero}`);
-                    input.setAttribute('class', `form-control StudentMarks[${i}]`);
-                    tableData.appendChild(input);
-                    countDistributionType++;
-                }
-                row.appendChild(tableData);
-            }
-            tableBody.appendChild(row);
-        }
-        table.appendChild(tableHeader);
-        table.appendChild(tableBody);
-        myTable.appendChild(table);
-    }
-
-    $('#getMarks').on("click",
-        function () {
-
+    $('#getMarks').on("click", function () {
+        let studentsUrl = "Marks/GetStudentsMarks?academicYearId=" + $("#AcademicYearId").val()
+            + "&courseId=" + $("#CourseId").val() + "&sectionId=" + $("#SectionId").val()
+            + "&examId=" + $("#ExamId").val();
+            $.ajax({
+                method: "GET",
+                url: studentsUrl
+            }).done(function (response) {
+                $("#markTable").html(response);
+                $('#marks').DataTable({
+                    "lengthChange": false,
+                    language: {
+                        searchPlaceholder: "Student Roll no"
+                    }
+                });
+                $('#marks_filter').addClass("text-right");
+            }).fail(function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr.status);
+                console.log(thrownError);
+            });;
         });
 
     $('#updateMarks').on("click",
@@ -171,9 +36,9 @@
 
     $(document).on("click", '#result', function () {
 
-        var studentId = $(this).data("studentid");
-        var record = $(this).data("row");
-        var markArray = Array.from(document.getElementsByClassName(`Marks[${record}]`));
+        const studentId = $(this).data("studentid");
+        const record = $(this).data("row");
+        const markArray = Array.from(document.getElementsByClassName(`Marks[${record}]`));
         var totalMarksArray = Array.from(document.getElementsByClassName(`TotalMarks[${record}]`));
         var passMarkArray = Array.from(document.getElementsByClassName(`PassMarks[${record}]`));
 
@@ -190,12 +55,7 @@
                 PassMark: pass
             });
         });
-        console.log(studentMarks);
-        let present = $(`#z${record}__Present:checked`).val();
-        let examId = $('#ExamId').val();
-        let sectionId = $('#SectionId').val();
-        let academicYearId = $('#AcademicYearId').val();
-        let subjectId = $('#SubjectId').val();
+        const present = $(`#z${record}__Present:checked`).val();
 
         studentResultSave(
             {
@@ -211,7 +71,7 @@
     });
 
     $(document).on('change', "input[type='number']", function () {
-        var marks = Array.from(document.getElementsByClassName(`StudentMarks[${$(this).data('id')}]`));
+        var marks = Array.from(document.getElementsByClassName(`Marks[${$(this).data('id')}]`));
         let totalMark = 0;
         marks.forEach((item, idx) => {
             totalMark += parseInt(item.value) || 0;;
@@ -220,18 +80,30 @@
         totalMarkField.value = totalMark;
     });
 
-    $('#ExamId').on('change', function () {
-        currentAmount = 0;
-        $('#markentry').remove();
-    });
+
     $('#btnAdd').on("click", function () {
         let studentsUrl = "Marks/MarksEntry?academicYearId=" + $("#AcademicYearId").val()
             + "&courseId=" + $("#CourseId").val() + "&sectionId=" + $("#SectionId").val()
             + "&examId=" + $("#ExamId").val();
 
         if (currentAmount < limit) {
-            getStudents(studentsUrl);
-            currentAmount++;
+            $.ajax({
+                method: "GET",
+                url: studentsUrl
+            }).done(function (response) {
+                $("#markTable").html(response);
+                $('#marks').DataTable({
+                    "lengthChange": false,
+                    language: {
+                        searchPlaceholder: "Student Roll no"
+                    }
+                });
+                $('#marks_filter').addClass("text-right");
+                currentAmount++;
+            }).fail(function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr.status);
+                console.log(thrownError);
+            });;
         }
     });
 
@@ -242,15 +114,18 @@
             url: "Marks/AjaxMarkSave",
             data: data,
             success: function (response) {
-                console.log(response);
+                alertify.set('notifier', 'position', 'top-right');
+                console.log(this);
+                if (response.success) {
+                    alertify.success('Mark Saved');
+                } else {
+                    alertify.error('Mark Not Saved');
+                }
             }
         });
     }
-
-    //loadDataTable();
+    
     populateCourse($("#AcademicYearId").val());
-    //populateSection($("#CourseId").val());
-    //loadDataTable($("#CourseId").val());
 
     $("#AcademicYearId").change(function () {
         populateCourse(this.value);
@@ -274,20 +149,22 @@
         $('#markentry').remove();
     });
 
-    $('#exams_filter').addClass("text-right");
-
-    $('#exams').on('click', '.show-bs-modal', function (event) {
-        var id = $(this).data("id");
-        var modal = $("#modal-default");
-        modal.find('.modal-body p').text('Are you sure you want to delete this record?');
-        $("#deleteId").val(id);
-        $("#deleteForm").attr("action", "/admin/exam/delete");
-        modal.modal('show');
+    $('#ExamId').on('change', function () {
+        currentAmount = 0;
+        $('#markentry').remove();
     });
+    //$('#marks').on('click', '.show-bs-modal', function (event) {
+    //    var id = $(this).data("id");
+    //    var modal = $("#modal-default");
+    //    modal.find('.modal-body p').text('Are you sure you want to delete this record?');
+    //    $("#deleteId").val(id);
+    //    $("#deleteForm").attr("action", "/admin/exam/delete");
+    //    modal.modal('show');
+    //});
 
-    $("#deleteButton").click(function () {
-        $("#deleteForm").submit();
-    });
+    //$("#deleteButton").click(function () {
+    //    $("#deleteForm").submit();
+    //});
 });
 
 function populateSection(courseId) {
@@ -350,16 +227,5 @@ function populateExams(courseId) {
             }
             $("#ExamId").html(s);
         }
-    });
-}
-var dataTable;
-
-function loadDataTable(url) {
-    dataTable = $('#exams').DataTable({
-        "processing": true,
-        "serverSide": true,
-        "ajax": url,
-        "columnDefs": [
-        ]
     });
 }

@@ -55,6 +55,9 @@ namespace FinalProject.Web.Areas.Admin.Models
         public Guid ExamId { get; set; }
         public List<MarkDistribution> StudentMark { get; set; }
         public bool Present { get; set; }
+        public double TotalMark { get; set; }
+        public string Grade { get; set; }
+        public double Point { get; set; }
     }
 
     public class MarkDistribution
