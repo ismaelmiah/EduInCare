@@ -26,6 +26,11 @@ namespace DataAccessLayer.Library
             _dbSet.Add(entity);
         }
 
+        public void AddRange(IEnumerable<TEntity> entity)
+        {
+            _dbSet.AddRange(entity);
+        }
+
         public virtual void Remove(TKey id)
         {
             var entityToDelete = _dbSet.Find(id);

@@ -133,7 +133,7 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
         public List<StudentMarks> BuildStudentMarksList(Guid academicYearId, Guid courseId, Guid sectionId, Guid examId, bool isMarkSet = false)
         {
 
-            var students = _markService.GetMarks(x => x.AcademicYearId == academicYearId && x.ExamId == examId
+            var students = _markService.GetMarks(x => x.AcademicYearId == academicYearId 
                     && x.CourseId == courseId && x.SectionId == sectionId && x.IsMarkSet == isMarkSet,
                 "Student,Section,Course,Subject,Exam,AcademicYear");
             if (isMarkSet)
@@ -223,7 +223,7 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
         /// <returns></returns>
         public bool StudentMarkSave(StudentMarks model)
         {
-            var entity = _markService.GetMarksByStudent(x => x.StudentId == model.StudentId && x.ExamId == model.ExamId);
+            var entity = _markService.GetMarksByStudent(x => x.StudentId == model.StudentId);
             var grade = CalculateGradeAndPoint(model.StudentMark, model.ExamId).grade;
             var point = CalculateGradeAndPoint(model.StudentMark, model.ExamId).point;
             if (entity == null) return false;

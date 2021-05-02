@@ -73,7 +73,7 @@ namespace Foundation.Library.Services
                     StudentId = x.StudentId,
                     CourseId = x.CourseId,
                     AcademicYearId = x.AcademicYearId,
-                    ExamId = x.ExamId,
+                    //ExamId = x.ExamId,
                     SectionId = x.SectionId,
                     Grade = x.Grade,
                     Marks = x.Marks,

@@ -12,10 +12,10 @@ namespace Foundation.Library.Entities
         public virtual Section Section { get; set; }
         public Guid CourseId { get; set; }
         public virtual Course Course { get; set; }
-        public Guid? SubjectId { get; set; }
+        public Guid SubjectId { get; set; }
         public virtual Subject Subject { get; set; }
-        public Guid? ExamId { get; set; }
-        public virtual Exam Exam { get; set; }
+        public Guid ExamRulesId { get; set; }
+        public virtual ExamRules ExamRules { get; set; }
         public Guid AcademicYearId { get; set; }
         public virtual AcademicYear AcademicYear { get; set; }
         public string Marks { get; set; }

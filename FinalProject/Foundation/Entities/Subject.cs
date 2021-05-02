@@ -17,7 +17,7 @@ namespace Foundation.Library.Entities
         public virtual Course Course { get; set; }
         public bool ExcludeInResult { get; set; }
         public virtual ICollection<Section> Sections { get; set; }
-        public virtual Mark Mark { get; set; }
         public virtual ICollection<ExamRules> ExamRules { get; set; }
+        public virtual ICollection<Mark> Marks { get; set; }
     }
 }

@@ -81,6 +81,7 @@ namespace Foundation.Library.Services
         public void Update(Section section)
         {
             _management.SectionRepository.Edit(section);
+            _management.Save();
         }
     }
 }

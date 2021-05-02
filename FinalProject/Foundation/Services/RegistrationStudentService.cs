@@ -18,8 +18,9 @@ namespace Foundation.Library.Services
         public void AddRegistration(Registration registration)
         {
             _management.RegistrationStudentRepository.Add(registration);
-            var exams = _management.ExamRepository.Get(x => x.CourseId == registration.CourseId);
-            foreach (var exam in exams)
+            var rulesList = _management.ExamRuleRepository.Get(x => x.CourseId == registration.CourseId);
+            var listOfMarks = new List<Mark>();
+            foreach (var rule in rulesList)
             {
                 var marks = new Mark()
                 {
@@ -27,16 +28,17 @@ namespace Foundation.Library.Services
                     CourseId = registration.CourseId,
                     SectionId = registration.SectionId,
                     StudentId = registration.StudentId,
-                    ExamId = exam.Id
+                    SubjectId = rule.SubjectId,
+                    ExamRulesId = rule.Id
                 };
-                _management.MarkRepository.Add(marks);
-
-                _management.Save();
+                listOfMarks.Add(marks);
             }
-
+            _management.MarkRepository.AddRange(listOfMarks);
             var student = _management.StudentRepository.GetById(registration.StudentId);
             student.RollNo = registration.RollNo;
             _management.StudentRepository.Edit(student);
+
+            _management.Save();
         }
 
         public (int total, int totalDisplay, IList<Registration> records) GetRegistrationList(int pageIndex, int pageSize, string searchText,
