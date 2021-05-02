@@ -87,8 +87,11 @@ namespace Foundation.Library.Contexts
 
             builder.Entity<Registration>()
                 .HasOne(x => x.Section)
-                .WithOne(x => x.Registration)
-                .HasForeignKey<Registration>(x => x.SectionId);
+                .WithMany(x => x.Registration)
+                .HasForeignKey(x => x.SectionId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Course>()
                 .HasOne(x => x.Department)
@@ -100,13 +103,19 @@ namespace Foundation.Library.Contexts
 
             builder.Entity<Registration>()
                 .HasOne(x => x.Course)
-                .WithOne(x => x.Registration)
-                .HasForeignKey<Registration>(x => x.CourseId);
+                .WithMany(x => x.Registration)
+                .HasForeignKey(x => x.CourseId)
+                .HasPrincipalKey(x=>x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Registration>()
                 .HasOne(x => x.AcademicYear)
-                .WithOne(x => x.Registration)
-                .HasForeignKey<Registration>(x => x.AcademicYearId);
+                .WithMany(x => x.Registration)
+                .HasForeignKey(x => x.AcademicYearId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
             
             builder.Entity<Course>()
                 .HasOne(x => x.AcademicYear)
@@ -129,11 +138,13 @@ namespace Foundation.Library.Contexts
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<Exam>()
-                .HasOne(x => x.ExamRules)
-                .WithOne(x => x.Exam)
-                .HasForeignKey<ExamRules>(x => x.ExamId)
-                .IsRequired();
+            builder.Entity<ExamRules>()
+                .HasOne(x => x.Exam)
+                .WithMany(x => x.ExamRules)
+                .HasForeignKey(x => x.ExamId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<ExamRules>()
                 .HasOne(x => x.Grade)
@@ -155,6 +166,54 @@ namespace Foundation.Library.Contexts
                 .HasOne(x => x.Subject)
                 .WithMany(x => x.ExamRules)
                 .HasForeignKey(x => x.SubjectId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Mark>()
+                .HasOne(x => x.Student)
+                .WithMany(x => x.Marks)
+                .HasForeignKey(x => x.StudentId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Mark>()
+                .HasOne(x => x.ExamRules)
+                .WithMany(x => x.Marks)
+                .HasForeignKey(x => x.ExamRulesId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Mark>()
+                .HasOne(x => x.Subject)
+                .WithMany(x => x.Marks)
+                .HasForeignKey(x => x.SubjectId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Mark>()
+                .HasOne(x => x.Course)
+                .WithMany(x => x.Marks)
+                .HasForeignKey(x => x.CourseId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+            
+            builder.Entity<Mark>()
+                .HasOne(x => x.Section)
+                .WithMany(x => x.Marks)
+                .HasForeignKey(x => x.SectionId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Mark>()
+                .HasOne(x => x.AcademicYear)
+                .WithMany(x => x.Marks)
+                .HasForeignKey(x => x.AcademicYearId)
                 .HasPrincipalKey(x => x.Id)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
@@ -183,5 +242,6 @@ namespace Foundation.Library.Contexts
         public DbSet<Exam> Exams { get; set; }
         public DbSet<ExamRules> ExamRules { get; set; }
         public DbSet<Grade> Grades { get; set; }
+        public DbSet<Mark> Marks { get; set; }
     }
 }

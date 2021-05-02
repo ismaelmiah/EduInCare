@@ -18,6 +18,26 @@ namespace Foundation.Library.Services
         public void AddRegistration(Registration registration)
         {
             _management.RegistrationStudentRepository.Add(registration);
+            var rulesList = _management.ExamRuleRepository.Get(x => x.CourseId == registration.CourseId);
+            var listOfMarks = new List<Mark>();
+            foreach (var rule in rulesList)
+            {
+                var marks = new Mark()
+                {
+                    AcademicYearId = registration.AcademicYearId,
+                    CourseId = registration.CourseId,
+                    SectionId = registration.SectionId,
+                    StudentId = registration.StudentId,
+                    SubjectId = rule.SubjectId,
+                    ExamRulesId = rule.Id
+                };
+                listOfMarks.Add(marks);
+            }
+            _management.MarkRepository.AddRange(listOfMarks);
+            var student = _management.StudentRepository.GetById(registration.StudentId);
+            student.RollNo = registration.RollNo;
+            _management.StudentRepository.Edit(student);
+
             _management.Save();
         }
 
@@ -34,7 +54,8 @@ namespace Foundation.Library.Services
             }
             else
             {
-                result = _management.RegistrationStudentRepository.GetDynamic(x => x.CardNo == searchText, orderBy, "AcademicYear,Course,Student,Section", pageIndex, pageSize);
+                result = _management.RegistrationStudentRepository.GetDynamic(x => x.CardNo == searchText,
+                    orderBy, "AcademicYear,Course,Student,Section", pageIndex, pageSize);
             }
 
             var data = (from x in result.data
@@ -61,8 +82,15 @@ namespace Foundation.Library.Services
 
         public void Delete(Guid id)
         {
+            var registration = _management.RegistrationStudentRepository.GetById(id);
             _management.RegistrationStudentRepository.Remove(id);
             _management.Save();
+            var marks = _management.MarkRepository.Get(x => x.StudentId == registration.StudentId);
+            foreach (var mark in marks)
+            {
+                _management.MarkRepository.Remove(mark);
+                _management.Save();
+            }
         }
 
         public Registration GetRegistration(Guid id)
@@ -78,6 +106,7 @@ namespace Foundation.Library.Services
         public void Update(Registration registration)
         {
             _management.RegistrationStudentRepository.Edit(registration);
+            _management.Save();
         }
     }
 }

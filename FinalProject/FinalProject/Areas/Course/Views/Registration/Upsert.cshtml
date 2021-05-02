@@ -171,12 +171,6 @@
 
             $("#CourseId").change(function () {
                 populateSection(this.value);
-                populateStudent(this.value, $("#Shift").val());
-            });
-
-
-            $("#Shift").change(function () {
-                populateStudent($("#CourseId").val(), this.value);
             });
 
             function populateCourse(yearId) {
@@ -191,7 +185,6 @@
                         }
                         $("#CourseId").html(s);
                         populateSection(data[0].value);
-                        populateStudent(data[0].value, $("#Shift").val());
                     }
                 });
             }
@@ -207,15 +200,15 @@
                             s += '<option value="' + data[i].value + '">' + data[i].text + '</option>';
                         }
                         $("#SectionId").html(s);
+                        populateStudent(courseId);
                     }
                 });
             }
 
-            function populateStudent(courseId, shift) {
-                console.log(courseId + ' ' + shift);
+            function populateStudent(courseId) {
                 $.ajax({
                     method: "GET",
-                    url: "GetStudents?courseId=" + courseId + "&shift=" + shift,
+                    url: "GetStudents?courseId=" + courseId,
                     dataType: "json",
                     success: function (data) {
                         var s = "";

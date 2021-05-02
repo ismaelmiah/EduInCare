@@ -29,10 +29,13 @@
     <link href="~/css/selectize.css" rel="stylesheet" />
     <link href="~/css/bootstrap-multiselect.min.css" rel="stylesheet" />
     <link href="~/css/bootstrap-select.css" rel="stylesheet" />
+    <link href="~/css/alertify.min.css" rel="stylesheet" />
     <!-- jQuery -->
     <script src="~/AdminPanel/plugins/jquery/jquery.min.js"></script>
+    <script src="~/AdminPanel/plugins/popper/popper.js"></script>
     <script src="~/js/selectize.min.js"></script>
     <script src="~/js/bootstrap-multiselect.min.js"></script>
+    <script src="~/js/alertify.min.js"></script>
     @RenderSection("Styles", required: false)
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -339,7 +342,7 @@
                         <li>
                             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                                 <li class="nav-item has-treeview">
-                                    <a asp-action="Index" asp-area="Admin" asp-controller="Attendance" class="nav-link">
+                                    <a asp-action="Index" asp-area="Admin" asp-controller="Marks" class="nav-link">
                                         <i class="fas fa-clipboard-list nav-icon"></i>
                                         <p>
                                             Marks & Result
@@ -348,13 +351,13 @@
                                     </a>
                                     <ul class="nav nav-treeview ml-3">
                                         <li class="nav-item">
-                                            <a asp-action="Index" asp-area="Admin" asp-controller="Attendance" class="nav-link">
+                                            <a asp-action="Index" asp-area="Admin" asp-controller="Marks" class="nav-link">
                                                 <i class="fas fa-clipboard-check nav-icon"></i>
                                                 <p>Marks</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a asp-action="Index" asp-area="Admin" asp-controller="Attendance" class="nav-link">
+                                            <a asp-action="Index" asp-area="Admin" asp-controller="Result" class="nav-link">
                                                 <i class="fas fa-tasks nav-icon"></i>
                                                 <p>Result</p>
                                             </a>

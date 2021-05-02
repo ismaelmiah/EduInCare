@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DataAccessLayer.Library;
 
 namespace Foundation.Library.Entities
@@ -17,5 +18,6 @@ namespace Foundation.Library.Entities
         public double TotalExamMarks { get; set; }
         public double PassMarks { get; set; } 
         public string MarksDistribution { get; set; }
+        public virtual ICollection<Mark> Marks { get; set; }
     }
 }

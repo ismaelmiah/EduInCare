@@ -107,7 +107,8 @@ namespace FinalProject.Web.Areas.Course.Models.ModelBuilder
                 Status = model.Status,
                 SectionId = model.SectionId,
                 RollNo = model.RollNo,
-                OldRegistrationId = model.OldRegistrationId
+                OldRegistrationId = model.OldRegistrationId,
+                RegistrationNo = model.RegistrationNo
             };
         }
 

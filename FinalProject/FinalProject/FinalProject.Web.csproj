@@ -38,6 +38,20 @@
     <Compile Remove="Migrations\20210414102218_Exam&amp;ExamRules&amp;GradeTableInitialize.Designer.cs" />
     <Compile Remove="Migrations\20210419161023_UpdateRelationshipWithExamRules-1.cs" />
     <Compile Remove="Migrations\20210419161023_UpdateRelationshipWithExamRules-1.Designer.cs" />
+    <Compile Remove="Migrations\20210420165814_MarksTableInitized.cs" />
+    <Compile Remove="Migrations\20210420165814_MarksTableInitized.Designer.cs" />
+    <Compile Remove="Migrations\20210424182203_UpdateRelationSubjectAndMark.cs" />
+    <Compile Remove="Migrations\20210424182203_UpdateRelationSubjectAndMark.Designer.cs" />
+    <Compile Remove="Migrations\20210425083333_UpdateMarksTable.cs" />
+    <Compile Remove="Migrations\20210425083333_UpdateMarksTable.Designer.cs" />
+    <Compile Remove="Migrations\20210502051814_UpdateMarkTable.cs" />
+    <Compile Remove="Migrations\20210502051814_UpdateMarkTable.Designer.cs" />
+    <Compile Remove="Migrations\20210502054727_UpdateMarkTable-1.cs" />
+    <Compile Remove="Migrations\20210502054727_UpdateMarkTable-1.Designer.cs" />
+    <Compile Remove="Migrations\20210502055225_UpdateMarkTable-2.cs" />
+    <Compile Remove="Migrations\20210502055225_UpdateMarkTable-2.Designer.cs" />
+    <Compile Remove="Migrations\20210502063642_UpdateMarkTable-3.cs" />
+    <Compile Remove="Migrations\20210502063642_UpdateMarkTable-3.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

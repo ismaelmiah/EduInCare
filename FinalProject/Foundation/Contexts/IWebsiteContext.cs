@@ -26,5 +26,6 @@ namespace Foundation.Library.Contexts
         DbSet<Exam> Exams { get; set; }
         DbSet<ExamRules> ExamRules { get; set; }
         DbSet<Grade> Grades { get; set; }
+        DbSet<Mark> Marks { get; set; }
     }
 }

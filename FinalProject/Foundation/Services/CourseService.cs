@@ -29,13 +29,13 @@ namespace Foundation.Library.Services
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 result = _management.CourseRepository.GetDynamic(null,
-                    orderBy, "Sections,Subjects,Department", pageIndex, pageSize);
+                    orderBy, "Sections,Subjects,Department,Registration", pageIndex, pageSize);
 
             }
             else
             {
                 result = _management.CourseRepository.GetDynamic(x => x.Name == searchText,
-                    orderBy, "Sections,Subjects,Department", pageIndex, pageSize);
+                    orderBy, "Sections,Subjects,Department,Registration", pageIndex, pageSize);
             }
 
             var data = (from x in result.data
@@ -51,6 +51,7 @@ namespace Foundation.Library.Services
                     HaveCompulsorySubject = x.HaveCompulsorySubject,
                     MaxCompulsorySubject = x.MaxCompulsorySubject,
                     Department = x.Department,
+                    Registration = x.Registration,
                 }).ToList();
 
             return (result.total, result.totalDisplay, data);

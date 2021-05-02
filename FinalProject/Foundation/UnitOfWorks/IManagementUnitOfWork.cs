@@ -20,5 +20,6 @@ namespace Foundation.Library.UnitOfWorks
         public IExamRepository ExamRepository { get; set; }
         public IGradeRepository GradeRepository { get; set; }
         public IExamRuleRepository ExamRuleRepository { get; set; }
+        public IMarkRepository MarkRepository { get; set; }
     }
 }

@@ -1,0 +1,52 @@
+﻿@using Foundation.Library.Enums
+@model List<StudentMarks>
+@{
+    var count = 1;
+}
+
+<div id="markentry">
+    <table id="marks" class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>#</th>
+            <th style="width: 230px;">Student Name</th>
+            <th>Roll No</th>
+            @foreach (var header in Model[0].StudentMark)
+            {
+                <th>@header.Type</th>
+            }
+            <th>Total Marks</th>
+            <th>Grade</th>
+            <th>Point</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>@count</td>
+                <td>@Model[i].StudentName</td>
+                <td>@Model[i].RollNo</td>
+                @for (var j = 0; j < Model[i].StudentMark.Count; j++)
+                {
+                    <td>@Model[i].StudentMark[j].Mark</td>
+                }
+                <td>@Model[i].TotalMark</td>
+                <td>@Model[i].Grade</td>
+                <td>@Model[i].Point</td>
+                <td>
+                    @if (Model[i].Present)
+                    {
+                        <span class="badge badge-success">Present</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-danger">Absent</span>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

@@ -18,5 +18,6 @@ namespace Foundation.Library.Entities
         public bool ExcludeInResult { get; set; }
         public virtual ICollection<Section> Sections { get; set; }
         public virtual ICollection<ExamRules> ExamRules { get; set; }
+        public virtual ICollection<Mark> Marks { get; set; }
     }
 }

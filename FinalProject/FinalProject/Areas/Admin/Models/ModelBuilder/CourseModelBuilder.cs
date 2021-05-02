@@ -36,7 +36,6 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                 tableModel.GetSortText(new[]
                 {
                     "Name",
-                    "Subjects",
                     "Department",
                     "Duration",
                     "Status",
@@ -52,6 +51,7 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                         {
                             record.Name,
                             record.Subjects.Count(),
+                            record.Registration.Count(),
                             record.Department.Name,
                             record.Duration,
                             record.Status,

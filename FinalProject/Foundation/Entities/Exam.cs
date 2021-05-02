@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DataAccessLayer.Library;
 
 namespace Foundation.Library.Entities
@@ -11,6 +12,6 @@ namespace Foundation.Library.Entities
         public Course Course { get; set; }
         public string MarksDistributionTypes { get; set; }
         public bool Status { get; set; }
-        public virtual ExamRules ExamRules { get; set; }
+        public virtual ICollection<ExamRules> ExamRules { get; set; }
     }
 }

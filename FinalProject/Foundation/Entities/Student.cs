@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DataAccessLayer.Library;
 using Foundation.Library.Enums;
 
@@ -11,6 +12,7 @@ namespace Foundation.Library.Entities
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
+        public int RollNo { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string BirthCertificateNo { get; set; }
         public string NationalIdentificationNo { get; set; }
@@ -25,6 +27,7 @@ namespace Foundation.Library.Entities
         public string Nationality { get; set; }
         public DateTime YearOfEnroll { get; set; }
         public virtual Parents Parents { get; set; }
+        public virtual ICollection<Mark> Marks { get; set; }
         public virtual Registration Registration { get; set; }
         public bool Status { get; set; }
     }
