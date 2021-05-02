@@ -39,11 +39,23 @@ namespace FinalProject.Web.Areas.Admin.Controllers
             return Json(new { success = isSaved });
         }
 
-        public IActionResult GetMarksResult()
+        public IActionResult GetResults(Guid academicYearId, Guid courseId, Guid sectionId, Guid examId)
         {
             var tableModel = new DataTablesAjaxRequestModel(Request);
             var model = new MarksModel();
-            var data = model.ModelBuilder.GetMarksResult(tableModel);
+            var data = model.ModelBuilder.GetMarksResult(tableModel, academicYearId, courseId, sectionId, examId);
+            return Json(data);
+        }
+
+        public IActionResult Results()
+        {
+            return View();
+        }
+
+        public IActionResult GetAcademicYears()
+        {
+            var model = new MarksModel();
+            var data = model.ModelBuilder.GetAcademicYearList();
             return Json(data);
         }
 

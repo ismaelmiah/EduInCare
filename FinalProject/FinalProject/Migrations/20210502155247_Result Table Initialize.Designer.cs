@@ -4,14 +4,16 @@ using Foundation.Library.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FinalProject.Web.Migrations
 {
     [DbContext(typeof(WebsiteContext))]
-    partial class WebsiteContextModelSnapshot : ModelSnapshot
+    [Migration("20210502155247_Result Table Initialize")]
+    partial class ResultTableInitialize
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -667,12 +669,6 @@ namespace FinalProject.Web.Migrations
                     b.Property<double>("Point")
                         .HasColumnType("float");
 
-                    b.Property<Guid>("SectionId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("StudentId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<double>("TotalMarks")
                         .HasColumnType("float");
 
@@ -683,10 +679,6 @@ namespace FinalProject.Web.Migrations
                     b.HasIndex("CourseId");
 
                     b.HasIndex("ExamId");
-
-                    b.HasIndex("SectionId");
-
-                    b.HasIndex("StudentId");
 
                     b.ToTable("Results");
                 });
@@ -996,18 +988,6 @@ namespace FinalProject.Web.Migrations
                     b.HasOne("Foundation.Library.Entities.Exam", "Exam")
                         .WithMany("Results")
                         .HasForeignKey("ExamId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Foundation.Library.Entities.Section", "Section")
-                        .WithMany("Results")
-                        .HasForeignKey("SectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Foundation.Library.Entities.Student", "Student")
-                        .WithMany("Results")
-                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

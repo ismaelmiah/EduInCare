@@ -1,18 +1,18 @@
 ﻿@section Title
 {
-    <title>Marks</title>
+    <title>Results</title>
 }
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Marks</h1>
+                <h1>Results</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home" asp-area="Admin">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Marks</li>
+                    <li class="breadcrumb-item active">Results</li>
                 </ol>
             </div>
         </div>
@@ -49,16 +49,16 @@
                                 <span class="text-danger field-validation-valid" data-valmsg-for="CourseId" data-valmsg-replace="true"></span>
                             </div>
                         </div>
-                        <div class="form-group row col-md-3">
-                            <div class="col-3">
+                        <div class="form-group row col-md-2">
+                            <div class="col-4">
                                 <label class="card-title" for="SectionId">Section</label>
                             </div>
-                            <div class="col-9">
+                            <div class="col-8">
                                 <select id="SectionId" name="SectionId" class="form-control"></select>
                                 <span class="text-danger field-validation-valid" data-valmsg-for="SectionId" data-valmsg-replace="true"></span>
                             </div>
                         </div>
-                        <div class="form-group row col-2">
+                        <div class="form-group row col-3">
                             <div class="col-3">
                                 <label class="card-title" for="ExamId">Exam</label>
                             </div>
@@ -69,26 +69,26 @@
                         </div>
                         <div class="form-group col">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" id="getResult" class="btn btn-info">Get Result</button>
-                                <button type="button" id="deleteResult" class="btn btn-warning">Delete Result</button>
+                                <button type="button" id="getResult" class="btn btn-success">Get Result</button>
+                                <button type="button" id="deleteResult" class="btn btn-danger">Delete Result</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <partial name="_DeletePopupPartial" />
-                    <div id="markTable"></div>
-                    @*
-                        <table id="grades" class="text-center table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Rule</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                        </table>*@
+                    <table id="results" class="text-center table table-bordered table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Roll NO</th>
+                                <th>Grade</th>
+                                <th>Point</th>
+                                <th>Total Marks</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
                 <!-- /.card-body -->
             </div>
@@ -104,5 +104,5 @@
 {
     <script src="/AdminPanel/plugins/datatables/jquery.dataTables.js"></script>
     <script src="/AdminPanel/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
-    <script src="~/js/marks.js"></script>
+    <script src="~/js/resultPublish.js"></script>
 }

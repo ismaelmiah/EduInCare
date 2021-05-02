@@ -18,5 +18,6 @@ namespace Foundation.Library.Entities
         public virtual ICollection<Registration> Registration { get; set; }
         public virtual ICollection<Course> Courses { get; set; }
         public virtual ICollection<Mark> Marks { get; set; }
+        public virtual ICollection<Result> Results { get; set; }
     }
 }

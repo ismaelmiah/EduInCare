@@ -218,6 +218,38 @@ namespace Foundation.Library.Contexts
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder.Entity<Result>()
+                .HasOne(x => x.AcademicYear)
+                .WithMany(x => x.Results)
+                .HasForeignKey(x => x.AcademicYearId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Result>()
+                .HasOne(x => x.Exam)
+                .WithMany(x => x.Results)
+                .HasForeignKey(x => x.ExamId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Result>()
+                .HasOne(x => x.Course)
+                .WithMany(x => x.Results)
+                .HasForeignKey(x => x.CourseId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Result>()
+                .HasOne(x => x.Student)
+                .WithMany(x => x.Results)
+                .HasForeignKey(x => x.StudentId)
+                .HasPrincipalKey(x => x.Id)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
             base.OnModelCreating(builder);
         }
 
@@ -243,5 +275,6 @@ namespace Foundation.Library.Contexts
         public DbSet<ExamRules> ExamRules { get; set; }
         public DbSet<Grade> Grades { get; set; }
         public DbSet<Mark> Marks { get; set; }
+        public DbSet<Result> Results { get; set; }
     }
 }

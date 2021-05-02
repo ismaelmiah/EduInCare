@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Autofac;
-using FinalProject.Web.Areas.Admin.Controllers;
 using FinalProject.Web.Models;
 using Foundation.Library.Entities;
 using Foundation.Library.Services;
@@ -23,6 +22,7 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
         private readonly IAcademicYearService _academic;
         private readonly IRegistrationStudentService _registrationStudent;
         private readonly IGradeService _gradeService;
+        private readonly IResultService _resultService;
 
         public MarksModelBuilder(
             IExamRuleService examRuleService,
@@ -33,7 +33,8 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             ISectionService sectionService,
             IAcademicYearService academic,
             IRegistrationStudentService registrationStudent,
-            IGradeService gradeService)
+            IGradeService gradeService,
+            IResultService resultService)
         {
             _examRuleService = examRuleService;
             _courseService = courseService;
@@ -44,10 +45,12 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             _academic = academic;
             _registrationStudent = registrationStudent;
             _gradeService = gradeService;
+            _resultService = resultService;
         }
 
         public MarksModelBuilder()
         {
+            _resultService = Startup.AutofacContainer.Resolve<IResultService>();
             _gradeService = Startup.AutofacContainer.Resolve<IGradeService>();
             _courseService = Startup.AutofacContainer.Resolve<ICourseService>();
             _examService = Startup.AutofacContainer.Resolve<IExamService>();
@@ -58,49 +61,20 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             _academic = Startup.AutofacContainer.Resolve<IAcademicYearService>();
             _registrationStudent = Startup.AutofacContainer.Resolve<IRegistrationStudentService>();
         }
-
-        public MarksModel BuildMarksModel(Guid id)
+        
+        public object GetMarksResult(DataTablesAjaxRequestModel tableModel, Guid academicYearId, Guid courseId, Guid sectionId, Guid examId)
         {
-            var exMark = _markService.GetMark(id);
-            return new MarksModel
-            {
-
-            };
-        }
-
-        public void Save(MarksModel model)
-        {
-            var markEntity = ConvertToEntity(model);
-            _markService.AddMark(markEntity);
-        }
-
-        private Mark ConvertToEntity(MarksModel model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Guid id, MarksModel model)
-        {
-            var exMark = _markService.GetMark(id);
-
-        }
-
-        public void Delete(Guid id)
-        {
-            _markService.DeleteMark(id);
-        }
-
-        public object GetMarksResult(DataTablesAjaxRequestModel tableModel)
-        {
-
-            var (total, totalDisplay, records) = _markService.GetMarkList(
+            var (total, totalDisplay, records) = _resultService.GetResultList(
                 tableModel.PageIndex,
                 tableModel.PageSize,
                 tableModel.SearchText,
                 tableModel.GetSortText(new[]
                 {
-                    "Name"
-                }));
+                    "Student",
+                    "Grade",
+                    "Point",
+                    "TotalMarks",
+                }), academicYearId, courseId, sectionId, examId);
 
             return new
             {
@@ -109,7 +83,11 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                 data = (from record in records
                         select new object[]
                         {
-                            record.Marks,
+                            record.Student.FirstName+' '+record.Student.MiddleName+' '+record.Student.LastName,
+                            record.Student.RollNo,
+                            record.Grade,
+                            record.Point,
+                            record.TotalMarks,
                             record.Id.ToString(),
                         }
                     ).ToArray()
