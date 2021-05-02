@@ -44,7 +44,7 @@
         const courseId = $("#CourseId").val();
 
 
-        let studentsUrl = "Marks/GetStudentsMarks?academicYearId=" +
+        let studentsUrl = "Marks/MarksEntry?academicYearId=" +
             academicYearId +
             "&courseId=" +
             courseId +
@@ -71,6 +71,44 @@
             console.log(xhr.status);
             console.log(thrownError);
         });
+    });
+
+    $(document).on("click", '#update', function () {
+
+        const examId = $('#ExamId').val();
+        const sectionId = $('#SectionId').val();
+        const academicYearId = $('#AcademicYearId').val();
+        const subjectId = $('#SubjectId').val();
+
+        const studentId = $(this).data("studentid");
+        const record = $(this).data("row");
+        const markArray = Array.from(document.getElementsByClassName(`Marks[${record}]`));
+        var totalMarksArray = Array.from(document.getElementsByClassName(`TotalMarks[${record}]`));
+        var passMarkArray = Array.from(document.getElementsByClassName(`PassMarks[${record}]`));
+
+        let studentMarks = [];
+        markArray.forEach((item, index) => {
+            var num = parseInt(item.value) || 0;
+            var type = $(item).data('name');
+            var total = totalMarksArray[index].value;
+            var pass = passMarkArray[index].value;
+            studentMarks.push({
+                Mark: num,
+                Type: type.toString(),
+                TotalMark: total,
+                PassMark: pass
+            });
+        });
+        const present = $(`#z${record}__Present:checked`).val();
+
+        studentResultUpdate(
+            {
+                Present: present,
+                StudentId: studentId,
+                ExamId: examId,
+                StudentMark: studentMarks
+            }
+        );
     });
 
     $(document).on("click", '#result', function () {
@@ -170,6 +208,23 @@
                     alertify.success('Mark Saved');
                 } else {
                     alertify.error('Mark Not Saved');
+                }
+            }
+        });
+    }
+
+    function studentResultUpdate(data) {
+        $.ajax({
+            method: "POST",
+            url: "Marks/AjaxMarkSave",
+            data: data,
+            success: function (response) {
+                alertify.set('notifier', 'position', 'top-right');
+                console.log(this);
+                if (response.success) {
+                    alertify.warning('Mark Updated');
+                } else {
+                    alertify.error('Mark Not Update');
                 }
             }
         });
