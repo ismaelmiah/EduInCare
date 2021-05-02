@@ -23,15 +23,22 @@
             method: "GET",
             url: studentsUrl
         }).done(function (response) {
-            $("#markTable").html(response);
-            $('#marks').DataTable({
-                "lengthChange": false,
-                "searching": false
-            });
-            $('#marks_filter').addClass("text-right");
+            if (response.length > 1) {
+                $("#markTable").html(response);
+                $('#marks').DataTable({
+                    "lengthChange": false,
+                    "searching": false
+                });
+                $('#marks_filter').addClass("text-right");
+            } else {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.error('Marks not entered! Please enter mark for this exam!');
+            }
         }).fail(function (xhr, ajaxOptions, thrownError) {
-            console.log(xhr.status);
-            console.log(thrownError);
+            //console.log(xhr.status);
+            //console.log(thrownError);
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('Marks not entered! Please enter mark for this exam!');
         });;
     });
 
@@ -61,12 +68,17 @@
             method: "GET",
             url: studentsUrl
         }).done(function (response) {
-            $("#markTable").html(response);
-            $('#marks').DataTable({
-                "lengthChange": false,
-                "searching": false
-            });
-            $('#marks_filter').addClass("text-right");
+            if (response.length > 1) {
+                $("#markTable").html(response);
+                $('#marks').DataTable({
+                    "lengthChange": false,
+                    "searching": false
+                });
+                $('#marks_filter').addClass("text-right");
+            } else {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.error('Marks not entered! Please enter mark for this exam!');
+            }
         }).fail(function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status);
             console.log(thrownError);
@@ -183,12 +195,17 @@
             method: "GET",
             url: studentsUrl
         }).done(function (response) {
-            $("#markTable").html(response);
-            $('#marks').DataTable({
-                "lengthChange": false,
-                "searching": false
-            });
-            $('#marks_filter').addClass("text-right");
+            if (response.length > 1) {
+                $("#markTable").html(response);
+                $('#marks').DataTable({
+                    "lengthChange": false,
+                    "searching": false
+                });
+                $('#marks_filter').addClass("text-right");
+            } else {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.error('Marks entry not possible! Because result is published for this exam!');
+            }
         }).fail(function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status);
             console.log(thrownError);
