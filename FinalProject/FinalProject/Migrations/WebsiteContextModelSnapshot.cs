@@ -646,38 +646,6 @@ namespace FinalProject.Web.Migrations
                     b.ToTable("Registrations");
                 });
 
-            modelBuilder.Entity("Foundation.Library.Entities.Result", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AcademicYearId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CourseId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ExamId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Grade")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Point")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AcademicYearId");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("ExamId");
-
-                    b.ToTable("Results");
-                });
-
             modelBuilder.Entity("Foundation.Library.Entities.Section", b =>
                 {
                     b.Property<Guid>("Id")
@@ -963,27 +931,6 @@ namespace FinalProject.Web.Migrations
                         .WithOne("Registration")
                         .HasForeignKey("Foundation.Library.Entities.Registration", "StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Foundation.Library.Entities.Result", b =>
-                {
-                    b.HasOne("Foundation.Library.Entities.AcademicYear", "AcademicYear")
-                        .WithMany("Results")
-                        .HasForeignKey("AcademicYearId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Foundation.Library.Entities.Course", "Course")
-                        .WithMany("Results")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Foundation.Library.Entities.Exam", "Exam")
-                        .WithMany("Results")
-                        .HasForeignKey("ExamId")
-                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

@@ -9,8 +9,7 @@ namespace FinalProject.Web.Areas.Admin.Controllers
     {
         public IActionResult Index()
         {
-            var model = new StudentMarks();
-            return View(model);
+            return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
