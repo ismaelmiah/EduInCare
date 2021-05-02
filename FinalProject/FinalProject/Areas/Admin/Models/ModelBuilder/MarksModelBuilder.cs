@@ -130,37 +130,39 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             return new SelectList(_sectionService.GetSections(), "Id", "Name", selectedItem);
         }
 
-        public List<StudentMarks> BuildStudentMarksList(Guid academicYearId, Guid courseId, Guid sectionId, Guid examId, bool isMarkSet = false)
+        public List<StudentMarks> BuildStudentMarksList(Guid academicYearId, Guid courseId, Guid subjectId, Guid sectionId, Guid examId, bool isMarkSet = false)
         {
+            var examRule = _examRuleService.GetExamRules().FirstOrDefault(x => x.ExamId == examId);
 
             var students = _markService.GetMarks(x => x.AcademicYearId == academicYearId 
-                    && x.CourseId == courseId && x.SectionId == sectionId && x.IsMarkSet == isMarkSet,
-                "Student,Section,Course,Subject,Exam,AcademicYear");
+                    && x.CourseId == courseId && x.SectionId == sectionId && x.SubjectId == subjectId && x.ExamRulesId == examRule.Id 
+                    && x.IsMarkSet == isMarkSet, "Student,Section,Course,Subject,ExamRules,AcademicYear");
+
             if (isMarkSet)
             {
                 var studentMarksList = students.Select(x => new StudentMarks
                 {
                     StudentName = x.Student.FirstName + ' ' + x.Student.MiddleName + ' ' + x.Student.LastName,
                     RollNo = x.Student.RollNo,
+                    StudentId = x.StudentId,
                     Present = x.Present,
                     TotalMark = GetTotalMarks(x.Marks),
                     Grade = x.Grade,
                     Point = x.Point,
+                    Update = true,
                     StudentMark = BuildStudentMarks(x.Marks)
                 }).ToList();
                 return studentMarksList;
             }
             else
             {
-                var examRule = _examRuleService.GetExamRules().FirstOrDefault(x => x.ExamId == examId);
                 var studentMarksList = students.Select(x => new StudentMarks
                 {
                     StudentId = x.StudentId,
                     StudentName = x.Student.FirstName + ' ' + x.Student.MiddleName + ' ' + x.Student.LastName,
                     RollNo = x.Student.RollNo,
-                    AcademicYearId = x.AcademicYearId,
                     Present = x.Present,
-                    SectionId = x.SectionId,
+                    Update =  false,
                     StudentMark = BuildStudentMarks(examRule.MarksDistribution, true)
                 }).ToList();
                 return studentMarksList;
@@ -227,7 +229,6 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             var grade = CalculateGradeAndPoint(model.StudentMark, model.ExamId).grade;
             var point = CalculateGradeAndPoint(model.StudentMark, model.ExamId).point;
             if (entity == null) return false;
-            entity.SubjectId = model.SubjectId;
             entity.Marks = JsonConvert.SerializeObject(model.StudentMark);
             entity.Grade = grade;
             entity.IsMarkSet = true;

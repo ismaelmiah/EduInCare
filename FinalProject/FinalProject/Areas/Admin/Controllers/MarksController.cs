@@ -15,19 +15,19 @@ namespace FinalProject.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-        public IActionResult MarksEntry(Guid academicYearId, Guid courseId, Guid sectionId, Guid examId)
+        public IActionResult MarksEntry(Guid academicYearId, Guid courseId, Guid subjectId, Guid sectionId, Guid examId, bool isMarkSet = false)
         {
             var model = new MarksModel();
-            var data = model.ModelBuilder.BuildStudentMarksList(academicYearId, courseId, sectionId, examId);
+            var data = model.ModelBuilder.BuildStudentMarksList(academicYearId, courseId, subjectId, sectionId, examId, isMarkSet);
             if (data.Count == 0)
                 return Json(data);
             return PartialView(data);
         }
         
-        public IActionResult GetStudentsMarks(Guid academicYearId, Guid courseId, Guid sectionId, Guid examId)
+        public IActionResult GetStudentsMarks(Guid academicYearId, Guid courseId, Guid subjectId, Guid sectionId, Guid examId)
         {
             var model = new MarksModel();
-            var data = model.ModelBuilder.BuildStudentMarksList(academicYearId, courseId, sectionId, examId, true);
+            var data = model.ModelBuilder.BuildStudentMarksList(academicYearId, courseId, subjectId, sectionId, examId, true);
             return PartialView(data);
         }
 

@@ -1,40 +1,84 @@
 ﻿$(document).ready(function () {
 
-    var limit = 1;
-    var currentAmount = 0;
-    let examId = $('#ExamId').val();
-    let sectionId = $('#SectionId').val();
-    let academicYearId = $('#AcademicYearId').val();
-    let subjectId = $('#SubjectId').val();
-
     $('#getMarks').on("click", function () {
-        let studentsUrl = "Marks/GetStudentsMarks?academicYearId=" + $("#AcademicYearId").val()
-            + "&courseId=" + $("#CourseId").val() + "&sectionId=" + $("#SectionId").val()
-            + "&examId=" + $("#ExamId").val();
-            $.ajax({
-                method: "GET",
-                url: studentsUrl
-            }).done(function (response) {
-                $("#markTable").html(response);
-                $('#marks').DataTable({
-                    "lengthChange": false,
-                    language: {
-                        searchPlaceholder: "Student Roll no"
-                    }
-                });
-                $('#marks_filter').addClass("text-right");
-            }).fail(function (xhr, ajaxOptions, thrownError) {
-                console.log(xhr.status);
-                console.log(thrownError);
-            });;
-        });
+        const examId = $('#ExamId').val();
+        const sectionId = $('#SectionId').val();
+        const academicYearId = $('#AcademicYearId').val();
+        const subjectId = $('#SubjectId').val();
+        const courseId = $("#CourseId").val();
 
-    $('#updateMarks').on("click",
-        function () {
 
+        const studentsUrl = "Marks/GetStudentsMarks?academicYearId=" +
+            academicYearId +
+            "&courseId=" +
+            courseId +
+            "&subjectId=" +
+            subjectId +
+            "&sectionId=" +
+            sectionId +
+            "&examId=" +
+            examId;
+
+        $.ajax({
+            method: "GET",
+            url: studentsUrl
+        }).done(function (response) {
+            $("#markTable").html(response);
+            $('#marks').DataTable({
+                "lengthChange": false,
+                "searching": false
+            });
+            $('#marks_filter').addClass("text-right");
+        }).fail(function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
+        });;
+    });
+
+    $('#updateMarks').on("click", function () {
+
+        const examId = $('#ExamId').val();
+        const sectionId = $('#SectionId').val();
+        const academicYearId = $('#AcademicYearId').val();
+        const subjectId = $('#SubjectId').val();
+        const courseId = $("#CourseId").val();
+
+
+        let studentsUrl = "Marks/GetStudentsMarks?academicYearId=" +
+            academicYearId +
+            "&courseId=" +
+            courseId +
+            "&subjectId=" +
+            subjectId +
+            "&sectionId=" +
+            sectionId +
+            "&examId=" +
+            examId +
+            "&isMarkSet=" +
+            true;
+
+        $.ajax({
+            method: "GET",
+            url: studentsUrl
+        }).done(function (response) {
+            $("#markTable").html(response);
+            $('#marks').DataTable({
+                "lengthChange": false,
+                "searching": false
+            });
+            $('#marks_filter').addClass("text-right");
+        }).fail(function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
         });
+    });
 
     $(document).on("click", '#result', function () {
+
+        const examId = $('#ExamId').val();
+        const sectionId = $('#SectionId').val();
+        const academicYearId = $('#AcademicYearId').val();
+        const subjectId = $('#SubjectId').val();
 
         const studentId = $(this).data("studentid");
         const record = $(this).data("row");
@@ -62,9 +106,6 @@
                 Present: present,
                 StudentId: studentId,
                 ExamId: examId,
-                SectionId: sectionId,
-                AcademicYearId: academicYearId,
-                SubjectId: subjectId,
                 StudentMark: studentMarks
             }
         );
@@ -81,30 +122,39 @@
     });
 
 
-    $('#btnAdd').on("click", function () {
-        let studentsUrl = "Marks/MarksEntry?academicYearId=" + $("#AcademicYearId").val()
-            + "&courseId=" + $("#CourseId").val() + "&sectionId=" + $("#SectionId").val()
-            + "&examId=" + $("#ExamId").val();
+    $('#entryMarks').on("click", function () {
+        const examId = $('#ExamId').val();
+        const sectionId = $('#SectionId').val();
+        const academicYearId = $('#AcademicYearId').val();
+        const subjectId = $('#SubjectId').val();
+        const courseId = $("#CourseId").val();
 
-        if (currentAmount < limit) {
-            $.ajax({
-                method: "GET",
-                url: studentsUrl
-            }).done(function (response) {
-                $("#markTable").html(response);
-                $('#marks').DataTable({
-                    "lengthChange": false,
-                    language: {
-                        searchPlaceholder: "Student Roll no"
-                    }
-                });
-                $('#marks_filter').addClass("text-right");
-                currentAmount++;
-            }).fail(function (xhr, ajaxOptions, thrownError) {
-                console.log(xhr.status);
-                console.log(thrownError);
-            });;
-        }
+
+        let studentsUrl = "Marks/MarksEntry?academicYearId=" +
+            academicYearId +
+            "&courseId=" +
+            courseId +
+            "&subjectId=" +
+            subjectId +
+            "&sectionId=" +
+            sectionId +
+            "&examId=" +
+            examId;
+
+        $.ajax({
+            method: "GET",
+            url: studentsUrl
+        }).done(function (response) {
+            $("#markTable").html(response);
+            $('#marks').DataTable({
+                "lengthChange": false,
+                "searching": false
+            });
+            $('#marks_filter').addClass("text-right");
+        }).fail(function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
+        });
     });
 
 
@@ -124,7 +174,7 @@
             }
         });
     }
-    
+
     populateCourse($("#AcademicYearId").val());
 
     $("#AcademicYearId").change(function () {

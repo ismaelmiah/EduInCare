@@ -1,7 +1,7 @@
 ﻿@model List<StudentMarks>
 @{
     var count = 1;
-    var isUpdate = true;
+    var totalMark = 0;
 }
 
 <div id="markentry">
@@ -32,6 +32,7 @@
                 <td>@Model[i].RollNo</td>
                 @for (var j = 0; j < Model[i].StudentMark.Count; j++)
                 {
+                    totalMark += Model[i].StudentMark[j].Mark;
                     <td>
                         <div class="row">
                             <input data-name="@Model[i].StudentMark[j].Type"
@@ -46,11 +47,23 @@
                         </div>
                     </td>
                 }
-                <td><input readonly="readonly" id="TotalMarks[@i]" class="form-control"/></td>
+                <td><input value="@totalMark" readonly="readonly" id="TotalMarks[@i]" class="form-control"/></td>
                 <td><input asp-for="@Model[i].Present" class="form-control"/></td>
-                <td>
-                    <button data-row="@i" id="result" data-studentid="@Model[i].StudentId" class="btn @(isUpdate ? "btn-outline-warning" : "btn-outline-success")">@(isUpdate ? "Update" : "Save")</button>
-                </td>
+                @{
+                    totalMark = 0;
+
+
+}
+            <td>
+                @if (Model[i].Update)
+                {
+                    <button data-row="@i" id="update" data-studentid="@Model[i].StudentId" class="btn btn-outline-warning">Update</button>
+                }
+                else
+                {
+                    <button data-row="@i" id="result" data-studentid="@Model[i].StudentId" class="btn btn-outline-success">Save</button>
+                }
+            </td>
             </tr>
         }
         </tbody>

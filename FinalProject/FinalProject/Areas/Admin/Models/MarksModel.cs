@@ -58,6 +58,7 @@ namespace FinalProject.Web.Areas.Admin.Models
         public double TotalMark { get; set; }
         public string Grade { get; set; }
         public double Point { get; set; }
+        public bool Update { get; set; }
     }
 
     public class MarkDistribution
