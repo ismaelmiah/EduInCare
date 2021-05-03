@@ -18,8 +18,11 @@ namespace FinalProject.Web.Areas.Admin.Controllers
         public IActionResult MarksEntry(Guid academicYearId, Guid courseId, Guid subjectId, Guid sectionId, Guid examId, bool isMarkSet = false)
         {
             var model = new MarksModel();
-            var data = model.ModelBuilder.BuildStudentMarksList(academicYearId, courseId, subjectId, sectionId, examId, isMarkSet);
-            if (data.Count == 0)
+            var (data, isPublished) = model.ModelBuilder.BuildStudentMarksList(academicYearId, courseId, subjectId, sectionId, examId, isMarkSet);
+            
+            if (isPublished == false)
+                return Json(true);
+            else if (data.Count == 0)
                 return Json(data);
             return PartialView(data);
         }
@@ -27,7 +30,8 @@ namespace FinalProject.Web.Areas.Admin.Controllers
         public IActionResult GetStudentsMarks(Guid academicYearId, Guid courseId, Guid subjectId, Guid sectionId, Guid examId)
         {
             var model = new MarksModel();
-            var data = model.ModelBuilder.BuildStudentMarksList(academicYearId, courseId, subjectId, sectionId, examId, true);
+            var (data, isPublished) = model.ModelBuilder.BuildStudentMarksList(academicYearId, courseId, subjectId, sectionId, examId, true);
+            //if (isPublished == false) return Json(true);
             return PartialView(data);
         }
 
@@ -47,9 +51,13 @@ namespace FinalProject.Web.Areas.Admin.Controllers
             return Json(data);
         }
 
-        public IActionResult Results()
+        public IActionResult Results() =>  View();
+
+        public IActionResult PublishResult(Guid academicYearId, Guid courseId, Guid subjectId, Guid sectionId, Guid examId)
         {
-            return View();
+            var model = new MarksModel();
+            var isPublished = model.ModelBuilder.PublishResult(academicYearId, courseId, subjectId, sectionId, examId);
+            return Json(isPublished);
         }
 
         public IActionResult GetAcademicYears()

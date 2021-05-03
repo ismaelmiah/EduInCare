@@ -108,13 +108,15 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             return new SelectList(_sectionService.GetSections(), "Id", "Name", selectedItem);
         }
 
-        public List<StudentMarks> BuildStudentMarksList(Guid academicYearId, Guid courseId, Guid subjectId, Guid sectionId, Guid examId, bool isMarkSet = false)
+        public (List<StudentMarks> studentMarksList, bool isPublished) BuildStudentMarksList(Guid academicYearId, Guid courseId, Guid subjectId, Guid sectionId, Guid examId, bool isMarkSet = false)
         {
             var examRule = _examRuleService.GetExamRules().FirstOrDefault(x => x.ExamId == examId);
 
             var students = _markService.GetMarks(x => x.AcademicYearId == academicYearId 
                     && x.CourseId == courseId && x.SectionId == sectionId && x.SubjectId == subjectId && x.ExamRulesId == examRule.Id 
-                    && x.IsMarkSet == isMarkSet, "Student,Section,Course,Subject,ExamRules,AcademicYear");
+                    && x.IsMarkSet == isMarkSet, "Student");
+
+            var isPublished = students.Any(x => x.IsMarkSet == false);
 
             if (isMarkSet)
             {
@@ -130,7 +132,7 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                     Update = true,
                     StudentMark = BuildStudentMarks(x.Marks)
                 }).ToList();
-                return studentMarksList;
+                return (studentMarksList, isPublished);
             }
             else
             {
@@ -143,7 +145,7 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                     Update =  false,
                     StudentMark = BuildStudentMarks(examRule.MarksDistribution, true)
                 }).ToList();
-                return studentMarksList;
+                return (studentMarksList, isPublished);
             }
         }
 
@@ -240,6 +242,31 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             }
 
             return (grade, point);
+        }
+
+        public bool PublishResult(Guid academicYearId, Guid courseId, Guid subjectId, Guid sectionId, Guid examId)
+        {
+            var examRule = _examRuleService.GetExamRules().FirstOrDefault(x => x.ExamId == examId);
+
+            var allMarks = _markService.GetMarks(x => x.AcademicYearId == academicYearId
+                                                           && x.CourseId == courseId && x.SectionId == sectionId &&
+                                                           x.SubjectId == subjectId && x.ExamRulesId == examRule.Id, "");
+
+            var isMarkEntered = allMarks.Any(x => x.IsMarkSet == false);
+            if (!isMarkEntered)
+            {
+                return false;
+            }
+            else
+            {
+                foreach (var mark in allMarks)
+                {
+                    mark.IsPublish = true;
+                    _markService.UpdateMark(mark);
+                }
+
+                return true;
+            }
         }
     }
 }

@@ -1,5 +1,41 @@
 ﻿$(document).ready(function () {
 
+    $('#publish').on("click", function () {
+        const examId = $('#ExamId').val();
+        const sectionId = $('#SectionId').val();
+        const academicYearId = $('#AcademicYearId').val();
+        const subjectId = $('#SubjectId').val();
+        const courseId = $("#CourseId").val();
+
+
+        const studentsUrl = "Marks/PublishResult?academicYearId=" +
+            academicYearId +
+            "&courseId=" +
+            courseId +
+            "&subjectId=" +
+            subjectId +
+            "&sectionId=" +
+            sectionId +
+            "&examId=" +
+            examId;
+
+        $.ajax({
+            method: "GET",
+            url: studentsUrl
+        }).done(function (response) {
+            alertify.set('notifier', 'position', 'top-right');
+            if (response) {
+                alertify.success('Result Published');
+            } else {
+                alertify.success('Result Published, Please Entered Mark for All Students');
+            }
+        }).fail(function (xhr, ajaxOptions, thrownError) {
+            //console.log(xhr.status);
+            //console.log(thrownError);
+            alertify.error('Result Published, Please Entered Mark for All Students');
+        });
+    });
+
     $('#getMarks').on("click", function () {
         const examId = $('#ExamId').val();
         const sectionId = $('#SectionId').val();
@@ -30,9 +66,13 @@
                     "searching": false
                 });
                 $('#marks_filter').addClass("text-right");
-            } else {
+            }
+            else if (response.length === 0) {
                 alertify.set('notifier', 'position', 'top-right');
                 alertify.error('Marks not entered! Please enter mark for this exam!');
+            } else {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.error('Result Already Published!');
             }
         }).fail(function (xhr, ajaxOptions, thrownError) {
             //console.log(xhr.status);
@@ -75,9 +115,13 @@
                     "searching": false
                 });
                 $('#marks_filter').addClass("text-right");
-            } else {
+            }
+            else if (response.length === 0) {
                 alertify.set('notifier', 'position', 'top-right');
                 alertify.error('Marks not entered! Please enter mark for this exam!');
+            }else {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.error('Result Already Published!');
             }
         }).fail(function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status);
@@ -202,9 +246,13 @@
                     "searching": false
                 });
                 $('#marks_filter').addClass("text-right");
+            }
+            else if (response.length === 0) {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.error('Marks not entered! Please enter mark for this exam!');
             } else {
                 alertify.set('notifier', 'position', 'top-right');
-                alertify.error('Marks entry not possible! Because result is published for this exam!');
+                alertify.error('Result Already Published!');
             }
         }).fail(function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status);
