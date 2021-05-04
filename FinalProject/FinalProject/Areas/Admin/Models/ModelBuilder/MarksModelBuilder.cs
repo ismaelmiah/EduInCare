@@ -70,7 +70,6 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                 tableModel.SearchText,
                 tableModel.GetSortText(new[]
                 {
-                    "Student",
                     "Grade",
                     "Point",
                     "TotalMarks",
@@ -253,7 +252,7 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                                                            x.SubjectId == subjectId && x.ExamRulesId == examRule.Id, "");
 
             var isMarkEntered = allMarks.Any(x => x.IsMarkSet == false);
-            if (!isMarkEntered)
+            if (isMarkEntered)
             {
                 return false;
             }
@@ -263,6 +262,18 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                 {
                     mark.IsPublish = true;
                     _markService.UpdateMark(mark);
+                    var result = new Result
+                    {
+                        StudentId = mark.StudentId,
+                        AcademicYearId = mark.AcademicYearId,
+                        SectionId = mark.SectionId,
+                        CourseId = mark.CourseId,
+                        ExamId = examRule.ExamId,
+                        TotalMarks = GetTotalMarks(mark.Marks),
+                        Grade = CalculateGradeAndPoint(JsonConvert.DeserializeObject<List<MarkDistribution>>(mark.Marks), examRule.ExamId).grade,
+                        Point = CalculateGradeAndPoint(JsonConvert.DeserializeObject<List<MarkDistribution>>(mark.Marks), examRule.ExamId).point,
+                    };
+                    _resultService.AddResult(result);
                 }
 
                 return true;

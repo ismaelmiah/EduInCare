@@ -68,6 +68,7 @@ namespace Foundation.Library.Services
                             Id = x.Id,
                             StudentId = x.StudentId,
                             CourseId = x.CourseId,
+                            Student = x.Student,
                             AcademicYearId = x.AcademicYearId,
                             ExamId = x.ExamId,
                             Grade = x.Grade,
