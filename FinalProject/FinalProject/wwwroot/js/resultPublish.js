@@ -1,5 +1,4 @@
 ﻿$(document).ready(function () {
-
     $('#results').hide();
     $.ajax({
         method: "GET",
@@ -41,6 +40,7 @@
             "ajax": Url,
             "initComplete": function (settings, json) {
                 $('#results').show();
+                $('[data-toggle="tooltip"]').tooltip();
             },
             "columnDefs": [
                 {
@@ -48,20 +48,11 @@
                     "targets": 5,
                     "render": function (data, type, row) {
                         return `
-                                    <button class="btn btn-info btn-sm" onclick="window.location.href='/admin/course/profile/${data}'" value='${data}'>
-                                                                            <i class="fas fa-info">
-                                                                            </i>
-                                                                            Details
+                                    <button data-toggle="tooltip" data-placement="top" title="Marksheet" class="btn btn-info btn-sm" onclick="window.location.href='/admin/course/profile/${data}'" value='${data}'>
+                                                                            <i class="fas fa-file-pdf"></i>
                                                                         </button>
-                                    <button type="submit" class="btn btn-warning btn-sm" onclick="window.location.href='/admin/course/upsert/${data}'" value='${data}'>
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Edit
-                                    </button>
-                                    <button type="submit" class="btn btn-danger btn-sm show-bs-modal" href="#" data-id='${data}' value='${data}'>
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
+                                    <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Public Marksheet" onclick="window.location.href='/admin/course/profile/${data}'" value='${data}'>
+                                        <i class="far fa-file-alt"></i>
                                     </button>`;
                     }
                 }
