@@ -13,5 +13,6 @@ namespace Foundation.Library.Entities
         public string MarksDistributionTypes { get; set; }
         public bool Status { get; set; }
         public virtual ICollection<ExamRules> ExamRules { get; set; }
+        public virtual ICollection<Result> Results { get; set; }
     }
 }

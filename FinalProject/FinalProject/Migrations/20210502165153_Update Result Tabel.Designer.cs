@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalProject.Web.Migrations
 {
     [DbContext(typeof(WebsiteContext))]
-    [Migration("20210404165534_StudentHasShift")]
-    partial class StudentHasShift
+    [Migration("20210502165153_Update Result Tabel")]
+    partial class UpdateResultTabel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -65,6 +65,81 @@ namespace FinalProject.Web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Advertises");
+                });
+
+            modelBuilder.Entity("Foundation.Library.Entities.Applicants", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("BirthCertificateNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("BloodGroup")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageAlternativeText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MiddleName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MobileNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NationalIdentificationNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nationality")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PermanentAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PresentAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("RecordMetaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Religion")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("RecordMetaId");
+
+                    b.ToTable("Applicants");
                 });
 
             modelBuilder.Entity("Foundation.Library.Entities.AppointmentImage", b =>
@@ -230,6 +305,71 @@ namespace FinalProject.Web.Migrations
                     b.ToTable("Employees");
                 });
 
+            modelBuilder.Entity("Foundation.Library.Entities.Exam", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("MarksDistributionTypes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Exams");
+                });
+
+            modelBuilder.Entity("Foundation.Library.Entities.ExamRules", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ExamId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("GradeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("MarksDistribution")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("PassMarks")
+                        .HasColumnType("float");
+
+                    b.Property<Guid>("SubjectId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("TotalExamMarks")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("ExamId");
+
+                    b.HasIndex("GradeId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("ExamRules");
+                });
+
             modelBuilder.Entity("Foundation.Library.Entities.Footer", b =>
                 {
                     b.Property<Guid>("Id")
@@ -245,6 +385,23 @@ namespace FinalProject.Web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Footers");
+                });
+
+            modelBuilder.Entity("Foundation.Library.Entities.Grade", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Rule")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Grades");
                 });
 
             modelBuilder.Entity("Foundation.Library.Entities.Group", b =>
@@ -279,6 +436,62 @@ namespace FinalProject.Web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Headers");
+                });
+
+            modelBuilder.Entity("Foundation.Library.Entities.Mark", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AcademicYearId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ExamRulesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Grade")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsMarkSet")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Marks")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Point")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("Present")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("SectionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SubjectId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AcademicYearId");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("ExamRulesId");
+
+                    b.HasIndex("SectionId");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("Marks");
                 });
 
             modelBuilder.Entity("Foundation.Library.Entities.Notice", b =>
@@ -365,6 +578,23 @@ namespace FinalProject.Web.Migrations
                     b.ToTable("Posts");
                 });
 
+            modelBuilder.Entity("Foundation.Library.Entities.RecordMeta", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifiedLast")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RecordMeta");
+                });
+
             modelBuilder.Entity("Foundation.Library.Entities.Registration", b =>
                 {
                     b.Property<Guid>("Id")
@@ -398,9 +628,6 @@ namespace FinalProject.Web.Migrations
                     b.Property<Guid>("SectionId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Shift")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
@@ -409,19 +636,56 @@ namespace FinalProject.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AcademicYearId")
-                        .IsUnique();
+                    b.HasIndex("AcademicYearId");
 
-                    b.HasIndex("CourseId")
-                        .IsUnique();
+                    b.HasIndex("CourseId");
 
-                    b.HasIndex("SectionId")
-                        .IsUnique();
+                    b.HasIndex("SectionId");
 
                     b.HasIndex("StudentId")
                         .IsUnique();
 
                     b.ToTable("Registrations");
+                });
+
+            modelBuilder.Entity("Foundation.Library.Entities.Result", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AcademicYearId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ExamId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Grade")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Point")
+                        .HasColumnType("float");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("TotalMarks")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AcademicYearId");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("ExamId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Results");
                 });
 
             modelBuilder.Entity("Foundation.Library.Entities.Section", b =>
@@ -475,6 +739,9 @@ namespace FinalProject.Web.Migrations
                     b.Property<int>("BloodGroup")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("CourseId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
@@ -514,8 +781,11 @@ namespace FinalProject.Web.Migrations
                     b.Property<int>("Religion")
                         .HasColumnType("int");
 
-                    b.Property<int>("Shift")
+                    b.Property<int>("RollNo")
                         .HasColumnType("int");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -524,6 +794,8 @@ namespace FinalProject.Web.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
 
                     b.ToTable("Students");
                 });
@@ -556,6 +828,19 @@ namespace FinalProject.Web.Migrations
                     b.ToTable("Subjects");
                 });
 
+            modelBuilder.Entity("Foundation.Library.Entities.Applicants", b =>
+                {
+                    b.HasOne("Foundation.Library.Entities.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Foundation.Library.Entities.RecordMeta", "RecordMeta")
+                        .WithMany()
+                        .HasForeignKey("RecordMetaId");
+                });
+
             modelBuilder.Entity("Foundation.Library.Entities.Course", b =>
                 {
                     b.HasOne("Foundation.Library.Entities.AcademicYear", "AcademicYear")
@@ -580,6 +865,81 @@ namespace FinalProject.Web.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Foundation.Library.Entities.Exam", b =>
+                {
+                    b.HasOne("Foundation.Library.Entities.Course", "Course")
+                        .WithMany("Exams")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Foundation.Library.Entities.ExamRules", b =>
+                {
+                    b.HasOne("Foundation.Library.Entities.Course", "Course")
+                        .WithMany("ExamRules")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Foundation.Library.Entities.Exam", "Exam")
+                        .WithMany("ExamRules")
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Foundation.Library.Entities.Grade", "Grade")
+                        .WithMany("ExamRules")
+                        .HasForeignKey("GradeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Foundation.Library.Entities.Subject", "Subject")
+                        .WithMany("ExamRules")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Foundation.Library.Entities.Mark", b =>
+                {
+                    b.HasOne("Foundation.Library.Entities.AcademicYear", "AcademicYear")
+                        .WithMany("Marks")
+                        .HasForeignKey("AcademicYearId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Foundation.Library.Entities.Course", "Course")
+                        .WithMany("Marks")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Foundation.Library.Entities.ExamRules", "ExamRules")
+                        .WithMany("Marks")
+                        .HasForeignKey("ExamRulesId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Foundation.Library.Entities.Section", "Section")
+                        .WithMany("Marks")
+                        .HasForeignKey("SectionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Foundation.Library.Entities.Student", "Student")
+                        .WithMany("Marks")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Foundation.Library.Entities.Subject", "Subject")
+                        .WithMany("Marks")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Foundation.Library.Entities.Parents", b =>
                 {
                     b.HasOne("Foundation.Library.Entities.Student", "Student")
@@ -592,27 +952,54 @@ namespace FinalProject.Web.Migrations
             modelBuilder.Entity("Foundation.Library.Entities.Registration", b =>
                 {
                     b.HasOne("Foundation.Library.Entities.AcademicYear", "AcademicYear")
-                        .WithOne("Registration")
-                        .HasForeignKey("Foundation.Library.Entities.Registration", "AcademicYearId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithMany("Registration")
+                        .HasForeignKey("AcademicYearId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Foundation.Library.Entities.Course", "Course")
-                        .WithOne("Registration")
-                        .HasForeignKey("Foundation.Library.Entities.Registration", "CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithMany("Registration")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Foundation.Library.Entities.Section", "Section")
-                        .WithOne("Registration")
-                        .HasForeignKey("Foundation.Library.Entities.Registration", "SectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithMany("Registration")
+                        .HasForeignKey("SectionId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Foundation.Library.Entities.Student", "Student")
                         .WithOne("Registration")
                         .HasForeignKey("Foundation.Library.Entities.Registration", "StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Foundation.Library.Entities.Result", b =>
+                {
+                    b.HasOne("Foundation.Library.Entities.AcademicYear", "AcademicYear")
+                        .WithMany("Results")
+                        .HasForeignKey("AcademicYearId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Foundation.Library.Entities.Course", "Course")
+                        .WithMany("Results")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Foundation.Library.Entities.Exam", "Exam")
+                        .WithMany("Results")
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Foundation.Library.Entities.Student", "Student")
+                        .WithMany("Results")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -634,6 +1021,13 @@ namespace FinalProject.Web.Migrations
                         .HasForeignKey("Foundation.Library.Entities.Section", "TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Foundation.Library.Entities.Student", b =>
+                {
+                    b.HasOne("Foundation.Library.Entities.Course", null)
+                        .WithMany("Students")
+                        .HasForeignKey("CourseId");
                 });
 
             modelBuilder.Entity("Foundation.Library.Entities.Subject", b =>

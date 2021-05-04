@@ -3,43 +3,43 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FinalProject.Web.Migrations
 {
-    public partial class CourseHasManyStudents : Migration
+    public partial class UpdateResultTabel1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<Guid>(
-                name: "CourseId",
-                table: "Students",
+                name: "SectionId",
+                table: "Results",
                 nullable: false,
                 defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
 
             migrationBuilder.CreateIndex(
-                name: "IX_Students_CourseId",
-                table: "Students",
-                column: "CourseId");
+                name: "IX_Results_SectionId",
+                table: "Results",
+                column: "SectionId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Students_Courses_CourseId",
-                table: "Students",
-                column: "CourseId",
-                principalTable: "Courses",
+                name: "FK_Results_Sections_SectionId",
+                table: "Results",
+                column: "SectionId",
+                principalTable: "Sections",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Students_Courses_CourseId",
-                table: "Students");
+                name: "FK_Results_Sections_SectionId",
+                table: "Results");
 
             migrationBuilder.DropIndex(
-                name: "IX_Students_CourseId",
-                table: "Students");
+                name: "IX_Results_SectionId",
+                table: "Results");
 
             migrationBuilder.DropColumn(
-                name: "CourseId",
-                table: "Students");
+                name: "SectionId",
+                table: "Results");
         }
     }
 }

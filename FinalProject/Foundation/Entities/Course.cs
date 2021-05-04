@@ -28,6 +28,7 @@ namespace Foundation.Library.Entities
         public virtual ICollection<Registration> Registration { get; set; }
         public virtual ICollection<Exam> Exams { get; set; }
         public virtual ICollection<Mark> Marks { get; set; }
+        public virtual ICollection<Result> Results { get; set; }
         public virtual ICollection<ExamRules> ExamRules { get; set; }
         public Guid AcademicYearId { get; set; }
         public virtual AcademicYear AcademicYear { get; set; }

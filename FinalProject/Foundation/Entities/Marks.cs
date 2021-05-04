@@ -23,5 +23,6 @@ namespace Foundation.Library.Entities
         public double Point { get; set; }
         public bool Present { get; set; }
         public bool IsMarkSet { get; set; }
+        public bool IsPublish { get; set; } 
     }
 }

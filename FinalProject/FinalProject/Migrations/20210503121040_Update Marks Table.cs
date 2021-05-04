@@ -2,22 +2,22 @@
 
 namespace FinalProject.Web.Migrations
 {
-    public partial class StudentHasShift : Migration
+    public partial class UpdateMarksTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "Shift",
-                table: "Students",
+            migrationBuilder.AddColumn<bool>(
+                name: "IsPublish",
+                table: "Marks",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: false);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Shift",
-                table: "Students");
+                name: "IsPublish",
+                table: "Marks");
         }
     }
 }

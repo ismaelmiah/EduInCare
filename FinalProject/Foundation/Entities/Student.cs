@@ -28,6 +28,7 @@ namespace Foundation.Library.Entities
         public DateTime YearOfEnroll { get; set; }
         public virtual Parents Parents { get; set; }
         public virtual ICollection<Mark> Marks { get; set; }
+        public virtual ICollection<Result> Results { get; set; }
         public virtual Registration Registration { get; set; }
         public bool Status { get; set; }
     }
