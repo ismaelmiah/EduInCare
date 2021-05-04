@@ -1,4 +1,24 @@
 ﻿$(function () {
+
+    $("#addExam").on('click', function () {
+        var modal = $("#modal-exam");
+        modal.modal('show');
+        $.ajax({
+            method: "GET",
+            url: "Exam/Upsert"
+        }).done(function (response) {
+            $("#contentArea").html(response);
+            $("#modal-exam").modal('toggle');
+            LoadFormData();
+        }).fail(function (xhr, ajaxOptions, thrownError) {
+            //console.log(xhr.status);
+            //console.log(thrownError);
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('Marks not entered! Please enter mark for this exam!');
+        });
+    });
+
+
     $('#exams').DataTable({
         "processing": true,
         "serverSide": true,
@@ -53,3 +73,10 @@
         $("#deleteForm").submit();
     });
 });
+
+var LoadFormData = function() {
+
+    $("#examSubmit").click(function () {
+        $("#examForm").submit();
+    });
+}

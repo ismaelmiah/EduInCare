@@ -64,9 +64,9 @@ namespace Foundation.Library.Contexts
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<Subject>()
+            builder.Entity<Student>()
                 .HasOne(x => x.Course)
-                .WithMany(x => x.Subjects)
+                .WithMany(x => x.Students)
                 .HasForeignKey(x => x.CourseId)
                 .HasPrincipalKey(x => x.Id)
                 .IsRequired()

@@ -1,224 +1,132 @@
-﻿@using Foundation.Library.Enums
-@model RegistrationModel
+﻿@model RegistrationModel
 
 @{
     ViewData["subtitle"] = "Register Student";
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLTE.cshtml";
 }
 
-@section Title
-{
-    <title>Register</title>
-}
-
-<div class="row">
-    <div class="col-md-12">
-        <div class="card card-info">
-            <div class="card-header">
-                <h3 class="card-title text-center">@ViewData["subtitle"]</h3>
+<div class="modal-header">
+    <h4 class="modal-title">@ViewData["subtitle"]</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="Id" type="hidden" />
+        <div class="row align-items-center justify-content-between">
+            <div class="form-group row col-4">
+                <div class="col-6">
+                    <label asp-for="AcademicYearId"></label>
+                </div>
+                <div class="col-6">
+                    <select asp-for="AcademicYearId" asp-items="Model.AcademicYearList" class="form-control"></select>
+                    <span asp-validation-for="AcademicYearId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row col-5">
+                <div class="col-2">
+                    <label asp-for="CourseId"></label>
+                </div>
+                <div class="col-10">
+                    <select asp-for="CourseId" asp-items="Model.CourseList" class="form-control"></select>
+                    <span asp-validation-for="CourseId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row col-3">
+                <div class="col-4">
+                    <label asp-for="SectionId"></label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="SectionId" asp-items="Model.SectionList" class="form-control"></select>
+                    <span asp-validation-for="SectionId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="row align-items-center justify-content-between">
+            <div class="form-group row col">
+                <div class="col-2">
+                    <label asp-for="StudentId"></label>
+                </div>
+                <div class="col-10">
+                    <select asp-for="StudentId" asp-items="Model.StudentList" class="form-control"></select>
+                    <span asp-validation-for="StudentId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row col">
+                <div class="col-4">
+                    <label asp-for="RegistrationNo">Registration No</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="RegistrationNo" placeholder="Auto Generated" class="form-control" />
+                    <span asp-validation-for="RegistrationNo" class="text-danger"></span>
+                </div>
             </div>
         </div>
-        <form asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
-            <div class="card-body">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input asp-for="Id" type="hidden" />
-                <div class="row">
-                    <div class="form-group row col-3">
-                        <div class="col-6">
-                            <label asp-for="AcademicYearId"></label>
-                        </div>
-                        <div class="col-6">
-                            <select asp-for="AcademicYearId" asp-items="Model.AcademicYearList" class="form-control"></select>
-                            <span asp-validation-for="AcademicYearId" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-group row col-3 ml-2">
-                        <div class="col-3">
-                            <label asp-for="CourseId"></label>
-                        </div>
-                        <div class="col-9">
-                            <select asp-for="CourseId" asp-items="Model.CourseList" class="form-control"></select>
-                            <span asp-validation-for="CourseId" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-group row col-3 ml-3">
-                        <div class="col-4">
-                            <label asp-for="SectionId"></label>
-                        </div>
-                        <div class="col-8">
-                            <select asp-for="SectionId" asp-items="Model.SectionList" class="form-control"></select>
-                            <span asp-validation-for="SectionId" class="text-danger"></span>
-                        </div>
-                    </div>
+        <div class="row align-items-center justify-content-between">
+            <div class="form-group row col">
+                <div class="col-5">
+                    <label asp-for="BoardRegistrationNo"></label>
                 </div>
-                <div class="row">
-                    <div class="form-group row col">
-                        <div class="col-2">
-                            <label asp-for="StudentId"></label>
-                        </div>
-                        <div class="col-10">
-                            <select asp-for="StudentId" asp-items="Model.StudentList" class="form-control"></select>
-                            <span asp-validation-for="StudentId" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-group row col">
-                        <div class="col-3">
-                            <label asp-for="RegistrationNo">Registration No</label>
-                        </div>
-                        <div class="col-9">
-                            <input asp-for="RegistrationNo" placeholder="Auto Generated" class="form-control" />
-                            <span asp-validation-for="RegistrationNo" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-group row col-2 ml-3">
-                        <div class="col-4">
-                            <label asp-for="RollNo"></label>
-                        </div>
-                        <div class="col-8">
-                            <input asp-for="RollNo" class="form-control" />
-                            <span asp-validation-for="RollNo" class="text-danger"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group row col">
-                        <div class="col-4">
-                            <label asp-for="BoardRegistrationNo"></label>
-                        </div>
-                        <div class="col-8">
-                            <input asp-for="BoardRegistrationNo" class="form-control" />
-                            <span asp-validation-for="BoardRegistrationNo" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-group row col">
-                        <div class="col-3">
-                            <label asp-for="OldRegistrationId"></label>
-                        </div>
-                        <div class="col-9">
-                            <input asp-for="OldRegistrationId" class="form-control" />
-                            <span asp-validation-for="OldRegistrationId" class="text-danger"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group row">
-                            <div class="col-4">
-                                <label asp-for="IsPromoted"></label>
-                            </div>
-                            <div class="col-8">
-                                <input asp-for="IsPromoted" class="form-control" />
-                                <span asp-validation-for="IsPromoted" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-4">
-                                <label asp-for="Status" class=""></label>
-                            </div>
-                            <div class="col-8">
-                                <input asp-for="Status" class="form-control" />
-                                <span asp-validation-for="Status" class="text-danger"></span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-7">
+                    <input asp-for="BoardRegistrationNo" class="form-control" />
+                    <span asp-validation-for="BoardRegistrationNo" class="text-danger"></span>
                 </div>
             </div>
-            <div class="card-footer">
-                <div class="form-group row mb-0">
-                    <div class="col-6 text-left">
-                        @if (Model.Id == new Guid())
-                        {
-                            <input type="submit" value="Create" class="btn btn-primary" />
-                        }
-                        else
-                        {
-                            <input type="submit" value="Update" class="btn btn-warning" />
-                        }
-                    </div>
-                    <div class="col-6 text-right">
-                        <a asp-area="Course" asp-controller="Registration" asp-action="Index">Back to List</a>
-                    </div>
+            <div class="form-group row col">
+                <div class="col-4">
+                    <label asp-for="OldRegistrationId"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="OldRegistrationId" class="form-control" />
+                    <span asp-validation-for="OldRegistrationId" class="text-danger"></span>
                 </div>
             </div>
-        </form>
+        </div>
+        <div class="row align-items-center justify-content-between">
+            <div class="form-group row col-3">
+                <div class="col-7">
+                    <label asp-for="IsPromoted"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="IsPromoted" class="form-control" />
+                    <span asp-validation-for="IsPromoted" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row col-2">
+                <div class="col-7">
+                    <label asp-for="Status" class=""></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Status" class="form-control" />
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row col-3">
+                <div class="col-4">
+                    <label asp-for="RollNo"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="RollNo" class="form-control" />
+                    <span asp-validation-for="RollNo" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <div class="form-group row mb-0">
+        <div class="col-6 text-left">
+            @if (Model.Id == new Guid())
+            {
+                <input type="submit" value="Create" class="btn btn-primary" />
+            }
+            else
+            {
+                <input type="submit" value="Update" class="btn btn-warning" />
+            }
+        </div>
     </div>
 </div>
-
-@section Scripts
-{
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $.ajax({
-                method: "GET",
-                url: "GetAcademicYears",
-                dataType: "json",
-                success: function (data) {
-                    var s = "";
-                    for (var i = 0; i < data.length; i++) {
-                        s += '<option value="' + data[i].value + '">' + data[i].text + '</option>';
-                    }
-                    $("#AcademicYearId").html(s);
-                    populateCourse(data[0].value);
-                }
-            });
-            //populateStudent($("#CourseId").val(), $("#Shift").val());
-
-            $("#AcademicYearId").change(function () {
-                populateCourse(this.value);
-            });
-
-
-            $("#CourseId").change(function () {
-                populateSection(this.value);
-            });
-
-            function populateCourse(yearId) {
-                $.ajax({
-                    method: "GET",
-                    url: "GetCoursesByYear?yearId=" + yearId,
-                    dataType: "json",
-                    success: function (data) {
-                        var s = "";
-                        for (var i = 0; i < data.length; i++) {
-                            s += '<option value="' + data[i].value + '">' + data[i].text + '</option>';
-                        }
-                        $("#CourseId").html(s);
-                        populateSection(data[0].value);
-                    }
-                });
-            }
-
-            function populateSection(courseId) {
-                $.ajax({
-                    method: "GET",
-                    url: "GetSectionsByCourse?courseId=" + courseId,
-                    dataType: "json",
-                    success: function (data) {
-                        var s = "";
-                        for (var i = 0; i < data.length; i++) {
-                            s += '<option value="' + data[i].value + '">' + data[i].text + '</option>';
-                        }
-                        $("#SectionId").html(s);
-                        populateStudent(courseId);
-                    }
-                });
-            }
-
-            function populateStudent(courseId) {
-                $.ajax({
-                    method: "GET",
-                    url: "GetStudents?courseId=" + courseId,
-                    dataType: "json",
-                    success: function (data) {
-                        var s = "";
-                        for (var i = 0; i < data.length; i++) {
-                            s += '<option value="' + data[i].value + '">' + data[i].text + '</option>';
-                        }
-                        $("#StudentId").html(s);
-                    }
-                });
-            }
-        });
-    </script>
-}

@@ -30,7 +30,7 @@
                             <h2 class="card-title">Current Academic Years</h2>
                         </div>
                         <div class="col-md-8 text-right">
-                            <a asp-action="Upsert" asp-controller="AcademicYear" asp-area="Admin" class="btn btn-outline-primary">Add Academic Year</a>
+                            <button type="button" id="addAcademicYear" class="btn btn-outline-primary">Add Academic Year</button>
                         </div>
                     </div>
                 </div>
@@ -60,6 +60,17 @@
     <!-- /.row -->
 </section>
 <!-- /.content -->
+
+
+<div class="modal fade bd-example-modal-lg" id="modal-academicYear" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="contentArea">
+
+        </div>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
 
 @section scripts
 {

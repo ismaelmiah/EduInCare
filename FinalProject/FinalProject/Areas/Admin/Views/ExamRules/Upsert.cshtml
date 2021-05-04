@@ -1,243 +1,122 @@
-﻿@using Foundation.Library.Enums
-@model ExamRulesModel
+﻿@model ExamRulesModel
 
 @{
     ViewData["subtitle"] = "Add ExamRule";
 }
-
-@section Title
-{
-    <title>Create Exam Rule</title>
-}
-
-<div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
-        <div class="card card-info">
-            <div class="card-header">
-                <h3 class="card-title text-center">@ViewData["subtitle"]</h3>
+<div class="modal-header">
+    <h4 class="modal-title">@ViewData["subtitle"]</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form id="examRuleForm" asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="Id" type="hidden" />
+        <div class="row">
+            <div class="form-group row col">
+                <div class="col-3">
+                    <label asp-for="CourseId"></label>
+                </div>
+                <div class="col-9">
+                    <select asp-for="CourseId" asp-items="Model.CourseList" class="form-control"></select>
+                    <span asp-validation-for="CourseId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row col">
+                <div class="col-3">
+                    <label asp-for="SubjectId"></label>
+                </div>
+                <div class="col-9">
+                    <select asp-for="SubjectId" asp-items="Model.SubjectList" class="form-control"></select>
+                    <span asp-validation-for="SubjectId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row col">
+                <div class="col-3">
+                    <label asp-for="ExamId"></label>
+                </div>
+                <div class="col-9">
+                    <select asp-for="ExamId" asp-items="Model.ExamList" class="form-control"></select>
+                    <span asp-validation-for="ExamId" class="text-danger"></span>
+                </div>
             </div>
         </div>
-        <form asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
-            <div class="card-body">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input asp-for="Id" type="hidden" />
-                <div class="row">
-                    <div class="form-group row col">
-                        <div class="col-3">
-                            <label asp-for="CourseId"></label>
-                        </div>
-                        <div class="col-9">
-                            <select asp-for="CourseId" asp-items="Model.CourseList" class="form-control"></select>
-                            <span asp-validation-for="CourseId" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-group row col">
-                        <div class="col-3">
-                            <label asp-for="SubjectId"></label>
-                        </div>
-                        <div class="col-9">
-                            <select asp-for="SubjectId" asp-items="Model.SubjectList" class="form-control"></select>
-                            <span asp-validation-for="SubjectId" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-group row col">
-                        <div class="col-3">
-                            <label asp-for="ExamId"></label>
-                        </div>
-                        <div class="col-9">
-                            <select asp-for="ExamId" asp-items="Model.ExamList" class="form-control"></select>
-                            <span asp-validation-for="ExamId" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-group row col">
-                        <div class="col-3">
-                            <label asp-for="GradeId"></label>
-                        </div>
-                        <div class="col-9">
-                            <select asp-for="GradeId" asp-items="Model.GradeList" class="form-control"></select>
-                            <span asp-validation-for="GradeId" class="text-danger"></span>
-                        </div>
-                    </div>
+        <div class="row">
+            <div class="form-group row col">
+                <div class="col-3">
+                    <label asp-for="GradeId"></label>
                 </div>
-                <div class="row">
-                    <div class="form-group row col-3">
-                        <div class="col-7">
-                            <label asp-for="TotalExamMarks"></label>
-                        </div>
-                        <div class="col-5">
-                            <input readonly="readonly" asp-for="TotalExamMarks" class="form-control" />
-                            <span asp-validation-for="TotalExamMarks" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-group row col-3">
-                        <div class="col-5">
-                            <label asp-for="PassMarks"></label>
-                        </div>
-                        <div class="col-5">
-                            <input readonly="readonly" asp-for="PassMarks" class="form-control" />
-                            <span asp-validation-for="PassMarks" class="text-danger"></span>
-                        </div>
-                    </div>
+                <div class="col-9">
+                    <select asp-for="GradeId" asp-items="Model.GradeList" class="form-control"></select>
+                    <span asp-validation-for="GradeId" class="text-danger"></span>
                 </div>
-                <div class="row mt-3">
-                    <label class="text-info font-weight-bold">Marks Distributions</label>
-                    <table class="table text-center table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Type</th>
-                                <th>Total Marks</th>
-                                <th>Pass Marks</th>
+            </div>
+            <div class="form-group row col">
+                <div class="col-7">
+                    <label asp-for="TotalExamMarks"></label>
+                </div>
+                <div class="col-5">
+                    <input readonly="readonly" asp-for="TotalExamMarks" class="form-control" />
+                    <span asp-validation-for="TotalExamMarks" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row col">
+                <div class="col-5">
+                    <label asp-for="PassMarks"></label>
+                </div>
+                <div class="col-5">
+                    <input readonly="readonly" asp-for="PassMarks" class="form-control" />
+                    <span asp-validation-for="PassMarks" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <label class="text-info font-weight-bold">Marks Distributions</label>
+            <table class="table text-center table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Total Marks</th>
+                        <th>Pass Marks</th>
+                    </tr>
+                </thead>
+                <tbody id="marksdistributionbody">
+                    @if (Model.DistributionModels != null)
+                    {
+                        for (int i = 0; i < Model.DistributionModels.Count; i++)
+                        {
+                            <tr class="text-center">
+                                <td class="w-25">
+                                    <input type="hidden" asp-for="DistributionModels[i].DistributionType" />
+                                    @Model.DistributionModels[i].DistributionType
+                                </td>
+                                <td class="w-25">
+                                    <input asp-for="DistributionModels[i].TotalMarks" class="form-control" />
+                                </td>
+                                <td class="w-25">
+                                    <input asp-for="DistributionModels[i].PassMarks" class="form-control" />
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody id="marksdistributionbody">
-                            @if (Model.DistributionModels != null)
-                            {
-                                for (int i = 0; i < Model.DistributionModels.Count; i++)
-                                {
-                                    <tr class="text-center">
-                                        <td class="w-25">
-                                            <input type="hidden" asp-for="DistributionModels[i].DistributionType" />
-                                            @Model.DistributionModels[i].DistributionType
-                                        </td>
-                                        <td class="w-25">
-                                            <input asp-for="DistributionModels[i].TotalMarks" class="form-control" />
-                                        </td>
-                                        <td class="w-25">
-                                            <input asp-for="DistributionModels[i].PassMarks" class="form-control" />
-                                        </td>
-                                    </tr>
-                                }
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="card-footer">
-                <div class="form-group row mb-0">
-                    <div class="col-6 text-left">
-                        @if (Model.Id == new Guid())
-                        {
-                            <input type="submit" value="Create" class="btn btn-primary" />
                         }
-                        else
-                        {
-                            <input type="submit" value="Update" class="btn btn-warning" />
-                        }
-                    </div>
-                    <div class="col-6 text-right">
-                        <a asp-area="Course" asp-controller="ExamRules" asp-action="Index">Back to List</a>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="col-md-1"></div>
-
+                    }
+                </tbody>
+            </table>
+        </div>
+    </form>
 </div>
-
-@section Scripts
-{
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $.ajax({
-                method: "GET",
-                url: "GetSubjects?courseId=" + $("#CourseId").val(),
-                dataType: "json",
-                success: function(data) {
-                    var s = "";
-                    for (var i = 0; i < data.length; i++) {
-                        s += '<option value="' + data[i].value + '">' + data[i].text + '</option>';
-                    }
-                    $("#SubjectId").html(s);
-                    populateExams($("#CourseId").val());
-                }
-            });
-
-            $("#CourseId").change(function() {
-                populateSubjects(this.value);
-            });
-
-
-            $("#ExamId").change(function() {
-                populateTable(this.value);
-            });
-        
-            $("#GradeId").change(function() {
-                var mark = this.options[this.selectedIndex].text.split(' ')[0];
-                populateMarks(mark);
-            });
-            function populateMarks(mark) {
-                if (mark > 50) {
-                    $('#TotalExamMarks').val(mark);
-                    $('#PassMarks').val(parseInt(mark / 3));
-                } else {
-                    $('#TotalExamMarks').val(mark);
-                    $('#PassMarks').val(parseInt(mark / 3)+1);
-                }
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <div class="form-group row mb-0">
+        <div class="col-6 text-left">
+            @if (Model.Id == new Guid())
+            {
+                <button type="button" id="examRuleSubmit" class="btn btn-primary">Create</button>
             }
-            function populateExams(courseId) {
-                $.ajax({
-                    method: "GET",
-                    url: "GetExams?courseId=" + courseId,
-                    dataType: "json",
-                    success: function(data) {
-                        var s = "";
-                        for (var i = 0; i < data.length; i++) {
-                            s += '<option value="' + data[i].value + '">' + data[i].text + '</option>';
-                        }
-                        $("#ExamId").html(s);
-                        populateMarks($("#GradeId option:selected").text().split(' ')[0]);
-                        populateTable(data[0].value);
-                    }
-                });
+            else
+            {
+                <button type="button" id="examRuleSubmit" class="btn btn-warning">Update</button>
             }
-
-            function populateSubjects(courseId) {
-                $.ajax({
-                    method: "GET",
-                    url: "GetSubjects?courseId=" + courseId,
-                    dataType: "json",
-                    success: function(data) {
-                        var s = "";
-                        for (var i = 0; i < data.length; i++) {
-                            s += '<option value="' + data[i].value + '">' + data[i].text + '</option>';
-                        }
-                        $("#SubjectId").html(s);
-
-                        populateExams(courseId);
-                    }
-                });
-            }
-
-            function populateTable(examId) {
-                $.ajax({
-                    method: "GET",
-                    url: "GetMarkDistributions?examId=" + examId,
-                    dataType: "json",
-                    success: function(data) {
-                        const marksDistribution = data.marksDistributionTypes.split(',');
-                        var s = "";
-                        marksDistribution.forEach((item, index) => {
-                            var row = `<tr>
-                                            <td class="w-25">
-                                                <input type="hidden" id="DistributionModels_${index}__DistributionType" name="DistributionModels[${index}].DistributionType" value="${item}" />
-                                                <label>${item}</label>
-                                            </td>
-                                            <td class="w-25">
-                                                <input class="form-control" id="DistributionModels_[${index}]_TotalMarks" type="number" name="DistributionModels[${index}].TotalMarks" />
-                                            </td>
-                                            <td class="w-25">
-                                                <input class="form-control" id="DistributionModels_${index}__PassMarks" type="number" name="DistributionModels[${index}].PassMarks" />
-                                            </td>
-                                        </tr>`;
-                            s += row;
-                        });
-                        $("#marksdistributionbody").html(s);
-                    }
-                });
-            };
-        });
-    </script>
-}
+</div>
+    </div>
+</div>

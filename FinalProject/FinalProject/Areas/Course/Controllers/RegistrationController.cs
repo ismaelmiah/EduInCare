@@ -26,12 +26,12 @@ namespace FinalProject.Web.Areas.Course.Controllers
             var model = new RegistrationModel();
 
             if (id == null)
-                return View(model);
+                return PartialView(model);
 
             model = model.ModelBuilder.BuildRegistrationModel(id.GetValueOrDefault());
             if (model == null)
                 return NotFound();
-            return View(model);
+            return PartialView(model);
         }
 
         [HttpPost]
@@ -52,7 +52,7 @@ namespace FinalProject.Web.Areas.Course.Controllers
                 }
             }
 
-            return RedirectToAction(nameof(Index));
+            return PartialView(model);
         }
 
         public IActionResult GetAcademicYears()

@@ -26,12 +26,12 @@ namespace FinalProject.Web.Areas.Admin.Controllers
             var model = new CourseModel();
 
             if (id == null)
-                return View(model);
+                return PartialView(model);
 
             model = model.ModelBuilder.BuildCourseModel(id.GetValueOrDefault());
             if (model == null)
                 return NotFound();
-            return View(model);
+            return PartialView(model);
         }
 
         [HttpPost]
@@ -51,7 +51,7 @@ namespace FinalProject.Web.Areas.Admin.Controllers
                     model.ModelBuilder.UpdateCourse(model.Id, model);
                 }
             }
-            return RedirectToRoute(new { Area = "Admin", controller = "Course", action = "Index" });
+            return RedirectToAction(nameof(Index));
         }
 
 

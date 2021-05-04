@@ -33,13 +33,13 @@
                             <h2 class="card-title">Current Subjects</h2>
                         </div>
                         <div class="col-md-8 text-right">
-                            <a asp-action="Upsert" asp-controller="Registration" asp-area="Course" class="btn btn-outline-primary">Register Student</a>
+                            <button id="registerStudent" class="btn btn-outline-primary">Register Student</button>
                         </div>
                     </div>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <partial name="~/Areas/Admin/Views/Shared/_DeletePopupPartial.cshtml"/>
+                    <partial name="~/Areas/Admin/Views/Shared/_DeletePopupPartial.cshtml" />
                     <table id="Registrations" class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -65,6 +65,15 @@
 </section>
 <!-- /.content -->
 
+<div class="modal fade bd-example-modal-lg" id="modal-registration" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="contentArea">
+
+        </div>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
 @section scripts
 {
     <script src="/AdminPanel/plugins/datatables/jquery.dataTables.js"></script>

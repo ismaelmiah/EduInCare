@@ -195,6 +195,7 @@ namespace FinalProject.Web.Areas.Student.Models.ModelBuilder
 
             var student = ConvertToEntityStudent(applicant);
             student.UserId = CreateUser(applicant.Email, applicant.Email, DefaultPassword, applicant.MobileNo, RoleType.Student);
+            student.CourseId = applicant.CourseId;
             
             _studentService.AddStudent(student);
         }

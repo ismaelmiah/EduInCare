@@ -12,7 +12,6 @@ namespace FinalProject.Web.Areas.Course.Models
         public RegistrationModel()
         {
             ModelBuilder = new RegistrationModelBuilder();
-            StudentList = ModelBuilder.GetStudentList();
         }
 
         public Guid Id { get; set; }
@@ -31,11 +30,11 @@ namespace FinalProject.Web.Areas.Course.Models
         public SelectList AcademicYearList { get; set; }
         public int RollNo { get; set; }
         public string IdCardNo { get; set; }
-        [Display(Name = "Board Registration No")]
+        [Display(Name = "Board Registration")]
         public string BoardRegistrationNo { get; set; }
         [Display(Name = "Is Promoted")]
         public bool IsPromoted { get; set; }
-        [Display(Name = "Old Registration No")]
+        [Display(Name = "Old Registration")]
         public string OldRegistrationId { get; set; }
         public bool Status { get; set; }
     }

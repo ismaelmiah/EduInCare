@@ -1,4 +1,21 @@
 ﻿$(function () {
+    $("#addSubject").on('click', function () {
+        var modal = $("#modal-subject");
+        modal.modal('show');
+        $.ajax({
+            method: "GET",
+            url: "Subject/Upsert"
+        }).done(function (response) {
+            $("#contentArea").html(response);
+            $("#modal-subject").modal('toggle');
+        }).fail(function (xhr, ajaxOptions, thrownError) {
+            //console.log(xhr.status);
+            //console.log(thrownError);
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('Marks not entered! Please enter mark for this exam!');
+        });
+    });
+
     $('#subjects').DataTable({
         "processing": true,
         "serverSide": true,

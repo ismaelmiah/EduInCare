@@ -150,18 +150,10 @@ namespace FinalProject.Web.Areas.Course.Models.ModelBuilder
             return new SelectList(_academic.GetAcademicYears(), "Id", "Title", selectedItem);
         }
 
-        //public SelectList GetStudentList(Guid courseId, int shift)
-        //{
-        //    var studentList = _student.GetStudents(courseId.Select(x => 
-        //        new {x.Id, Name = $"{x.FirstName} {x.MiddleName} {x.LastName}" }).ToList();
-
-        //    return new SelectList(studentList, "Id", "Name");
-        //}
-
-        public SelectList GetStudentList(object studentId = null)
+        public SelectList GetStudentList(Guid courseId, object studentId = null)
         {
-            var studentList = _student.GetStudents().Select(x => 
-                new {x.Id, Name = $"{x.FirstName} {x.MiddleName} {x.LastName}" }).ToList();
+            var studentList = _student.GetStudents(x => x.CourseId == courseId)
+                .Select(x => new {x.Id, Name = $"{x.FirstName} {x.MiddleName} {x.LastName}" }).ToList();
 
             return new SelectList(studentList, "Id", "Name", studentId);
         }
