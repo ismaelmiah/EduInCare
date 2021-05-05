@@ -65,6 +65,14 @@
 });
 
 var LoadFormData = function() {
+
+    $("#DepartmentId").select2({
+        width: 'resolve'
+    });
+    $("#AcademicYearId").select2({
+        width: 'resolve'
+    });
+
     $('#HaveCompulsorySubject').change(function () {
         if ($(this).is(":checked")) {
             $("#MaxCompulsorySubjectDiv").css("visibility", "visible");

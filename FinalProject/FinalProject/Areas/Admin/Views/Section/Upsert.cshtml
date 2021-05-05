@@ -39,7 +39,7 @@
                         <label asp-for="CourseId"></label>
                     </div>
                     <div class="col-8">
-                        <select asp-for="CourseId" asp-items="Model.CourseList" class="form-control"></select>
+                        <select style="width: 100%" asp-for="CourseId" asp-items="Model.CourseList" class="form-control"></select>
                         <span asp-validation-for="CourseId" class="text-danger"></span>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                         <label for="TeacherId">Adviser </label>
                     </div>
                     <div class="col-8">
-                        <select asp-for="TeacherId" asp-items="Model.TeacherList" class="form-control"></select>
+                        <select style="width: 100%" asp-for="TeacherId" asp-items="Model.TeacherList" class="form-control"></select>
                         <span asp-validation-for="TeacherId" class="text-danger"></span>
                     </div>
                 </div>

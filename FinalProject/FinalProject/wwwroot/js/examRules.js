@@ -1,4 +1,6 @@
 ﻿$(document).ready(function () {
+    $("#CourseId").select2();
+
     $("#addExamRule").on('click', function () {
         var modal = $("#modal-examrules");
         modal.modal('show');
@@ -112,6 +114,12 @@ var LoadFormData = function () {
             populateExams($("#CourseId").val());
         }
     });
+
+    $("#CourseId").select2();
+    $("#SubjectId").select2();
+    $("#ExamId").select2();
+    $("#GradeId").select2();
+
 
     $("#CourseId").change(function () {
         populateSubjects(this.value);

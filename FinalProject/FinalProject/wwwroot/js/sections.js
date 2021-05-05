@@ -64,7 +64,14 @@
     });
 });
 
-var LoadFormData = function() {
+var LoadFormData = function () {
+    $("#CourseId").select2({
+        width: 'resolve'
+    });
+    $("#TeacherId").select2({
+        width: 'resolve'
+    });
+
     $("#sectionSubmit").click(function () {
         $("#sectionForm").submit();
     });

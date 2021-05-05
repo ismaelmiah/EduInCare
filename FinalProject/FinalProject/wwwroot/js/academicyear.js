@@ -24,7 +24,7 @@
         "columnDefs": [
             {
                 "orderable": false,
-                "targets": 5,
+                "targets": 6,
                 "render": function (data, type, row) {
                     return `
                                     <button class="btn btn-info btn-sm" onclick="window.location.href='/admin/AcademicYear/profile/${data}'" value='${data}'>

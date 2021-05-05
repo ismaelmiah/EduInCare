@@ -81,6 +81,19 @@ var LoadFormData = function () {
         }
     });
 
+    $("#AcademicYearId").select2({
+        width: 'resolve'
+    });
+    $("#CourseId").select2({
+        width: 'resolve'
+    });
+    $("#SectionId").select2({
+        width: 'resolve'
+    });
+    $("#StudentId").select2({
+        width: 'resolve'
+    });
+
     $("#AcademicYearId").change(function () {
         populateCourse(this.value);
     });

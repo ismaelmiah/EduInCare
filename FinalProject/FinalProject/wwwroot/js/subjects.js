@@ -8,6 +8,10 @@
         }).done(function (response) {
             $("#contentArea").html(response);
             $("#modal-subject").modal('toggle');
+
+            $("#CourseId").select2({
+                width: 'resolve'
+            });
         }).fail(function (xhr, ajaxOptions, thrownError) {
             //console.log(xhr.status);
             //console.log(thrownError);
