@@ -30,6 +30,8 @@ namespace Foundation.Library.Entities
         public virtual ICollection<Mark> Marks { get; set; }
         public virtual ICollection<Result> Results { get; set; }
         public virtual Registration Registration { get; set; }
+        public Guid CourseId { get; set; }
+        public virtual Course Course { get; set; }
         public bool Status { get; set; }
     }
 }

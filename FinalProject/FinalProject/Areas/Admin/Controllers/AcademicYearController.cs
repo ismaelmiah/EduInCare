@@ -26,12 +26,12 @@ namespace FinalProject.Web.Areas.Admin.Controllers
             var model = new AcademicYearModel();
 
             if (id == null)
-                return View(model);
+                return PartialView(model);
 
             model = model.ModelBuilder.BuildAcademicYearModel(id.GetValueOrDefault());
             if (model == null)
                 return NotFound();
-            return View(model);
+            return PartialView(model);
         }
 
         [HttpPost]

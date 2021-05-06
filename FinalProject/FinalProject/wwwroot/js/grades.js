@@ -1,4 +1,24 @@
 ﻿$(function () {
+
+    $("#addGrade").on('click', function () {
+        var modal = $("#modal-grade");
+        modal.modal('show');
+        $.ajax({
+            method: "GET",
+            url: "Grade/Upsert"
+        }).done(function (response) {
+            $("#contentArea").html(response);
+            $("#modal-grade").modal('toggle');
+            LoadFormData();
+        }).fail(function (xhr, ajaxOptions, thrownError) {
+            //console.log(xhr.status);
+            //console.log(thrownError);
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('Marks not entered! Please enter mark for this exam!');
+        });
+    });
+
+
     $('#grades').DataTable({
         "processing": true,
         "serverSide": true,
@@ -66,3 +86,9 @@
     });
 
 });
+
+var LoadFormData = function() {
+    $("#gradeSubmit").click(function () {
+        $("#gradeFrom").submit();
+    });
+}

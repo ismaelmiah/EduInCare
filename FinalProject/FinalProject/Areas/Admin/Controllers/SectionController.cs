@@ -18,12 +18,12 @@ namespace FinalProject.Web.Areas.Admin.Controllers
             var model = new SectionModel();
 
             if (id == null)
-                return View(model);
+                return PartialView(model);
 
             model = model.ModelBuilder.BuildSectionModel(id.GetValueOrDefault());
             if (model == null)
                 return NotFound();
-            return View(model);
+            return PartialView(model);
         }
 
         [HttpPost]
@@ -43,7 +43,7 @@ namespace FinalProject.Web.Areas.Admin.Controllers
                     model.ModelBuilder.UpdateSection(model.Id, model);
                 }
             }
-            return RedirectToRoute(new { Area = "Admin", controller = "Section", action = "Index" });
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Delete(Guid id)

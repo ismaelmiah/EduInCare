@@ -1,4 +1,23 @@
 ﻿$(function () {
+
+    $("#addCourse").on('click', function () {
+        var modal = $("#modal-course");
+        modal.modal('show');
+        $.ajax({
+            method: "GET",
+            url: "Course/Upsert"
+        }).done(function (response) {
+            $("#contentArea").html(response);
+            $("#modal-course").modal('toggle');
+            LoadFormData();
+        }).fail(function (xhr, ajaxOptions, thrownError) {
+            //console.log(xhr.status);
+            //console.log(thrownError);
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('Marks not entered! Please enter mark for this exam!');
+        });
+    });
+
     $('#courses').DataTable({
         "processing": true,
         "serverSide": true,
@@ -44,3 +63,26 @@
         $("#deleteForm").submit();
     });
 });
+
+var LoadFormData = function() {
+
+    $("#DepartmentId").select2({
+        width: 'resolve'
+    });
+    $("#AcademicYearId").select2({
+        width: 'resolve'
+    });
+
+    $('#HaveCompulsorySubject').change(function () {
+        if ($(this).is(":checked")) {
+            $("#MaxCompulsorySubjectDiv").css("visibility", "visible");
+        }
+        else {
+            $("#MaxCompulsorySubjectDiv").css("visibility", "hidden");
+        }
+    });
+
+    $("#courseSubmit").click(function () {
+        $("#courseForm").submit();
+    });
+}

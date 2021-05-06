@@ -31,7 +31,7 @@
                             <h2 class="card-title">Current Sections</h2>
                         </div>
                         <div class="col-md-8 text-right">
-                            <a asp-action="Upsert" asp-controller="Section" asp-area="Admin" class="btn btn-outline-primary">Add Section</a>
+                            <button id="addSection" class="btn btn-outline-primary">Add Section</button>
                         </div>
                     </div>
                 </div>
@@ -63,6 +63,15 @@
 </section>
 <!-- /.content -->
 
+<div class="modal fade bd-example-modal-lg" id="modal-section" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="contentArea">
+
+        </div>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
 @section scripts
 {
     <script src="/AdminPanel/plugins/datatables/jquery.dataTables.js"></script>

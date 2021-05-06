@@ -18,12 +18,12 @@ namespace FinalProject.Web.Areas.Admin.Controllers
             var model = new GradeModel();
 
             if (id == null)
-                return View(model);
+                return PartialView(model);
 
             model = model.ModelBuilder.BuildGradeModel(id.GetValueOrDefault());
             if (model == null)
                 return NotFound();
-            return View(model);
+            return PartialView(model);
         }
 
         [HttpPost]

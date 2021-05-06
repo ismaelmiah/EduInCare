@@ -1,4 +1,22 @@
 ﻿$(function () {
+    $("#addAcademicYear").on('click', function() {
+        var modal = $("#modal-academicYear");
+        modal.modal('show');
+        $.ajax({
+            method: "GET",
+            url: "AcademicYear/Upsert"
+        }).done(function (response) {
+            $("#contentArea").html(response);
+            $("#modal-academicYear").modal('toggle');
+            LoadFormData();
+        }).fail(function (xhr, ajaxOptions, thrownError) {
+            //console.log(xhr.status);
+            //console.log(thrownError);
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('Marks not entered! Please enter mark for this exam!');
+        });
+    });
+
     $('#academicyear').DataTable({
         "processing": true,
         "serverSide": true,
@@ -6,7 +24,7 @@
         "columnDefs": [
             {
                 "orderable": false,
-                "targets": 5,
+                "targets": 6,
                 "render": function (data, type, row) {
                     return `
                                     <button class="btn btn-info btn-sm" onclick="window.location.href='/admin/AcademicYear/profile/${data}'" value='${data}'>
@@ -44,3 +62,25 @@
         $("#deleteForm").submit();
     });
 });
+
+var LoadFormData = function () {
+
+    var date = new Date();
+
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
+
+    var today = year + "-" + month + "-" + day;
+
+
+    document.getElementById('StartDate').value = today;
+    document.getElementById('EndDate').value = today;
+
+    $("#academicYearSubmit").click(function () {
+        $("#academicYearForm").submit();
+    });
+}

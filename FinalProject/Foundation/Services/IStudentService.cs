@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using Foundation.Library.Entities;
-using Foundation.Library.Enums;
 
 namespace Foundation.Library.Services
 {
@@ -14,7 +14,6 @@ namespace Foundation.Library.Services
         void Delete(Guid id);
         Student GetStudent(Guid id);
         void Update(Student student);
-        IList<Student> GetStudents();
-        IList<Student> GetStudents(Guid courseId, Guid sectionId);
+        IList<Student> GetStudents(Expression<Func<Student, bool>> filter);
     }
 }

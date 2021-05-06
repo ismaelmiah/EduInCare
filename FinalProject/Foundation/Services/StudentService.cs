@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Foundation.Library.Entities;
 using Foundation.Library.UnitOfWorks;
 
@@ -75,16 +76,9 @@ namespace Foundation.Library.Services
             _management.StudentRepository.Edit(student);
             _management.Save();
         }
-
-        public IList<Student> GetStudents()
+        public IList<Student> GetStudents(Expression<Func<Student, bool>> filter)
         {
-            return _management.StudentRepository.GetAll();
-        }
-
-        public IList<Student> GetStudents(Guid courseId, Guid sectionId)
-        {
-            var studentsByCourseId = _management.StudentRepository.Get(null);
-            return studentsByCourseId;
+            return _management.StudentRepository.Get(filter);
         }
     }
 }

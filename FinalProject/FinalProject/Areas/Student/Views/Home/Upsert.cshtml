@@ -4,7 +4,6 @@
 @{
     ViewData["Title"] = "Student Application";
     ViewData["subtitle"] = "Admission Form";
-    Layout = "_StudentLayout";
     if (Model.Id != new Guid())
     {
         //edit
@@ -205,7 +204,17 @@
         }
 
         $(document).ready(function () {
+            
 
+            $("#Gender").select2({
+                width: 'resolve'
+            });
+            $("#Religion").select2({
+                width: 'resolve'
+            });
+            $("#BloodGroup").select2({
+                width: 'resolve'
+            });
 
             populateSubject($("#CourseId option:selected").val());
             $("#CourseId").change(function () {
