@@ -21,7 +21,7 @@ namespace FinalProject.Web.Areas.Employee.Models
         }
         public Guid Id { get; set; }
         public string Name { get; set; }
-        [Display(Name = "National Identification Number")]
+        [Display(Name = "NID Number")]
         public string Nid { get; set; }
         public Gender Gender { get; set; }
         public string MobileNo { get; set; }

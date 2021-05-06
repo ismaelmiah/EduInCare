@@ -23,9 +23,9 @@ namespace FinalProject.Web.Areas.Student.Models
         public string LastName { get; set; }
         [Display(Name = "Date Of Birth")]
         public DateTime DateOfBirth { get; set; }
-        [Display(Name = "Birth Certificate Number")]
+        [Display(Name = "Birth Certificate")]
         public string BirthCertificateNo { get; set; }
-        [Display(Name = "National Identification Number")]
+        [Display(Name = "NID Number")]
         public string NationalIdentificationNo { get; set; }
         public Gender Gender { get; set; }
         public Religion Religion { get; set; }

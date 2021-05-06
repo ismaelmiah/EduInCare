@@ -12,10 +12,6 @@
     }
 
 }
-@section Styles
-{
-    <link href="~/css/chosen.min.css" rel="stylesheet" />
-}
 <div class="row">
         <div class="card card-info">
             <div class="card-header">
@@ -89,7 +85,7 @@
                                 </div>
                                 <div class="form-group col">
                                     <label asp-for="Role"></label>
-                                    <select style="width: 100%" class="form-control" asp-for="Role" asp-items="Html.GetEnumSelectList<RoleType>()"></select>
+                                    <select style="width: 100%" asp-for="Role" asp-items="Html.GetEnumSelectList<RoleType>()"></select>
                                     <span asp-validation-for="Role" class="text-danger"></span>
                                 </div>
                             </div>
@@ -131,7 +127,7 @@
                                 </div>
                                 <div class="form-group col">
                                     <label asp-for="Shift"></label>
-                                    <select asp-for="Shift" asp-items="Html.GetEnumSelectList<WorkShift>()" class="form-control"></select>
+                                    <select style="width: 100%" asp-for="Shift" asp-items="Html.GetEnumSelectList<WorkShift>()" class="form-control"></select>
                                     <span asp-validation-for="Shift" class="text-danger"></span>
                                 </div>
                             </div>
@@ -182,45 +178,48 @@
 {
     
     <script>
-        //$(".chosen").chosen({ width: "100%", display_disabled_options: true, placeholder_text_multiple: "Select Your Qualifications" });
-        $(".chosen").select2({
-            closeOnSelect: true,
-            placeholder: "Qualifications",
-            allowClear: true,
-            width: 'resolve'
-        });
-        $("#Role").select2({
-            width: 'resolve'
-        });
-        $("#DesignationId").select2({
-            width: 'resolve'
-        });
-        $("#Shift").select2({
-            width: 'resolve'
+        $(document).ready(function () {
+            $.fn.select2.defaults.reset();
+            $(".chosen").select2({
+                closeOnSelect: true,
+                placeholder: "Qualifications",
+                allowClear: true,
+                width: 'resolve'
+            });
+            $("#Role").select2({
+                width: 'resolve',
+                selectOnClose: true
+            });
+            $("#DesignationId").select2();
+            $("#Shift").select2({
+                width: 'resolve'
+            });
+
+            
+            var imageTag = document.getElementById('blah');
+            imageTag.style.border = "2px solid";
+            imageTag.style.paddingTop = "100px";
+            imageTag.style.paddingBottom = "100px";
+            imageTag.style.paddingLeft = "75px";
+            imageTag.style.paddingRight = "75px";
+            if (imageTag.src !== "#") {
+                imageTag.style.removeProperty('padding');
+                imageTag.style.removeProperty('border');
+            }
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        document.getElementById('blah').style.removeProperty('padding');
+                        document.getElementById('blah').style.removeProperty('border');
+                        document.getElementById('blah').src = e.target.result;
+                        document.getElementById('blah').width = 220;
+                        document.getElementById('blah').height = 200;
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
         });
 
-        var imageTag = document.getElementById('blah');
-        imageTag.style.border = "2px solid";
-        imageTag.style.paddingTop = "100px";
-        imageTag.style.paddingBottom = "100px";
-        imageTag.style.paddingLeft = "75px";
-        imageTag.style.paddingRight = "75px";
-        if (imageTag.src !== "#") {
-            imageTag.style.removeProperty('padding');
-            imageTag.style.removeProperty('border');
-        }
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    document.getElementById('blah').style.removeProperty('padding');
-                    document.getElementById('blah').style.removeProperty('border');
-                    document.getElementById('blah').src = e.target.result;
-                    document.getElementById('blah').width = 220;
-                    document.getElementById('blah').height = 200;
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
     </script>
 }
