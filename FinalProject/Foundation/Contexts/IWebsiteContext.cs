@@ -28,5 +28,15 @@ namespace Foundation.Library.Contexts
         DbSet<Grade> Grades { get; set; }
         DbSet<Mark> Marks { get; set; }
         DbSet<Result> Results { get; set; }
+        
+        /// <summary>
+        /// Website Content Entities
+        /// </summary>
+        DbSet<Sliders> Sliders { get; set; }
+        DbSet<Events> Events { get; set; }
+        DbSet<AboutContent> AboutContents { get; set; }
+        DbSet<Testimonials> Testimonials { get; set; }
+        DbSet<ClassProfiles> ClassProfiles { get; set; }
+        DbSet<TeacherProfiles> TeacherProfiles { get; set; }
     }
 }

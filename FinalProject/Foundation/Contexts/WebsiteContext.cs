@@ -276,5 +276,15 @@ namespace Foundation.Library.Contexts
         public DbSet<Grade> Grades { get; set; }
         public DbSet<Mark> Marks { get; set; }
         public DbSet<Result> Results { get; set; }
+
+        /// <summary>
+        /// Website Content Entities
+        /// </summary>
+        public DbSet<Sliders> Sliders { get; set; }
+        public DbSet<Events> Events { get; set; }
+        public DbSet<AboutContent> AboutContents { get; set; }
+        public DbSet<Testimonials> Testimonials { get; set; }
+        public DbSet<ClassProfiles> ClassProfiles { get; set; }
+        public DbSet<TeacherProfiles> TeacherProfiles { get; set; }
     }
 }
