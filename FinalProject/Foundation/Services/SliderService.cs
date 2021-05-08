@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using Foundation.Library.BaseServices;
 using Foundation.Library.Entities;
 using Foundation.Library.UnitOfWorks;
 
 namespace Foundation.Library.Services
 {
-    public class SliderService : IBaseService<Sliders>
+    public interface ISliderService : IBaseService<Sliders>
+    {
+
+    }
+    public class SliderService : ISliderService
     {
         private readonly IWebsiteUnitOfWork _website;
 

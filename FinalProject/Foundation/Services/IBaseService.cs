@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Foundation.Library.Services
+namespace Foundation.Library.BaseServices
 {
     public interface IBaseService<T> where T: class
     {

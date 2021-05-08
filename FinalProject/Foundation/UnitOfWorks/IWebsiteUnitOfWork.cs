@@ -13,11 +13,11 @@ namespace Foundation.Library.UnitOfWorks
         IPostRepository Post { get; set; }
         INoticeRepository Notice { get; set; }
         IAdvertiseRepository Advertise { get; set; }
-        IRepository<Sliders, Guid, WebsiteContext> SliderRepository { get; set; }
-        IRepository<AboutContent, Guid, WebsiteContext> AboutContentRepository { get; set; }
-        IRepository<Testimonials, Guid, WebsiteContext> TestimonialRepository { get; set; }
-        IRepository<Events, Guid, WebsiteContext> EventsRepository { get; set; }
-        IRepository<ClassProfiles, Guid, WebsiteContext> ClassProfileRepository { get; set; }
-        IRepository<TeacherProfiles, Guid, WebsiteContext> TeacherProfileRepository { get; set; }
+        ISliderRepository SliderRepository { get; set; }
+        IAboutContentRepository AboutContentRepository { get; set; }
+        ITestimonialRepository TestimonialRepository { get; set; }
+        IEventsRepository EventsRepository { get; set; }
+        IClassProfilesRepository ClassProfileRepository { get; set; }
+        ITeacherProfilesRepository TeacherProfileRepository { get; set; }
     }
 }

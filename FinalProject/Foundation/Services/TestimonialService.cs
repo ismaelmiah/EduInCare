@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using Foundation.Library.BaseServices;
 using Foundation.Library.Entities;
 using Foundation.Library.UnitOfWorks;
 
 namespace Foundation.Library.Services
 {
-    public class TestimonialService : IBaseService<Testimonials>
+    public interface ITestimonialService : IBaseService<Testimonials>
+    {
+
+    }
+    public class TestimonialService : ITestimonialService
     {
         private readonly IWebsiteUnitOfWork _website;
 

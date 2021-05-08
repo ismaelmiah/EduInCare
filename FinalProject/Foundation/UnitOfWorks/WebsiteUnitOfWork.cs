@@ -13,13 +13,13 @@ namespace Foundation.Library.UnitOfWorks
             IFooterRepository footer,
             INoticeRepository notice,
             IAdvertiseRepository advertise,
-            IPostRepository post, 
-            IRepository<Sliders, Guid, WebsiteContext> sliderRepository,
-            IRepository<AboutContent, Guid, WebsiteContext> aboutContentRepository,
-            IRepository<Testimonials, Guid, WebsiteContext> testimonialRepository,
-            IRepository<Events, Guid, WebsiteContext> eventsRepository,
-            IRepository<ClassProfiles, Guid, WebsiteContext> classProfileRepository,
-            IRepository<TeacherProfiles, Guid, WebsiteContext> teacherProfileRepository) : base(dbContext)
+            IPostRepository post,
+            ISliderRepository sliderRepository,
+            IAboutContentRepository aboutContentRepository,
+            ITestimonialRepository testimonialRepository,
+            IEventsRepository eventsRepository,
+            IClassProfilesRepository classProfileRepository,
+            ITeacherProfilesRepository teacherProfileRepository) : base(dbContext)
         {
             Header = header;
             Footer = footer;
@@ -39,11 +39,11 @@ namespace Foundation.Library.UnitOfWorks
         public IPostRepository Post { get; set; }
         public INoticeRepository Notice { get; set; }
         public IAdvertiseRepository Advertise { get; set; }
-        public IRepository<Sliders, Guid, WebsiteContext> SliderRepository { get; set; }
-        public IRepository<AboutContent, Guid, WebsiteContext> AboutContentRepository { get; set; }
-        public IRepository<Testimonials, Guid, WebsiteContext> TestimonialRepository { get; set; }
-        public IRepository<Events, Guid, WebsiteContext> EventsRepository { get; set; }
-        public IRepository<ClassProfiles, Guid, WebsiteContext> ClassProfileRepository { get; set; }
-        public IRepository<TeacherProfiles, Guid, WebsiteContext> TeacherProfileRepository { get; set; }
+        public ISliderRepository SliderRepository { get; set; }
+        public IAboutContentRepository AboutContentRepository { get; set; }
+        public ITestimonialRepository TestimonialRepository { get; set; }
+        public IEventsRepository EventsRepository { get; set; }
+        public IClassProfilesRepository ClassProfileRepository { get; set; }
+        public ITeacherProfilesRepository TeacherProfileRepository { get; set; }
     }
 }

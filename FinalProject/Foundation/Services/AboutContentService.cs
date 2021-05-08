@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using Foundation.Library.BaseServices;
 using Foundation.Library.Entities;
 using Foundation.Library.UnitOfWorks;
 
 namespace Foundation.Library.Services
 {
-    public class AboutContentService : IBaseService<AboutContent>
+    public interface IAboutContentService : IBaseService<AboutContent>
+    {
+
+    }
+    public class AboutContentService: IAboutContentService
     {
         private readonly IWebsiteUnitOfWork _website;
 
