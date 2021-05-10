@@ -4,16 +4,16 @@ using Foundation.Library.Services;
 
 namespace FinalProject.Web.Areas.Administrative.Models.ModelBuilder
 {
-    public class SliderModelBuilder
+    public class HomePageModelBuilder
     {
         private readonly ISliderService _sliderService;
 
-        public SliderModelBuilder(ISliderService sliderService)
+        public HomePageModelBuilder(ISliderService sliderService)
         {
             _sliderService = sliderService;
         }
 
-        public SliderModelBuilder()
+        public HomePageModelBuilder()
         {
             _sliderService = Startup.AutofacContainer.Resolve<ISliderService>();
         }

@@ -15,8 +15,9 @@
     <header>
             @await RenderSectionAsync("HeaderModel", false)
     </header>
-            @RenderBody()
-
+    <main>
+        @RenderBody()
+    </main>
     <footer class="border-top footer text-muted">
         @await RenderSectionAsync("FooterModel", false)
     </footer>
