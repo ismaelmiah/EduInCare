@@ -1,105 +1,143 @@
 ﻿@model HomePageModel
 
 @{
-    ViewData["subtitle"] = "Add Academic Year";
+    ViewData["subtitle"] = "Home Page";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLTE.cshtml";
 }
 @section Title
 {
     <title>Homepage Settings</title>
 }
-<div class="row">
-    <div class="card card-info">
-        <div class="card-header">
-            <h3 class="card-title text-center">@ViewData["subtitle"]</h3>
-        </div>
+<div class="card card-info">
+    <div class="card-header">
+        <h3 class="card-title text-center">@ViewData["subtitle"]</h3>
     </div>
-    <form asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Homepage">
-        <div class="card-body">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="row">
-                    @for (var i = 0; i < Model.Sliders.Count; i++)
-                    {
-                        <partial name="_Slider" model="Model.Sliders[i]" />
-                    }
-                    @for (int i = 0; i < Model.FeatureInfos.Count; i++)
-                    {
-                        <partial name="_FeatureInfo" model="Model.FeatureInfos[i]" />
-                    }
-                    <div class="form-group row">
-                        <div class="col-4">
-                            <label asp-for="FacilitiesModel.Heading"></label>
-                        </div>
-                        <div class="col-8">
-                            <input asp-for="FacilitiesModel.Heading" type="Date" class="form-control" />
-                            <span asp-validation-for="FacilitiesModel.Heading" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-4">
-                            <label asp-for="FacilitiesModel.Description"></label>
-                        </div>
-                        <div class="col-8">
-                            <textarea asp-for="FacilitiesModel.Description" class="form-control"></textarea>
-                            <span asp-validation-for="FacilitiesModel.Description" class="text-danger"></span>
-                        </div>
-                    </div>
-                    @for (int i = 0; i < Model.FacilitiesModel.FeatureInfos.Count; i++)
-                    {
-                        <partial name="_FeatureInfo" model="Model.FacilitiesModel.FeatureInfos[i]" />
-                    }
-                    <div class="form-group row">
-                        <div class="col-4">
-                            <label asp-for="EventsModel.Heading"></label>
-                        </div>
-                        <div class="col-8">
-                            <input asp-for="EventsModel.Heading" type="Date" class="form-control" />
-                            <span asp-validation-for="EventsModel.Heading" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-4">
-                            <label asp-for="EventsModel.Description"></label>
-                        </div>
-                        <div class="col-8">
-                            <textarea asp-for="EventsModel.Description" class="form-control"></textarea>
-                            <span asp-validation-for="EventsModel.Description" class="text-danger"></span>
-                        </div>
-                    </div>
-                    @for (int i = 0; i < Model.EventsModel.EventItems.Count; i++)
-                    {
-                        <partial name="_FeatureInfo" model="Model.EventsModel.EventItems[i]" />
-                    }
-                    <div class="form-group row">
-                        <div class="col-4">
-                            <label asp-for="TestimonialsModel.Heading"></label>
-                        </div>
-                        <div class="col-8">
-                            <input asp-for="TestimonialsModel.Heading" type="Date" class="form-control" />
-                            <span asp-validation-for="TestimonialsModel.Heading" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-4">
-                            <label asp-for="TestimonialsModel.Description"></label>
-                        </div>
-                        <div class="col-8">
-                            <textarea asp-for="TestimonialsModel.Description" class="form-control"></textarea>
-                            <span asp-validation-for="TestimonialsModel.Description" class="text-danger"></span>
-                        </div>
-                    </div>
-                    @for (int i = 0; i < Model.TestimonialsModel.TestimonialItemModels.Count; i++)
-                    {
-                        <partial name="_FeatureInfo" model="Model.TestimonialsModel.TestimonialItemModels[i]" />
-                    }
-                </div>
+</div>
+<form asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Homepage">
+    <div class="card-body">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <label class="text-cyan font-weight-bold">Slider</label>
         </div>
-        <div class="card-footer">
-            <div class="form-group row mb-0">
-                <div class="col-6 text-left">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                </div>
+        @if (Model.Sliders != null)
+        {
+            for (var i = 0; i < Model.Sliders.Count; i++)
+            {
+                <partial name="_Slider" model="Model.Sliders[i]" />
+            }
+        }
+        <div class="row justify-content-end">
+            <button class="btn btn-primary">Add Slide</button>
+        </div>
+        <div class="form-group row">
+            <label class="text-cyan font-weight-bold">Feature Info</label>
+        </div>
+        @if (Model.FeatureInfos != null)
+        {
+            for (int i = 0; i < Model.FeatureInfos.Count; i++)
+            {
+                <partial name="_FeatureInfo" model="Model.FeatureInfos[i]" />
+            }
+        }
+        <div class="row justify-content-end">
+            <button class="btn btn-primary">Add Feature</button>
+        </div>
+        <div class="form-group row">
+            <label class="text-cyan font-weight-bold">Facility</label>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="FacilitiesModel.Heading"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="FacilitiesModel.Heading" class="form-control" />
+                <span asp-validation-for="FacilitiesModel.Heading" class="text-danger"></span>
             </div>
         </div>
-    </form>
-</div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="FacilitiesModel.Description"></label>
+            </div>
+            <div class="col-8">
+                <textarea asp-for="FacilitiesModel.Description" class="form-control"></textarea>
+                <span asp-validation-for="FacilitiesModel.Description" class="text-danger"></span>
+            </div>
+        </div>
+        @if (Model.FacilitiesModel.FeatureInfos != null)
+        {
+            for (int i = 0; i < Model.FacilitiesModel.FeatureInfos.Count; i++)
+            {
+                <partial name="_FeatureInfo" model="Model.FacilitiesModel.FeatureInfos[i]" />
+            }
+        }
+        <div class="row justify-content-end">
+            <button class="btn btn-primary">Add Facility</button>
+        </div>
+        <div class="form-group row">
+            <label class="text-cyan font-weight-bold">Events</label>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="EventsModel.Heading"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="EventsModel.Heading" class="form-control" />
+                <span asp-validation-for="EventsModel.Heading" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="EventsModel.Description"></label>
+            </div>
+            <div class="col-8">
+                <textarea asp-for="EventsModel.Description" class="form-control"></textarea>
+                <span asp-validation-for="EventsModel.Description" class="text-danger"></span>
+            </div>
+        </div>
+        @if (Model.EventsModel.EventItems != null)
+        {
+            for (int i = 0; i < Model.EventsModel.EventItems.Count; i++)
+            {
+                <partial name="_FeatureInfo" model="Model.EventsModel.EventItems[i]" />
+            }
+        }
+        <div class="row justify-content-end">
+            <button class="btn btn-primary">Add Event</button>
+        </div>
+        <div class="form-group row">
+            <label class="text-cyan font-weight-bold">Testimonials</label>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="TestimonialsModel.Heading"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="TestimonialsModel.Heading" type="Date" class="form-control" />
+                <span asp-validation-for="TestimonialsModel.Heading" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="TestimonialsModel.Description"></label>
+            </div>
+            <div class="col-8">
+                <textarea asp-for="TestimonialsModel.Description" class="form-control"></textarea>
+                <span asp-validation-for="TestimonialsModel.Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row justify-content-end">
+            <button class="btn btn-primary">Add Testimonial</button>
+        </div>
+        @*@for (int i = 0; i < Model.TestimonialsModel.TestimonialItemModels.Count; i++)
+        {
+            <partial name="_FeatureInfo" model="Model.TestimonialsModel.TestimonialItemModels[i]" />
+        }*@
+    </div>
+    <div class="card-footer">
+        <div class="form-group row mb-0">
+            <div class="col-6 text-left">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>

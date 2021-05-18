@@ -12,6 +12,9 @@ namespace FinalProject.Web.Areas.Administrative.Models
         public HomePageModel()
         {
             ModelBuilder = new HomePageModelBuilder();
+            FacilitiesModel = new FacilitiesModel();
+            EventsModel = new EventsModel();
+            TestimonialsModel = new TestimonialsModel();
         }
 
         public IList<SliderModel> Sliders { get; set; }
@@ -36,6 +39,10 @@ namespace FinalProject.Web.Areas.Administrative.Models
 
     public class FacilitiesModel
     {
+        public FacilitiesModel()
+        {
+            FeatureInfos = new List<FeatureInfoModel>();
+        }
         public string Heading { get; set; }
         public string Description { get; set; }
         public List<FeatureInfoModel> FeatureInfos { get; set; }
@@ -43,6 +50,10 @@ namespace FinalProject.Web.Areas.Administrative.Models
 
     public class EventsModel
     {
+        public EventsModel()
+        {
+            EventItems = new List<EventItemModel>();
+        }
         public string Heading { get; set; }
         public string Description { get; set; }
         public List<EventItemModel> EventItems { get; set; }
@@ -57,6 +68,10 @@ namespace FinalProject.Web.Areas.Administrative.Models
 
     public class TestimonialsModel
     {
+        public TestimonialsModel()
+        {
+            TestimonialItemModels = new List<TestimonialItemModel>();
+        }
         public string Heading { get; set; }
         public string Description { get; set; }
         public List<TestimonialItemModel> TestimonialItemModels { get; set; }

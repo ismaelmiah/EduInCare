@@ -9,17 +9,7 @@ namespace FinalProject.Web.Areas.Administrative.Controllers
     {
         public IActionResult Homepage()
         {
-            var model = new HomePageModel()
-            {
-                Sliders = new List<SliderModel>()
-                {
-                    new SliderModel()
-                    {
-                        Heading = "",
-                        SubHeading = ""
-                    }
-                }
-            };
+            var model = new HomePageModel();
             return View(model);
         }
         [HttpPost]
