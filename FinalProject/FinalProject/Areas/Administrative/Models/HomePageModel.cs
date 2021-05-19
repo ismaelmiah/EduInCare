@@ -15,6 +15,8 @@ namespace FinalProject.Web.Areas.Administrative.Models
             FacilitiesModel = new FacilitiesModel();
             EventsModel = new EventsModel();
             TestimonialsModel = new TestimonialsModel();
+            Sliders = new List<SliderModel>();
+            FeatureInfos = new List<FeatureInfoModel>();
         }
 
         public IList<SliderModel> Sliders { get; set; }
