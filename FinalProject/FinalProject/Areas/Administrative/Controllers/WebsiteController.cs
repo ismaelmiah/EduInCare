@@ -17,7 +17,7 @@ namespace FinalProject.Web.Areas.Administrative.Controllers
         {
             if (ModelState.IsValid)
             {
-                //TODO: Save Homepage Data Into Database
+               model.ModelBuilder.SaveHomePage(model);
             }
             return View(model);
         }

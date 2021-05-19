@@ -20,12 +20,17 @@
             <label class="text-cyan font-weight-bold">Slider</label>
         </div>
         <div id="Sliders">
-            @if (Model.Sliders != null)
+            @if (Model.Sliders != null && Model.Sliders.Count > 0)
             {
-                for (var i = 0; i < Model.Sliders.Count; i++)
-                {
+                <div id="newSlide">
+                    @for (var i = 0; i < Model.Sliders.Count; i++)
+                    {
+                    <div class="form-group row">
+                        <label class="text-indigo font-weight-bold">Slide No #@(i+1)</label>
+                    </div>
                     <partial name="_Slider" for="Sliders[i]" />
-                }
+                    }
+                </div>
             }
         </div>
         <div class="row justify-content-end">
@@ -34,15 +39,22 @@
         <div class="form-group row">
             <label class="text-cyan font-weight-bold">Feature Info</label>
         </div>
-        @if (Model.FeatureInfos != null)
-        {
-            for (int i = 0; i < Model.FeatureInfos.Count; i++)
+        <div id="Features">
+            @if (Model.FeatureInfos != null && Model.FeatureInfos.Count > 0)
             {
-                <partial name="_FeatureInfo" model="Model.FeatureInfos[i]" />
+                <div id="newFeature">
+                    @for (int i = 0; i < Model.FeatureInfos.Count; i++)
+                    {
+                    <div class="form-group row">
+                        <label class="text-indigo font-weight-bold">Features No #@(i + 1)</label>
+                    </div>
+                    <partial name="_FeatureInfo" for="FeatureInfos[i]" />
+                    }
+                </div>
             }
-        }
+        </div>
         <div class="row justify-content-end">
-            <button class="btn btn-primary">Add Feature</button>
+            <button class="btn btn-primary" id="addFeature">Add Feature</button>
         </div>
         <div class="form-group row">
             <label class="text-cyan font-weight-bold">Facility</label>
@@ -65,15 +77,22 @@
                 <span asp-validation-for="FacilitiesModel.Description" class="text-danger"></span>
             </div>
         </div>
-        @if (Model.FacilitiesModel.FeatureInfos != null)
-        {
-            for (int i = 0; i < Model.FacilitiesModel.FeatureInfos.Count; i++)
+        <div id="facilitiesInfo">
+            @if (Model.FacilitiesModel.FeatureInfos != null && Model.FacilitiesModel.FeatureInfos.Count > 0)
             {
-                <partial name="_FeatureInfo" model="Model.FacilitiesModel.FeatureInfos[i]" />
+                <div id="newFeature">
+                    @for (int i = 0; i < Model.FacilitiesModel.FeatureInfos.Count; i++)
+                    {
+                    <div class="form-group row">
+                        <label class="text-indigo font-weight-bold">Facility No #@(i + 1)</label>
+                    </div>
+                    <partial name="_FeatureInfo" for="FacilitiesModel.FeatureInfos[i]" />
+                    }
+                </div>
             }
-        }
+        </div>
         <div class="row justify-content-end">
-            <button class="btn btn-primary">Add Facility</button>
+            <button class="btn btn-primary" id="addFacility">Add Facility</button>
         </div>
         <div class="form-group row">
             <label class="text-cyan font-weight-bold">Events</label>
@@ -96,15 +115,22 @@
                 <span asp-validation-for="EventsModel.Description" class="text-danger"></span>
             </div>
         </div>
-        @if (Model.EventsModel.EventItems != null)
-        {
-            for (int i = 0; i < Model.EventsModel.EventItems.Count; i++)
+        <div id="EventsInfo">
+            @if (Model.EventsModel.EventItems != null && Model.EventsModel.EventItems.Count > 0)
             {
-                <partial name="_FeatureInfo" model="Model.EventsModel.EventItems[i]" />
+                <div id="newFeature">
+                    @for (int i = 0; i < Model.EventsModel.EventItems.Count; i++)
+                    {
+                    <div class="form-group row">
+                        <label class="text-indigo font-weight-bold">Event No #@(i + 1)</label>
+                    </div>
+                    <partial name="_EventItem" for="EventsModel.EventItems[i]" />
+                    }
+                </div>
             }
-        }
+        </div>
         <div class="row justify-content-end">
-            <button class="btn btn-primary">Add Event</button>
+            <button class="btn btn-primary" id="addEvent">Add Event</button>
         </div>
         <div class="form-group row">
             <label class="text-cyan font-weight-bold">Testimonials</label>
@@ -114,7 +140,7 @@
                 <label asp-for="TestimonialsModel.Heading"></label>
             </div>
             <div class="col-8">
-                <input asp-for="TestimonialsModel.Heading" type="Date" class="form-control" />
+                <input asp-for="TestimonialsModel.Heading" class="form-control" />
                 <span asp-validation-for="TestimonialsModel.Heading" class="text-danger"></span>
             </div>
         </div>
@@ -127,19 +153,28 @@
                 <span asp-validation-for="TestimonialsModel.Description" class="text-danger"></span>
             </div>
         </div>
-        <div class="row justify-content-end">
-            <button class="btn btn-primary">Add Testimonial</button>
-        </div>
-        @*@for (int i = 0; i < Model.TestimonialsModel.TestimonialItemModels.Count; i++)
+        <div id="testimonialInfo">
+            @if (Model.TestimonialsModel.TestimonialItemModels != null && Model.TestimonialsModel.TestimonialItemModels.Count > 0)
             {
-                <partial name="_FeatureInfo" model="Model.TestimonialsModel.TestimonialItemModels[i]" />
-            }*@
+                <div id="newFeature">
+                    @for (int i = 0; i < Model.TestimonialsModel.TestimonialItemModels.Count; i++)
+                    {
+                    <div class="form-group row">
+                        <label class="text-indigo font-weight-bold">Testimonial No #@(i + 1)</label>
+                    </div>
+                    <partial name="_FeatureInfo" for="TestimonialsModel.TestimonialItemModels[i]" />
+                    }
+                </div>
+            }
+        </div>
+        <div class="row justify-content-end">
+            <button class="btn btn-primary" id="addTestimonial">Add Testimonial</button>
+        </div>
+
     </div>
     <div class="card-footer">
-        <div class="form-group row mb-0">
-            <div class="col-6 text-left">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
+        <div class="form-group row mb-0 justify-content-center">
+            <input type="submit" value="Save" class="btn btn-lg btn-outline-primary" />
         </div>
     </div>
 </form>
@@ -147,46 +182,209 @@
 @section Scripts
 {
     <script type="text/javascript">
-        $(document).ready(function() {
-            $("#addSlide").click(function(e) {
+        $(document).ready(function () {
+            $("#addTestimonial").click(function (e) {
                 e.preventDefault();
 
-                const noOfSlide = $("#Sliders > div").length;
+                const noOfTestimonial = $("#testimonialInfo > #newFeature").length;
+
+                var testimonial = `
+<div id="newFeature">
+                <div class="form-group row">
+                    <label class="text-indigo font-weight-bold">Testimonial No #${noOfTestimonial + 1}</label>
+                </div>
+                <div class="form-group row">
+                        <div class="col-4">
+                            <label for="FeatureInfos_${noOfTestimonial}__Title">Name</label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="FeatureInfos_${noOfTestimonial}__Title" name="FeatureInfos[${noOfTestimonial}].Title" value="">
+                            <span class="text-danger field-validation-valid" data-valmsg-for="FeatureInfos[${noOfTestimonial}].Title" data-valmsg-replace="true"></span>
+                        </div>
+                </div>
+                <div class="form-group row">
+                        <div class="col-4">
+                            <label for="FeatureInfos_${noOfTestimonial}__Title">Designation</label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="FeatureInfos_${noOfTestimonial}__Title" name="FeatureInfos[${noOfTestimonial}].Title" value="">
+                            <span class="text-danger field-validation-valid" data-valmsg-for="FeatureInfos[${noOfTestimonial}].Title" data-valmsg-replace="true"></span>
+                        </div>
+                </div>
+                <div class="form-group row">
+                        <div class="col-4">
+                            <label for="EventsModel_${noOfTestimonial}__EventPhoto">Person Photo</label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" type="file" id="EventItems_${noOfTestimonial}__EventPhoto" name="EventItems[${noOfTestimonial}].EventPhoto">
+                            <span class="text-danger field-validation-valid" data-valmsg-for="Sliders[${noOfTestimonial}].EventPhoto" data-valmsg-replace="true"></span>
+                        </div>
+                </div>
+                <div class="form-group row">
+                        <div class="col-4">
+                            <label for="FeatureInfos_${noOfTestimonial}__Description">Quoto</label>
+                        </div>
+                        <div class="col-8">
+                            <textarea class="form-control" type="text" id="FeatureInfos_${noOfTestimonial}__SubHeading" name="FeatureInfos[${noOfTestimonial}].Description"></textarea>
+                            <span class="text-danger field-validation-valid" data-valmsg-for="FeatureInfos[${noOfTestimonial}].Description" data-valmsg-replace="true"></span>
+                        </div>
+                </div>
+</div>
+                             `;
+
+                $("#testimonialInfo").append(testimonial);
+            });
+
+            $("#addEvent").click(function (e) {
+                e.preventDefault();
+
+                const noOfEvents = $("#EventsInfo > #newFeature").length;
+
+                var event = `
+<div id="newFeature">
+                <div class="form-group row">
+                    <label class="text-indigo font-weight-bold">Event No #${noOfEvents + 1}</label>
+                </div>
+                <div class="form-group row">
+                        <div class="col-4">
+                            <label for="EventsModel_${noOfEvents}__EventPhoto">Event Photo</label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" type="file" id="EventItems_${noOfEvents}__EventPhoto" name="EventItems[${noOfEvents}].EventPhoto">
+                            <span class="text-danger field-validation-valid" data-valmsg-for="Sliders[${noOfEvents}].EventPhoto" data-valmsg-replace="true"></span>
+                        </div>
+                </div>
+                <div class="form-group row">
+                        <div class="col-4">
+                            <label for="FeatureInfos_${noOfEvents}__Title">Title</label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="FeatureInfos_${noOfEvents}__Title" name="FeatureInfos[${noOfEvents}].Title" value="">
+                            <span class="text-danger field-validation-valid" data-valmsg-for="FeatureInfos[${noOfEvents}].Title" data-valmsg-replace="true"></span>
+                        </div>
+                </div>
+                <div class="form-group row">
+                        <div class="col-4">
+                            <label for="FeatureInfos_${noOfEvents}__Description">Description</label>
+                        </div>
+                        <div class="col-8">
+                            <textarea class="form-control" type="text" id="FeatureInfos_${noOfEvents}__SubHeading" name="FeatureInfos[${noOfEvents}].Description"></textarea>
+                            <span class="text-danger field-validation-valid" data-valmsg-for="FeatureInfos[${noOfEvents}].Description" data-valmsg-replace="true"></span>
+                        </div>
+                </div>
+</div>
+                             `;
+
+                $("#EventsInfo").append(event);
+            });
+
+            $("#addFacility").click(function (e) {
+                e.preventDefault();
+
+                const noOfFacility = $("#facilitiesInfo > #newFeature").length;
+
+                var facility = `
+<div id="newFeature">
+                <div class="form-group row">
+                    <label class="text-indigo font-weight-bold">Facility No #${noOfFacility + 1}</label>
+                </div>
+                <div class="form-group row">
+                        <div class="col-4">
+                            <label for="FeatureInfos_${noOfFacility}__Heading">Heading</label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="FeatureInfos_${noOfFacility}__Heading" name="FeatureInfos[${noOfFacility}].Heading" value="">
+                            <span class="text-danger field-validation-valid" data-valmsg-for="FeatureInfos[${noOfFacility}].Heading" data-valmsg-replace="true"></span>
+                        </div>
+                </div>
+                <div class="form-group row">
+                        <div class="col-4">
+                            <label for="FeatureInfos_${noOfFacility}__Description">Description</label>
+                        </div>
+                        <div class="col-8">
+                            <textarea class="form-control" type="text" id="FeatureInfos_${noOfFacility}__SubHeading" name="FeatureInfos[${noOfFacility}].Description"></textarea>
+                            <span class="text-danger field-validation-valid" data-valmsg-for="FeatureInfos[${noOfFacility}].Description" data-valmsg-replace="true"></span>
+                        </div>
+                </div>
+</div>
+                             `;
+
+                $("#facilitiesInfo").append(facility);
+            });
+
+            $("#addFeature").click(function (e) {
+                e.preventDefault();
+
+                const noOfFeature = $("#Features > #newFeature").length;
+
+                var feature = `
+<div id="newFeature">
+                <div class="form-group row">
+                    <label class="text-indigo font-weight-bold">Features No #${noOfFeature + 1}</label>
+                </div>
+                <div class="form-group row">
+                        <div class="col-4">
+                            <label for="FeatureInfos_${noOfFeature}__Heading">Heading</label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="FeatureInfos_${noOfFeature}__Heading" name="FeatureInfos[${noOfFeature}].Heading" value="">
+                            <span class="text-danger field-validation-valid" data-valmsg-for="FeatureInfos[${noOfFeature}].Heading" data-valmsg-replace="true"></span>
+                        </div>
+                </div>
+                <div class="form-group row">
+                        <div class="col-4">
+                            <label for="FeatureInfos_${noOfFeature}__Description">Description</label>
+                        </div>
+                        <div class="col-8">
+                            <textarea class="form-control" type="text" id="FeatureInfos_${noOfFeature}__SubHeading" name="FeatureInfos[${noOfFeature}].Description"></textarea>
+                            <span class="text-danger field-validation-valid" data-valmsg-for="FeatureInfos[${noOfFeature}].Description" data-valmsg-replace="true"></span>
+                        </div>
+                </div>
+</div>
+                             `;
+
+                $("#Features").append(feature);
+            });
+
+            $("#addSlide").click(function (e) {
+                e.preventDefault();
+
+                const noOfSlide = $("#Sliders > #newSlide").length;
 
                 var slide = `
 <div id="newSlide">
-    <div class="form-group row">
-        <label class="text-indigo font-weight-bold">Slide No #${noOfSlide+1}</label>
-    </div>
-    <div class="form-group row">
-            <div class="col-4">
-                <label for="Sliders_${noOfSlide}__Heading">Heading</label>
-            </div>
-            <div class="col-8">
-                <input class="form-control" type="text" id="Sliders_${noOfSlide}__Heading" name="Sliders[${noOfSlide}].Heading" value="">
-                <span class="text-danger field-validation-valid" data-valmsg-for="Sliders[${noOfSlide}].Heading" data-valmsg-replace="true"></span>
-            </div>
-    </div>
-    <div class="form-group row">
-            <div class="col-4">
-                <label for="Sliders_${noOfSlide}__SubHeading">SubHeading</label>
-            </div>
-            <div class="col-8">
-                <input class="form-control" type="text" id="Sliders_${noOfSlide}__SubHeading" name="Sliders[${noOfSlide}].SubHeading" value="">
-                <span class="text-danger field-validation-valid" data-valmsg-for="Sliders[${noOfSlide}].SubHeading" data-valmsg-replace="true"></span>
-            </div>
-    </div>
-    <div class="form-group row">
-            <div class="col-4">
-                <label for="Sliders_${noOfSlide}__SlideImage">SlideImage</label>
-            </div>
-            <div class="col-8">
-                <input class="form-control" type="file" id="Sliders_${noOfSlide}__SlideImage" name="Sliders[${noOfSlide}].SlideImage">
-                <span class="text-danger field-validation-valid" data-valmsg-for="Sliders[${noOfSlide}].SlideImage" data-valmsg-replace="true"></span>
-            </div>
-    </div>
+                <div class="form-group row">
+                    <label class="text-indigo font-weight-bold">Slide No #${noOfSlide + 1}</label>
+                </div>
+                <div class="form-group row">
+                        <div class="col-4">
+                            <label for="Sliders_${noOfSlide}__Heading">Heading</label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="Sliders_${noOfSlide}__Heading" name="Sliders[${noOfSlide}].Heading">
+                            <span class="text-danger field-validation-valid" data-valmsg-for="Sliders[${noOfSlide}].Heading" data-valmsg-replace="true"></span>
+                        </div>
+                </div>
+                <div class="form-group row">
+                        <div class="col-4">
+                            <label for="Sliders_${noOfSlide}__SubHeading">SubHeading</label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="Sliders_${noOfSlide}__SubHeading" name="Sliders[${noOfSlide}].SubHeading">
+                            <span class="text-danger field-validation-valid" data-valmsg-for="Sliders[${noOfSlide}].SubHeading" data-valmsg-replace="true"></span>
+                        </div>
+                </div>
+                <div class="form-group row">
+                        <div class="col-4">
+                            <label for="Sliders_${noOfSlide}__SlideImage">SlideImage</label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" type="file" id="Sliders_${noOfSlide}__SlideImage" name="Sliders[${noOfSlide}].SlideImage">
+                            <span class="text-danger field-validation-valid" data-valmsg-for="Sliders[${noOfSlide}].SlideImage" data-valmsg-replace="true"></span>
+                        </div>
+                </div>
 </div>
-                 `;
+                             `;
 
                 $("#Sliders").append(slide);
             });

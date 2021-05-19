@@ -38,5 +38,7 @@ namespace Foundation.Library.Contexts
         DbSet<Testimonials> Testimonials { get; set; }
         DbSet<ClassProfiles> ClassProfiles { get; set; }
         DbSet<TeacherProfiles> TeacherProfiles { get; set; }
+        DbSet<FeatureInfos> FeatureInfos { get; set; }
+        DbSet<Facility> Facilities { get; set; }
     }
 }

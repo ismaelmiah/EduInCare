@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using FinalProject.Web.Areas.Administrative.Models.ModelBuilder;
 using Microsoft.AspNetCore.Http;
 
@@ -45,7 +46,9 @@ namespace FinalProject.Web.Areas.Administrative.Models
         {
             FeatureInfos = new List<FeatureInfoModel>();
         }
+        [Display(Name = "Title")]
         public string Heading { get; set; }
+        [Display(Name = "Sub Description")]
         public string Description { get; set; }
         public List<FeatureInfoModel> FeatureInfos { get; set; }
     }
@@ -56,7 +59,9 @@ namespace FinalProject.Web.Areas.Administrative.Models
         {
             EventItems = new List<EventItemModel>();
         }
+        [Display(Name = "Title")]
         public string Heading { get; set; }
+        [Display(Name = "Sub Description")]
         public string Description { get; set; }
         public List<EventItemModel> EventItems { get; set; }
     }
@@ -65,6 +70,7 @@ namespace FinalProject.Web.Areas.Administrative.Models
     {
         public string Title { get; set; }
         public string Description { get; set; }
+        [Display(Name = "Event Photo")]
         public IFormFile EventPhoto { get; set; }
     }
 
@@ -74,7 +80,9 @@ namespace FinalProject.Web.Areas.Administrative.Models
         {
             TestimonialItemModels = new List<TestimonialItemModel>();
         }
+        [Display(Name = "Title")]
         public string Heading { get; set; }
+        [Display(Name = "Sub Description")]
         public string Description { get; set; }
         public List<TestimonialItemModel> TestimonialItemModels { get; set; }
     }

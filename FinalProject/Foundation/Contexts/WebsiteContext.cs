@@ -152,7 +152,7 @@ namespace Foundation.Library.Contexts
                 .HasForeignKey(x => x.GradeId)
                 .HasPrincipalKey(x => x.Id)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict); ;
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<ExamRules>()
                 .HasOne(x => x.Course)
@@ -286,5 +286,7 @@ namespace Foundation.Library.Contexts
         public DbSet<Testimonials> Testimonials { get; set; }
         public DbSet<ClassProfiles> ClassProfiles { get; set; }
         public DbSet<TeacherProfiles> TeacherProfiles { get; set; }
+        public DbSet<FeatureInfos> FeatureInfos { get; set; }
+        public DbSet<Facility> Facilities { get; set; }
     }
 }
