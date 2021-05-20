@@ -19,5 +19,7 @@ namespace Foundation.Library.UnitOfWorks
         IEventsRepository EventsRepository { get; set; }
         IClassProfilesRepository ClassProfileRepository { get; set; }
         ITeacherProfilesRepository TeacherProfileRepository { get; set; }
+        IFeatureInfoRepository FeatureInfoRepository { get; set; }
+        IFacilityRepository FacilityRepository { get; set; }
     }
 }

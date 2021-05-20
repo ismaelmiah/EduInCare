@@ -1,4 +1,4 @@
-.article-list, .photo-gallery {
+﻿.article-list, .photo-gallery {
     color: #313437;
     background-color: #fff
 }
@@ -59,83 +59,9 @@
             text-decoration: none
         }
 
-            .article-list .item .action:hover, .contact-clean form .btn:hover, .footer-clean ul a:hover {
+            .article-list .item .action:hover, .footer-clean ul a:hover {
                 opacity: 1
             }
-
-.contact-clean {
-    background: #f1f7fc;
-    padding: 80px 0
-}
-
-    .contact-clean form {
-        max-width: 480px;
-        width: 90%;
-        margin: 0 auto;
-        background-color: #fff;
-        padding: 40px;
-        border-radius: 4px;
-        color: #505e6c;
-        box-shadow: 1px 1px 5px rgba(0,0,0,.1)
-    }
-
-    .contact-clean h2 {
-        margin-top: 5px;
-        font-weight: 700;
-        font-size: 28px;
-        margin-bottom: 36px;
-        color: inherit
-    }
-
-    .contact-clean .form-group:last-child {
-        margin-bottom: 5px
-    }
-
-    .contact-clean form .form-control {
-        background: #fff;
-        border-radius: 2px;
-        box-shadow: 1px 1px 1px rgba(0,0,0,.05);
-        outline: 0;
-        color: inherit;
-        padding-left: 12px;
-        height: 42px
-    }
-
-        .contact-clean form .form-control:focus {
-            border: 1px solid #b2b2b2
-        }
-
-    .contact-clean form textarea.form-control {
-        min-height: 100px;
-        max-height: 260px;
-        padding-top: 10px;
-        resize: vertical
-    }
-
-    .contact-clean form .btn {
-        padding: 16px 32px;
-        border: none;
-        background: 0 0;
-        box-shadow: none;
-        text-shadow: none;
-        opacity: .9;
-        text-transform: uppercase;
-        font-weight: 700;
-        font-size: 13px;
-        letter-spacing: .4px;
-        line-height: 1;
-        outline: 0 !important
-    }
-
-        .contact-clean form .btn:active {
-            transform: translateY(1px)
-        }
-
-    .contact-clean form .btn-primary {
-        background-color: #055ada !important;
-        margin-top: 15px;
-        color: #fff
-    }
 
 .features-boxed, .testimonials-clean {
     color: #313437;
@@ -247,65 +173,6 @@
     opacity: .6
 }
 
-.blog-home2 {
-    font-family: Montserrat,sans-serif;
-    color: #8d97ad;
-    font-weight: 300
-}
-
-    .blog-home2 a.link, .blog-home2 h1, .blog-home2 h2, .blog-home2 h3, .blog-home2 h4, .blog-home2 h5, .blog-home2 h6 {
-        color: #3e4555
-    }
-
-    .blog-home2 .font-weight-medium {
-        font-weight: 500
-    }
-
-    .blog-home2 .subtitle {
-        color: #8d97ad;
-        line-height: 24px
-    }
-
-    .blog-home2 .text-themecolor, .blog-home2 a.link:hover {
-        color: #316ce8
-    }
-
-    .blog-home2 h5 {
-        line-height: 22px;
-        font-size: 18px
-    }
-
-    .blog-home2 .on-hover {
-        -webkit-transition: .2s ease-in;
-        -o-transition: .2s ease-in;
-        transition: .2s ease-in
-    }
-
-        .blog-home2 .on-hover:hover {
-            -webkit-transform: translateY(-10px);
-            -ms-transform: translateY(-10px);
-            transform: translateY(-10px)
-        }
-
-    .blog-home2 .date-pos {
-        right: 10px;
-        top: 10px
-    }
-
-        .blog-home2 .date-pos span {
-            font-size: 30px;
-            line-height: 30px
-        }
-
-    .blog-home2 .bg-info-gradiant {
-        background: #188ef4;
-        background: -webkit-linear-gradient(legacy-direction(to right),#188ef4 0,#316ce8 100%);
-        background: -webkit-gradient(linear,left top,right top,from(#188ef4),to(#316ce8));
-        background: -webkit-linear-gradient(left,#188ef4 0,#316ce8 100%);
-        background: -o-linear-gradient(left,#188ef4 0,#316ce8 100%);
-        background: linear-gradient(to right,#188ef4 0,#316ce8 100%)
-    }
-
 .photo-gallery .intro {
     font-size: 16px;
     max-width: 500px;
@@ -320,6 +187,77 @@
     padding-bottom: 30px
 }
 
+.login-dark {
+    height: 750px;
+    background: url(../../assets/img/star-sky.jpg) 0 0/cover #475d62;
+    position: relative
+}
+
+    .login-dark form {
+        max-width: 320px;
+        width: 90%;
+        background-color: #1e2833;
+        padding: 40px;
+        border-radius: 4px;
+        transform: translate(-50%,-50%);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        color: #fff;
+        box-shadow: 3px 3px 4px rgba(0,0,0,.2)
+    }
+
+    .login-dark .illustration {
+        text-align: center;
+        padding: 15px 0 20px;
+        font-size: 100px;
+        color: #2980ef
+    }
+
+    .login-dark form .form-control {
+        background: 0 0;
+        border: none;
+        border-bottom: 1px solid #434a52;
+        border-radius: 0;
+        box-shadow: none;
+        outline: 0;
+        color: inherit
+    }
+
+    .login-dark form .btn-primary {
+        background: #214a80;
+        border: none;
+        border-radius: 4px;
+        padding: 11px;
+        box-shadow: none;
+        margin-top: 26px;
+        text-shadow: none;
+        outline: 0
+    }
+
+        .login-dark form .btn-primary:active, .login-dark form .btn-primary:hover {
+            background: #214a80;
+            outline: 0
+        }
+
+    .login-dark form .forgot {
+        display: block;
+        text-align: center;
+        font-size: 12px;
+        color: #6f7a85;
+        opacity: .9;
+        text-decoration: none
+    }
+
+        .login-dark form .forgot:active, .login-dark form .forgot:hover {
+            opacity: 1;
+            text-decoration: none
+        }
+
+    .login-dark form .btn-primary:active {
+        transform: translateY(1px)
+    }
+
 .carousel-inner, .carousel-item img {
     max-height: 500px
 }
@@ -330,14 +268,6 @@
         padding-top: 25px;
         font-size: 24px
     }
-
-    .contact-clean {
-        padding: 20px 0
-    }
-
-        .contact-clean form {
-            padding: 30px
-        }
 
     .footer-clean .item {
         text-align: center;

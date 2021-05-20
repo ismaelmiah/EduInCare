@@ -19,7 +19,9 @@ namespace Foundation.Library.UnitOfWorks
             ITestimonialRepository testimonialRepository,
             IEventsRepository eventsRepository,
             IClassProfilesRepository classProfileRepository,
-            ITeacherProfilesRepository teacherProfileRepository) : base(dbContext)
+            ITeacherProfilesRepository teacherProfileRepository,
+            IFacilityRepository facility,
+            IFeatureInfoRepository featureInfo) : base(dbContext)
         {
             Header = header;
             Footer = footer;
@@ -31,7 +33,9 @@ namespace Foundation.Library.UnitOfWorks
             EventsRepository = eventsRepository;
             ClassProfileRepository = classProfileRepository;
             TeacherProfileRepository = teacherProfileRepository;
+            FacilityRepository = facility;
             SliderRepository = sliderRepository;
+            FeatureInfoRepository = featureInfo;
         }
 
         public IHeaderRepository Header { get; set; }
@@ -45,5 +49,7 @@ namespace Foundation.Library.UnitOfWorks
         public IEventsRepository EventsRepository { get; set; }
         public IClassProfilesRepository ClassProfileRepository { get; set; }
         public ITeacherProfilesRepository TeacherProfileRepository { get; set; }
+        public IFeatureInfoRepository FeatureInfoRepository { get; set; }
+        public IFacilityRepository FacilityRepository { get; set; }
     }
 }

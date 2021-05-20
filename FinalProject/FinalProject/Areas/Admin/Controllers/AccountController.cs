@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using FinalProject.Web.Areas.Admin.Models;
 using FinalProject.Web.Areas.Course.Models;
 using FinalProject.Web.Areas.Employee.Models;
+using FinalProject.Web.Models;
 using Membership.Library.Entities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
@@ -75,71 +76,6 @@ namespace FinalProject.Web.Areas.Admin.Controllers
             else
             {
                 return RedirectToRoute(new { Area = "Admin", Controller = "Home", Action = "Index"});
-            }
-        }
-
-        public async Task<IActionResult> Login(string returnUrl = null)
-        {
-            var model = new LoginModel();
-            if (!string.IsNullOrEmpty(model.ErrorMessage))
-            {
-                ModelState.AddModelError(string.Empty, model.ErrorMessage);
-            }
-
-            returnUrl ??= Url.Content("~/");
-
-            // Clear the existing external cookie to ensure a clean login process
-            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
-            model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
-            model.ReturnUrl = returnUrl;
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Login(LoginModel model, string returnUrl = null)
-        {
-            returnUrl ??= Url.Content("~/");
-
-            if (!ModelState.IsValid) return View();
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-            if (result.Succeeded)
-            {
-                _logger.LogInformation("User logged in.");
-                return LocalRedirect(returnUrl);
-            }
-            if (result.RequiresTwoFactor)
-            {
-                return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-            }
-            if (result.IsLockedOut)
-            {
-                _logger.LogWarning("User account locked out.");
-                return RedirectToPage("./Lockout");
-            }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                return View();
-            }
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Logout(string returnUrl = null)
-        {
-            await _signInManager.SignOutAsync();
-            _logger.LogInformation("User logged out.");
-            if (returnUrl != null)
-            {
-                return LocalRedirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction(nameof(Login));
             }
         }
 
