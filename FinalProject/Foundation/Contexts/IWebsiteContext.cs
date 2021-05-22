@@ -28,6 +28,8 @@ namespace Foundation.Library.Contexts
         DbSet<Grade> Grades { get; set; }
         DbSet<Mark> Marks { get; set; }
         DbSet<Result> Results { get; set; }
+        DbSet<StudentAttendance> StudentAttendances { get; set; }
+        DbSet<EmployeeAttendance> EmployeeAttendances { get; set; }
         
         /// <summary>
         /// Website Content Entities
