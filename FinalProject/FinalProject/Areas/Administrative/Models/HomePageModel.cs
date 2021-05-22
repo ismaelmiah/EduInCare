@@ -13,11 +13,12 @@ namespace FinalProject.Web.Areas.Administrative.Models
         public HomePageModel()
         {
             ModelBuilder = new HomePageModelBuilder();
-            FacilitiesModel = new FacilitiesModel();
-            EventsModel = new EventsModel();
-            TestimonialsModel = new TestimonialsModel();
-            Sliders = new List<SliderModel>();
-            FeatureInfos = new List<FeatureInfoModel>();
+            var (facilitiesModel, eventsModel, testimonialsModel, sliderModels, featureInfoModels) = ModelBuilder.BuildHomepage();
+            Sliders = sliderModels;
+            EventsModel = eventsModel;
+            TestimonialsModel = testimonialsModel;
+            FacilitiesModel = facilitiesModel;
+            FeatureInfos = featureInfoModels;
         }
 
         public IList<SliderModel> Sliders { get; set; }
@@ -32,6 +33,7 @@ namespace FinalProject.Web.Areas.Administrative.Models
         public string Heading { get; set; }
         public string SubHeading { get; set; }
         public IFormFile SlideImage { get; set; }
+        public string ImageUrl { get; set; }
     }
 
     public class FeatureInfoModel

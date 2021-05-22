@@ -5,13 +5,13 @@
 
 @section HeaderModel
 {
-    <partial name="_HeaderView" model="Model.Header" />
+    <partial name="_HeaderView" model="Model.Sliders"/>
 }
 
-<partial name="_FeatureInfo" />
-<partial name="_Facilities" />
-<partial name="_Events" />
-<partial name="_Testimonials" />
+<partial name="_FeatureInfo" model="Model.FeatureInfos" />
+<partial name="_Facilities" model="Model.FacilitiesModel" />
+<partial name="_Events" model="Model.EventsModel" />
+<partial name="_Testimonials" model="Model.TestimonialsModel" />
 
 <partial name="_FooterView" />
 @*if (Model.Advertise.IsActive)

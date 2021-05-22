@@ -8,14 +8,7 @@ namespace FinalProject.Web.Controllers
     {
         public IActionResult Index()
         {
-            var model = new WebsiteModel
-            {
-                Header = new HeaderModel(),
-                Footer = new FooterModel(),
-                Advertise = new AdvertiseModel(),
-                Notice = new NoticeModel(),
-                Post = new PostModel()
-            };
+            var model = new WebsiteModel();
             return View(model);
         }
     }

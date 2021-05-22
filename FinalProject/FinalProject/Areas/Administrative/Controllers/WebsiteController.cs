@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using FinalProject.Web.Areas.Administrative.Models;
 
 namespace FinalProject.Web.Areas.Administrative.Controllers
@@ -10,6 +9,7 @@ namespace FinalProject.Web.Areas.Administrative.Controllers
         public IActionResult Homepage()
         {
             var model = new HomePageModel();
+            model.ModelBuilder.BuildHomepage();
             return View(model);
         }
         [HttpPost]

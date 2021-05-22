@@ -1,4 +1,5 @@
-﻿
+﻿@model FinalProject.Web.Areas.Administrative.Models.FacilitiesModel
+
 <div id="facilities">
     <section class="features-boxed">
         <div class="container">
@@ -13,39 +14,19 @@
                 </p>
             </div>
             <div class="row justify-content-center features">
-                <div class="col-sm-6 col-md-5 col-lg-4 item">
-                    <div class="box m-0">
-                        <i class="fa fa-map-marker icon"></i>
-                        <h3 class="name">Works everywhere</h3>
-                        <p class="description">
-                            Aenean tortor est, vulputate quis leo in, vehicula rhoncus
-                            lacus. Praesent aliquam in tellus eu.
-                        </p>
-                        <a class="learn-more" href="#">Learn more »</a>
+                @foreach (var item in Model.FeatureInfos)
+                {
+                    <div class="col-sm-6 col-md-5 col-lg-4 item">
+                        <div class="box m-0">
+                            <i class="fa fa-map-marker icon"></i>
+                            <h3 class="name">@item.Heading</h3>
+                            <p class="description">
+                                @item.Description
+                            </p>
+                            <a class="learn-more" href="#">Learn more »</a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6 col-md-5 col-lg-4 item">
-                    <div class="box m-0">
-                        <i class="fa fa-clock-o icon"></i>
-                        <h3 class="name">Always available</h3>
-                        <p class="description">
-                            Aenean tortor est, vulputate quis leo in, vehicula rhoncus
-                            lacus. Praesent aliquam in tellus eu.
-                        </p>
-                        <a class="learn-more" href="#">Learn more »</a>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-5 col-lg-4 item">
-                    <div class="box m-0">
-                        <i class="fa fa-list-alt icon"></i>
-                        <h3 class="name">Customizable</h3>
-                        <p class="description">
-                            Aenean tortor est, vulputate quis leo in, vehicula rhoncus
-                            lacus. Praesent aliquam in tellus eu.
-                        </p>
-                        <a class="learn-more" href="#">Learn more »</a>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </section>
