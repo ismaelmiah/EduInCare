@@ -63,7 +63,7 @@ namespace Foundation.Library.Services
                 select new EmployeeAttendance
                 {
                     Id = x.Id,
-                    Employee = x.Employee,
+                    AttendanceInfo = x.AttendanceInfo,
                     AttendanceDate = x.AttendanceDate
                 }).ToList();
 

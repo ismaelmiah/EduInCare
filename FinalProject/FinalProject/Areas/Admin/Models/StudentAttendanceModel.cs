@@ -11,6 +11,7 @@ namespace FinalProject.Web.Areas.Admin.Models
         public StudentAttendanceModel()
         {
             ModelBuilder = new AttendanceModelBuilder();
+            CourseList = ModelBuilder.GetCourseList();
         }
         [Display(Name = "Course")]
         public Guid CourseId { get; set; }

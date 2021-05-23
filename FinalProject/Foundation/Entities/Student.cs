@@ -32,7 +32,6 @@ namespace Foundation.Library.Entities
         public virtual Registration Registration { get; set; }
         public Guid CourseId { get; set; }
         public virtual Course Course { get; set; }
-        public virtual ICollection<StudentAttendance> StudentAttendances { get; set; }
         public bool Status { get; set; }
     }
 }

@@ -46,10 +46,10 @@ namespace FinalProject.Web.Areas.Student.Models.ModelBuilder
         {
             var student = _studentService.GetStudent(id);
             //var userInfo = _dbContext.Users.Find(student.UserId);
-            var registrationInfo = _registration.GetRegistration(student.Registration.Id);
-            var courseInfo = _courseService.GetCourse(registrationInfo.CourseId);
-            var academicYear = _academic.GetAcademicYear(registrationInfo.AcademicYearId);
-            var sectionInfo = _section.GetSection(registrationInfo.SectionId);
+            //var registrationInfo = _registration.GetRegistrations().FirstOrDefault(x => x.StudentId == student.Id);
+            var courseInfo = _courseService.GetCourse(student.CourseId);
+            //var academicYear = _academic.GetAcademicYear(registrationInfo.AcademicYearId);
+            //var sectionInfo = _section.GetSection(registrationInfo.SectionId);
 
             return new StudentProfileView
             {
@@ -61,7 +61,7 @@ namespace FinalProject.Web.Areas.Student.Models.ModelBuilder
                 MobileNo = student.MobileNo,
                 BirthCertificateNo = student.BirthCertificateNo,
                 NationalIdentificationNo = student.NationalIdentificationNo,
-                ParentsInfo = GetParentsModel(student.Parents),
+                //ParentsInfo = GetParentsModel(student.Parents),
                 ImagePath = FormatImageUrl(student.ImageUrl),
                 Religion = student.Religion,
                 BloodGroup = student.BloodGroup,
@@ -69,11 +69,11 @@ namespace FinalProject.Web.Areas.Student.Models.ModelBuilder
                 //UserName = userInfo.UserName,
                 PresentAddress = student.PresentAddress,
                 PermanentAddress = student.PermanentAddress,
-                AcademicYearModel = GetAcademicYearModel(academicYear),
-                RegistrationModel = GetRegistrationModel(registrationInfo),
+                //AcademicYearModel = GetAcademicYearModel(academicYear),
+                //RegistrationModel = GetRegistrationModel(registrationInfo),
                 CourseModel = GetCourseModel(courseInfo),
-                SectionModel = GetSectionModel(sectionInfo),
-                SubjectModels = GetSubjects(sectionInfo.CourseId)
+                //SectionModel = GetSectionModel(sectionInfo),
+                SubjectModels = GetSubjects(courseInfo.Id)
             };
         }
 

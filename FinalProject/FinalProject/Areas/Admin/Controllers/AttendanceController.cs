@@ -12,7 +12,6 @@ namespace FinalProject.Web.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var model = new StudentAttendanceModel();
-            model.ModelBuilder.GetCourseList();
             return View(model);
         }
         public IActionResult EmployeeAttendance()
@@ -27,11 +26,11 @@ namespace FinalProject.Web.Areas.Admin.Controllers
             return Json(data);
         }
 
-        public IActionResult GetStudents(Guid courseId)
+        public IActionResult GetStudents(Guid courseId, Guid sectionId)
         {
             var tableModel = new DataTablesAjaxRequestModel(Request);
             var model = new StudentAttendanceModel();
-            var data = model.ModelBuilder.GetStudentList(tableModel, courseId);
+            var data = model.ModelBuilder.GetStudentList(tableModel, courseId, sectionId);
             return Json(data);
         }
     }

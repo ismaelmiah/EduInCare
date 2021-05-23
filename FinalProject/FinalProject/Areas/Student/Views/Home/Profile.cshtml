@@ -46,10 +46,10 @@
                             <p class="text-muted text-center">@Model.CourseModel.Title</p>
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item" style="background-color: #FFF">
-                                    <b>Registration No.</b> <a class="pull-right">@Model.RegistrationModel.RegistrationNo</a>
+                                    <b>Registration No.</b> <a class="pull-right">@(Model.RegistrationModel != null ? Model.RegistrationModel.RegistrationNo : "")</a>
                                 </li>
                                 <li class="list-group-item" style="background-color: #FFF">
-                                    <b>ID Card No.</b> <a class="pull-right">@Model.RegistrationModel.IdCardNo</a>
+                                    <b>ID Card No.</b> <a class="pull-right">@(Model.RegistrationModel != null ? Model.RegistrationModel.IdCardNo : "")</a>
                                 </li>
                                 <li class="list-group-item" style="background-color: #FFF">
                                     <b>Phone</b> <a class="pull-right">@Model.MobileNo</a>
@@ -83,78 +83,78 @@
                         </li>
                     </ul>
                     <div class="mt-3 tab-content">
-                            <div class="tab-pane active" id="information">
-                                <p class="text-info" style="font-size: 16px; border-bottom: 1px solid #eee;">Personal Info:</p>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Full Name</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p>: @Model.Name</p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Date of Birth</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p>: @Model.DateOfBirth.ToShortDateString()</p>
-                                    </div>
+                        <div class="tab-pane active" id="information">
+                            <p class="text-info" style="font-size: 16px; border-bottom: 1px solid #eee;">Personal Info:</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Full Name</label>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Gender</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p>: @Model.Gender.ToString()</p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Religion</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p>: @Model.Religion.ToString()</p>
-                                    </div>
+                                <div class="col-md-3">
+                                    <p>: @Model.Name</p>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Blood Group</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        @{var bloodType = EnumHelper<BloodGroup>.GetDisplayValue(Model.BloodGroup);}
-                                        <p>: @bloodType</p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Nationality</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p>: @Model.Nationality</p>
-                                    </div>
+                                <div class="col-md-3">
+                                    <label>Date of Birth</label>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Email</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p>: @Model.Email</p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Phone No.</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p>: @Model.MobileNo</p>
-                                    </div>
+                                <div class="col-md-3">
+                                    <p>: @Model.DateOfBirth.ToShortDateString()</p>
                                 </div>
-                                <p class="text-info" style="font-size: 16px; border-bottom: 1px solid #eee;">Parents Info:</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Gender</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>: @Model.Gender.ToString()</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Religion</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>: @Model.Religion.ToString()</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Blood Group</label>
+                                </div>
+                                <div class="col-md-3">
+                                    @{var bloodType = EnumHelper<BloodGroup>.GetDisplayValue(Model.BloodGroup);}
+                                    <p>: @bloodType</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Nationality</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>: @Model.Nationality</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>: @Model.Email</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Phone No.</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>: @Model.MobileNo</p>
+                                </div>
+                            </div>
+                            <p class="text-info" style="font-size: 16px; border-bottom: 1px solid #eee;">Parents Info:</p>
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label>Father Name </label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p>: @Model.ParentsInfo.FatherName</p>
+                                        <p>: @(Model.ParentsInfo != null ? Model.ParentsInfo.FatherName : "")</p>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Father Phone No.</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p>: @Model.ParentsInfo.FatherMobileNo</p>
+                                        <p>: @(Model.ParentsInfo != null ? Model.ParentsInfo.FatherMobileNo : "")</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -162,13 +162,13 @@
                                         <label>Mother Name </label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p>: @Model.ParentsInfo.MotherName</p>
+                                        <p>: @(Model.ParentsInfo != null ? Model.ParentsInfo.MotherName : "")</p>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Mother Phone No.</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p>: @Model.ParentsInfo.MotherMobileNo</p>
+                                        <p>:  @(Model.ParentsInfo != null ? Model.ParentsInfo.MotherMobileNo : "").</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -176,108 +176,108 @@
                                         <label>Guardian Name </label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p>: @Model.ParentsInfo.GuardianName</p>
+                                        <p>:  @(Model.ParentsInfo != null ? Model.ParentsInfo.GuardianName : "")</p>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Guardian Phone No.</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <p>: @Model.ParentsInfo.GuardianMobileNo</p>
+                                        <p>: @(Model.ParentsInfo != null ? Model.ParentsInfo.GuardianMobileNo : "")</p>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Present Address </label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p>
-                                            : @Model.PresentAddress
-                                        </p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Permanent Address</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p>
-                                            : @Model.PermanentAddress
-                                        </p>
-                                    </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Present Address </label>
                                 </div>
-                                <p class="text-info" style="font-size: 16px; border-bottom: 1px solid #eee;">Academic Info:</p>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Academic Year</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p>: @Model.AcademicYearModel.Title</p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Registration No </label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p>: @Model.RegistrationModel.RegistrationNo</p>
-                                    </div>
-
+                                <div class="col-md-3">
+                                    <p>
+                                        : @Model.PresentAddress
+                                    </p>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Class</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p>: @Model.CourseModel.Title</p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Section </label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p>: @Model.SectionModel.Name</p>
-                                    </div>
+                                <div class="col-md-3">
+                                    <label>Permanent Address</label>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Roll No.</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p>: @Model.RegistrationModel.RollNo</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Board Registration No.</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p>: @Model.RegistrationModel.BoardRegistrationNo</p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Card No.</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p>: @Model.RegistrationModel.IdCardNo</p>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Username</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p>: @Model.UserName</p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Status</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        @if (Model.RegistrationModel.Status)
-                                        {
-                                            <span class="bg-green badge">Active</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="bg-green badge">In Active</span>
-                                        }
-                                    </div>
+                                <div class="col-md-3">
+                                    <p>
+                                        : @Model.PermanentAddress
+                                    </p>
                                 </div>
                             </div>
+                            <p class="text-info" style="font-size: 16px; border-bottom: 1px solid #eee;">Academic Info:</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Academic Year</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>: @(Model.AcademicYearModel != null ? Model.AcademicYearModel.Title : "")</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Registration No </label>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>: @(Model.RegistrationModel != null ? Model.RegistrationModel.RegistrationNo : "")</p>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Class</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>: @Model.CourseModel.Title</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Section </label>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>: @(Model.SectionModel != null ? Model.SectionModel.Name : "")</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Roll No.</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>: @(Model.RegistrationModel != null ? Model.RegistrationModel.RollNo.ToString() : "")</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Board Registration No.</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>: @(Model.RegistrationModel != null ? Model.RegistrationModel.BoardRegistrationNo : "")</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Card No.</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>: @(Model.RegistrationModel != null ? Model.RegistrationModel.IdCardNo : "")</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Username</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>: @Model.UserName</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Status</label>
+                                </div>
+                                <div class="col-md-3">
+                                    @if (Model.RegistrationModel != null ? Model.RegistrationModel.Status : false)
+                                    {
+                                        <span class="bg-green badge">Active</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="bg-green badge">In Active</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
                             <div class="tab-pane" id="subject">
                                 <table id="subjectTable" class="table table-bordered table-hover text-center">
                                     <thead>

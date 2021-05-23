@@ -44,11 +44,13 @@ namespace FinalProject.Web.Areas.Course.Controllers
                 {
                     //Create
                     model.ModelBuilder.SaveRegistration(model);
+                    return RedirectToAction(nameof(Index));
                 }
                 else
                 {
                     //Update
                     model.ModelBuilder.UpdateRegistration(model.Id, model);
+                    return RedirectToAction(nameof(Index));
                 }
             }
 

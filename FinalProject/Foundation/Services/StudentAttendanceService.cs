@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Foundation.Library.Entities;
 using Foundation.Library.UnitOfWorks;
 
@@ -63,8 +64,7 @@ namespace Foundation.Library.Services
                 select new StudentAttendance
                 {
                     Id = x.Id,
-                    Student = x.Student,
-                    IsPresent = x.IsPresent,
+                    AttendanceInfo = x.AttendanceInfo,
                     AttendanceDate = x.AttendanceDate
                 }).ToList();
 
@@ -84,7 +84,7 @@ namespace Foundation.Library.Services
             }
             else
             {
-                result = _management.StudentAttendanceRepository.GetDynamic(x => x.CourseId == courseId,
+                result = _management.StudentAttendanceRepository.GetDynamic(x => x.AttendanceInfo == searchText,
                     orderBy, "", pageIndex, pageSize);
             }
 
@@ -92,12 +92,15 @@ namespace Foundation.Library.Services
                 select new StudentAttendance
                 {
                     Id = x.Id,
-                    Student = x.Student,
-                    IsPresent = x.IsPresent,
                     AttendanceDate = x.AttendanceDate
                 }).ToList();
 
             return (result.total, result.totalDisplay, data);
+        }
+
+        public StudentAttendance GetAttendance(Expression<Func<StudentAttendance, bool>> filter = null)
+        {
+            throw new NotImplementedException();
         }
     }
 }

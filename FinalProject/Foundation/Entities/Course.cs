@@ -30,7 +30,6 @@ namespace Foundation.Library.Entities
         public virtual ICollection<Mark> Marks { get; set; }
         public virtual ICollection<Result> Results { get; set; }
         public virtual ICollection<ExamRules> ExamRules { get; set; }
-        public virtual ICollection<StudentAttendance> StudentAttendances { get; set; }
         public Guid AcademicYearId { get; set; }
         public virtual AcademicYear AcademicYear { get; set; }
         //TODO: Course & Department Might be Many TO Many Relationship

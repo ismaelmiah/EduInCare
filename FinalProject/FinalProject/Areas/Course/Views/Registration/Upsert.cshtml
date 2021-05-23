@@ -11,7 +11,7 @@
     </button>
 </div>
 <div class="modal-body">
-    <form asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
+    <form asp-antiforgery="true" id="registrationform" method="post" enctype="multipart/form-data" asp-action="Upsert">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input asp-for="Id" type="hidden" />
         <div class="row align-items-center justify-content-between">
@@ -121,11 +121,11 @@
         <div class="col-6 text-left">
             @if (Model.Id == new Guid())
             {
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" id="registrationSubmit" class="btn btn-primary" />
             }
             else
             {
-                <input type="submit" value="Update" class="btn btn-warning" />
+                <input type="submit" value="Update" id="registrationSubmit" class="btn btn-warning" />
             }
         </div>
     </div>

@@ -48,7 +48,10 @@
                             </div>
                         </div>
                         <div class="form-group row col-2">
-                            <input class="form-control" type="date" readonly="readonly" />
+                            <input id="currentDate" class="form-control" type="date" readonly="readonly" />
+                        </div>
+                        <div class="form-group row col-1">
+                            <button id="getAttendance" class="btn btn-primary">Get Attendance</button>
                         </div>
                     </div>
                 </div>
@@ -77,5 +80,61 @@
 
 @section Scripts
 {
-    
+    <script src="/AdminPanel/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="/AdminPanel/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+    <script type="text/javascript">
+        var date = new Date();
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+
+        if (month < 10) month = "0" + month;
+        if (day < 10) day = "0" + day;
+
+        var today = year + "-" + month + "-" + day;
+
+        $("#currentDate").val(today);
+
+        populateSection($("#CourseId").val());
+        $("#CourseId").select2({
+            width: 'resolve'
+        });
+
+        $("#SectionId").select2({
+            width: 'resolve'
+        });
+        
+        $("#CourseId").change(function () {
+            populateSection(this.value);
+        });
+
+        function populateSection(courseId) {
+            $.ajax({
+                method: "GET",
+                url: "Attendance/GetSectionsByCourse?courseId=" + courseId
+            }).done(function (data) {
+                var s = "";
+                for (var i = 0; i < data.length; i++) {
+                    s += '<option value="' + data[i].value + '">' + data[i].text + '</option>';
+                }
+                $("#SectionId").html(s);
+            }).fail(function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr.status);
+                console.log(thrownError);
+            });
+        }
+
+        $("#getAttendance").click(function() {
+            $('#attendanceTable').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": "Attendance/GetStudents?courseId=" + $("#CourseId").val() + "&sectionId=" + $("#SectionId").val(),
+                "columnDefs": [
+                    {
+                        
+                    }
+                ]
+            });
+        });
+    </script>
 }

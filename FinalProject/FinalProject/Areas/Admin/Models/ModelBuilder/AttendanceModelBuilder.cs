@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Autofac;
 using FinalProject.Web.Areas.Course.Models;
@@ -6,6 +7,7 @@ using FinalProject.Web.Models;
 using Foundation.Library.Entities;
 using Foundation.Library.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
 {
@@ -80,50 +82,14 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             };
         }
 
-        public void SaveRegistration(RegistrationModel model)
-        {
-            var entity = ConvertToEntity(model);
-            _registration.AddRegistration(entity);
-        }
 
-        private static Registration ConvertToEntity(RegistrationModel model)
+        private static StudentAttendance ConvertToEntity(List<AttendanceModel> model)
         {
-            return new Registration
+            return new StudentAttendance
             {
-                CourseId = model.CourseId,
-                AcademicYearId = model.AcademicYearId,
-                StudentId = model.StudentId,
-                BoardRegistrationNo = model.BoardRegistrationNo,
-                CardNo = model.IdCardNo,
-                IsPromoted = model.IsPromoted,
-                Status = model.Status,
-                SectionId = model.SectionId,
-                RollNo = model.RollNo,
-                OldRegistrationId = model.OldRegistrationId,
-                RegistrationNo = model.RegistrationNo
+                AttendanceInfo = JsonConvert.SerializeObject(model),
+                AttendanceDate = DateTime.UtcNow
             };
-        }
-
-        public void UpdateRegistration(Guid id, RegistrationModel model)
-        {
-            var exEntity = _registration.GetRegistration(id);
-            exEntity.Status = model.Status;
-            exEntity.RollNo = model.RollNo;
-            exEntity.SectionId = model.SectionId;
-            exEntity.CourseId = model.CourseId;
-            exEntity.AcademicYearId = model.AcademicYearId;
-            exEntity.StudentId = model.StudentId;
-            exEntity.OldRegistrationId = model.OldRegistrationId;
-            exEntity.RegistrationNo = model.BoardRegistrationNo;
-            exEntity.BoardRegistrationNo = model.BoardRegistrationNo;
-            exEntity.IsPromoted = model.IsPromoted;
-
-            _registration.Update(exEntity);
-        }
-
-        public void DeleteRegistration(Guid id)
-        {
-            _registration.Delete(id);
         }
 
         public SelectList GetCourseList()
@@ -137,33 +103,72 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             return new SelectList(_section.GetSections(courseId), "Id", "Name", selectedItem);
         }
 
-        public object GetStudentList(DataTablesAjaxRequestModel tableModel, Guid courseId)
+        public object GetStudentList(DataTablesAjaxRequestModel tableModel, Guid courseId, Guid sectionId )
         {
-            var (total, totalDisplay, records) = _attendance.GetListForDataTable(courseId,
-                tableModel.PageIndex,
+            var students = _registration.GetRegistrations()
+                .Where(x => x.CourseId == courseId && x.SectionId == sectionId);
+
+            var attendance = students.Select(x => new AttendanceModel
+            {
+                CourseId = x.CourseId,
+                IsPresent = false,
+                SectionId = x.SectionId,
+                StudentId = x.StudentId
+            }).ToList();
+
+            var todayAttendance = _attendance.GetList();
+            if (todayAttendance.Any())
+            {
+                todayAttendance = todayAttendance.Where(x => x.AttendanceDate == DateTime.UtcNow).ToList();
+
+                bool alreadyDone = todayAttendance.Select(to => JsonConvert.DeserializeObject<List<AttendanceModel>>(to.AttendanceInfo))
+                    .Any(data => data.Any(x => x.CourseId == courseId && x.SectionId == sectionId));
+
+                if (!alreadyDone && todayAttendance.Count() != 0)
+                {
+                    var entity = ConvertToEntity(attendance);
+                    _attendance.Create(entity);
+                }
+            }
+
+            var (total, totalDisplay, records) = _attendance.GetListForDataTable(tableModel.PageIndex,
                 tableModel.PageSize,
                 tableModel.SearchText,
                 tableModel.GetSortText(new[]
                 {
-                    "Student",
-                    "IsPresent",
+                    "AttendanceInfo",
+                    "AttendanceDate",
                 }));
+
+            var today = records.FirstOrDefault(x => x.AttendanceDate.ToShortDateString() == DateTime.UtcNow.ToShortDateString());
+            var studentAttendanceModels = JsonConvert.DeserializeObject<List<AttendanceModel>>(today.AttendanceInfo);
+
 
             return new
             {
                 recordsTotal = total,
                 recordsFiltered = totalDisplay,
-                data = (from record in records
+                data = (from record in studentAttendanceModels
                         select new object[]
                         {
-                            $"{record.Student.FirstName} {record.Student.MiddleName} {record.Student.LastName}",
-                            record.Student.RollNo,
+                            record.StudentName,
+                            record.RollNo,
                             record.IsPresent,
-                            record.Id.ToString(),
+                            record.StudentId.ToString(),
                         }
                     ).ToArray()
 
             };
         }
+    }
+
+    public class AttendanceModel
+    {
+        public string StudentName { get; set; }
+        public int RollNo { get; set; }
+        public Guid StudentId { get; set; }
+        public Guid CourseId { get; set; }
+        public Guid SectionId { get; set; }
+        public bool IsPresent { get; set; }
     }
 }

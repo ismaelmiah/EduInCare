@@ -33,7 +33,7 @@
                                                                             </i>
                                                                             Details
                                                                         </button>
-                                    <button type="submit" class="btn btn-warning btn-sm" onclick="window.location.href='/course/Registration/upsert/${data}'" value='${data}'>
+                                    <button type="button" class="btn btn-warning btn-sm editRegistration" data-id='${data}' value='${data}'>
                                         <i class="fas fa-pencil-alt">
                                         </i>
                                         Edit
@@ -59,6 +59,26 @@
         modal.modal('show');
     });
 
+    $('#Registrations').on('click', '.editRegistration', function (event) {
+        var id = $(this).data("id");
+        var modal = $("#modal-registration");
+        $("#deleteForm").attr("action", "/course/Registration/delete");
+        modal.modal('show');
+        $.ajax({
+            method: "GET",
+            url: "Registration/upsert/" + id
+        }).done(function (response) {
+            $("#contentArea").html(response);
+            $("#modal-registration").modal('toggle');
+            LoadFormData();
+        }).fail(function (xhr, ajaxOptions, thrownError) {
+            //console.log(xhr.status);
+            //console.log(thrownError);
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('Marks not entered! Please enter mark for this exam!');
+        });
+    });
+
     $("#deleteButton").click(function () {
         $("#deleteForm").submit();
     });
@@ -79,6 +99,13 @@ var LoadFormData = function () {
             $("#AcademicYearId").html(s);
             populateCourse(data[0].value);
         }
+    });
+
+    $("#registrationSubmit").click(function() {
+        $("#registrationform").submit();
+        e.preventDefault();
+        // Coding
+        $('#modal-registration').modal('toggle'); //or  $('#IDModal').modal('hide');
     });
 
     $("#AcademicYearId").select2({
