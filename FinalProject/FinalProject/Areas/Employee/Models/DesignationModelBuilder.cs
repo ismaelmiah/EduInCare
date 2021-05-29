@@ -18,9 +18,11 @@ namespace FinalProject.Web.Areas.Employee.Models
         {
             _designation = Startup.AutofacContainer.Resolve<IDesignationService>();
         }
-        public void UpdateDesignationModel(object id, DesignationModel model)
+        public void UpdateDesignationModel(Guid id, DesignationModel model)
         {
-            throw new System.NotImplementedException();
+            var designation = _designation.GetDesignation(id);
+            designation.Name = model.Name;
+            _designation.Update(designation);
         }
 
         public void SaveDesignationModel(DesignationModel model)
@@ -39,7 +41,13 @@ namespace FinalProject.Web.Areas.Employee.Models
 
         public DesignationModel BuildDesignationModel(Guid id)
         {
-            throw new NotImplementedException();
+            var designation = _designation.GetDesignation(id);
+            return new DesignationModel {Id = designation.Id, Name = designation.Name};
+        }
+
+        internal void Delete(Guid id)
+        {
+            _designation.Delete(id);
         }
     }
 }

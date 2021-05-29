@@ -2,7 +2,7 @@
 @model EmployeeProfileView
 
 @{
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLTE.cshtml";
+    Layout = ViewBag.isAdmin ? "~/Areas/Admin/Views/Shared/_AdminLTE.cshtml" : "~/Views/Shared/_Layout.cshtml";
 }
 @section Title
 {

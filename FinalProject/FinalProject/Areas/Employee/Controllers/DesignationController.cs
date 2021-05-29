@@ -23,7 +23,7 @@ namespace FinalProject.Web.Areas.Employee.Controllers
             model = model.ModelBuilder.BuildDesignationModel(id.GetValueOrDefault());
             if (model == null)
                 return NotFound();
-            return View(model);
+            return PartialView(model);
         }
 
         [HttpPost]
@@ -47,6 +47,12 @@ namespace FinalProject.Web.Areas.Employee.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult Delete(Guid id)
+        {
+            var model = new DesignationModel();
+            model.ModelBuilder.Delete(id);
+            return RedirectToAction(nameof(Index));
+        }
 
         public IActionResult GetDesignations()
         {

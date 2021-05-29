@@ -18,6 +18,7 @@ namespace FinalProject.Web.Areas.Employee.Models
             QualificationType = (List<SelectListItem>)ModelBuilder.GetQualificationTypes();
             DesignationList = ModelBuilder.GetDesignationList();
             QualificationType = (List<SelectListItem>)ModelBuilder.GetQualificationTypes();
+            IdCardNo = ModelBuilder.GetNewEmployeeIdCardNo();
         }
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -29,7 +30,7 @@ namespace FinalProject.Web.Areas.Employee.Models
         public string PermanentAddress { get; set; }
         public MaritalStatus MaritalStatus { get; set; }
         public Religion Religion { get; set; }
-        public DateTime JoinOfDate { get; set; }
+        public DateTime JoinOfDate { get; set; } = DateTime.Now;
         public string IdCardNo { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string ImagePath { get; set; }

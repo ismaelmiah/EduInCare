@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using Autofac;
 using FinalProject.Web.Models;
 using Foundation.Library.Enums;
 using Foundation.Library.Services;
+using Membership.Library.Constants;
 using Membership.Library.Contexts;
 using Membership.Library.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -33,6 +36,11 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
             _designationService = designationService;
             _department = department;
             _userManager = userManager;
+        }
+
+        internal string GetNewEmployeeIdCardNo()
+        {
+            return "emp_"+ _employeeService.GetAllEmployees().Count();
         }
 
         public EmployeeModelBuilder()
@@ -198,18 +206,29 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
             }).ToList();
         }
         
-        public void SaveEmployee(EmployeeFormViewModel model)
+        public async Task SaveEmployee(EmployeeFormViewModel model)
         {
-            var userId = CreateUser(model.Email, model.UserName, model.Password, model.MobileNo, model.Role);
-            var employee = ConvertToEntity(model);
+            var userId = await CreateUser(model.Email, model.UserName, model.Password, model.MobileNo, model.Role);
+            var employee =  ConvertToEntity(model);
             employee.UserId = userId;
             _employeeService.AddEmployee(employee);
         }
-        private Guid CreateUser(string email, string username, string password, string phoneNumber, RoleType isEmployee)
+        private async Task<Guid> CreateUser(string email, string username, string password, string phoneNumber, RoleType isEmployee)
         {
             var user = new ApplicationUser { UserName = username, Email = email, PhoneNumber = phoneNumber, RoleType = isEmployee };
-            var result = _userManager.CreateAsync(user, password);
-            return result.Result.Succeeded ? user.Id : new Guid();
+            var result = await _userManager.CreateAsync(user, password);
+            if (result.Succeeded)
+            {
+                await _userManager.AddClaimsAsync(
+                    user,
+                    new List<Claim>
+                    {
+                            new Claim(MembershipClaims.MemberClaimType, MembershipClaims.MemberClaimValue)
+                    });
+
+                return user.Id;
+            }
+            return new Guid();
         }
         /// <summary>
         /// Convert Employee From View to Entity Employee
@@ -266,7 +285,8 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
 
         public SelectList GetDesignationList(object selected = null)
         {
-            return new SelectList(_designationService.GetDesignations().OrderBy(x=>x.Name), "Id", "Name", selected);
+            return new SelectList(_designationService.GetDesignations().Where(x => !x.Name.Equals("Assistant Principle")
+                && !x.Name.Equals("Principle")).OrderBy(x=>x.Name), "Id", "Name", selected);
         }
 
         public IList<SelectListItem> GetQualificationTypes()

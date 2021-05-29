@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="form-group col">
                                     <label asp-for="Email"></label>
-                                    <input asp-for="Email" class="form-control" />
+                                    <input type="email" asp-for="Email" class="form-control" />
                                     <span asp-validation-for="Email" class="text-danger"></span>
                                 </div>
                                 <div class="col">
@@ -120,7 +120,7 @@
                                 </div>
                                 <div class="form-group col">
                                     <label for="IdCardNo">ID Card No</label>
-                                    <input asp-for="IdCardNo" class="form-control" />
+                                    <input readonly="readonly" asp-for="IdCardNo" class="form-control" />
                                     <span asp-validation-for="IdCardNo" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col">
@@ -183,6 +183,19 @@
 {
     
     <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('blah').style.removeProperty('padding');
+                    document.getElementById('blah').style.removeProperty('border');
+                    document.getElementById('blah').src = e.target.result;
+                    document.getElementById('blah').width = 220;
+                    document.getElementById('blah').height = 200;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
         $(document).ready(function () {
             $.fn.select2.defaults.reset();
             $(".chosen").select2({
@@ -210,19 +223,6 @@
             if (imageTag.src !== "#") {
                 imageTag.style.removeProperty('padding');
                 imageTag.style.removeProperty('border');
-            }
-            function readURL(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        document.getElementById('blah').style.removeProperty('padding');
-                        document.getElementById('blah').style.removeProperty('border');
-                        document.getElementById('blah').src = e.target.result;
-                        document.getElementById('blah').width = 220;
-                        document.getElementById('blah').height = 200;
-                    };
-                    reader.readAsDataURL(input.files[0]);
-                }
             }
         });
 

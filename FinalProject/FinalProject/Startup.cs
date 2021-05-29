@@ -4,6 +4,7 @@ using Autofac.Extensions.DependencyInjection;
 using Foundation.Library;
 using Foundation.Library.Contexts;
 using Membership.Library;
+using Membership.Library.Constants;
 using Membership.Library.Contexts;
 using Membership.Library.Entities;
 using Membership.Library.Policy;
@@ -100,6 +101,12 @@ namespace FinalProject.Web
                 options.User.RequireUniqueEmail = false;
             });
 
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(100);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             services.AddAuthentication()
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
@@ -131,16 +138,17 @@ namespace FinalProject.Web
                     policy.Requirements.Add(new ImageRequirement());
                 });
                 */
-                options.AddPolicy("RestrictedArea", policy =>
+                options.AddPolicy("MemberPolicy", policy =>
                 {
                     policy.RequireAuthenticatedUser();
-                    policy.Requirements.Add(new NameRequirement());
+                    policy.RequireClaim(MembershipClaims.MemberClaimType);
                 });
 
-                options.AddPolicy("AdminAccess", policy =>
+                options.AddPolicy("AdminPolicy", policy =>
                 {
                     policy.RequireAuthenticatedUser();
-                    policy.RequireRole("Admin");
+                    //policy.Requirements.Add(new NameRequirement());
+                    policy.RequireClaim(MembershipClaims.AdminClaimType);
                 });
             });
 

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinalProject.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(policy: "AdminPolicy")]
     public class HomeController : Controller
     {
         public IActionResult Index()

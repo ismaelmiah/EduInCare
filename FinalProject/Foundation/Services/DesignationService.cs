@@ -50,17 +50,19 @@ namespace Foundation.Library.Services
 
         public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+            _management.DesignationRepository.Remove(id);
+            _management.Save();
         }
 
         public Designation GetDesignation(Guid id)
         {
-            throw new NotImplementedException();
+            return _management.DesignationRepository.GetById(id);
         }
 
         public void Update(Designation designation)
         {
-            throw new NotImplementedException();
+            _management.DesignationRepository.Edit(designation);
+            _management.Save();
         }
 
         public IList<Designation> GetDesignations()
