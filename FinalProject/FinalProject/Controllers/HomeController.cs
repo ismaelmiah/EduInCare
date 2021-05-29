@@ -1,5 +1,4 @@
-﻿using FinalProject.Web.Areas.Admin.Models;
-using FinalProject.Web.Models;
+﻿using FinalProject.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProject.Web.Controllers
@@ -10,6 +9,30 @@ namespace FinalProject.Web.Controllers
         {
             var model = new WebsiteModel();
             return View(model);
+        }
+
+        public IActionResult Classes()
+        {
+            return View();
+        }
+
+        public IActionResult Teachers()
+        {
+            return View();
+        }
+
+        public IActionResult Events()
+        {
+            return View();
+        }
+
+        public IActionResult Gallery()
+        {
+            return View();
+        }
+        public IActionResult ContactUs()
+        {
+            return View();
         }
     }
 }

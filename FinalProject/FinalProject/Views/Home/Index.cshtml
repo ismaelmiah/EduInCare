@@ -3,17 +3,14 @@
     ViewData["Title"] = "Home Page";
 }
 
-@section HeaderModel
-{
-    <partial name="_HeaderView" model="Model.Sliders"/>
-}
-
+<partial name="_HeaderView" model="Model.Sliders"/>
 <partial name="_FeatureInfo" model="Model.FeatureInfos" />
 <partial name="_Facilities" model="Model.FacilitiesModel" />
 <partial name="_Events" model="Model.EventsModel" />
 <partial name="_Testimonials" model="Model.TestimonialsModel" />
-
-<partial name="_FooterView" />
+<div class="d-flex justify-content-center align-items-center" style="height: 150px; background: radial-gradient(rgb(155,179,227), white);">
+    <div><a class="btn btn-outline-success" style="font-size: 25px;" asp-action="Upsert" asp-controller="Home" asp-area="Student">Apply Online</a></div>
+</div>
 @*if (Model.Advertise.IsActive)
     {
         <div class="jumbotron text-center">

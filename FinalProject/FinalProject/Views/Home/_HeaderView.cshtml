@@ -1,6 +1,6 @@
 ﻿@model List<FinalProject.Web.Areas.Administrative.Models.SliderModel>
 
-<nav class="navbar navbar-light navbar-expand-md sticky-top text-left bg-light" style="height: 100px">
+@*<nav class="navbar navbar-light navbar-expand-md sticky-top text-left bg-light" style="height: 100px">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">School Logo And Name</a><button
              data-toggle="collapse"
@@ -10,25 +10,29 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navcol-1">
-            <ul class="navbar-nav ml-auto" style="font-size: 20px">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Home</a>
+                    <a class="nav-link active" href="/" style="font-size: 16px;">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="untitled.html">Class</a>
+                    <a class="nav-link" asp-action="Classes">Class</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="untitled-1.html">Teacher</a>
+                    <a class="nav-link" asp-action="Teachers">Teachers</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="#">Events</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Gallery</a></li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact Us</a>
+                    <a class="nav-link" asp-action="Events">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-action="Gallery">Gallery</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-action="ContactUs">Contact Us</a>
                 </li>
             </ul>
         </div>
     </div>
-</nav>
+</nav>*@
 
 <div id="slider">
     <div class="carousel slide" data-ride="carousel" id="carousel-1">
@@ -43,7 +47,7 @@
                     />
                     <div class="bg-white text-dark d-inline-block carousel-caption mb-3" style="opacity: 0.5">
                         <h3>@Model[i].Heading</h3>
-                        <p>@Model[i].Heading</p>
+                        <p>@Model[i].SubHeading</p>
                     </div>
                 </div>
             }
