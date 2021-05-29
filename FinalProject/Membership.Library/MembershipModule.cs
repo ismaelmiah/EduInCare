@@ -1,5 +1,9 @@
-﻿using Autofac;
+﻿using System.Linq;
+using System.Reflection;
+using Autofac;
 using Membership.Library.Contexts;
+using Membership.Library.Seed;
+using Module = Autofac.Module;
 
 namespace Membership.Library
 {
@@ -20,6 +24,12 @@ namespace Membership.Library
                 .WithParameter("connectionString", _connectionString)
                 .WithParameter("migrationAssemblyName", _migrationAssemblyName)
                 .InstancePerLifetimeScope();
+
+            var membershipAssembly = Assembly.GetExecutingAssembly();
+
+            //builder.RegisterAssemblyTypes(membershipAssembly).Where(x => x.Namespace != null && x.Namespace.Contains("Services")).As(x => x.GetInterfaces()
+            //    .FirstOrDefault(i => i.Name == "I" + x.Name)).InstancePerLifetimeScope();
+
 
             base.Load(builder);
         }

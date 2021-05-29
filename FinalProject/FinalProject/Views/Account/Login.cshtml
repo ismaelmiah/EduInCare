@@ -9,7 +9,7 @@
 }
 <section class="login-dark">
     <form asp-action="Login" method="post">
-        <h2 class="sr-only">Login Form</h2>
+        <h2 style="color: white;font-size: 25px;margin: 0px 55px;">Login Form</h2>
         <div class="illustration">
             <i class="icon ion-ios-locked-outline"></i>
         </div>
@@ -21,6 +21,7 @@
             <input class="form-control"
                    asp-for="Password" placeholder="Password" />
         </div>
+        <span class="text-danger">@ViewData["error"]</span>
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit">
                 Log In
@@ -29,8 +30,3 @@
         <a class="forgot" href="#">Forgot your email or password?</a>
     </form>
 </section>
-
-@section FooterModel
-{
-    <div class="bg-green text-red">Footer</div>
-}

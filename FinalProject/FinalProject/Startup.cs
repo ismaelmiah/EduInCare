@@ -7,6 +7,7 @@ using Membership.Library;
 using Membership.Library.Contexts;
 using Membership.Library.Entities;
 using Membership.Library.Policy;
+using Membership.Library.Seed;
 using Membership.Library.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -114,8 +115,8 @@ namespace FinalProject.Web
 
             services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = $"/admin/account/login";
-                options.LogoutPath = $"/admin/account/logout";
+                options.LoginPath = $"/account/login";
+                options.LogoutPath = $"/account/logout";
             });
 
 
@@ -154,7 +155,7 @@ namespace FinalProject.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<ApplicationUser> userManager)
         {
             AutofacContainer = app.ApplicationServices.GetAutofacRoot();
             if (env.IsDevelopment())
@@ -175,6 +176,8 @@ namespace FinalProject.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            InternalUserSeed.SeedInternalUserAsync(userManager).Wait();
 
             app.UseEndpoints(endpoints =>
             {

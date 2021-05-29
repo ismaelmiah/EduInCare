@@ -1,4 +1,5 @@
 ﻿using System;
+using DataAccessLayer.Library;
 using Microsoft.AspNetCore.Identity;
 
 namespace Membership.Library.Entities
@@ -11,7 +12,7 @@ namespace Membership.Library.Entities
 
         }
 
-        internal ApplicationUser(string userName)
+        public ApplicationUser(string userName)
             : base(userName)
         {
 
@@ -22,7 +23,6 @@ namespace Membership.Library.Entities
     public enum RoleType
     {
         Teacher = 1,
-        Employee = 2,
-        Student = 3
+        Employee = 2
     }
 }

@@ -32,11 +32,8 @@ namespace FinalProject.Web.Controllers
                 {
                     return RedirectToAction("Index", "Home", new { Area = "Admin" });
                 }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Provided username or password is incorrect.");
-                    return View(model);
-                }
+
+                ViewData["error"] = "Username or Password incorrect";
             }
             return View(model);
         }

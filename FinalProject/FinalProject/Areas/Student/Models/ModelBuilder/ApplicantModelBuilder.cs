@@ -194,15 +194,15 @@ namespace FinalProject.Web.Areas.Student.Models.ModelBuilder
             _applicantService.ApproveApplication(applicant);
 
             var student = ConvertToEntityStudent(applicant);
-            student.UserId = CreateUser(applicant.Email, applicant.Email, DefaultPassword, applicant.MobileNo, RoleType.Student);
+            student.UserId = CreateUser(applicant.Email, applicant.Email, DefaultPassword, applicant.MobileNo);
             student.CourseId = applicant.CourseId;
             
             _studentService.AddStudent(student);
         }
 
-        private Guid CreateUser(string email, string username, string password, string phoneNumber, RoleType isEmployee)
+        private Guid CreateUser(string email, string username, string password, string phoneNumber)
         {
-            var user = new ApplicationUser { UserName = username, Email = email, PhoneNumber = phoneNumber, RoleType = isEmployee };
+            var user = new ApplicationUser { UserName = username, Email = email, PhoneNumber = phoneNumber, RoleType = 0 };
             var result = _userManager.CreateAsync(user, password);
             return result.Result.Succeeded ? user.Id : new Guid();
         }

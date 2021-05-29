@@ -10,171 +10,174 @@
         ViewData["Title"] = "Update Student Application";
     }
 }
-<div class="row">
-    <div class="col-md-12">
-        <div class="card card-info">
-            <div class="card-header">
-                <h3 class="card-title text-center">@ViewData["Title"]</h3>
-            </div>
-            <form asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
-                @if (Model.Id != new Guid())
-                {
-                    <input type="hidden" asp-for="Id" />
-                }
-                <div class="card-body">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="container">
 
-                    <label class="text-info font-weight-bold">Students Info</label>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label asp-for="FirstName"></label>
-                                        <input asp-for="FirstName" class="form-control" />
-                                        <span asp-validation-for="FirstName" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label asp-for="MiddleName"></label>
-                                        <input asp-for="MiddleName" class="form-control" />
-                                        <span asp-validation-for="MiddleName" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label asp-for="LastName"></label>
-                                        <input asp-for="LastName" class="form-control" />
-                                        <span asp-validation-for="LastName" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label asp-for="DateOfBirth"></label>
-                                        <input asp-for="DateOfBirth" type="Date" class="form-control" />
-                                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label asp-for="Gender"></label>
-                                        <select class="form-control" asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()"></select>
-                                        <span asp-validation-for="Gender" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label asp-for="Religion"></label>
-                                        <select class="form-control" asp-for="Religion" asp-items="Html.GetEnumSelectList<Religion>()"></select>
-                                        <span asp-validation-for="Religion" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col">
-                                    <label asp-for="BirthCertificateNo"></label>
-                                    <input asp-for="BirthCertificateNo" class="form-control" />
-                                    <span asp-validation-for="BirthCertificateNo" class="text-danger"></span>
-                                </div>
-                                <div class="form-group col">
-                                    <label asp-for="NationalIdentificationNo"></label>
-                                    <input asp-for="NationalIdentificationNo" class="form-control" />
-                                    <span asp-validation-for="NationalIdentificationNo" class="text-danger"></span>
-                                </div>
-                                <div class="form-group col">
-                                    <label asp-for="MobileNo"></label>
-                                    <input asp-for="MobileNo" class="form-control" />
-                                    <span asp-validation-for="MobileNo" class="text-danger"></span>
-                                </div>
-                                <div class="form-group col">
-                                    <label asp-for="Nationality"></label>
-                                    <input asp-for="Nationality" class="form-control" />
-                                    <span asp-validation-for="Nationality" class="text-danger"></span>
-                                </div>
-                                <div class="col mt-4">
-                                    <div id="previewstudentphoto" style="height: 200px;" class="border">
-                                        @if (Model.ImagePath != null)
-                                        {
-                                            <img id="blah" style="width: 247px; height: 200px;" src="@Model.ImagePath" alt="Photo">
-                                        }
-                                        else
-                                        {
-                                            <img id="blah" style="width: 247px; height: 200px;" src="#" alt="Photo">
-                                        }
-                                    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title text-center">@ViewData["Title"]</h3>
+                </div>
+                <form asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
+                    @if (Model.Id != new Guid())
+                    {
+                        <input type="hidden" asp-for="Id" />
+                    }
+                    <div class="card-body">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                                    <div class="form-group col" style="position: relative; top: -35px;">
-                                        <div class="custom-file">
-                                            <input asp-for="Photo" onchange="readURL(this);" class="custom-file-input" required>
-                                            <label class="custom-file-label" asp-for="Photo">Choose file...</label>
-                                            <span asp-validation-for="Photo" class="text-danger"></span>
+                        <label class="text-info font-weight-bold">Students Info</label>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="FirstName"></label>
+                                            <input asp-for="FirstName" class="form-control" />
+                                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="MiddleName"></label>
+                                            <input asp-for="MiddleName" class="form-control" />
+                                            <span asp-validation-for="MiddleName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="LastName"></label>
+                                            <input asp-for="LastName" class="form-control" />
+                                            <span asp-validation-for="LastName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="DateOfBirth"></label>
+                                            <input asp-for="DateOfBirth" type="Date" class="form-control" />
+                                            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="Gender"></label>
+                                            <select class="form-control" asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()"></select>
+                                            <span asp-validation-for="Gender" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label asp-for="Religion"></label>
+                                            <select class="form-control" asp-for="Religion" asp-items="Html.GetEnumSelectList<Religion>()"></select>
+                                            <span asp-validation-for="Religion" class="text-danger"></span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group col">
-                                    <label asp-for="BloodGroup"></label>
-                                    <select class="form-control" asp-for="BloodGroup" asp-items="Html.GetEnumSelectList<BloodGroup>()"></select>
-                                    <span asp-validation-for="BloodGroup" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label class="text-info font-weight-bold">Guardians Info</label>
-                                    <partial name="_ParentsFromView" for="ParentsInfo" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label class="text-info font-weight-bold">Present Address</label>
-                                    <partial name="_PresentAddressFormVIew" for="PresentAddress" />
-                                </div>
-                                <div class="col">
-                                    <label class="text-info font-weight-bold">Permanent Address</label>
-                                    <partial name="_PermanentAddressFormVIew" for="PermanentAddress" />
-                                </div>
-                            </div>
-                            <label class="text-info font-weight-bold">Academic Info</label>
-                            <div class="row">
-                                <div class="form-group col">
-                                    <label asp-for="Email"></label>
-                                    <input asp-for="Email" class="form-control"/>
-                                    <span asp-validation-for="Email" class="text-danger"></span>
-                                </div>
-                                <div class="form-group col">
-                                    <label>Course</label>
-                                    <select asp-for="CourseId" asp-items="Model.EnrollCourse" class="form-control"></select>
-                                    <span asp-validation-for="CourseId" class="text-danger"></span>
-                                </div>
-                                <div class="form-group col">
-                                    <div class="d-block">
-                                        <label class="text-info font-weight-bold">Subjects</label>
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label asp-for="BirthCertificateNo"></label>
+                                        <input asp-for="BirthCertificateNo" class="form-control" />
+                                        <span asp-validation-for="BirthCertificateNo" class="text-danger"></span>
                                     </div>
-                                    <p id="subjectLists" class="border form-control" readonly="readonly"></p>
+                                    <div class="form-group col">
+                                        <label asp-for="NationalIdentificationNo"></label>
+                                        <input asp-for="NationalIdentificationNo" class="form-control" />
+                                        <span asp-validation-for="NationalIdentificationNo" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col">
+                                        <label asp-for="MobileNo"></label>
+                                        <input asp-for="MobileNo" class="form-control" />
+                                        <span asp-validation-for="MobileNo" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col">
+                                        <label asp-for="Nationality"></label>
+                                        <input asp-for="Nationality" class="form-control" />
+                                        <span asp-validation-for="Nationality" class="text-danger"></span>
+                                    </div>
+                                    <div class="col mt-4">
+                                        <div id="previewstudentphoto" style="height: 200px;" class="border">
+                                            @if (Model.ImagePath != null)
+                                            {
+                                                <img id="blah" style="width: 247px; height: 200px;" src="@Model.ImagePath" alt="Photo">
+                                            }
+                                            else
+                                            {
+                                                <img id="blah" style="width: 247px; height: 200px;" src="#" alt="Photo">
+                                            }
+                                        </div>
+
+                                        <div class="form-group col" style="position: relative; top: -35px;">
+                                            <div class="custom-file">
+                                                <input asp-for="Photo" onchange="readURL(this);" class="custom-file-input" required>
+                                                <label class="custom-file-label" asp-for="Photo">Choose file...</label>
+                                                <span asp-validation-for="Photo" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col">
+                                        <label asp-for="BloodGroup"></label>
+                                        <select class="form-control" asp-for="BloodGroup" asp-items="Html.GetEnumSelectList<BloodGroup>()"></select>
+                                        <span asp-validation-for="BloodGroup" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="text-info font-weight-bold">Guardians Info</label>
+                                        <partial name="_ParentsFromView" for="ParentsInfo" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="text-info font-weight-bold">Present Address</label>
+                                        <partial name="_PresentAddressFormVIew" for="PresentAddress" />
+                                    </div>
+                                    <div class="col">
+                                        <label class="text-info font-weight-bold">Permanent Address</label>
+                                        <partial name="_PermanentAddressFormVIew" for="PermanentAddress" />
+                                    </div>
+                                </div>
+                                <label class="text-info font-weight-bold">Academic Info</label>
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label asp-for="Email"></label>
+                                        <input asp-for="Email" class="form-control" />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col">
+                                        <label>Course</label>
+                                        <select asp-for="CourseId" asp-items="Model.EnrollCourse" class="form-control"></select>
+                                        <span asp-validation-for="CourseId" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col">
+                                        <div class="d-block">
+                                            <label class="text-info font-weight-bold">Subjects</label>
+                                        </div>
+                                        <p id="subjectLists" class="border form-control" readonly="readonly"></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-footer">
-                    <div class="form-group row mb-0">
-                        <div class="col text-center">
-                            @if (Model.Id == new Guid())
-                            {
-                                <input type="submit" value="Application Submit" class="btn btn-lg btn-outline-primary" />
-                            }
-                            else
-                            {
-                                <input type="submit" value="Application Update" class="btn btn-lg btn-outline-warning" />
-                            }
+                    <div class="card-footer">
+                        <div class="form-group row mb-0">
+                            <div class="col text-center">
+                                @if (Model.Id == new Guid())
+                                {
+                                    <input type="submit" value="Application Submit" class="btn btn-lg btn-outline-primary" />
+                                }
+                                else
+                                {
+                                    <input type="submit" value="Application Update" class="btn btn-lg btn-outline-warning" />
+                                }
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
+</div>
 @section Scripts
 {
     <script>

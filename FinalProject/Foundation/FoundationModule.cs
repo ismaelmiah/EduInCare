@@ -2,8 +2,6 @@
 using System.Reflection;
 using Autofac;
 using Foundation.Library.Contexts;
-using Foundation.Library.Repositories;
-using Foundation.Library.UnitOfWorks;
 using Module = Autofac.Module;
 
 namespace Foundation.Library
@@ -30,7 +28,6 @@ namespace Foundation.Library
 
             builder.RegisterAssemblyTypes(foundationAssembly).Where(x => x.Namespace != null && x.Namespace.Contains("Services")).As(x => x.GetInterfaces()
                     .FirstOrDefault(i => i.Name == "I" + x.Name)).InstancePerLifetimeScope();
-            
 
             builder.RegisterAssemblyTypes(foundationAssembly).Where(x => x.Namespace != null && x.Namespace.Contains("Repositories")).As(x => x.GetInterfaces()
                     .FirstOrDefault(i => i.Name == "I" + x.Name)).InstancePerLifetimeScope();
