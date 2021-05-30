@@ -190,7 +190,8 @@
 .login-dark {
     height: 750px;
     background: url(../../assets/img/star-sky.jpg) 0 0/cover #475d62;
-    position: relative
+    position: relative;
+    margin-top: -50px;
 }
 
     .login-dark form {

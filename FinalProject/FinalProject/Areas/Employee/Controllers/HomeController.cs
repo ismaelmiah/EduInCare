@@ -14,11 +14,11 @@ namespace FinalProject.Web.Areas.Employee.Controllers
     {
         public HomeController()
         {
-            if(User.Identity.IsAuthenticated)
-            {
-                ViewBag.isAdmin = User.HasClaim(x => x.Type == MembershipClaims.AdminClaimType && x.Value == MembershipClaims.AdminClaimValue) ? true : false;
+            //if(User.Identity.IsAuthenticated)
+            //{
+            //    ViewBag.isAdmin = User.HasClaim(x => x.Type == MembershipClaims.AdminClaimType && x.Value == MembershipClaims.AdminClaimValue) ? true : false;
 
-            }
+            //}
         }
         [AllowAnonymous]
         public IActionResult Upsert(Guid? id)

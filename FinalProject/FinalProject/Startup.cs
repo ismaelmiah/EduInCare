@@ -101,12 +101,12 @@ namespace FinalProject.Web
                 options.User.RequireUniqueEmail = false;
             });
 
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromSeconds(100);
-                options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
-            });
+            //services.AddSession(options =>
+            //{
+            //    options.IdleTimeout = TimeSpan.FromSeconds(100);
+            //    options.Cookie.HttpOnly = true;
+            //    options.Cookie.IsEssential = true;
+            //});
 
             services.AddAuthentication()
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
@@ -177,6 +177,7 @@ namespace FinalProject.Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

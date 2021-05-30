@@ -9,8 +9,6 @@ namespace FinalProject.Web.Models
     {
 
         [Required]
-        [EmailAddress]
-        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required]
