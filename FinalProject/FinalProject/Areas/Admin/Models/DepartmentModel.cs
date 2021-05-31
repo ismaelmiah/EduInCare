@@ -28,7 +28,6 @@ namespace FinalProject.Web.Areas.Admin.Models
                 tableModel.GetSortText(new[]
                 {
                     "Name",
-                    "Courses",
                 }));
 
             return new
@@ -43,6 +42,23 @@ namespace FinalProject.Web.Areas.Admin.Models
                             record.Id.ToString(),
                         }
                     ).ToArray()
+            };
+        }
+
+        internal void Update(Guid id, DepartmentModel model)
+        {
+            var department = _departmentService.GetDepartment(id);
+            department.Name = model.Name;
+            _departmentService.UpdateDepartment(department);
+        }
+
+        internal DepartmentModel BuildModel(Guid id)
+        {
+            var department = _departmentService.GetDepartment(id);
+            return new DepartmentModel
+            {
+                Name = department.Name,
+                Id = department.Id
             };
         }
 

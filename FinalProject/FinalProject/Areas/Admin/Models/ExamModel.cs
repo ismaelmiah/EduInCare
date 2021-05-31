@@ -22,6 +22,7 @@ namespace FinalProject.Web.Areas.Admin.Models
         public IList<int> MarksDistributionTypes { get; set; }
         public List<SelectListItem> MarksDistributionTypeList { get; set; }
         public bool Status { get; set; }
+        [Display(Name = "Class")]
         public Guid CourseId { get; set; }
         public string Course { get; set; }
         public SelectList CourseList { get; set; }

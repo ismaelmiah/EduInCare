@@ -1,7 +1,7 @@
 ﻿@model CourseModel
 
 @{
-    ViewData["subtitle"] = "Add Course";
+    ViewData["subtitle"] = "Add Classes";
 }
 
 <div class="modal-header">
@@ -13,6 +13,7 @@
 <div class="modal-body">
     <form id="courseForm" asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="Id" type="hidden"/>
         <div class="row">
             <div class="col-5">
                 <div class="form-group row">
@@ -92,5 +93,5 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <button type="button" id="courseSubmit" class="btn btn-primary">Create</button>
+    <button type="button" id="courseSubmit" class="btn btn-primary">@(Model.Id != new Guid() ? "Update": "Create") </button>
 </div>

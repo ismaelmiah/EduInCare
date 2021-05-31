@@ -84,18 +84,17 @@
                 <tbody id="marksdistributionbody">
                     @if (Model.DistributionModels != null)
                     {
-                        for (int i = 0; i < Model.DistributionModels.Count; i++)
+                        for (var i = 0; i < Model.DistributionModels.Count; i++)
                         {
                             <tr class="text-center">
                                 <td class="w-25">
-                                    <input type="hidden" asp-for="DistributionModels[i].DistributionType" />
                                     @Model.DistributionModels[i].DistributionType
                                 </td>
                                 <td class="w-25">
-                                    <input asp-for="DistributionModels[i].TotalMarks" class="form-control" />
+                                    <input asp-for="@Model.DistributionModels[i].TotalMarks" class="form-control" />
                                 </td>
                                 <td class="w-25">
-                                    <input asp-for="DistributionModels[i].PassMarks" class="form-control" />
+                                    <input asp-for="@Model.DistributionModels[i].PassMarks" class="form-control" />
                                 </td>
                             </tr>
                         }
@@ -117,6 +116,6 @@
             {
                 <button type="button" id="examRuleSubmit" class="btn btn-warning">Update</button>
             }
-</div>
+        </div>
     </div>
 </div>

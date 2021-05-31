@@ -3,11 +3,12 @@
 {
     <title>Dashboard</title>
 }
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <a href="#" class="small-box-footer">
+            <a asp-action="Index" asp-controller="Student" class="small-box-footer">
                 <div class="small-box p-3 bg-success">
                     <div class="inner text-center">
                         <h3><i class="fas fa-user-graduate nav-icon"></i></h3>
@@ -18,7 +19,7 @@
         </div>
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <a href="#" class="small-box-footer">
+            <a asp-action="Teachers" asp-controller="Employee" class="small-box-footer">
                 <div class="small-box p-3 bg-secondary">
                     <div class="inner text-center">
                         <h3><i class="fas fa-chalkboard-teacher nav-icon"></i></h3>
@@ -29,7 +30,7 @@
         </div>
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <a href="#" class="small-box-footer">
+            <a asp-action="Index" asp-controller="Attendance" class="small-box-footer">
                 <div class="small-box p-3 bg-warning">
                     <div class="inner text-center">
                         <h3><i class="far fa-check-square nav-icon"></i></h3>
@@ -40,7 +41,7 @@
         </div>
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <a href="#" class="small-box-footer">
+            <a asp-controller="Report" asp-action="Index" class="small-box-footer">
                 <div class="small-box p-3 bg-primary">
                     <div class="inner text-center">
                         <h3><i class="fas fa-clipboard nav-icon"></i></h3>
@@ -51,7 +52,7 @@
         </div>
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <a href="#" class="small-box-footer">
+            <a asp-controller="Course" asp-action="Index" class="small-box-footer">
                 <div class="small-box p-3 bg-warning">
                     <div class="inner text-center">
                         <h3><i class="fas fa-th nav-icon"></i></h3>
@@ -62,7 +63,7 @@
         </div>
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <a href="#" class="small-box-footer">
+            <a asp-controller="Course" asp-action="Subject" class="small-box-footer">
                 <div class="small-box p-3 bg-info">
                     <div class="inner text-center">
                         <h3><i class="fas fa-book nav-icon"></i></h3>
@@ -73,7 +74,7 @@
         </div>
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <a href="#" class="small-box-footer">
+            <a asp-controller="Exam" asp-action="Index" class="small-box-footer">
                 <div class="small-box p-3 bg-success">
                     <div class="inner text-center">
                         <h3><i class="fas fa-diagnoses nav-icon"></i></h3>

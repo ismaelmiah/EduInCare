@@ -55,7 +55,7 @@
                 "targets": 2,
                 "render": function (data, type, row) {
                     return `
-                                    <button type="submit" class="btn btn-warning btn-sm" onclick="window.location.href='/admin/grade/upsert/${data}'" value='${data}'>
+                                    <button type="button" class="btn btn-warning gradeEdit btn-sm" data-id='${data}' value='${data}'>
                                         <i class="fas fa-pencil-alt">
                                         </i>
                                         Edit
@@ -72,6 +72,25 @@
 
     $('#grades_filter').addClass("text-right");
 
+    $('#grades').on('click', '.gradeEdit', function (event) {
+        var id = $(this).data("id");
+        var modal = $("#modal-grade");
+        modal.modal('show');
+        $.ajax({
+            method: "GET",
+            url: "Grade/Upsert?id="+id
+        }).done(function (response) {
+            $("#contentArea").html(response);
+            $("#modal-grade").modal('toggle');
+            LoadFormData();
+        }).fail(function (xhr, ajaxOptions, thrownError) {
+            //console.log(xhr.status);
+            //console.log(thrownError);
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('Marks not entered! Please enter mark for this exam!');
+        });
+    });
+    
     $('#grades').on('click', '.show-bs-modal', function (event) {
         var id = $(this).data("id");
         var modal = $("#modal-default");

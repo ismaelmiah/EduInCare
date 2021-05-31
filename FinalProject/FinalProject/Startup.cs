@@ -127,6 +127,14 @@ namespace FinalProject.Web
             });
 
 
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(100);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+
             services.AddAuthorization(options =>
             {
                 /*
@@ -160,6 +168,7 @@ namespace FinalProject.Web
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -185,6 +194,7 @@ namespace FinalProject.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
 
             InternalUserSeed.SeedInternalUserAsync(userManager).Wait();
 

@@ -125,9 +125,9 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
                         {
                             record.Name,
                             record.MobileNo,
-                            record.ImageUrl,
+                            FormatImageUrl(record.ImageUrl),
                             record.Gender.ToString(),
-                            record.Section?.Name,
+                            record.Section != null ? record.Section.Name : "No Section Assign",
                             record.JoinOfDate.ToShortDateString(),
                         }
                     ).ToArray()
@@ -178,6 +178,7 @@ namespace FinalProject.Web.Areas.Employee.Models.ModelBuilder
             {
                 Name = employee.Name,
                 Gender = employee.Gender,
+                Id = employee.Id,
                 JoinOfDate = employee.JoinOfDate,
                 MobileNo = employee.MobileNo,
                 UserName = employee.UserName,

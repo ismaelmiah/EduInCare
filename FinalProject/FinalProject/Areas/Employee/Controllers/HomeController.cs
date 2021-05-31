@@ -5,6 +5,9 @@ using FinalProject.Web.Areas.Student.Models;
 using Microsoft.AspNetCore.Authorization;
 using Membership.Library.Constants;
 using System.Threading.Tasks;
+using Membership.Library.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace FinalProject.Web.Areas.Employee.Controllers
 {
@@ -12,13 +15,11 @@ namespace FinalProject.Web.Areas.Employee.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        public HomeController()
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public HomeController(IHttpContextAccessor httpContextAccessor)
         {
-            //if(User.Identity.IsAuthenticated)
-            //{
-            //    ViewBag.isAdmin = User.HasClaim(x => x.Type == MembershipClaims.AdminClaimType && x.Value == MembershipClaims.AdminClaimValue) ? true : false;
-
-            //}
+            //_userManager = userManager;
+            _httpContextAccessor = httpContextAccessor;
         }
         [AllowAnonymous]
         public IActionResult Upsert(Guid? id)
@@ -38,19 +39,20 @@ namespace FinalProject.Web.Areas.Employee.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Upsert(EmployeeFormViewModel model)
         {
-            if (!ModelState.IsValid)
-                return View(model);
-            if (model.Id == new Guid())
+            if (ModelState.IsValid)
             {
-                //Create
-                await model.ModelBuilder.SaveEmployee(model);
+                if (model.Id == new Guid())
+                {
+                    //Create
+                    await model.ModelBuilder.SaveEmployee(model);
+                }
+                else
+                {
+                    //Update
+                    model.ModelBuilder.UpdateEmployee(model.Id, model);
+                }
             }
-            else
-            {
-                //Update
-                model.ModelBuilder.UpdateEmployee(model.Id, model);
-            }
-            return RedirectToRoute(new { Area = "Admin", controller = "Employee", action = "Employees" });
+            return RedirectToRoute(new { Area = "", controller = "Home", action = "Index" });
         }
 
         [Authorize(Policy = "AdminPolicy")]
@@ -60,6 +62,7 @@ namespace FinalProject.Web.Areas.Employee.Controllers
             model.ModelBuilder.DeleteEmployee(id);
             return RedirectToRoute(new { Area = "Admin", controller = "Employee", action = "Employees" });
         }
+        [Authorize(policy: "AdminPolicy")]
         public IActionResult EmployeeReport(Guid id)
         {
             return View();
@@ -71,6 +74,9 @@ namespace FinalProject.Web.Areas.Employee.Controllers
             model = model.ModelBuilder.BuildEmployeeProfile(id);
             if (model == null)
                 return NotFound();
+
+            var user = _httpContextAccessor.HttpContext.User;
+            model.isAdmin = user.HasClaim(x => x.Type == MembershipClaims.AdminClaimType && x.Value == MembershipClaims.AdminClaimValue) ? true : false;
             return View(model);
         }
     }

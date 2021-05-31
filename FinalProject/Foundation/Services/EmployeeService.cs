@@ -70,6 +70,9 @@ namespace Foundation.Library.Services
                             ImageUrl = x.ImageUrl,
                             UserName = x.UserName,
                             UserId = x.UserId,
+                            Section = x.Section,
+                            Status = x.Status,
+                            MaritalStatus = x.MaritalStatus,
                             JoinOfDate = x.JoinOfDate,
                         }).ToList();
 

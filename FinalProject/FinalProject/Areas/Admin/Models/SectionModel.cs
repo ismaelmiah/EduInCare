@@ -19,7 +19,7 @@ namespace FinalProject.Web.Areas.Admin.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
         public int Capacity { get; set; }
-        [Display(Name = "Course")]
+        [Display(Name = "Class")]
         public Guid CourseId { get; set; }
         public SelectList CourseList { get; set; }
         [Display(Name = "Teacher")]

@@ -1,12 +1,12 @@
-﻿using FinalProject.Web.Areas.Admin.Models.ModelBuilder;
-using FinalProject.Web.Areas.Employee.Models;
-using FinalProject.Web.Areas.Employee.Models.ModelBuilder;
+﻿using FinalProject.Web.Areas.Employee.Models;
 using FinalProject.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProject.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(policy: "AdminPolicy")]
     public class EmployeeController : Controller
     {
         public IActionResult Index()

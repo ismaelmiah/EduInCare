@@ -20,7 +20,7 @@ namespace FinalProject.Web.Areas.Admin.Models
         [Display(Name = "Subject")]
         public Guid SubjectId { get; set; }
         public SelectList SubjectList { get; set; }
-        [Display(Name = "Course")]
+        [Display(Name = "Class")]
         public Guid CourseId { get; set; }
         public SelectList CourseList { get; set; }
         [Display(Name = "Grade")]

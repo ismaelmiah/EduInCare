@@ -47,6 +47,7 @@ namespace Foundation.Library.Services
                             MiddleName = x.MiddleName,
                             LastName = x.LastName,
                             Gender = x.Gender,
+                            ImageUrl = x.ImageUrl,
                             MobileNo = x.MobileNo,
                             DateOfBirth = x.DateOfBirth,
                             BirthCertificateNo = x.BirthCertificateNo,

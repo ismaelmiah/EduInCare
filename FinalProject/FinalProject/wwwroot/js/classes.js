@@ -28,12 +28,7 @@
                 "targets": 7,
                 "render": function (data, type, row) {
                     return `
-                                    <button class="btn btn-info btn-sm" onclick="window.location.href='/admin/course/profile/${data}'" value='${data}'>
-                                                                            <i class="fas fa-info">
-                                                                            </i>
-                                                                            Details
-                                                                        </button>
-                                    <button type="submit" class="btn btn-warning btn-sm" onclick="window.location.href='/admin/course/upsert/${data}'" value='${data}'>
+                                    <button type="submit" class="btn btn-warning courseEdit btn-sm" data-id='${data}' value='${data}'>
                                         <i class="fas fa-pencil-alt">
                                         </i>
                                         Edit
@@ -57,6 +52,26 @@
         $("#deleteId").val(id);
         $("#deleteForm").attr("action", "/admin/course/delete");
         modal.modal('show');
+    });
+
+    $("#courses").on('click', '.courseEdit', function(event) {
+        var id = $(this).data("id");
+        console.log(id);
+        var modal = $("#modal-course");
+        modal.modal('show');
+        $.ajax({
+            method: "GET",
+            url: "Course/Upsert?id="+id
+        }).done(function (response) {
+            $("#contentArea").html(response);
+            $("#modal-course").modal('toggle');
+            LoadFormData();
+        }).fail(function (xhr, ajaxOptions, thrownError) {
+            //console.log(xhr.status);
+            //console.log(thrownError);
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('Marks not entered! Please enter mark for this exam!');
+        });
     });
 
     $("#deleteButton").click(function () {

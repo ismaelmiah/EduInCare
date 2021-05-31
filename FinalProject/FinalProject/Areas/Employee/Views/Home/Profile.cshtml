@@ -2,8 +2,21 @@
 @model EmployeeProfileView
 
 @{
-    Layout = "~/Views/Shared/_ProfileLayout.cshtml";
+    Layout = Model.isAdmin == false ? "~/Views/Shared/_ProfileLayout.cshtml" : "~/Areas/Admin/Views/Shared/_AdminLTE.cshtml";
     ViewData["Title"] = "Profile";
+}
+
+
+
+
+@if (Model.isAdmin)
+{
+
+    @section Title{
+        <title>
+            Profile
+        </title>
+    }
 }
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -19,9 +32,12 @@
             <div class="col-sm-6">
                 <ol class="float-sm-right">
                     @*<li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home" asp-area="Admin">Dashboard</a></li>
-        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home" asp-area="Admin">Employee</a></li>
-        <li class="breadcrumb-item active">Profile</li>*@
-                    <partial name="~/Views/Shared/_LoginPartial.cshtml" />
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home" asp-area="Admin">Employee</a></li>
+                        <li class="breadcrumb-item active">Profile</li>*@
+                    @if (Model.isAdmin == false)
+                    {
+                        <partial name="~/Views/Shared/_LoginPartial.cshtml" />
+                    }
                 </ol>
             </div>
         </div>
@@ -204,64 +220,64 @@
                             <div class="tab-pane" id="attendance">
                                 <table id="attendanceTable" class="table table-bordered table-hover">
                                     <thead>
-                                    <tr>
-                                        <th class="text-center">Date</th>
-                                        <th class="text-center">Status</th>
-                                    </tr>
+                                        <tr>
+                                            <th class="text-center">Date</th>
+                                            <th class="text-center">Status</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td class="text-center">20/03/2021</td>
-                                        <td class="text-center"> <span class="badge bg-green">Present</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">21/03/2021</td>
-                                        <td class="text-center"> <span class="badge bg-green">Present</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">22/03/2021</td>
-                                        <td class="text-center"> <span class="badge bg-green">Present</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">23/03/2021</td>
-                                        <td class="text-center"> <span class="badge bg-green">Present</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">24/03/2021</td>
-                                        <td class="text-center"> <span class="badge bg-red">Absent</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">25/03/2021</td>
-                                        <td class="text-center"> <span class="badge bg-green">Present</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">27/03/2021</td>
-                                        <td class="text-center"> <span class="badge bg-green">Present</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">28/03/2021</td>
-                                        <td class="text-center"> <span class="badge bg-green">Present</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">29/03/2021</td>
-                                        <td class="text-center"> <span class="badge bg-green">Present</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">30/03/2021</td>
-                                        <td class="text-center"> <span class="badge bg-red">Absent</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">31/03/2021</td>
-                                        <td class="text-center"> <span class="badge bg-red">Absent</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">01/04/2021</td>
-                                        <td class="text-center"> <span class="badge bg-red">Absent</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">03/04/2021</td>
-                                        <td class="text-center"> <span class="badge bg-green">Present</span></td>
-                                    </tr>
+                                        <tr>
+                                            <td class="text-center">20/03/2021</td>
+                                            <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">21/03/2021</td>
+                                            <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">22/03/2021</td>
+                                            <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">23/03/2021</td>
+                                            <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">24/03/2021</td>
+                                            <td class="text-center"> <span class="badge bg-red">Absent</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">25/03/2021</td>
+                                            <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">27/03/2021</td>
+                                            <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">28/03/2021</td>
+                                            <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">29/03/2021</td>
+                                            <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">30/03/2021</td>
+                                            <td class="text-center"> <span class="badge bg-red">Absent</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">31/03/2021</td>
+                                            <td class="text-center"> <span class="badge bg-red">Absent</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">01/04/2021</td>
+                                            <td class="text-center"> <span class="badge bg-red">Absent</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">03/04/2021</td>
+                                            <td class="text-center"> <span class="badge bg-green">Present</span></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

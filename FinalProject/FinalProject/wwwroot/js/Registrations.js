@@ -28,11 +28,6 @@
                 "targets": 7,
                 "render": function (data, type, row) {
                     return `
-                                    <button class="btn btn-info btn-sm" onclick="window.location.href='/course/Registration/profile/${data}'" value='${data}'>
-                                                                            <i class="fas fa-info">
-                                                                            </i>
-                                                                            Details
-                                                                        </button>
                                     <button type="button" class="btn btn-warning btn-sm editRegistration" data-id='${data}' value='${data}'>
                                         <i class="fas fa-pencil-alt">
                                         </i>

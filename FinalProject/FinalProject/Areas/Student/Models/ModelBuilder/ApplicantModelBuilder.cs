@@ -84,7 +84,7 @@ namespace FinalProject.Web.Areas.Student.Models.ModelBuilder
 
         public ApplicantViewModel BuildApplicantModel(Guid id)
         {
-            var applicant = _applicantService.GetApplicant(id);
+            var applicant = _studentService.GetStudent(id);
             return new ApplicantViewModel
             {
                 FirstName = applicant.FirstName,
@@ -221,6 +221,7 @@ namespace FinalProject.Web.Areas.Student.Models.ModelBuilder
                 BloodGroup = applicant.BloodGroup,
                 PresentAddress = applicant.PresentAddress,
                 MobileNo = applicant.MobileNo,
+                ImageUrl = applicant.ImageUrl,
                 PermanentAddress = applicant.PermanentAddress,
                 Status = applicant.Status == Status.Approved
             };

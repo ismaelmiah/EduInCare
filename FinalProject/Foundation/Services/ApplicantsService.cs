@@ -54,6 +54,7 @@ namespace Foundation.Library.Services
                     CourseId = x.CourseId,
                     Course = x.Course,
                     RecordMeta = x.RecordMeta,
+                    ImageUrl = x.ImageUrl,
                     Email = x.Email,
                     Status = x.Status
                 }).ToList();

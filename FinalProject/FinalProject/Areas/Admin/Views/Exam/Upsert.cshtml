@@ -30,7 +30,7 @@
                         <label asp-for="MarksDistributionTypes"></label>
                     </div>
                     <div class="col-8">
-                        <select multiple asp-for="MarksDistributionTypes" asp-items="Model.MarksDistributionTypeList" class="chosen form-control"></select>
+                        <select multiple="multiple" asp-for="MarksDistributionTypes" style="width: 100%" asp-items="Model.MarksDistributionTypeList" class="form-control"></select>
                         <span asp-validation-for="MarksDistributionTypes" class="text-danger"></span>
                     </div>
                 </div>

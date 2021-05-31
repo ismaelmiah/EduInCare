@@ -1,11 +1,13 @@
 ﻿using System;
 using FinalProject.Web.Areas.Admin.Models;
 using FinalProject.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProject.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(policy: "AdminPolicy")]
     public class ExamController : Controller
     {
         public IActionResult Index()

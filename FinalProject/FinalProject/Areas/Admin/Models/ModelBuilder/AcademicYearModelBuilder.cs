@@ -61,6 +61,7 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
             return new AcademicYearModel
             {
                 StartDate = exEntity.StartDate,
+                Id = exEntity.Id,
                 EndDate = exEntity.EndDate,
                 IsOpenForAdmission = exEntity.IsOpenForAdmission,
                 Status = exEntity.Status,

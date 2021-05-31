@@ -1,11 +1,13 @@
 ﻿using System;
 using FinalProject.Web.Areas.Course.Models;
 using FinalProject.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProject.Web.Areas.Course.Controllers
 {
     [Area("Course")]
+    [Authorize(policy: "AdminPolicy")]
     public class SubjectController : Controller
     {
         public IActionResult Index()
@@ -51,7 +53,8 @@ namespace FinalProject.Web.Areas.Course.Controllers
                     model.ModelBuilder.UpdateSubject(model.Id, model);
                 }
             }
-            return PartialView(model);
+
+            return RedirectToAction(nameof(Index));
         }
 
 

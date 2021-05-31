@@ -1,17 +1,20 @@
 ﻿using System;
 using FinalProject.Web.Areas.Student.Models;
 using FinalProject.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProject.Web.Areas.Student.Controllers
 {
     [Area("Student")]
+    [Authorize(policy: "AdminPolicy")]
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
+        [AllowAnonymous]
         public IActionResult Upsert(Guid? id)
         {
             var model = new ApplicantViewModel();
@@ -26,6 +29,7 @@ namespace FinalProject.Web.Areas.Student.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(ApplicantViewModel model)
         {
@@ -42,7 +46,7 @@ namespace FinalProject.Web.Areas.Student.Controllers
                     model.ModelBuilder.UpdateApplicant(model.Id, model);
                 }
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToRoute(new { Area = "", controller = "Home", action = "Index" });
         }
 
         public IActionResult Delete(Guid id)

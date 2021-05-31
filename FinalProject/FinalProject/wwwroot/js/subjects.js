@@ -8,10 +8,7 @@
         }).done(function (response) {
             $("#contentArea").html(response);
             $("#modal-subject").modal('toggle');
-
-            $("#CourseId").select2({
-                width: 'resolve'
-            });
+            LoadFormData();
         }).fail(function (xhr, ajaxOptions, thrownError) {
             //console.log(xhr.status);
             //console.log(thrownError);
@@ -30,12 +27,7 @@
                 "targets": 5,
                 "render": function (data, type, row) {
                     return `
-                                    <button class="btn btn-info btn-sm" onclick="window.location.href='/course/subject/profile/${data}'" value='${data}'>
-                                                                            <i class="fas fa-info">
-                                                                            </i>
-                                                                            Details
-                                                                        </button>
-                                    <button type="submit" class="btn btn-warning btn-sm" onclick="window.location.href='/course/subject/upsert/${data}'" value='${data}'>
+                                    <button type="submit" class="btn btn-warning subjectEdit btn-sm" data-id="${data}" value='${data}'>
                                         <i class="fas fa-pencil-alt">
                                         </i>
                                         Edit
@@ -61,7 +53,37 @@
         modal.modal('show');
     });
 
+    $('#subjects').on('click', '.subjectEdit', function (event) {
+        var id = $(this).data("id");
+        var modal = $("#modal-subject");
+        modal.modal('show');
+        $.ajax({
+            method: "GET",
+            url: "Subject/Upsert?id="+id
+        }).done(function (response) {
+            $("#contentArea").html(response);
+            $("#modal-subject").modal('toggle');
+            LoadFormData();
+        }).fail(function (xhr, ajaxOptions, thrownError) {
+            //console.log(xhr.status);
+            //console.log(thrownError);
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('Marks not entered! Please enter mark for this exam!');
+        });
+    });
+
     $("#deleteButton").click(function () {
         $("#deleteForm").submit();
     });
 });
+
+function LoadFormData() {
+
+    $("#CourseId").select2({
+        width: 'resolve'
+    });
+
+    $("#submitSubject").click(function() {
+        $("#subjectForm").submit();
+    });
+}

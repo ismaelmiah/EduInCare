@@ -10,14 +10,14 @@
     </button>
 </div>
 <div class="modal-body">
-    <form class="form-horizontal" asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
+    <form class="form-horizontal" id="subjectForm" asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input asp-for="Id" type="hidden" />
         <div class="row">
             <div class="col-8">
                 <div class="form-group row">
                     <div class="col-2">
-                        <label for="CourseId">Course</label>
+                        <label for="CourseId">Class</label>
                     </div>
                     <div class="col-10">
                         <select style="width: 100%;" asp-for="CourseId" asp-items="Model.CourseList" class="form-control"></select>
@@ -68,5 +68,5 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-primary">Create</button>
+    <button type="submit" id="submitSubject" class="btn btn-primary">@(Model.Id != new Guid() ? "Update": "Create") </button>
 </div>

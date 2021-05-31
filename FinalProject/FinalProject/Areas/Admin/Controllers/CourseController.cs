@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using FinalProject.Web.Areas.Admin.Models;
 using FinalProject.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FinalProject.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(policy: "AdminPolicy")]
     public class CourseController : Controller
     {
         public IActionResult Index()

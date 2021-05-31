@@ -21,7 +21,7 @@ namespace FinalProject.Web.Areas.Admin.Models
         [Display(Name = "Academic Year")]
         public Guid AcademicYearId { get; set; }
         public SelectList AcademicYearList { get; set; }
-        [Display(Name = "Course")]
+        [Display(Name = "Class")]
         public Guid CourseId { get; set; }
         public List<SelectListItem> CourseList { get; set; }
         [Display(Name = "Section")]

@@ -30,50 +30,50 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-2">
+                                    <div class="col">
                                         <div class="form-group">
                                             <label asp-for="FirstName"></label>
                                             <input asp-for="FirstName" class="form-control" />
                                             <span asp-validation-for="FirstName" class="text-danger"></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col">
                                         <div class="form-group">
                                             <label asp-for="MiddleName"></label>
                                             <input asp-for="MiddleName" class="form-control" />
                                             <span asp-validation-for="MiddleName" class="text-danger"></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col">
                                         <div class="form-group">
                                             <label asp-for="LastName"></label>
                                             <input asp-for="LastName" class="form-control" />
                                             <span asp-validation-for="LastName" class="text-danger"></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col">
                                         <div class="form-group">
                                             <label asp-for="DateOfBirth"></label>
                                             <input asp-for="DateOfBirth" type="Date" class="form-control" />
                                             <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col">
                                         <div class="form-group">
                                             <label asp-for="Gender"></label>
                                             <select class="form-control" asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()"></select>
                                             <span asp-validation-for="Gender" class="text-danger"></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                </div>
+                                <div class="row">
+                                    <div class="col">
                                         <div class="form-group">
                                             <label asp-for="Religion"></label>
                                             <select class="form-control" asp-for="Religion" asp-items="Html.GetEnumSelectList<Religion>()"></select>
                                             <span asp-validation-for="Religion" class="text-danger"></span>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="form-group col">
                                         <label asp-for="BirthCertificateNo"></label>
                                         <input asp-for="BirthCertificateNo" class="form-control" />
@@ -90,11 +90,18 @@
                                         <span asp-validation-for="MobileNo" class="text-danger"></span>
                                     </div>
                                     <div class="form-group col">
+                                        <label asp-for="BloodGroup"></label>
+                                        <select class="form-control" asp-for="BloodGroup" asp-items="Html.GetEnumSelectList<BloodGroup>()"></select>
+                                        <span asp-validation-for="BloodGroup" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-3">
                                         <label asp-for="Nationality"></label>
                                         <input asp-for="Nationality" class="form-control" />
                                         <span asp-validation-for="Nationality" class="text-danger"></span>
                                     </div>
-                                    <div class="col mt-4">
+                                    <div class="col-3 mt-4">
                                         <div id="previewstudentphoto" style="height: 200px;" class="border">
                                             @if (Model.ImagePath != null)
                                             {
@@ -113,11 +120,6 @@
                                                 <span asp-validation-for="Photo" class="text-danger"></span>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group col">
-                                        <label asp-for="BloodGroup"></label>
-                                        <select class="form-control" asp-for="BloodGroup" asp-items="Html.GetEnumSelectList<BloodGroup>()"></select>
-                                        <span asp-validation-for="BloodGroup" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -144,7 +146,7 @@
                                         <span asp-validation-for="Email" class="text-danger"></span>
                                     </div>
                                     <div class="form-group col">
-                                        <label>Course</label>
+                                        <label asp-for="CourseId">Class</label>
                                         <select asp-for="CourseId" asp-items="Model.EnrollCourse" class="form-control"></select>
                                         <span asp-validation-for="CourseId" class="text-danger"></span>
                                     </div>
@@ -219,10 +221,11 @@
                 width: 'resolve'
             });
 
-            populateSubject($("#CourseId option:selected").val());
             $("#CourseId").change(function () {
                 populateSubject(this.value);
             });
+
+            populateSubject($("#CourseId option:selected").val());
 
             function populateSubject(courseId) {
                 $.ajax({

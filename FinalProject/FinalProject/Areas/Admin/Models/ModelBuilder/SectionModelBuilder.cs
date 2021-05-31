@@ -109,6 +109,7 @@ namespace FinalProject.Web.Areas.Admin.Models.ModelBuilder
                 Capacity = exSection.Capacity,
                 CourseId = exSection.CourseId,
                 TeacherId = exSection.TeacherId,
+                Id = exSection.Id,
                 Description = exSection.Description,
                 Status = exSection.Status,
                 TeacherList = GetTeacherList(exSection.TeacherId),

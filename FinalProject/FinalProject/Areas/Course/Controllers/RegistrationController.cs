@@ -1,11 +1,13 @@
 ﻿using System;
 using FinalProject.Web.Areas.Course.Models;
 using FinalProject.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProject.Web.Areas.Course.Controllers
 {
     [Area("Course")]
+    [Authorize(policy: "AdminPolicy")]
     public class RegistrationController : Controller
     {
         public IActionResult Index()

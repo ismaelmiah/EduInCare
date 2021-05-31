@@ -31,5 +31,6 @@ namespace FinalProject.Web.Areas.Employee.Models
         public IList<string> Qualifications { get; set; }
         public bool Status { get; set; }
         public string IdCardNo { get; set; }
+        public bool isAdmin { get; set; }
     }
 }

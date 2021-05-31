@@ -11,6 +11,7 @@
 <div class="modal-body">
     <form id="academicYearForm" asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="Id" type="hidden"/>
         <div class="row">
             <div class="col-6">
                 <div class="form-group row">
@@ -66,5 +67,5 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <button type="button" id="academicYearSubmit" class="btn btn-primary">Create</button>
+    <button type="button" id="academicYearSubmit" class="btn btn-primary">@(Model.Id != new Guid() ? "Update": "Create") </button>
 </div>
