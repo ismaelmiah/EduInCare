@@ -15,6 +15,40 @@
         console.log(thrownError);
     });
 
+    $("#deleteResult").on("click",
+        function () {
+            const examId = $('#ExamId').val();
+            const sectionId = $('#SectionId').val();
+            const academicYearId = $('#AcademicYearId').val();
+            const courseId = $("#CourseId").val();
+
+            const Url = "DeleteResult?academicYearId=" +
+                academicYearId +
+                "&courseId=" +
+                courseId +
+                "&sectionId=" +
+                sectionId +
+                "&examId=" +
+                examId;
+            $.ajax({
+                method: "GET",
+                url: Url
+            }).done(function (data) {
+                if (data) {
+                    $('#results').hide();
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.success('Result Deleted Success');
+                }
+                else {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Result Deleted Problem');
+                }
+            }).fail(function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr.status);
+                console.log(thrownError);
+            });
+        });
+
     $('#getResult').on("click", function () {
         const examId = $('#ExamId').val();
         const sectionId = $('#SectionId').val();

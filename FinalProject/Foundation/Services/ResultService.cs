@@ -22,10 +22,18 @@ namespace Foundation.Library.Services
             _management.Save();
         }
 
-        public void DeleteResult(Guid id)
+        public bool DeleteResult(Guid id)
         {
-            _management.ResultRepository.Remove(id);
-            _management.Save();
+            try
+            {
+                _management.ResultRepository.Remove(id);
+                _management.Save();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public void EditResult(Result result)

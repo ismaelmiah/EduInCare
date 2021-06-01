@@ -252,7 +252,7 @@
                 alertify.error('Marks not entered! Please enter mark for this exam!');
             } else {
                 alertify.set('notifier', 'position', 'top-right');
-                alertify.error('Result Already Published!');
+                alertify.error('Result Already Published or No Student Left of Marks Enter!');
             }
         }).fail(function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status);

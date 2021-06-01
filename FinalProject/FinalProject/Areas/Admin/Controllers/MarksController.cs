@@ -53,6 +53,13 @@ namespace FinalProject.Web.Areas.Admin.Controllers
             return Json(data);
         }
 
+        public IActionResult DeleteResult(Guid academicYearId, Guid courseId, Guid sectionId, Guid examId)
+        {
+            var model = new MarksModel();
+            var result = model.ModelBuilder.DeleteResult(academicYearId, courseId, sectionId, examId);
+            return Json(result);
+        }
+
         public IActionResult Results() =>  View();
 
         public IActionResult PublishResult(Guid academicYearId, Guid courseId, Guid subjectId, Guid sectionId, Guid examId)

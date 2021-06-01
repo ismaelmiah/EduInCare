@@ -8,7 +8,7 @@ namespace Foundation.Library.Services
     public interface IResultService
     {
         void AddResult(Result result);
-        void DeleteResult(Guid id);
+        bool DeleteResult(Guid id);
         Result GetResult(Expression<Func<Result, bool>> filter);
         void EditResult(Result result);
         IList<Result> GetResults(Expression<Func<Result, bool>> filter, string includeParams);

@@ -47,6 +47,15 @@
         });
     });
 
+    $('#examrules').on('click', '.show-bs-modal', function (event) {
+        var id = $(this).data("id");
+        var modal = $("#modal-default");
+        modal.find('.modal-body p').text('Are you sure you want to delete this record?');
+        $("#deleteId").val(id);
+        $("#deleteForm").attr("action", "ExamRules/delete");
+        modal.modal('show');
+    });
+
     $("#deleteButton").click(function () {
         $("#deleteForm").submit();
     });
