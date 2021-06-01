@@ -10,6 +10,11 @@
     </button>
 </div>
 <div class="modal-body">
+    <div class="box-header">
+        <div class="callout callout-danger">
+            <p><b>Note:</b> Create <strong>Class</strong> before create new Subject.</p>
+        </div>
+    </div>
     <form class="form-horizontal" id="subjectForm" asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input asp-for="Id" type="hidden" />

@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $('#results').hide();
+    $('#results_wrapper').remove();
     $.ajax({
         method: "GET",
         url: "GetAcademicYears"
@@ -35,7 +35,7 @@
                 url: Url
             }).done(function (data) {
                 if (data) {
-                    $('#results').hide();
+                    $('#results_wrapper').remove();
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.success('Result Deleted Success');
                 }

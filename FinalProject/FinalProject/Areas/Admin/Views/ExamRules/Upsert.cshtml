@@ -10,6 +10,11 @@
     </button>
 </div>
 <div class="modal-body">
+    <div class="box-header">
+        <div class="callout callout-danger">
+            <p><b>Note:</b> Create <strong>Class, Subject, Exam and Grade</strong> before create new Exam Rule.</p>
+        </div>
+    </div>
     <form id="examRuleForm" asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input asp-for="Id" type="hidden" />

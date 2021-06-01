@@ -21,6 +21,8 @@ namespace FinalProject.Web.Controllers
             return View();
         }
 
+        public IActionResult Notices() => View();
+
         public IActionResult Events()
         {
             return View();

@@ -10,9 +10,14 @@
     </button>
 </div>
 <div class="modal-body">
+    <div class="box-header">
+        <div class="callout callout-danger">
+            <p><b>Note:</b> Create <strong>Class</strong>  and <strong>Teachers</strong> before create new Section.</p>
+        </div>
+    </div>
     <form id="sectionForm" class="form-horizontal" asp-antiforgery="true" method="post" enctype="multipart/form-data" asp-action="Upsert">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input asp-for="Id" type="hidden"/>
+        <input asp-for="Id" type="hidden" />
         <div class="row">
             <div class="col-5">
                 <div class="form-group row">
