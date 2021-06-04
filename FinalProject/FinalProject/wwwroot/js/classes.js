@@ -25,6 +25,14 @@
         "columnDefs": [
             {
                 "orderable": false,
+                "targets": 5,
+                "render": function (data, type, row) {
+                    if(data === true) return `<span class="lead"><span class="badge badge-pill badge-info">${data}</span></span>`;
+                    else return `<span class="lead"><span class="badge badge-pill badge-danger">${data}</span></span>`;
+                }
+            },
+            {
+                "orderable": false,
                 "targets": 7,
                 "render": function (data, type, row) {
                     return `

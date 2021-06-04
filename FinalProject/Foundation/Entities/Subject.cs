@@ -19,5 +19,6 @@ namespace Foundation.Library.Entities
         public virtual ICollection<Section> Sections { get; set; }
         public virtual ICollection<ExamRules> ExamRules { get; set; }
         public virtual ICollection<Mark> Marks { get; set; }
+        public virtual ICollection<Employee> Teachers { get; set; }
     }
 }

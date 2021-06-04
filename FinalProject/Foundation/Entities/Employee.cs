@@ -38,5 +38,7 @@ namespace Foundation.Library.Entities
         public string Email { get; set; }
         public bool Status { get; set; }
         public virtual Section Section { get; set; }
+        public virtual Guid SubjectId { get; set; }
+        public virtual Subject Subject { get; set; }
     }
 }
