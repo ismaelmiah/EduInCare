@@ -49,13 +49,13 @@ namespace Foundation.Library.Contexts
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<Employee>()
-                .HasOne(x => x.Subject)
-                .WithMany(x => x.Teachers)
-                .HasForeignKey(x => x.SubjectId)
-                .HasPrincipalKey(x => x.Id)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+            //builder.Entity<Employee>()
+            //    .HasOne(x => x.Subject)
+            //    .WithMany(x => x.Teachers)
+            //    .HasForeignKey(x => x.SubjectId)
+            //    .HasPrincipalKey(x => x.Id)
+            //    .IsRequired()
+            //    .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Section>()
                 .HasOne(x => x.Subject)
