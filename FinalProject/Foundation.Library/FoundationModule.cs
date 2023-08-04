@@ -1,9 +1,7 @@
-﻿using System.Linq;
-using System.Reflection;
-using Autofac;
+﻿using Autofac;
 using Foundation.Library.Contexts;
-using Foundation.Library.Repositories;
-using Foundation.Library.UnitOfWorks;
+using System.Linq;
+using System.Reflection;
 using Module = Autofac.Module;
 
 namespace Foundation.Library
